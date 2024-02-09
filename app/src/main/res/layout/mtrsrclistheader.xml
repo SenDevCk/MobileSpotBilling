@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+     android:layout_width="fill_parent"
+     android:layout_height="wrap_content"
+     android:orientation="horizontal" 
+     android:background = "@drawable/border">
+     <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Mtr No"
+        android:hint="Mtr No"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:width="100dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="SDO"
+        android:text="SDO"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:width="100dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Binder"
+        android:text="Binder"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:width="100dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Acc No"
+        android:text="Acc No"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:width="80dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Name"
+        android:text="Name"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:width="200dp" />
+
+</LinearLayout>

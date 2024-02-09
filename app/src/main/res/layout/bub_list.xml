@@ -1,0 +1,30 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" 
+     android:background="@drawable/backgroundboarder">
+	<TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/headerboarder"
+        android:paddingLeft="5dp"
+        android:text="Unbilled Consumer List"
+        android:textColor="#ffffff"
+        android:textSize="22dp" />
+
+    <TextView
+        android:id="@+id/tvBilledUnbilledNOR"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:textColor="#FFFF66"
+        android:hint="No. Of Records"
+        android:paddingRight="15dp" />
+
+    <ListView
+        android:id="@+id/lvBilledUnbilledList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+    </ListView>
+
+</LinearLayout>

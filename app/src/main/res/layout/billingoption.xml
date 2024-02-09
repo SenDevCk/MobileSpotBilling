@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+		
+		<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+		    android:layout_width="fill_parent"
+		    android:layout_height="fill_parent"
+		    android:scrollbars="vertical"
+            android:background="@drawable/backgroundboarder" >
+
+		    
+		    <LinearLayout 
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:orientation="vertical"
+		    android:paddingTop="2dp" >
+		   
+		<TextView         
+            
+            android:text="Billing:"
+           android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="5dp" 
+            android:textSize="22dp"
+            android:textColor="#ffffff"
+            android:background="@drawable/headerboarder" />
+
+				<Button
+					android:id="@+id/btnAcctNbr"
+					style="@style/btnStyleBeige"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_marginBottom="3dp"
+					android:layout_marginLeft="10dp"
+					android:layout_marginRight="10dp"
+					android:layout_marginTop="3dp"
+					android:text="By CA Number"
+					android:visibility="gone" />
+
+				<Button
+					android:id="@+id/btnLegacyNbr"
+					style="@style/btnStyleBeige"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_marginBottom="3dp"
+					android:layout_marginLeft="10dp"
+					android:layout_marginRight="10dp"
+					android:layout_marginTop="3dp"
+					android:text="By Legacy Number"
+					android:visibility="gone" />
+
+				<Button
+					android:id="@+id/btnMeter"
+					style="@style/btnStyleBeige"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_marginBottom="3dp"
+					android:layout_marginLeft="10dp"
+					android:layout_marginRight="10dp"
+					android:layout_marginTop="3dp"
+					android:text="By Meter Number"
+					android:visibility="gone" />
+
+				<Button
+					android:id="@+id/btnSequence"
+					style="@style/btnStyleBeige"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_marginBottom="3dp"
+					android:layout_marginLeft="10dp"
+					android:layout_marginRight="10dp"
+					android:layout_marginTop="3dp"
+					android:text="By Sequence" />
+
+   			<Button
+ 			    android:id="@+id/btnPrintDupBill"
+ 			    style="@style/btnStyleBeige"
+ 			    android:layout_width="match_parent"
+ 			    android:layout_height="wrap_content"
+ 			    android:layout_marginBottom="3dp"
+ 			    android:layout_marginLeft="10dp"
+ 			    android:layout_marginRight="10dp"
+ 			    android:layout_marginTop="3dp"
+ 			    android:text="Print Duplicate Bill" />
+   			
+            <Button
+            android:id="@+id/btnRouteOrder"
+            android:text="By Route Order" 
+            style="@style/btnStyleBeige"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:layout_marginBottom="3dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:visibility="invisible"
+            />
+            
+            <Button
+            android:id="@+id/btnConsumerSearch"
+            android:text="Consumer Search" 
+            style="@style/btnStyleBeige"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:layout_marginBottom="3dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:visibility="invisible"
+            />
+            
+            <Button
+            android:id="@+id/btnBillingOptionRecheck"
+            style="@style/btnStyleBeige"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:layout_marginBottom="3dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:text="Re-checking request"
+            android:visibility="invisible"
+             />
+            
+            
+            
+ 			<Button
+            android:id="@+id/btnChangeBinder"
+            style="@style/btnStyleBeige"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:layout_marginBottom="3dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:text="Change Binder"
+            android:visibility="invisible"
+             />
+
+</LinearLayout>
+</ScrollView>

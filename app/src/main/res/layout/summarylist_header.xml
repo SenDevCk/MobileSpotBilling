@@ -1,0 +1,59 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+     android:paddingTop="10dp"
+     android:paddingBottom="6dp"
+     android:layout_marginLeft="10dp"
+     android:layout_marginTop="10dp"
+     android:layout_width="fill_parent"
+     android:layout_height="wrap_content"
+     android:orientation="horizontal" 
+     android:background = "@drawable/border">
+     <!-- android:descendantFocusability="blocksDescendants" >  -->
+    
+ <TextView
+     android:layout_width="70dp"
+     android:layout_height="wrap_content"
+     android:padding="5dp"
+     android:text="CATEGORY"
+     android:textAppearance="?android:attr/textAppearanceLarge"
+     android:textSize="15sp" />
+     
+     <TextView 
+         android:layout_width="70dp"
+         android:layout_height="wrap_content" 
+         android:padding="5dp" 
+         android:text="TOTALCONS"
+         android:textAppearance="?android:attr/textAppearanceLarge" 
+         android:textSize="15sp"/>
+ 
+     <TextView 
+         android:layout_width="70dp"
+         android:layout_height="wrap_content"
+         android:padding="5dp" 
+         android:text="BILLED"
+         android:textAppearance="?android:attr/textAppearanceLarge"
+         android:textSize="15sp" />
+ 
+     <TextView 
+         android:layout_width="80dp"
+         android:layout_height="wrap_content" 
+         android:padding="5dp" 
+         android:text="UNITS"
+         android:textAppearance="?android:attr/textAppearanceLarge"
+         android:textSize="15sp" />
+     
+      <TextView 
+         android:layout_width="70dp"
+         android:layout_height="wrap_content" 
+         android:padding="5dp" 
+         android:text="BILLD AMT"
+         android:textAppearance="?android:attr/textAppearanceLarge"
+         android:textSize="15sp" />
+     
+       <TextView
+         android:layout_width="80dp"
+         android:layout_height="wrap_content" 
+         android:padding="5dp" 
+         android:text="PENDING"
+         android:textAppearance="?android:attr/textAppearanceLarge"
+         android:textSize="15sp" />
+</LinearLayout>

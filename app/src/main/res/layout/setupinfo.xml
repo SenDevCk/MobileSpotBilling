@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" 
+    android:scrollbars="vertical"    
+    android:background="@drawable/backgroundboarder">
+<LinearLayout 
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingTop="2dp" >
+    
+        <TextView         
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="5dp" 
+             android:textSize="22dp"
+             android:textColor="#ffffff"
+            android:background="@drawable/headerboarder"      
+            android:text="Setup :"/>
+        
+        <Button
+            android:id="@+id/btnDownloadInputData"
+            style="@style/btnStyleBeige"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="Download Input Data" />
+
+        <Button
+            android:id="@+id/btnSetupPrinter"
+            style="@style/btnStyleBeige"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="Configure Printer"
+            android:visibility="visible" />
+        
+        <Button
+            android:id="@+id/btnPrinterTest"
+            style="@style/btnStyleBeige"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="Test Printer"
+            android:visibility="invisible" />
+
+        <Button
+            android:id="@+id/btnClearData"
+            style="@style/btnStyleBeige"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="Clear User Info"
+            android:visibility="invisible" />
+
+        <Button
+            android:id="@+id/btnModifySetup"
+            style="@style/btnStyleBeige"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="Edit setup Info"
+            android:visibility="invisible"
+             />
+        
+        <Button
+            android:id="@+id/btnVerifySetup"
+           	 style="@style/btnStyleBeige"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="Verify setup Info"
+             android:visibility="invisible"
+             />
+        
+    	<Button
+            android:id="@+id/btnSetupSDD"
+             style="@style/btnStyleBeige"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="Single Due Dt."
+            android:visibility="invisible"
+             />
+    
+</LinearLayout>
+    
+
+</ScrollView>

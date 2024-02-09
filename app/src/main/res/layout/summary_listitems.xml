@@ -1,0 +1,55 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+     android:paddingTop="10dp"
+     android:paddingBottom="6dp"
+     android:layout_marginLeft="10dp"
+     android:layout_marginTop="10dp"
+     android:layout_width="fill_parent"
+     android:layout_height="wrap_content"
+     android:orientation="horizontal" >
+     <!-- android:descendantFocusability="blocksDescendants" >  -->
+    
+     <TextView
+         android:id="@+id/tvsummaryBinder"
+         android:layout_width="70dp"
+         android:layout_height="wrap_content"
+         android:padding="5dp"
+         android:textAppearance="?android:attr/textAppearanceLarge"
+         android:textSize="15sp" />
+     
+     <TextView android:id="@+id/tvsummaryTotal"
+         android:layout_width="70dp"
+         android:layout_height="wrap_content" 
+         android:padding="5dp" 
+         android:textAppearance="?android:attr/textAppearanceLarge" 
+         android:textSize="15sp"/>
+ 
+     <TextView android:id="@+id/tvsummaryBilled"
+         android:layout_width="70dp"
+         android:layout_height="wrap_content"
+         android:padding="5dp"  
+         android:textAppearance="?android:attr/textAppearanceLarge"
+         android:textSize="15sp" />
+ 
+     <TextView android:id="@+id/tvsummaryUnbilled"
+         android:layout_width="80dp"
+         android:layout_height="wrap_content" 
+         android:padding="5dp" 
+         android:textAppearance="?android:attr/textAppearanceLarge"
+         android:textSize="15sp" />
+      <TextView android:id="@+id/tvsummaryPosted"
+         android:layout_width="70dp"
+         android:layout_height="wrap_content" 
+         android:padding="5dp" 
+         android:textAppearance="?android:attr/textAppearanceLarge"
+         android:textSize="15sp" />
+     
+       <TextView android:id="@+id/tvsummaryPending"
+         android:layout_width="80dp"
+         android:layout_height="wrap_content" 
+         android:padding="5dp" 
+         android:textAppearance="?android:attr/textAppearanceLarge"
+         android:textSize="15sp" />
+     
+     
+     
+</LinearLayout>

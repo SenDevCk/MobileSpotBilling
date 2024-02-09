@@ -1,0 +1,31 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <item
+        android:id="@+id/menu_overflow"
+        android:icon="@drawable/menu_settings"
+        android:orderInCategory="4"
+        android:title=":"
+        app:showAsAction="always|withText">
+        <menu>
+
+            <item
+                android:id="@+id/nometerfound"
+                android:orderInCategory="1"
+                android:title="@string/no_meter_found"></item>
+
+            <!--<item
+                android:id="@+id/serversetting"
+                android:orderInCategory="1"
+                android:title="@string/setting_title"
+                android:visible=""
+                ></item>-->
+
+        </menu>
+
+    </item>
+
+
+
+</menu>

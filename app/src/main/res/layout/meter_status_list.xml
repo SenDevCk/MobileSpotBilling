@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@drawable/border"
+    android:isScrollContainer="true">
+
+   <ListView
+       android:id="@+id/MeterStatusList"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:layout_marginBottom="10dp"
+       android:layout_marginLeft="10dp"
+       android:layout_marginRight="10dp"
+       android:layout_marginTop="10dp"
+       android:background="@drawable/border"
+       android:drawSelectorOnTop="false">
+      <!--   android:listSelector="@drawable/selection"-->
+
+
+   </ListView>
+
+   <TextView
+       android:id="@+id/pl_md_message"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:layout_below="@+id/MeterStatusList"
+       android:layout_margin="20dp"
+       android:text="TextView"
+       android:visibility="invisible" />
+   <TextView
+       android:id="@+id/pl_md_stats"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_below="@+id/pl_md_message"
+       android:layout_margin="20dp"
+       android:text="Max PL/Max MD/ MD Prev/ PL Done/ MD Done : Not Calculated " />
+
+</RelativeLayout>

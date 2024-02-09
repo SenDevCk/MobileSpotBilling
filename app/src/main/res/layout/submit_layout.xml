@@ -1,0 +1,24 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	 
+	 android:layout_width="match_parent"
+	 android:layout_height="wrap_content"
+	 android:paddingTop="20dp"
+	 android:orientation="horizontal" >
+	 
+	 <Button
+	     android:id="@+id/CancelSubmit"
+	     style="@style/btnStyleBeige"
+	     android:layout_width="100dp"
+	     android:layout_height="wrap_content"
+	     android:layout_marginLeft="10dp"
+         android:textSize="18sp"
+	     android:text="Cancel" />
+	 <Button
+	     android:id="@+id/Confirm"
+	     style="@style/btnStyleBeige"
+	     android:layout_width="100dp"
+	     android:layout_height="wrap_content"
+	     android:layout_marginLeft="50dp"
+         android:textSize="18sp"
+	     android:text="Confirm" />
+ </LinearLayout>

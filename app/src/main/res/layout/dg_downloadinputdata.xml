@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+     android:background="@drawable/backgroundboarder"
+    android:orientation="vertical" 
+    android:id="@+id/downloadInputDataLayout"
+    >
+
+      <TextView
+	        android:id="@+id/textView1"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:textSize="18dp"
+	        android:textColor="#ffffff"
+	        android:paddingLeft="10dp"
+	        
+	        android:text="Input data will be downloaded ...Proceed !!!!" />
+      
+      		<LinearLayout
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:layout_marginTop="10dp" 
+		    >
+
+		    <TextView
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_gravity="left"
+		        android:layout_marginLeft="17dp"
+		        android:layout_marginTop="8dp"
+		        android:text="SDO Code    :"
+		        android:textColor="#ffffff"
+		        android:textSize="18dp"
+		        android:textStyle="bold" 
+		        android:visibility="invisible"/>
+
+		    <TextView
+		        android:id="@+id/txtVwSdoCd"
+		        android:layout_width="wrap_content"
+		        android:layout_height="match_parent"
+		        android:layout_gravity="right"
+		        android:layout_marginLeft="15dp"
+		        android:textColor="#ffff66"
+		        android:textSize="18dp" 
+		        android:text=" "
+		        />
+		</LinearLayout>
+		
+		
+	     <LinearLayout
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	             android:layout_marginTop="10dp"
+	              >
+	
+	          <TextView
+	             android:layout_width="wrap_content"
+	              android:layout_height="wrap_content"
+	              android:layout_gravity="left"
+	              android:layout_marginLeft="17dp"
+	              android:layout_marginTop="8dp"
+	              android:paddingLeft="29dp"
+	              android:text="MRU       :"
+	              android:textSize="18dp"
+	              android:textStyle="bold"
+	              android:textColor="#ffffff" 
+	              android:visibility="invisible"/>
+		
+			<TextView
+			    android:id="@+id/txtVwBinder" 
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"
+			    android:layout_gravity="right"
+			    android:layout_marginLeft="15dp"
+			    android:textSize="18dp"
+		        android:textColor="#ffff66"  
+		        android:text="  "
+		        />
+		</LinearLayout>
+					
+
+		<LinearLayout
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:paddingTop="15dp"           
+	            android:layout_marginTop="20dp">
+	
+	          <Button
+	              android:id="@+id/btnOk"
+	              android:layout_width="100dp"
+	              android:layout_height="wrap_content"
+	              android:layout_gravity="left"
+	              android:layout_marginLeft="55dp"
+	              android:layout_marginTop="20dp"
+	              android:textSize="18dp"
+				  style="@style/btnStyleBeige"
+	              android:text="OK"/>
+		
+		  <Button
+		              android:id="@+id/btnCancel"
+		              style="@style/btnStyleBeige"
+		              android:layout_width="100dp"
+		              android:layout_height="wrap_content"
+		              android:layout_gravity="left"
+		              android:layout_marginLeft="10dp"
+		              android:layout_marginTop="20dp"
+					   android:textSize="18dp"
+		               android:text="Cancel"/>
+		</LinearLayout>
+
+		
+		     	<LinearLayout
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:layout_marginTop="10dp" 
+		    >
+
+		    <TextView
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_gravity="left"
+		        android:layout_marginLeft="17dp"
+		        android:layout_marginTop="8dp"
+		        android:text="Version    :"
+		        android:textColor="#ffffff"
+		        android:textSize="18dp"
+		        android:textStyle="bold" 
+		        android:visibility="invisible"/>
+
+		    <TextView
+		        android:id="@+id/txtVersion"
+		        android:layout_width="wrap_content"
+		        android:layout_height="match_parent"
+		        android:layout_gravity="right"
+		        android:layout_marginLeft="15dp"
+		        android:textColor="#ffff66"
+		        android:textSize="18dp" 
+		        android:text="@string/app_fileversion"
+		        android:visibility="invisible"
+		        />
+		</LinearLayout>
+
+		<LinearLayout
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:layout_marginTop="10dp" >
+	
+	          <TextView
+	              android:layout_width="wrap_content"
+	              android:layout_height="wrap_content"
+	              android:layout_gravity="left"
+	              android:layout_marginLeft="17dp"
+	              android:layout_marginTop="8dp"
+	              android:paddingLeft="42dp"
+	              android:text="IMEI    :"
+	              android:textSize="18dp"
+	              android:textStyle="bold"
+	              android:textColor="#ffffff" 
+	              android:visibility="invisible"/>
+		
+		<TextView
+		    android:id="@+id/txtVwImie" 
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_marginLeft="15dp"
+		    android:textSize="18dp"
+	        android:textColor="#ffff66" 
+	        android:visibility="invisible"/>
+		</LinearLayout>
+		
+				<LinearLayout
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:layout_marginTop="10dp" 
+	            android:visibility="invisible"
+	             >
+	
+	          <TextView
+	              android:layout_width="wrap_content"
+	              android:layout_height="wrap_content"
+	              android:layout_gravity="left"
+	              android:layout_marginLeft="17dp"
+	              android:layout_marginTop="8dp"
+	              android:paddingLeft="42dp"
+	              android:text="User    :"
+	              android:textSize="18dp"
+	              android:textStyle="bold"
+	              android:textColor="#ffffff" />
+		
+		<TextView
+		    android:id="@+id/txtVwUser" 
+		    android:layout_width="wrap_content"
+		    android:layout_height="match_parent"
+		    android:layout_gravity="right"
+		    android:layout_marginLeft="15dp"
+		    android:textSize="18dp"
+	        android:textColor="#ffff66" />
+		</LinearLayout>
+		
+		<LinearLayout
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:layout_marginTop="10dp"
+	            android:visibility="invisible"
+	             >
+	
+	          <TextView
+	              android:layout_width="wrap_content"
+	              android:layout_height="wrap_content"
+	              android:layout_gravity="left"
+	              android:layout_marginLeft="7dp"
+	              android:layout_marginTop="8dp"
+	              android:paddingLeft="10dp"
+	              android:text="Bill month   :"
+	              android:textSize="18dp"
+	              android:textStyle="bold"
+	              android:textColor="#ffffff" />
+		
+		<TextView
+		    android:id="@+id/txtVwBillMth" 
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_marginLeft="15dp"
+		    android:textSize="18dp"
+	        android:textColor="#ffff66" />
+		</LinearLayout>
+
+		
+    
+</LinearLayout>

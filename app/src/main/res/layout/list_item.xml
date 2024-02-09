@@ -1,0 +1,38 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+     android:paddingTop="10dp"
+     android:paddingBottom="6dp"
+     android:layout_marginLeft="10dp"
+     android:layout_marginTop="10dp"
+     android:layout_width="fill_parent"
+     android:layout_height="wrap_content"
+     android:orientation="horizontal" >
+     <!-- android:descendantFocusability="blocksDescendants" >  -->
+    
+ 
+     <TextView android:id="@+id/drBinderCell"
+         android:layout_width="170dp"
+         android:layout_height="wrap_content"
+         android:padding="5dp"
+         android:layout_marginLeft="10dp"
+         android:layout_weight="1" 
+         android:textAppearance="?android:attr/textAppearanceLarge" />
+ 
+     <TextView android:id="@+id/drBilledCell"
+         android:layout_width="170dp"
+         android:layout_height="wrap_content"
+         android:padding="5dp" 
+         android:layout_weight="1" 
+         android:textAppearance="?android:attr/textAppearanceLarge" />
+ 
+     <TextView android:id="@+id/drTotalCell"
+         android:layout_width="170dp"
+         android:layout_height="wrap_content" 
+         android:padding="5dp" 
+         android:textAppearance="?android:attr/textAppearanceLarge" />
+     
+     <TextView android:id="@+id/drUnitcell"
+         android:layout_width="170dp"
+         android:layout_height="wrap_content" 
+         android:padding="5dp" 
+         android:textAppearance="?android:attr/textAppearanceLarge" />
+</LinearLayout>

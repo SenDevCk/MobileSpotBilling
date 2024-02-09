@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" 
+    android:background="@drawable/backgroundboarder"
+    android:id="@+id/VerifySetupInfoLayout"
+    >
+   
+       
+     <TextView
+         android:id="@+id/textView1"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:layout_marginLeft="8dp"
+         android:paddingLeft="0dp"
+         android:layout_marginTop="10dp"
+         android:text="Setup information"
+         android:textSize="18dp" 
+         android:textColor="@android:color/white"/>
+
+   <LinearLayout
+         android:layout_width="match_parent"
+         android:layout_height="51dp"
+         android:weightSum="5"
+         android:layout_marginTop="10dp">
+ <TextView              
+	              android:layout_width="wrap_content"
+	              android:layout_height="wrap_content"
+	              android:layout_gravity="left"
+	             
+	              android:layout_marginLeft="40dp"
+	              android:layout_marginTop="8dp"
+	              android:text="SDO Code   :"
+	              android:textSize="18dp"
+	              android:textStyle="bold"
+	              android:textColor="#ffffff" />
+		
+		<TextView
+		    android:id="@+id/txtVwSdoCd"  
+		    android:layout_width="wrap_content"
+		    android:layout_height="match_parent"
+		    android:layout_gravity="right"
+		    android:layout_marginLeft="15dp"		   
+		    android:textSize="18dp"
+	        android:textColor="#ffff66"  />
+       
+       
+	</LinearLayout>
+	
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="51dp"
+            android:weightSum="5" >
+		<TextView
+	             android:layout_width="wrap_content"
+	              android:layout_height="wrap_content"
+	              android:layout_gravity="left"
+	              android:layout_marginLeft="40dp"
+	              android:layout_marginTop="8dp"
+	              android:paddingLeft="4dp"
+	              android:text="Binder list  :"
+	               android:textSize="18dp"
+	               android:textStyle="bold"
+	              android:textColor="#ffffff" />
+		
+		<TextView
+		    android:id="@+id/txtVwBinder" 
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_gravity="right"
+		    android:layout_marginLeft="15dp"		    
+		    android:textSize="18dp"
+	        android:textColor="#ffff66"  />
+	</LinearLayout>
+	<LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="51dp"
+            android:weightSum="5" >
+		<TextView
+	             android:layout_width="wrap_content"
+	              android:layout_height="wrap_content"
+	              android:layout_gravity="left"
+	              android:layout_marginLeft="13dp"
+	              android:layout_marginTop="8dp"
+	              android:paddingLeft="5dp"
+	              android:text="Active Binder  :"
+	               android:textSize="18dp"
+	               android:textStyle="bold"
+	              android:textColor="#ffffff" />
+		
+		<TextView
+		    android:id="@+id/txtVwActiveBinder" 
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_gravity="right"
+		    android:layout_marginLeft="15dp"		    
+		    android:textSize="18dp"
+	        android:textColor="#ffff66"  />
+	</LinearLayout>
+	<LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="51dp"
+            android:weightSum="5" >
+		<TextView
+	             android:layout_width="wrap_content"
+	              android:layout_height="wrap_content"
+	              android:layout_gravity="left"
+	              android:layout_marginLeft="28dp"
+	              android:layout_marginTop="8dp"
+	              android:paddingLeft="5dp"
+	              android:text="Valid user?  :"
+	               android:textSize="18dp"
+	               android:textStyle="bold"
+	              android:textColor="#ffffff" />
+		
+		<TextView
+		    android:id="@+id/txtVwActiveUser" 
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_gravity="right"
+		    android:layout_marginLeft="15dp"		    
+		    android:textSize="18dp"
+	        android:textColor="#ffff66"  />
+	</LinearLayout>
+	<LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="51dp"
+            android:weightSum="5" >
+		<TextView
+	             android:layout_width="wrap_content"
+	              android:layout_height="wrap_content"
+	              android:layout_gravity="left"
+	              android:layout_marginLeft="26dp"
+	              android:layout_marginTop="8dp"
+	              android:paddingLeft="15dp"
+	              android:text="Bill Month  :"
+	               android:textSize="18dp"
+	               android:textStyle="bold"
+	              android:textColor="#ffffff" />
+		
+		<TextView
+		    android:id="@+id/txtVwBillMth" 
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_gravity="right"
+		    android:layout_marginLeft="15dp"		    
+		    android:textSize="18dp"
+	        android:textColor="#ffff66"  />
+	</LinearLayout>
+	<LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="51dp"
+            android:weightSum="5" >
+		 <TextView
+	              android:layout_width="wrap_content"
+	              android:layout_height="wrap_content"
+	              android:layout_gravity="left"
+	              android:layout_marginLeft="30dp"
+	              android:layout_marginTop="8dp"
+	              android:paddingLeft="52dp"
+	              android:text="User   :"
+	              android:textSize="18dp"
+	              android:textStyle="bold"
+	              android:textColor="#ffffff" />
+		
+		<TextView
+		    android:id="@+id/txtVwUserId" 
+		    android:layout_width="wrap_content"
+		    android:layout_height="match_parent"
+		    android:layout_gravity="right"
+		    android:layout_marginLeft="15dp"		    
+		    android:textSize="18dp"
+	        android:textColor="#ffff66" />
+	</LinearLayout>
+	<LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="51dp"
+            android:weightSum="5" >
+		 <TextView
+	              android:layout_width="wrap_content"
+	              android:layout_height="wrap_content"
+	              android:layout_gravity="left"
+	              android:layout_marginLeft="26dp"
+	              android:layout_marginTop="8dp"
+	              android:paddingLeft="60dp"
+	              android:text="IMEI  :"
+	              android:textSize="18dp"
+	              android:textStyle="bold"
+	              android:textColor="#ffffff" />
+		
+		<TextView
+		    android:id="@+id/txtVwImieNbr" 
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_marginLeft="15dp"		    
+		    android:textSize="18dp"
+	        android:textColor="#ffff66" />
+	</LinearLayout>
+	<LinearLayout
+	            android:layout_width="match_parent"
+	            android:layout_height="65dp"
+	            android:background="@drawable/linearlayoutbackgroundboarder"
+	            android:paddingTop="15dp"
+	           
+	            android:layout_marginTop="20dp">
+	
+	          <Button
+	              android:id="@+id/btnOk"
+	              android:layout_width="100dp"
+	              android:layout_height="wrap_content"
+	              android:background="@drawable/buttonbackground1"
+	              android:layout_gravity="left"
+	              android:layout_marginLeft="110dp"
+	              android:layout_marginTop="20dp"
+	              android:textSize="18dp"
+	              android:textColor="#ffffff"
+	              android:text="OK" />
+	          </LinearLayout>
+
+</LinearLayout>

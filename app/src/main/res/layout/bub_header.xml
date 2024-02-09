@@ -1,0 +1,56 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+     android:paddingTop="10dp"
+     android:paddingBottom="6dp"
+     android:layout_marginLeft="10dp"
+     android:layout_marginTop="10dp"
+     android:layout_width="fill_parent"
+     android:layout_height="wrap_content"
+     android:orientation="horizontal" 
+     android:background = "@drawable/border">
+     
+     <!-- android:descendantFocusability="blocksDescendants" >  -->
+    
+     <TextView
+         android:layout_width="170dp"
+         android:layout_height="wrap_content"
+         android:layout_marginLeft="10dp"
+         android:layout_weight="1"
+         android:padding="5dp"
+         android:text="MRU"
+         android:textAppearance="?android:attr/textAppearanceLarge"
+         android:textColor="#FFFF66"
+         android:textStyle="bold"
+         android:textSize="20sp" />
+ 
+     <TextView
+         android:layout_width="170dp"
+         android:layout_height="wrap_content"
+         android:layout_weight="1"
+         android:padding="5dp"
+         android:text="BILLED"
+         android:textAppearance="?android:attr/textAppearanceLarge"
+         android:textColor="#FFFF66"
+         android:textStyle="bold"
+         android:textSize="20sp" />
+ 
+     <TextView
+         android:layout_width="170dp"
+         android:layout_height="wrap_content"
+         android:padding="5dp"
+         android:text="UNBILLED"
+         android:textAppearance="?android:attr/textAppearanceLarge"
+         android:textColor="#FFFF66"
+         android:textStyle="bold"
+         android:textSize="20sp" />
+     
+     <TextView
+         android:layout_width="170dp"
+         android:layout_height="wrap_content"
+         android:padding="5dp"
+         android:text="TOTAL"
+         android:textAppearance="?android:attr/textAppearanceLarge"
+         android:textColor="#FFFF66"
+         android:textStyle="bold"
+         android:textSize="20sp" />
+
+</LinearLayout>

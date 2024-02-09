@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+		
+		<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:orientation="vertical"
+		    android:paddingTop="2dp" 
+            android:background="@drawable/backgroundboarder" >
+		<EditText
+		        android:id="@+id/etDialogText"
+		        style="@style/StyleEditText"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:layout_gravity="center"
+		        android:textSize="18sp" 
+		        android:ems="4"
+		        android:hint="Enter here"
+		        android:inputType="number"
+		        android:maxLength="10" />
+		    
+
+		    <LinearLayout
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:gravity="center" 
+		         android:orientation="horizontal">
+		        
+		   <Button
+            android:id="@+id/btnDialogCancel"
+            style="@style/btnStyleBeige"
+            android:layout_width="134dp"
+            android:layout_margin="10dp"
+            android:layout_height="wrap_content"
+            android:text="Cancel" />
+
+        <Button
+            android:id="@+id/btnDialogOK"
+            style="@style/btnStyleBeige"
+            android:layout_width="134dp"
+            android:layout_margin="10dp"
+            android:layout_height="wrap_content"
+            android:text="OK" />
+            
+		    </LinearLayout>
+            
+ 			
+
+</LinearLayout>

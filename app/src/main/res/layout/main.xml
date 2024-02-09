@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/backgroundboarder"
+    android:scrollbars="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingTop="2dp" >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/headerboarder"
+            android:paddingLeft="5dp"
+            android:text="Main:"
+            android:textColor="#ffffff"
+            android:textSize="22dp" />
+
+        <Button
+            android:id="@+id/btnBilling"
+            style="@style/btnStyleBeige"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="3dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="3dp"
+            android:text="Billing" />
+
+         <Button
+            android:id="@+id/btnSync"
+            style="@style/btnStyleBeige"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="3dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="3dp"
+            android:text="Synchronize" />
+         
+         <Button
+	            android:id="@+id/btnMissingCons"
+	            android:text="Missing Consumers" 
+	            style="@style/btnStyleBeige"
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:layout_marginTop="3dp"
+	            android:layout_marginBottom="3dp"
+	            android:layout_marginLeft="10dp"
+	            android:layout_marginRight="10dp"/> 
+	            
+         <Button
+            android:id="@+id/btnAbnormality"
+            android:text="Abnormality" 
+            style="@style/btnStyleBeige"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:layout_marginBottom="3dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"/>      
+	            
+        <Button
+            android:id="@+id/btnReport"
+            style="@style/btnStyleBeige"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="3dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="3dp"
+            android:text="Report" />
+
+        <Button
+            android:id="@+id/btnSummary"
+            style="@style/btnStyleBeige"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="3dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="3dp"
+            android:text="Summary" />
+
+        <Button
+            android:id="@+id/btnSetup"
+            style="@style/btnStyleBeige"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="3dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="3dp"
+            android:text="Set Up" />
+
+        <Button
+            android:id="@+id/btnHelp"
+            style="@style/btnStyleBeige"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:layout_marginBottom="3dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:text="Help" />
+
+        <Button
+            android:id="@+id/btnQuit"
+            style="@style/btnStyleBeige"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#cc0000"             
+            android:layout_marginTop="3dp"
+            android:layout_marginBottom="3dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:text="Quit" />
+        <Button
+            android:id="@+id/btnDummyPrint"
+            style="@style/btnStyleBeige"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#cc0000"
+            android:layout_marginTop="3dp"
+            android:layout_marginBottom="3dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:text="Dummy Print"
+            android:visibility="gone"/>
+        
+        
+        <Button
+            android:id="@+id/btnUploadData"
+            style="@style/btnStyleBeige"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="3dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="3dp"
+            android:text="Upload Billed Data"
+            android:visibility="gone"
+             />
+
+    </LinearLayout>
+
+</ScrollView>

@@ -1,0 +1,147 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="fill_parent" 
+    android:scrollbars="horizontal"
+    android:background="@drawable/backgroundboarder">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+        
+        <TextView  
+            android:id="@+id/tvConDetailHeader"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="5dp" 
+            android:textSize="22dp"
+            android:textColor="#ffffff"
+            android:background="@drawable/headerboarder"      
+            android:text="Abnormality Details"/>
+        
+        <LinearLayout
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:layout_marginLeft="10dp"
+             android:layout_marginRight="5dp"
+             android:layout_marginTop="10dp" >
+
+             <TextView
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_weight="0.09"
+                 android:paddingLeft="10dp"
+                 android:text="CA Number :"
+                 android:textColor="@android:color/white"
+                 android:textSize="18dp"
+                 android:textStyle="bold" />
+
+             <EditText
+                 android:id="@+id/AccNoTxt"
+                 style="@style/StyleEditText"
+                 android:layout_width="108dp"
+                 android:layout_height="wrap_content"
+                 android:layout_gravity="center"
+                 android:layout_marginLeft="25dp"
+                 android:layout_weight="0.06"
+                 android:ems="8"
+                 android:hint=" Acc No"
+                 android:inputType="number"
+                 android:maxLength="9"
+                 android:textSize="18sp" />
+
+         </LinearLayout>
+        
+         <LinearLayout android:layout_width="match_parent"
+		     android:layout_height="wrap_content"
+		     android:layout_marginTop="10dp"
+		     android:layout_marginLeft="10dp"
+		     android:layout_marginRight="5dp">
+	       			
+		 	<TextView
+		 	    android:layout_width="159dp"
+		 	    android:layout_height="wrap_content"
+		 	    android:paddingLeft="10dp"
+		 	    android:text="Abnormality"
+		 	    android:textColor="@android:color/white"
+		 	    android:textSize="18dp"
+		 	    android:textStyle="bold" />
+			
+			<Spinner 
+			    android:id="@+id/AbnormalitySpn"
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"
+			    android:layout_gravity="center"
+			    android:layout_marginLeft="25dp"
+			    android:ems="8"
+			    android:textSize="18sp"
+			    android:entries="@array/Abnormality"
+			    />
+			
+      </LinearLayout>
+      
+      <LinearLayout android:layout_width="match_parent"
+		     android:layout_height="wrap_content"
+		     android:layout_marginTop="10dp"
+		     android:layout_marginLeft="10dp"
+		     android:layout_marginRight="5dp"
+		  android:visibility="gone">
+	       			
+		 	<TextView
+		 	    android:layout_width="159dp"
+		 	    android:layout_height="wrap_content"
+		 	    android:paddingLeft="10dp"
+		 	    android:text="Remarks:"
+		 	    android:textColor="@android:color/white"
+		 	    android:textSize="18dp"
+		 	    android:textStyle="bold" />
+		 
+			<EditText
+			    android:id="@+id/RemarksTxt"
+			    style="@style/StyleEditText"
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"
+			    android:layout_gravity="center"
+			    android:layout_marginLeft="25dp"
+			    android:ems="8"
+			    android:hint=" Remarks"
+			    android:maxLength="20"
+			    android:textSize="18sp" />
+			
+      </LinearLayout>
+      
+      	  <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+			  >
+         <Button 
+		    android:id="@+id/ContinueBtn"
+		    style="@style/btnStyleBeige"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+          	android:layout_marginTop="15dp"
+            android:layout_marginLeft="110dp"
+	        android:text="Update" /> 
+	        
+
+        </LinearLayout>
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:visibility="gone">
+
+			<Button
+				android:id="@+id/CancelBtn"
+				style="@style/btnStyleBeige"
+				android:layout_width="100dp"
+				android:layout_height="50dp"
+				android:layout_marginTop="15dp"
+				android:layout_marginLeft="50dp"
+				android:text="Cancel" />
+
+		</LinearLayout>
+        
+    </LinearLayout>
+
+</ScrollView>

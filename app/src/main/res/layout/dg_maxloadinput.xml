@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="240dp"
+    android:orientation="vertical" 
+    android:background="#0f3e6d">
+    <EditText
+        android:id="@+id/dialogMaxLoad"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:inputType="number"
+        android:layout_marginTop="16dp"
+        android:layout_marginLeft="4dp"
+        android:layout_marginRight="4dp"
+        android:layout_marginBottom="4dp"
+        android:hint="Enetr Max Load" />
+  
+     <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+	        	
+     <Button
+        android:id="@+id/dialogButtonMaxloadConfirm"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:text="Confirm"
+        android:background="@drawable/buttonbackground1"
+        android:textSize="18dp"
+        android:textColor="@android:color/white"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="45dp"
+        android:layout_marginRight="5dp"
+        />
+     <Button
+        android:id="@+id/dialogButtonMaxLoadCancle"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:text="Cancel"
+        android:textSize="18dp"
+        android:textColor="@android:color/white"
+        android:background="@drawable/buttonbackground1"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="1dp"
+        android:layout_marginRight="5dp"
+        />
+     
+     </LinearLayout>
+	<TextView 
+         android:id="@+id/dialogMaxLoadErrorLbl"
+	     android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:text=""
+         android:textAppearance="?android:attr/textAppearanceMedium"/>
+</LinearLayout>

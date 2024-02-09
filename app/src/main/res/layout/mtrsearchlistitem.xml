@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:showDividers="beginning" >
+
+    <TextView
+        android:id="@+id/tvMrtSrcListItemMtrNo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Mtr No"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:width="100dp" />
+
+    <TextView
+        android:id="@+id/tvMrtSrcListItemSDO"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="SDO"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:width="100dp" />
+
+    <TextView
+        android:id="@+id/tvMrtSrcListItemBinder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Binder"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:width="100dp" />
+
+    <TextView
+        android:id="@+id/tvMrtSrcListItemAccNo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Acc No"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:width="80dp" />
+
+    <TextView
+        android:id="@+id/tvMrtSrcListItemName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Name"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:width="200dp" />
+
+</LinearLayout>

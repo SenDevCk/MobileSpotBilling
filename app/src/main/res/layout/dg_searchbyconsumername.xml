@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+     android:background="@drawable/backgroundboarder"
+     >
+       <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/headerboarder"
+        android:paddingLeft="5dp"
+        android:text="Search By Consumer Name"
+        android:textColor="#ffffff"
+        android:textSize="22dp" />
+     <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+	          <EditText
+	              android:id="@+id/edtTxtConName"
+	              android:layout_width="195dp"
+	              android:layout_height="wrap_content"
+	              android:layout_alignParentLeft="true"
+	              android:layout_toLeftOf="@+id/btnSearchConsName"
+	              android:layout_weight="1"
+	              android:ems="10"
+	              android:hint="Consumer Name"
+	              android:inputType="none"
+	              android:maxLength="12"
+	              android:singleLine="true" />
+
+	          <Button
+	              android:id="@+id/btnSearchConsName"
+	              style="?android:attr/buttonStyleSmall"
+	              android:layout_width="wrap_content"
+	              android:layout_height="wrap_content"
+	              android:layout_alignBottom="@+id/edtTxtConName"
+	              android:layout_alignParentRight="true"
+	              android:layout_alignParentTop="true"
+	              android:text="Search" />
+
+    </RelativeLayout>
+
+    <ListView
+        android:id="@+id/lvSrcByConName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+    </ListView>
+    
+    
+</LinearLayout>
