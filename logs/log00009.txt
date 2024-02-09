@@ -1,0 +1,457 @@
+09-11 14:24:17.964 18400-18400/org.cso.MobileSpotBilling I/System.out: context android.app.ContextImpl@eeb3311
+09-11 14:24:17.988 18400-18400/org.cso.MobileSpotBilling I/System.out: total  : 1
+09-11 14:24:17.988 18400-18400/org.cso.MobileSpotBilling E/getUserInfo =>: total  : 1
+09-11 14:24:17.989 18400-18400/org.cso.MobileSpotBilling I/System.out: FAT68
+09-11 14:24:17.989 18400-18400/org.cso.MobileSpotBilling E/UtilAppCommon.acctNbr:::::: 100386807
+09-11 14:24:17.989 18400-18400/org.cso.MobileSpotBilling E/GetConsumerInfoByField: 100386807  <>  Accno  <>  CONSUMER_NAME
+09-11 14:24:17.989 18400-18400/org.cso.MobileSpotBilling E/qry ==>>: select * from BillInput where CONTRACT_AC_NO='100386807'
+09-11 14:24:17.998 18400-18400/org.cso.MobileSpotBilling E/value ==>>: Sri CHHAVILA RAY .
+09-11 14:24:17.999 18400-18400/org.cso.MobileSpotBilling E/GetConsumerInfoByField: 100386807  <>  Accno  <>  CONSUMER_NAME
+09-11 14:24:17.999 18400-18400/org.cso.MobileSpotBilling E/qry ==>>: select * from BillInput where CONTRACT_AC_NO='100386807'
+09-11 14:24:18.001 18400-18400/org.cso.MobileSpotBilling E/value ==>>: Sri CHHAVILA RAY .
+09-11 14:24:18.003 18400-18400/org.cso.MobileSpotBilling I/System.out: Entering into the database part 
+09-11 14:24:18.007 18400-18400/org.cso.MobileSpotBilling E/Pole No: 0260152006
+09-11 14:24:18.007 18400-18400/org.cso.MobileSpotBilling E/getBillInputDetails->: Completed
+09-11 14:24:18.008 18400-18400/org.cso.MobileSpotBilling I/System.out: sudhir BTngenerated clicked on Entry formtrue
+09-11 14:24:18.019 18400-18400/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityPaused:ActvConsumerNbrInput
+09-11 14:24:18.059 18400-18400/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityCreated:ActvBilling
+09-11 14:24:18.061 18400-18400/org.cso.MobileSpotBilling E/validateDoubleBilling: Start
+09-11 14:24:18.061 18400-18400/org.cso.MobileSpotBilling I/System.out: context android.app.ContextImpl@5a8469b
+09-11 14:24:18.068 18400-18400/org.cso.MobileSpotBilling E/AccountNo: 100386807
+09-11 14:24:18.070 18400-18400/org.cso.MobileSpotBilling I/System.out: context android.app.ContextImpl@5a8469b
+09-11 14:24:18.079 18400-18400/org.cso.MobileSpotBilling I/System.out: Entering into the database part 
+09-11 14:24:18.083 18400-18400/org.cso.MobileSpotBilling E/Pole No: 0260152006
+09-11 14:24:18.083 18400-18400/org.cso.MobileSpotBilling E/getBillInputDetails->: Completed
+09-11 14:24:18.084 18400-18400/org.cso.MobileSpotBilling E/checkDoubleBilling =>>: select * from SAPBlueInput where CANumber = '100386807' and SCHEDULED_BILLING_DATE IS NOT NULL;
+09-11 14:24:18.085 18400-18400/org.cso.MobileSpotBilling E/checkDoubleBilling =>>: select * from SAPInput where CANumber = '100386807' and SCHEDULED_BILLING_DATE IS NOT NULL;
+09-11 14:24:18.090 18400-18400/org.cso.MobileSpotBilling I/System.out: context android.app.ContextImpl@5a8469b
+09-11 14:24:18.102 18400-18400/org.cso.MobileSpotBilling I/System.out: Entering into the database part 
+09-11 14:24:18.106 18400-18400/org.cso.MobileSpotBilling E/Pole No: 0260152006
+09-11 14:24:18.106 18400-18400/org.cso.MobileSpotBilling E/getBillInputDetails->: Completed
+09-11 14:24:18.152 18400-18400/org.cso.MobileSpotBilling E/showConsumerDetails: End
+09-11 14:24:18.153 18400-18400/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityStarted:ActvBilling
+09-11 14:24:18.153 18400-18400/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityResumed:ActvBilling
+09-11 14:24:18.600 18400-18400/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivitySaveInstanceState:ActvConsumerNbrInput
+09-11 14:24:18.600 18400-18400/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityStopped:ActvConsumerNbrInput
+09-11 14:24:19.776 18400-18400/org.cso.MobileSpotBilling I/System.out: context org.cso.MobileSpotBilling.ActvBilling@bf9b2b2
+09-11 14:24:19.794 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1.Count ==>>  Select METER_CAP as Count from BillInput  ==  149
+09-11 14:24:19.795 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  
+09-11 14:24:19.795 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  
+09-11 14:24:19.795 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  
+09-11 14:24:19.795 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  
+09-11 14:24:19.795 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  
+09-11 14:24:19.795 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  
+09-11 14:24:19.795 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  
+09-11 14:24:19.795 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  
+09-11 14:24:19.795 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  
+09-11 14:24:19.795 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  
+09-11 14:24:19.795 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  
+09-11 14:24:19.795 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  
+09-11 14:24:19.795 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  
+09-11 14:24:19.795 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  
+09-11 14:24:19.795 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  9322218673
+09-11 14:24:19.796 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  
+09-11 14:24:19.796 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  993428416
+09-11 14:24:19.796 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  
+09-11 14:24:19.796 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  9327135131
+09-11 14:24:19.796 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  
+09-11 14:24:19.796 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  
+09-11 14:24:19.797 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  9905488012
+09-11 14:24:19.797 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  
+09-11 14:24:19.797 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  
+09-11 14:24:19.797 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  7034431945
+09-11 14:24:19.797 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  9031917191
+09-11 14:24:19.797 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  
+09-11 14:24:19.797 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  
+09-11 14:24:19.797 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  
+09-11 14:24:19.797 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  9304171270
+09-11 14:24:19.797 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  
+09-11 14:24:19.797 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  
+09-11 14:24:19.797 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  8409294672
+09-11 14:24:19.797 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  
+09-11 14:24:19.797 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  
+09-11 14:24:19.797 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  
+09-11 14:24:19.797 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  
+09-11 14:24:19.797 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  9139175198
+09-11 14:24:19.797 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  
+09-11 14:24:19.797 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  9234953645
+09-11 14:24:19.798 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  
+09-11 14:24:19.798 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  
+09-11 14:24:19.798 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  7488451459
+09-11 14:24:19.798 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  9931445726
+09-11 14:24:19.798 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  
+09-11 14:24:19.798 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  9234935400
+09-11 14:24:19.798 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  
+09-11 14:24:19.798 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  
+09-11 14:24:19.798 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  
+09-11 14:24:19.798 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  
+09-11 14:24:19.798 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  
+09-11 14:24:19.798 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  
+09-11 14:24:19.798 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  
+09-11 14:24:19.798 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  9213182813
+09-11 14:24:19.798 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  9507388306
+09-11 14:24:19.798 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  
+09-11 14:24:19.798 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  
+09-11 14:24:19.798 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  
+09-11 14:24:19.799 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  
+09-11 14:24:19.799 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  
+09-11 14:24:19.799 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  
+09-11 14:24:19.799 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  
+09-11 14:24:19.799 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  9431071375
+09-11 14:24:19.799 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  
+09-11 14:24:19.799 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  9279034736
+09-11 14:24:19.799 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  
+09-11 14:24:19.799 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  
+09-11 14:24:19.799 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  9934868780
+09-11 14:24:19.799 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  8294635943
+09-11 14:24:19.799 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  
+09-11 14:24:19.799 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  
+09-11 14:24:19.799 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  7038181318
+09-11 14:24:19.799 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  
+09-11 14:24:19.799 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  
+09-11 14:24:19.799 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  9263868977
+09-11 14:24:19.799 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  
+09-11 14:24:19.800 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  
+09-11 14:24:19.800 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  9204039755
+09-11 14:24:19.800 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  
+09-11 14:24:19.800 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  
+09-11 14:24:19.800 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  
+09-11 14:24:19.800 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  
+09-11 14:24:19.800 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  
+09-11 14:24:19.800 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  9304040241
+09-11 14:24:19.800 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  9122407881
+09-11 14:24:19.800 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  
+09-11 14:24:19.800 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  9409589299
+09-11 14:24:19.800 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  
+09-11 14:24:19.800 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  9235191381
+09-11 14:24:19.800 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  
+09-11 14:24:19.800 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  9234551094
+09-11 14:24:19.800 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  
+09-11 14:24:19.800 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  
+09-11 14:24:19.801 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  9334280848
+09-11 14:24:19.801 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  9905361030
+09-11 14:24:19.801 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  
+09-11 14:24:19.801 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  
+09-11 14:24:19.801 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  
+09-11 14:24:19.801 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  9934025048
+09-11 14:24:19.801 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  
+09-11 14:24:19.801 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  9955121233
+09-11 14:24:19.801 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  9608614435
+09-11 14:24:19.801 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  
+09-11 14:24:19.801 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  
+09-11 14:24:19.801 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  9234943845
+09-11 14:24:19.801 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  
+09-11 14:24:19.801 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  
+09-11 14:24:19.801 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  9661787275
+09-11 14:24:19.801 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  
+09-11 14:24:19.801 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  
+09-11 14:24:19.802 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  9291381318
+09-11 14:24:19.804 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  
+09-11 14:24:19.804 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  
+09-11 14:24:19.804 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  
+09-11 14:24:19.804 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  
+09-11 14:24:19.804 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  
+09-11 14:24:19.804 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  
+09-11 14:24:19.804 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  9931445726
+09-11 14:24:19.804 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  8409539299
+09-11 14:24:19.804 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  9939805278
+09-11 14:24:19.804 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  
+09-11 14:24:19.804 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  
+09-11 14:24:19.804 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  
+09-11 14:24:19.804 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  9304771924
+09-11 14:24:19.804 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  9304171270
+09-11 14:24:19.805 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  
+09-11 14:24:19.805 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  8071193565
+09-11 14:24:19.805 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  9234949539
+09-11 14:24:19.805 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  
+09-11 14:24:19.805 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  7020190113
+09-11 14:24:19.805 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  9115590191
+09-11 14:24:19.805 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  
+09-11 14:24:19.805 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  960844512
+09-11 14:24:19.805 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  9234578107
+09-11 14:24:19.805 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  
+09-11 14:24:19.805 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  9234943641
+09-11 14:24:19.805 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  8271416354
+09-11 14:24:19.805 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  9835611191
+09-11 14:24:19.805 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  
+09-11 14:24:19.805 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  
+09-11 14:24:19.805 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  
+09-11 14:24:19.805 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  
+09-11 14:24:19.806 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  9898989898
+09-11 14:24:19.806 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  7763814721
+09-11 14:24:19.806 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  9801253665
+09-11 14:24:19.806 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  8271361672
+09-11 14:24:19.806 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  
+09-11 14:24:19.806 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  9898989898
+09-11 14:24:19.806 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  
+09-11 14:24:19.808 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberCheck ==>> c2.Count ==>>  Select MobileNo from SAPInput  ==  1
+09-11 14:24:19.808 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c2 ==>>  9801253665
+09-11 14:24:19.817 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberCheck ==>> c1.Count ==>>  Select METER_CAP as Count from BillInput Where METER_CAP = '8271361672'  ==  1
+09-11 14:24:19.818 18400-18400/org.cso.MobileSpotBilling E/UtilDB: MobileNumberCheck ==>> c2.Count ==>>  Select MobileNo from SAPInput Where MobileNo = '8271361672'  ==  0
+09-11 14:24:19.818 18400-18400/org.cso.MobileSpotBilling I/System.out: context org.cso.config.AppController@cca3e4b
+09-11 14:24:19.840 18400-18400/org.cso.MobileSpotBilling E/InsertMobPoleConsCmpltd: Executed
+09-11 14:24:19.845 18400-18400/org.cso.MobileSpotBilling E/Network: Network
+09-11 14:24:19.849 18400-18400/org.cso.MobileSpotBilling E/StartBilling: Billing Started
+09-11 14:24:19.851 18400-18400/org.cso.MobileSpotBilling E/StartBilling: Reading Nxt Date
+09-11 14:24:19.851 18400-18400/org.cso.MobileSpotBilling E/StartBilling: Inside Nxt Date
+09-11 14:24:19.851 18400-18400/org.cso.MobileSpotBilling E/NXT_SCH_MTR_RDR_DATE>>: 2017.09.30
+09-11 14:24:19.851 18400-18400/org.cso.MobileSpotBilling E/SCH_MTR_RDR_DATE>>: 2017.08.31
+09-11 14:24:19.862 18400-18400/org.cso.MobileSpotBilling E/Date Time Equal =>: false
+09-11 14:24:19.873 18400-18400/org.cso.MobileSpotBilling E/Format Today =>: 11-09-2017 12:00:00
+09-11 14:24:19.874 18400-18400/org.cso.MobileSpotBilling E/Nxt =>: 30-09-2017 12:00:00
+09-11 14:24:19.874 18400-18400/org.cso.MobileSpotBilling E/Sch =>: 31-08-2017 12:00:00
+09-11 14:24:19.874 18400-18400/org.cso.MobileSpotBilling E/Date eqbm =>: true
+09-11 14:24:19.874 18400-18400/org.cso.MobileSpotBilling E/StartBilling: Done Reading Nxt Date
+09-11 14:24:19.874 18400-18400/org.cso.MobileSpotBilling I/System.out: context org.cso.MobileSpotBilling.ActvBilling@bf9b2b2
+09-11 14:24:19.891 18400-18400/org.cso.MobileSpotBilling I/ActvBilling: StartBilling ==>> 000000000102486232  <<==>> null
+09-11 14:24:19.929 18400-18400/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityPaused:ActvBilling
+09-11 14:24:20.036 18400-18400/org.cso.MobileSpotBilling W/art: Before Android 4.1, method android.graphics.PorterDuffColorFilter android.support.graphics.drawable.VectorDrawableCompat.updateTintFilter(android.graphics.PorterDuffColorFilter, android.content.res.ColorStateList, android.graphics.PorterDuff$Mode) would have incorrectly overridden the package-private method in android.graphics.drawable.Drawable
+09-11 14:24:20.059 18400-18400/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityCreated:ActivityBT_Reading
+09-11 14:24:20.213 18400-18400/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityStarted:ActivityBT_Reading
+09-11 14:24:20.239 18400-17476/org.cso.MobileSpotBilling W/GooglePlayServicesUtil: Google Play services out of date.  Requires 9877000 but found 9683436
+09-11 14:24:20.241 18400-18400/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityResumed:ActivityBT_Reading
+09-11 14:24:20.243 18400-18400/org.cso.MobileSpotBilling I/System.out: 0
+09-11 14:24:20.774 18400-18400/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityStopped:ActvBilling
+09-11 14:24:20.774 18400-18400/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityDestroyed:ActvBilling
+09-11 14:24:20.864 18400-18400/org.cso.MobileSpotBilling I/System.out: device123164,null
+09-11 14:24:20.869 18400-18400/org.cso.MobileSpotBilling I/System.out: device123164,null
+09-11 14:24:20.918 18400-18400/org.cso.MobileSpotBilling I/System.out: device123164,null
+09-11 14:24:20.923 18400-18400/org.cso.MobileSpotBilling I/System.out: deviceAT2TV3-88F9,[Landroid.os.ParcelUuid;@6b9b80d
+09-11 14:24:20.935 18400-18400/org.cso.MobileSpotBilling I/System.out: device123164,null
+09-11 14:24:20.941 18400-18400/org.cso.MobileSpotBilling I/System.out: deviceAT2TV3-88F9,[Landroid.os.ParcelUuid;@a3583c2
+09-11 14:24:21.072 18400-18400/org.cso.MobileSpotBilling I/System.out: device123164,null
+09-11 14:24:21.077 18400-18400/org.cso.MobileSpotBilling I/System.out: deviceAT2TV3-88F9,[Landroid.os.ParcelUuid;@fa65d3
+09-11 14:24:21.081 18400-18400/org.cso.MobileSpotBilling I/System.out: device123164,null
+09-11 14:24:21.086 18400-18400/org.cso.MobileSpotBilling I/System.out: deviceAT2TV3-88F9,[Landroid.os.ParcelUuid;@9d5d510
+09-11 14:24:21.264 18400-18400/org.cso.MobileSpotBilling I/System.out: device123164,null
+09-11 14:24:21.269 18400-18400/org.cso.MobileSpotBilling I/System.out: deviceAT2TV3-88F9,[Landroid.os.ParcelUuid;@156c809
+09-11 14:24:21.274 18400-18400/org.cso.MobileSpotBilling I/System.out: deviceFlex,null
+09-11 14:24:21.280 18400-18400/org.cso.MobileSpotBilling I/System.out: device123164,null
+09-11 14:24:21.285 18400-18400/org.cso.MobileSpotBilling I/System.out: deviceAT2TV3-88F9,[Landroid.os.ParcelUuid;@2dc1a0e
+09-11 14:24:21.289 18400-18400/org.cso.MobileSpotBilling I/System.out: deviceFlex,null
+09-11 14:24:21.547 18400-18400/org.cso.MobileSpotBilling I/System.out: device123164,null
+09-11 14:24:21.554 18400-18400/org.cso.MobileSpotBilling I/System.out: deviceAT2TV3-88F9,[Landroid.os.ParcelUuid;@c7b8c2f
+09-11 14:24:21.561 18400-18400/org.cso.MobileSpotBilling I/System.out: deviceFlex,null
+09-11 14:24:21.572 18400-18400/org.cso.MobileSpotBilling I/System.out: device123164,null
+09-11 14:24:21.578 18400-18400/org.cso.MobileSpotBilling I/System.out: deviceAT2TV3-88F9,[Landroid.os.ParcelUuid;@ab323c
+09-11 14:24:21.582 18400-18400/org.cso.MobileSpotBilling I/System.out: deviceFlex,null
+09-11 14:24:22.455 18400-18400/org.cso.MobileSpotBilling I/System.out: device123164,null
+09-11 14:24:22.466 18400-18400/org.cso.MobileSpotBilling I/System.out: deviceAT2TV3-88F9,[Landroid.os.ParcelUuid;@89adbc5
+09-11 14:24:22.475 18400-18400/org.cso.MobileSpotBilling I/System.out: deviceFlex,null
+09-11 14:24:22.480 18400-18400/org.cso.MobileSpotBilling I/System.out: device123164,null
+09-11 14:24:22.485 18400-18400/org.cso.MobileSpotBilling I/System.out: deviceAT2TV3-88F9,[Landroid.os.ParcelUuid;@843c91a
+09-11 14:24:22.489 18400-18400/org.cso.MobileSpotBilling I/System.out: deviceFlex,null
+09-11 14:24:22.556 18400-18400/org.cso.MobileSpotBilling I/System.out: device123164,null
+09-11 14:24:22.561 18400-18400/org.cso.MobileSpotBilling I/System.out: deviceAT2TV3-88F9,[Landroid.os.ParcelUuid;@3ebc4b
+09-11 14:24:22.565 18400-18400/org.cso.MobileSpotBilling I/System.out: deviceFlex,null
+09-11 14:24:22.570 18400-18400/org.cso.MobileSpotBilling I/System.out: device123164,null
+09-11 14:24:22.574 18400-18400/org.cso.MobileSpotBilling I/System.out: deviceAT2TV3-88F9,[Landroid.os.ParcelUuid;@5173628
+09-11 14:24:22.578 18400-18400/org.cso.MobileSpotBilling I/System.out: deviceFlex,null
+09-11 14:24:22.700 18400-18400/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityPaused:ActivityBT_Reading
+09-11 14:24:22.733 18400-18400/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityCreated:PeripheralActivity
+09-11 14:24:22.761 18400-18400/org.cso.MobileSpotBilling I/System.out: isCheckedfalse
+09-11 14:24:22.762 18400-18400/org.cso.MobileSpotBilling I/System.out: isChecked2false
+09-11 14:24:22.769 18400-18400/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityStarted:PeripheralActivity
+09-11 14:24:22.769 18400-18400/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityResumed:PeripheralActivity
+09-11 14:24:23.263 18400-18400/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivitySaveInstanceState:ActivityBT_Reading
+09-11 14:24:23.263 18400-18400/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityStopped:ActivityBT_Reading
+09-11 14:24:30.905 18400-18400/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityPaused:PeripheralActivity
+09-11 14:24:30.918 18400-18400/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityDestroyed:ActivityBT_Reading
+09-11 14:24:30.939 18400-18400/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityCreated:ActivityBT_Reading
+09-11 14:24:30.964 18400-18400/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityStarted:ActivityBT_Reading
+09-11 14:24:30.968 18400-18400/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityResumed:ActivityBT_Reading
+09-11 14:24:30.969 18400-18400/org.cso.MobileSpotBilling I/System.out: 0
+09-11 14:24:30.995 18400-17768/org.cso.MobileSpotBilling W/GooglePlayServicesUtil: Google Play services out of date.  Requires 9877000 but found 9683436
+09-11 14:24:31.355 18400-18400/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityStopped:PeripheralActivity
+09-11 14:24:31.355 18400-18400/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityDestroyed:PeripheralActivity
+09-11 14:24:31.480 18400-18400/org.cso.MobileSpotBilling I/System.out: device123164,null
+09-11 14:24:31.484 18400-18400/org.cso.MobileSpotBilling I/System.out: device123164,null
+09-11 14:24:31.517 18400-18400/org.cso.MobileSpotBilling I/System.out: device123164,null
+09-11 14:24:31.522 18400-18400/org.cso.MobileSpotBilling I/System.out: device123164,null
+09-11 14:24:31.672 18400-18400/org.cso.MobileSpotBilling I/System.out: device123164,null
+09-11 14:24:31.676 18400-18400/org.cso.MobileSpotBilling I/System.out: deviceAT2TV3-88F9,[Landroid.os.ParcelUuid;@c307fef
+09-11 14:24:31.682 18400-18400/org.cso.MobileSpotBilling I/System.out: device123164,null
+09-11 14:24:31.686 18400-18400/org.cso.MobileSpotBilling I/System.out: deviceAT2TV3-88F9,[Landroid.os.ParcelUuid;@97b7afc
+09-11 14:24:31.785 18400-18400/org.cso.MobileSpotBilling I/System.out: device123164,null
+09-11 14:24:31.790 18400-18400/org.cso.MobileSpotBilling I/System.out: deviceAT2TV3-88F9,[Landroid.os.ParcelUuid;@3f45585
+09-11 14:24:31.797 18400-18400/org.cso.MobileSpotBilling I/System.out: device123164,null
+09-11 14:24:31.801 18400-18400/org.cso.MobileSpotBilling I/System.out: deviceAT2TV3-88F9,[Landroid.os.ParcelUuid;@af51fda
+09-11 14:24:31.829 18400-18400/org.cso.MobileSpotBilling I/System.out: device123164,null
+09-11 14:24:31.833 18400-18400/org.cso.MobileSpotBilling I/System.out: deviceAT2TV3-88F9,[Landroid.os.ParcelUuid;@6af2c0b
+09-11 14:24:31.837 18400-18400/org.cso.MobileSpotBilling I/System.out: device123164,null
+09-11 14:24:31.842 18400-18400/org.cso.MobileSpotBilling I/System.out: deviceAT2TV3-88F9,[Landroid.os.ParcelUuid;@3834ae8
+09-11 14:24:32.073 18400-18400/org.cso.MobileSpotBilling I/System.out: device123164,null
+09-11 14:24:32.079 18400-18400/org.cso.MobileSpotBilling I/System.out: deviceAT2TV3-88F9,[Landroid.os.ParcelUuid;@729c501
+09-11 14:24:32.086 18400-18400/org.cso.MobileSpotBilling I/System.out: device123164,null
+09-11 14:24:32.091 18400-18400/org.cso.MobileSpotBilling I/System.out: deviceAT2TV3-88F9,[Landroid.os.ParcelUuid;@6955fa6
+09-11 14:24:32.127 18400-18400/org.cso.MobileSpotBilling I/System.out: device123164,null
+09-11 14:24:32.132 18400-18400/org.cso.MobileSpotBilling I/System.out: deviceAT2TV3-88F9,[Landroid.os.ParcelUuid;@1227de7
+09-11 14:24:32.137 18400-18400/org.cso.MobileSpotBilling I/System.out: device123164,null
+09-11 14:24:32.142 18400-18400/org.cso.MobileSpotBilling I/System.out: deviceAT2TV3-88F9,[Landroid.os.ParcelUuid;@5b62d94
+09-11 14:24:32.742 18400-18400/org.cso.MobileSpotBilling I/System.out: device123164,null
+09-11 14:24:32.762 18400-18400/org.cso.MobileSpotBilling I/System.out: deviceAT2TV3-88F9,[Landroid.os.ParcelUuid;@4ecb03d
+09-11 14:24:32.769 18400-18400/org.cso.MobileSpotBilling I/System.out: device123164,null
+09-11 14:24:32.776 18400-18400/org.cso.MobileSpotBilling I/System.out: deviceAT2TV3-88F9,[Landroid.os.ParcelUuid;@2a7d032
+09-11 14:24:33.054 18400-18400/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityPaused:ActivityBT_Reading
+09-11 14:24:33.069 18400-18400/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityCreated:PeripheralActivity
+09-11 14:24:33.091 18400-18400/org.cso.MobileSpotBilling I/System.out: isCheckedfalse
+09-11 14:24:33.092 18400-18400/org.cso.MobileSpotBilling I/System.out: isChecked2false
+09-11 14:24:33.106 18400-18400/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityStarted:PeripheralActivity
+09-11 14:24:33.107 18400-18400/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityResumed:PeripheralActivity
+09-11 14:24:33.556 18400-18400/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivitySaveInstanceState:ActivityBT_Reading
+09-11 14:24:33.556 18400-18400/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityStopped:ActivityBT_Reading
+09-11 14:24:34.642 18400-18400/org.cso.MobileSpotBilling I/System.out: ch value :android.bluetooth.BluetoothGattCharacteristic@8de5d48,00002902-0000-1000-8000-00805f9b34fb
+09-11 14:24:34.642 18400-18400/org.cso.MobileSpotBilling I/System.out: ch value :00002902-0000-1000-8000-00805f9b34fb
+09-11 14:24:34.642 18400-18400/org.cso.MobileSpotBilling I/System.out: descriptorandroid.bluetooth.BluetoothGattDescriptor@4c9d7e1
+09-11 14:24:35.649 18400-18400/org.cso.MobileSpotBilling I/System.out: OGH BLE COMM MOD: [B@2bda906
+09-11 14:24:35.853 18400-18466/org.cso.MobileSpotBilling I/PeripheralActivity: UDPM_INFO_ENEGRY ==>> 0
+09-11 14:24:35.963 18400-18400/org.cso.MobileSpotBilling I/Choreographer: Skipped 72 frames!  The application may be doing too much work on its main thread.
+09-11 14:24:35.992 18400-18400/org.cso.MobileSpotBilling I/System.out: context org.cso.MobileSpotBilling.PeripheralActivity@b8f1183
+09-11 14:24:36.042 18400-18400/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityPaused:PeripheralActivity
+09-11 14:24:36.130 18400-18408/org.cso.MobileSpotBilling W/SQLiteConnectionPool: A SQLiteConnection object for database '/data/user/0/org.cso.MobileSpotBilling/databases/MobileDb.db' was leaked!  Please fix your application to end transactions in progress properly and to close the database when it is no longer needed.
+09-11 14:24:36.132 18400-18408/org.cso.MobileSpotBilling W/SQLiteConnectionPool: A SQLiteConnection object for database '/data/user/0/org.cso.MobileSpotBilling/databases/MobileDb.db' was leaked!  Please fix your application to end transactions in progress properly and to close the database when it is no longer needed.
+09-11 14:24:36.136 18400-18408/org.cso.MobileSpotBilling W/SQLiteConnectionPool: A SQLiteConnection object for database '/data/user/0/org.cso.MobileSpotBilling/databases/MobileDb.db' was leaked!  Please fix your application to end transactions in progress properly and to close the database when it is no longer needed.
+09-11 14:24:36.137 18400-18408/org.cso.MobileSpotBilling W/SQLiteConnectionPool: A SQLiteConnection object for database '/data/user/0/org.cso.MobileSpotBilling/databases/MobileDb.db' was leaked!  Please fix your application to end transactions in progress properly and to close the database when it is no longer needed.
+09-11 14:24:36.139 18400-18408/org.cso.MobileSpotBilling W/SQLiteConnectionPool: A SQLiteConnection object for database '/data/user/0/org.cso.MobileSpotBilling/databases/MobileDb.db' was leaked!  Please fix your application to end transactions in progress properly and to close the database when it is no longer needed.
+09-11 14:24:36.140 18400-18408/org.cso.MobileSpotBilling W/SQLiteConnectionPool: A SQLiteConnection object for database '/data/user/0/org.cso.MobileSpotBilling/databases/MobileDb.db' was leaked!  Please fix your application to end transactions in progress properly and to close the database when it is no longer needed.
+09-11 14:24:36.141 18400-18408/org.cso.MobileSpotBilling W/SQLiteConnectionPool: A SQLiteConnection object for database '/data/user/0/org.cso.MobileSpotBilling/databases/MobileDb.db' was leaked!  Please fix your application to end transactions in progress properly and to close the database when it is no longer needed.
+09-11 14:24:36.142 18400-18408/org.cso.MobileSpotBilling W/SQLiteConnectionPool: A SQLiteConnection object for database '/data/user/0/org.cso.MobileSpotBilling/databases/MobileDb.db' was leaked!  Please fix your application to end transactions in progress properly and to close the database when it is no longer needed.
+09-11 14:24:36.144 18400-18408/org.cso.MobileSpotBilling W/SQLiteConnectionPool: A SQLiteConnection object for database '/data/user/0/org.cso.MobileSpotBilling/databases/MobileDb.db' was leaked!  Please fix your application to end transactions in progress properly and to close the database when it is no longer needed.
+09-11 14:24:36.149 18400-18408/org.cso.MobileSpotBilling W/SQLiteConnectionPool: A SQLiteConnection object for database '/data/user/0/org.cso.MobileSpotBilling/databases/MobileDb.db' was leaked!  Please fix your application to end transactions in progress properly and to close the database when it is no longer needed.
+09-11 14:24:36.151 18400-18408/org.cso.MobileSpotBilling W/SQLiteConnectionPool: A SQLiteConnection object for database '/data/user/0/org.cso.MobileSpotBilling/databases/MobileDb.db' was leaked!  Please fix your application to end transactions in progress properly and to close the database when it is no longer needed.
+09-11 14:24:36.164 18400-18400/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityCreated:DcMeterReading
+09-11 14:24:36.214 18400-18400/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityStarted:DcMeterReading
+09-11 14:24:36.215 18400-18400/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityResumed:DcMeterReading
+09-11 14:24:36.722 18400-18400/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityStopped:PeripheralActivity
+09-11 14:24:36.722 18400-18400/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityDestroyed:PeripheralActivity
+09-11 14:24:44.828 18400-18400/org.cso.MobileSpotBilling E/Network: Network
+09-11 14:24:44.830 18400-18400/org.cso.MobileSpotBilling I/System.out: context org.cso.config.AppController@cca3e4b
+09-11 14:24:44.847 18400-18400/org.cso.MobileSpotBilling I/System.out: data length----13
+09-11 14:24:44.894 18400-18400/org.cso.MobileSpotBilling E/copySAPInputData: Started
+09-11 14:24:44.894 18400-18400/org.cso.MobileSpotBilling I/copySAPInputData C: 100386807 >> 5001596011 >> 31.08.2017 >>  >> OK >> 500 >> 0 >> 0 >>  >> 19.2189181 >> 72.8341581 >>  >> 1 >> 000000000102486232
+09-11 14:24:44.894 18400-18400/org.cso.MobileSpotBilling E/copySAPInputData: Completed
+09-11 14:24:44.896 18400-18400/org.cso.MobileSpotBilling I/System.out: context org.cso.MobileSpotBilling.DcMeterReading@4318d60
+09-11 14:24:44.962 18400-18516/org.cso.MobileSpotBilling E/Util Address Output: http://220.225.3.133/biharsbmservice/udmsvc.asmx?WSDL
+09-11 14:24:44.964 18400-18516/org.cso.MobileSpotBilling E/getBlueData Param: 5001596011|31.08.2017|000000000102486232|OK|500|0||19.2189181|72.8341581|1|0
+09-11 14:24:45.000 18400-18400/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityPaused:DcMeterReading
+09-11 14:24:45.061 18400-18400/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityCreated:ActvBilling
+09-11 14:24:45.066 18400-18400/org.cso.MobileSpotBilling I/System.out: photo id ::::::: 201708_100386807
+09-11 14:24:45.078 18400-18400/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityStarted:ActvBilling
+09-11 14:24:45.078 18400-18400/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityResumed:ActvBilling
+09-11 14:24:45.115 18400-18400/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityPaused:ActvBilling
+09-11 14:24:45.953 18400-18516/org.cso.MobileSpotBilling I/Response getBlueData: [{"MESSAGE":"SUCCESS","SAPFLAG":"1"}]
+09-11 14:24:45.953 18400-18516/org.cso.MobileSpotBilling E/Util getBlueData: Completed
+09-11 14:24:46.937 18400-18400/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivitySaveInstanceState:ActvBilling
+09-11 14:24:46.937 18400-18400/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityStopped:ActvBilling
+09-11 14:24:46.937 18400-18400/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityStopped:DcMeterReading
+09-11 14:24:46.937 18400-18400/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityDestroyed:DcMeterReading
+09-11 14:24:51.888 18400-18400/org.cso.MobileSpotBilling I/System.out: context org.cso.MobileSpotBilling.ActvBilling@fa69a4e
+09-11 14:24:51.906 18400-18400/org.cso.MobileSpotBilling I/System.out: context org.cso.MobileSpotBilling.ActvBilling@fa69a4e
+09-11 14:24:51.922 18400-18400/org.cso.MobileSpotBilling I/System.out: data length----13
+09-11 14:24:51.922 18400-18400/org.cso.MobileSpotBilling E/insertIntoImageData: 100386807$%$201708_100386807.jpg$%$/storage/emulated/0/SBDocs/Photos_Crop/BAAB/BAAB8025$%$0$%$0
+09-11 14:24:51.924 18400-18400/org.cso.MobileSpotBilling E/insertIntoImageData E: Cannot bind argument at index 6 because the index is out of range.  The statement has 5 parameters.
+09-11 14:24:51.924 18400-18400/org.cso.MobileSpotBilling W/System.err: java.lang.IllegalArgumentException: Cannot bind argument at index 6 because the index is out of range.  The statement has 5 parameters.
+09-11 14:24:51.931 18400-18400/org.cso.MobileSpotBilling W/System.err:     at android.database.sqlite.SQLiteProgram.bind(SQLiteProgram.java:212)
+09-11 14:24:51.931 18400-18400/org.cso.MobileSpotBilling W/System.err:     at android.database.sqlite.SQLiteProgram.bindString(SQLiteProgram.java:166)
+09-11 14:24:51.931 18400-18400/org.cso.MobileSpotBilling W/System.err:     at org.cso.MSBUtil.UtilDB.insertIntoImageData(UtilDB.java:477)
+09-11 14:24:51.931 18400-18400/org.cso.MobileSpotBilling W/System.err:     at org.cso.MobileSpotBilling.ActvBilling.CropImage(ActvBilling.java:1528)
+09-11 14:24:51.931 18400-18400/org.cso.MobileSpotBilling W/System.err:     at org.cso.MobileSpotBilling.ActvBilling.onActivityResult(ActvBilling.java:861)
+09-11 14:24:51.931 18400-18400/org.cso.MobileSpotBilling W/System.err:     at android.app.Activity.dispatchActivityResult(Activity.java:6456)
+09-11 14:24:51.931 18400-18400/org.cso.MobileSpotBilling W/System.err:     at android.app.ActivityThread.deliverResults(ActivityThread.java:3710)
+09-11 14:24:51.931 18400-18400/org.cso.MobileSpotBilling W/System.err:     at android.app.ActivityThread.handleSendResult(ActivityThread.java:3757)
+09-11 14:24:51.931 18400-18400/org.cso.MobileSpotBilling W/System.err:     at android.app.ActivityThread.-wrap16(ActivityThread.java)
+09-11 14:24:51.931 18400-18400/org.cso.MobileSpotBilling W/System.err:     at android.app.ActivityThread$H.handleMessage(ActivityThread.java:1394)
+09-11 14:24:51.931 18400-18400/org.cso.MobileSpotBilling W/System.err:     at android.os.Handler.dispatchMessage(Handler.java:102)
+09-11 14:24:51.931 18400-18400/org.cso.MobileSpotBilling W/System.err:     at android.os.Looper.loop(Looper.java:148)
+09-11 14:24:51.931 18400-18400/org.cso.MobileSpotBilling W/System.err:     at android.app.ActivityThread.main(ActivityThread.java:5438)
+09-11 14:24:51.931 18400-18400/org.cso.MobileSpotBilling W/System.err:     at java.lang.reflect.Method.invoke(Native Method)
+09-11 14:24:51.931 18400-18400/org.cso.MobileSpotBilling W/System.err:     at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:762)
+09-11 14:24:51.931 18400-18400/org.cso.MobileSpotBilling W/System.err:     at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:652)
+09-11 14:24:51.949 18400-18400/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityStarted:ActvBilling
+09-11 14:24:51.949 18400-18400/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityResumed:ActvBilling
+09-11 14:24:51.977 18400-18400/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityPaused:ActvBilling
+09-11 14:24:52.419 18400-18400/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivitySaveInstanceState:ActvBilling
+09-11 14:24:52.419 18400-18400/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityStopped:ActvBilling
+09-11 14:24:57.390 18400-18400/org.cso.MobileSpotBilling I/System.out: Inside billing method 
+09-11 14:24:57.390 18400-18400/org.cso.MobileSpotBilling E/preMtrStatus: 2017.08.31
+09-11 14:24:57.390 18400-18400/org.cso.MobileSpotBilling E/preMtrStatus: OK
+09-11 14:24:57.401 18400-18400/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityStarted:ActvBilling
+09-11 14:24:57.401 18400-18400/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityResumed:ActvBilling
+09-11 14:24:57.403 18400-18400/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityPaused:ActvBilling
+09-11 14:24:57.432 18400-18400/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityCreated:ActvMeterStatusMenu
+09-11 14:24:57.458 18400-18400/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityStarted:ActvMeterStatusMenu
+09-11 14:24:57.458 18400-18400/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityResumed:ActvMeterStatusMenu
+09-11 14:24:57.896 18400-18400/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivitySaveInstanceState:ActvBilling
+09-11 14:24:57.896 18400-18400/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityStopped:ActvBilling
+09-11 14:24:58.848 18400-18400/org.cso.MobileSpotBilling E/Meter Status: Start
+09-11 14:24:58.848 18400-18400/org.cso.MobileSpotBilling E/Pre Meter Readinf: 765
+09-11 14:25:00.407 18400-18400/org.cso.MobileSpotBilling E/Meter Status: End
+09-11 14:25:00.419 18400-18400/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityPaused:ActvMeterStatusMenu
+09-11 14:25:00.429 18400-18400/org.cso.MobileSpotBilling E/currentStatus: Running(OK)
+09-11 14:25:00.429 18400-18400/org.cso.MobileSpotBilling E/meterStatusId: OK
+09-11 14:25:00.444 18400-18400/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityStarted:ActvBilling
+09-11 14:25:00.444 18400-18400/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityResumed:ActvBilling
+09-11 14:25:00.455 18400-18400/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityPaused:ActvBilling
+09-11 14:25:00.472 18400-18400/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityCreated:ActvCurrReading
+09-11 14:25:00.472 18400-18400/org.cso.MobileSpotBilling I/System.out: **********Inside ActvCurrReading*********** 
+09-11 14:25:00.500 18400-18400/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityStarted:ActvCurrReading
+09-11 14:25:00.500 18400-18400/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityResumed:ActvCurrReading
+09-11 14:25:00.968 18400-18400/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivitySaveInstanceState:ActvBilling
+09-11 14:25:00.968 18400-18400/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityStopped:ActvBilling
+09-11 14:25:00.969 18400-18400/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityStopped:ActvMeterStatusMenu
+09-11 14:25:00.969 18400-18400/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityDestroyed:ActvMeterStatusMenu
+09-11 14:25:11.820 18400-18400/org.cso.MobileSpotBilling E/Current Read: Started
+09-11 14:25:11.884 18400-18400/org.cso.MobileSpotBilling E/Network: Network
+09-11 14:25:11.885 18400-18400/org.cso.MobileSpotBilling E/Pow Factor ==>>: null  <==>  0.00
+09-11 14:25:11.887 18400-18400/org.cso.MobileSpotBilling E/SCHEDULED_BILLING_DATE: 2017-08-31
+09-11 14:25:11.887 18400-18400/org.cso.MobileSpotBilling E/SCHEDULED_BILLING_DATE: 2017.08.31 <==> 31.08.2017
+09-11 14:25:11.887 18400-18400/org.cso.MobileSpotBilling I/System.out: context org.cso.config.AppController@cca3e4b
+09-11 14:25:11.933 18400-18400/org.cso.MobileSpotBilling I/System.out: data length----14
+09-11 14:25:11.934 18400-18400/org.cso.MobileSpotBilling E/UpdateIntoSAPInput:  ==>> Update SAPInput Set Installation = '5001596011',Latitude = '19.2189181',Longitude = '72.8341581', CurrentReadingKwh = '900',CurrentReadingKVAH = '0.00',MaxDemd = '1',PowerFactor = '0.00',MtrReadingNote = 'OK',MtrReadingDate = '11.09.2017', SCHEDULED_BILLING_DATE = '31.08.2017',SAP_DEVICE_NO = '102310902',ProcessedFlag = '1',SyncFlag = '0' Where CANumber = '100386807'
+09-11 14:25:11.966 18400-18400/org.cso.MobileSpotBilling E/copySAPInputData: Started
+09-11 14:25:11.966 18400-18400/org.cso.MobileSpotBilling E/CANumber: 100386807
+09-11 14:25:11.966 18400-18400/org.cso.MobileSpotBilling E/copySAPInputData: Completed
+09-11 14:25:11.969 18400-18400/org.cso.MobileSpotBilling I/System.out: context org.cso.MobileSpotBilling.ActvCurrReading@a24a415
+09-11 14:25:12.002 18400-18533/org.cso.MobileSpotBilling E/Util Address Output: http://220.225.3.133/BiharSBMService/MobiletoMW.asmx?WSDL
+09-11 14:25:12.002 18400-18533/org.cso.MobileSpotBilling E/getOutputData Param: 5001596011|31.08.2017|102310902|OK|900|1|0.00|19.2189181|72.8341581|1|0.00||0260152006
+09-11 14:25:35.970 18400-18533/org.cso.MobileSpotBilling E/Response OutputData: [{"ANLAGE":"5001596011","GERNR":"102310902","ADATSOLL":"2017.08.31","METER_READER_NOT":"OK","BILL_STATUS":"Actual","TOT_UNIT_BILLED":"635","BILL_DAYS":"134","PYMT_ON_ACCOUNT":"0.00","ARREAR_ENERGY":"2461.75","ARREAR_ED":"76.13","ARREAR_DPS":"0.00","ARREAR_PUNITIVE_AMT":"0.00","ARREAR_PUNITIVE_DPS":"0.00","ARREAR_OTHER_CHG":"0.00","TOTAL_ARREAR":"2537.88","CURR_DPS_KEPT_ON_ABEY":"0.00","CURRENT_MONTH_DPS":"0.00","FIXED_DEMAND_CHRG":"178.67","EXCESS_DEMAND_CHRG":"0.00","ENERGY_CHARGE":"3792.25","ENERGY_CHARGE_1H1":"0.00","ENERGY_CHARGE_2H1":"0.00","ENERGY_CHARGE_3H1":"0.00","MINIMUM_CHARGE":"0.00","ELECTRICITY_DUTY":"227.54","METER_RENT":"178.00","SHUNT_CAP_CHARGE":"0.00","OTHER_CHARGES":"0.00","INSTALLMENT_AMOUNT":"0.00","TOTAL_CURRENT_AMOUNT":"3436.66","NET_AMT_PYBL":"5974.54","NET_AMT_PBL_BY_DUE_DT":"5923.00","NET_AMT_PBL_BTWN_DUE_DT":"5975.00","AMT_PYBL_AFTR_DUE_DATE":"6065.00","LAST_PYMT_AMT":"0.00","LAST_PYMT_RECPT_NO":"","LAST_PYMT_DT":"0000.00.00","REGISTER":"001","PRE_MTR_RDNG_DATE":"2017.04.30","CURR_MTR_RDNG_DATE":"2017.09.11","PRE_MTR_RDNG":"765.00","CURR_MTR_RDNG":"900.00","DATE_OF_INVOICE":"2017.09.11","BILL_MONTH":"AUG-2017","DUE_DATE":"2017.09.26","POWER_FACTOR":"0.00","PPI_LEVIABLE":"-51.55","MINIMUM_UNIT":"0.00","MESSAGE10":"","BILLED_CONSUM":"135.00","INVOICENO":"010005390884","INCENTIVE_UNDER_IIP":"0.00","GOVT_SUB":"-939.80","INT_DISC":"-34.37","FLAG":"1","STATUS":"SUCCESS","MESSAGE_ID":"6","MESSAGE":"Successfully done","REC_DATE_TIME":"11 Sep 2017 14:24"}]
+09-11 14:25:35.970 18400-18533/org.cso.MobileSpotBilling E/Util getOutputData: Completed
+09-11 14:25:35.970 18400-18533/org.cso.MobileSpotBilling E/jsonTxt: [{"ANLAGE":"5001596011","GERNR":"102310902","ADATSOLL":"2017.08.31","METER_READER_NOT":"OK","BILL_STATUS":"Actual","TOT_UNIT_BILLED":"635","BILL_DAYS":"134","PYMT_ON_ACCOUNT":"0.00","ARREAR_ENERGY":"2461.75","ARREAR_ED":"76.13","ARREAR_DPS":"0.00","ARREAR_PUNITIVE_AMT":"0.00","ARREAR_PUNITIVE_DPS":"0.00","ARREAR_OTHER_CHG":"0.00","TOTAL_ARREAR":"2537.88","CURR_DPS_KEPT_ON_ABEY":"0.00","CURRENT_MONTH_DPS":"0.00","FIXED_DEMAND_CHRG":"178.67","EXCESS_DEMAND_CHRG":"0.00","ENERGY_CHARGE":"3792.25","ENERGY_CHARGE_1H1":"0.00","ENERGY_CHARGE_2H1":"0.00","ENERGY_CHARGE_3H1":"0.00","MINIMUM_CHARGE":"0.00","ELECTRICITY_DUTY":"227.54","METER_RENT":"178.00","SHUNT_CAP_CHARGE":"0.00","OTHER_CHARGES":"0.00","INSTALLMENT_AMOUNT":"0.00","TOTAL_CURRENT_AMOUNT":"3436.66","NET_AMT_PYBL":"5974.54","NET_AMT_PBL_BY_DUE_DT":"5923.00","NET_AMT_PBL_BTWN_DUE_DT":"5975.00","AMT_PYBL_AFTR_DUE_DATE":"6065.00","LAST_PYMT_AMT":"0.00","LAST_PYMT_RECPT_NO":"","LAST_PYMT_DT":"0000.00.00","REGISTER":"001","PRE_MTR_RDNG_DATE":"2017.04.30","CURR_MTR_RDNG_DATE":"2017.09.11","PRE_MTR_RDNG":"765.00","CURR_MTR_RDNG":"900.00","DATE_OF_INVOICE":"2017.09.11","BILL_MONTH":"AUG-2017","DUE_DATE":"2017.09.26","POWER_FACTOR":"0.00","PPI_LEVIABLE":"-51.55","MINIMUM_UNIT":"0.00","MESSAGE10":"","BILLED_CONSUM":"135.00","INVOICENO":"010005390884","INCENTIVE_UNDER_IIP":"0.00","GOVT_SUB":"-939.80","INT_DISC":"-34.37","FLAG":"1","STATUS":"SUCCESS","MESSAGE_ID":"6","MESSAGE":"Successfully done","REC_DATE_TIME":"11 Sep 2017 14:24"}]
+09-11 14:25:35.987 18400-18533/org.cso.MobileSpotBilling E/MESSAGE_ID: 6
+09-11 14:25:36.035 18400-18533/org.cso.MobileSpotBilling I/System.out: Pre InsertOutput ==>> {"ANLAGE":"5001596011","GERNR":"102310902","ADATSOLL":"2017.08.31","METER_READER_NOT":"OK","BILL_STATUS":"Actual","TOT_UNIT_BILLED":"635","BILL_DAYS":"134","PYMT_ON_ACCOUNT":"0.00","ARREAR_ENERGY":"2461.75","ARREAR_ED":"76.13","ARREAR_DPS":"0.00","ARREAR_PUNITIVE_AMT":"0.00","ARREAR_PUNITIVE_DPS":"0.00","ARREAR_OTHER_CHG":"0.00","TOTAL_ARREAR":"2537.88","CURR_DPS_KEPT_ON_ABEY":"0.00","CURRENT_MONTH_DPS":"0.00","FIXED_DEMAND_CHRG":"178.67","EXCESS_DEMAND_CHRG":"0.00","ENERGY_CHARGE":"3792.25","ENERGY_CHARGE_1H1":"0.00","ENERGY_CHARGE_2H1":"0.00","ENERGY_CHARGE_3H1":"0.00","MINIMUM_CHARGE":"0.00","ELECTRICITY_DUTY":"227.54","METER_RENT":"178.00","SHUNT_CAP_CHARGE":"0.00","OTHER_CHARGES":"0.00","INSTALLMENT_AMOUNT":"0.00","TOTAL_CURRENT_AMOUNT":"3436.66","NET_AMT_PYBL":"5974.54","NET_AMT_PBL_BY_DUE_DT":"5923.00","NET_AMT_PBL_BTWN_DUE_DT":"5975.00","AMT_PYBL_AFTR_DUE_DATE":"6065.00","LAST_PYMT_AMT":"0.00","LAST_PYMT_RECPT_NO":"","LAST_PYMT_DT":"0000.00.00","REGISTER":"001","PRE_MTR_RDNG_DATE":"2017.04.30","CURR_MTR_RDNG_DATE":"2017.09.11","PRE_MTR_RDNG":"765.00","CURR_MTR_RDNG":"900.00","DATE_OF_INVOICE":"2017.09.11","BILL_MONTH":"AUG-2017","DUE_DATE":"2017.09.26","POWER_FACTOR":"0.00","PPI_LEVIABLE":"-51.55","MINIMUM_UNIT":"0.00","MESSAGE10":"","BILLED_CONSUM":"135.00","INVOICENO":"010005390884","INCENTIVE_UNDER_IIP":"0.00","GOVT_SUB":"-939.80","INT_DISC":"-34.37","FLAG":"1","STATUS":"SUCCESS","MESSAGE_ID":"6","MESSAGE":"Successfully done","REC_DATE_TIME":"11 Sep 2017 14:24"}
+09-11 14:25:36.036 18400-18533/org.cso.MobileSpotBilling E/InsertOutput: Start
+09-11 14:25:36.037 18400-18533/org.cso.MobileSpotBilling E/DUE DATE SPLIT: 2017 == 09 == 26
+09-11 14:25:36.038 18400-18533/org.cso.MobileSpotBilling E/today: Tue Sep 26 00:00:00 GMT+05:30 2017
+09-11 14:25:36.039 18400-18533/org.cso.MobileSpotBilling E/DUE_DATE: 2017.09.26
+09-11 14:25:36.039 18400-18533/org.cso.MobileSpotBilling E/lsDate15: 26.09.2017
+09-11 14:25:36.039 18400-18533/org.cso.MobileSpotBilling E/lsDate25: 06.10.2017
+09-11 14:25:36.041 18400-18533/org.cso.MobileSpotBilling E/AVG_KWH_12_CYCLE_KWH: 0.8000000
+09-11 14:25:36.041 18400-18533/org.cso.MobileSpotBilling E/AVG_KWH_3_CYCLE_DR_KWH: 0.9600000
+09-11 14:25:36.051 18400-18533/org.cso.MobileSpotBilling E/Output Record =>: SBPD|AUG-2017|010005390884|BAA-Fatuha|BAAB-Fatuha|100386807||BAAB8025|C|Sri CHHAVILA RAY .|KACHIDARGAH NAYA TOLA PATNA 800021|0260152006|HSGF458|1|DS-IID|1.0000000||1.0000000|400.00|134|765.00|2017.04.30|OK|900.00|2017.09.11|OK|1.00000|135.0|1|0.00|0.00|635|129.0|Actual|0.00|2537.88|0.00|0.0|2537.88|3792.25|0.00|178.67|0.00|227.54|178.00|0.00|0.00|0.00|3436.66|||0.00|5974.54|-51.55|26.09.2017|5923.00|06.10.2017|5975.00|06.10.2017|6065.00|0.00|0000.00.00|||FAT68||8271361672|11 Sep 2017 14:24|-939.80|-34.37
+09-11 14:25:36.064 18400-18533/org.cso.MobileSpotBilling E/data length----: 70
+09-11 14:25:36.085 18400-18533/org.cso.MobileSpotBilling E/InsertIntoBillOutput: Done
+09-11 14:25:36.085 18400-18533/org.cso.MobileSpotBilling E/UpdateInputTable ==>>: Started
+09-11 14:25:36.092 18400-18533/org.cso.MobileSpotBilling E/UpdateInputTable ==>>: Completed
+09-11 14:25:36.102 18400-18400/org.cso.MobileSpotBilling E/getImageByCANo: Started
+09-11 14:25:36.103 18400-18400/org.cso.MobileSpotBilling I/System.out: context org.cso.config.AppController@cca3e4b
+09-11 14:25:36.115 18400-18400/org.cso.MobileSpotBilling I/System.out: sdocode & stmt ::   BAAB ---  SQLiteProgram: SELECT DISTINCT sub_division_code  FROM BillInput
+09-11 14:25:36.115 18400-18400/org.cso.MobileSpotBilling I/System.out: MRU & stmt ::   BAAB8025 ---  SQLiteProgram: SELECT DISTINCT MRU FROM BillInput
+09-11 14:25:36.117 18400-18400/org.cso.MobileSpotBilling I/System.out: context org.cso.MobileSpotBilling.ActvCurrReading@a24a415
+09-11 14:25:36.128 18400-18400/org.cso.MobileSpotBilling E/AndroidRuntime: FATAL EXCEPTION: main
+                                                                           Process: org.cso.MobileSpotBilling, PID: 18400
+                                                                           java.lang.NullPointerException: Attempt to invoke interface method 'java.lang.String android.database.Cursor.getString(int)' on a null object reference
+                                                                               at org.cso.MobileSpotBilling.ActvCurrReading.getImageByCANo(ActvCurrReading.java:935)
+                                                                               at org.cso.MobileSpotBilling.ActvCurrReading.printdlg(ActvCurrReading.java:494)
+                                                                               at org.cso.MobileSpotBilling.ActvCurrReading.access$000(ActvCurrReading.java:50)
+                                                                               at org.cso.MobileSpotBilling.ActvCurrReading$3.onFinish(ActvCurrReading.java:430)
+                                                                               at org.cso.MSBAsync.AsyncGetOutputData.onPostExecute(AsyncGetOutputData.java:228)
+                                                                               at org.cso.MSBAsync.AsyncGetOutputData.onPostExecute(AsyncGetOutputData.java:26)
+                                                                               at android.os.AsyncTask.finish(AsyncTask.java:663)
+                                                                               at android.os.AsyncTask.-wrap1(AsyncTask.java)
+                                                                               at android.os.AsyncTask$InternalHandler.handleMessage(AsyncTask.java:680)
+                                                                               at android.os.Handler.dispatchMessage(Handler.java:102)
+                                                                               at android.os.Looper.loop(Looper.java:148)
+                                                                               at android.app.ActivityThread.main(ActivityThread.java:5438)
+                                                                               at java.lang.reflect.Method.invoke(Native Method)
+                                                                               at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:762)
+                                                                               at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:652)

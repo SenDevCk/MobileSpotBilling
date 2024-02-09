@@ -1,0 +1,218 @@
+09-15 16:56:18.543 2846-2846/? I/art: Late-enabling -Xcheck:jni
+09-15 16:56:18.620 2846-2846/org.cso.MobileSpotBilling I/FirebaseInitProvider: FirebaseApp initialization unsuccessful
+09-15 16:56:18.656 2846-2846/org.cso.MobileSpotBilling W/art: Before Android 4.1, method android.graphics.PorterDuffColorFilter android.support.graphics.drawable.VectorDrawableCompat.updateTintFilter(android.graphics.PorterDuffColorFilter, android.content.res.ColorStateList, android.graphics.PorterDuff$Mode) would have incorrectly overridden the package-private method in android.graphics.drawable.Drawable
+09-15 16:56:18.678 2846-2846/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityCreated:ActivityPreLaunch
+09-15 16:56:18.749 2846-2846/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityCreated:ActvLaunchApp
+09-15 16:56:18.772 2846-2846/org.cso.MobileSpotBilling E/IMEI Number: 911542201041919
+09-15 16:56:18.774 2846-2846/org.cso.MobileSpotBilling I/System.out: context org.cso.config.AppController@7d74cbe
+09-15 16:56:18.786 2846-2846/org.cso.MobileSpotBilling E/intUserInfoRowCnt ==>>: 1
+09-15 16:56:18.786 2846-2846/org.cso.MobileSpotBilling E/User Count ==>>: FAT68
+09-15 16:56:18.786 2846-2846/org.cso.MobileSpotBilling E/User Count ==>>: TEST3
+09-15 16:56:18.786 2846-2846/org.cso.MobileSpotBilling E/User Count ==>>: 80961
+09-15 16:56:18.786 2846-2846/org.cso.MobileSpotBilling E/User Count ==>>: 911542201041919
+09-15 16:56:18.786 2846-2846/org.cso.MobileSpotBilling E/User Count ==>>: D8:80:39:F0:88:F9
+09-15 16:56:18.786 2846-2846/org.cso.MobileSpotBilling E/Parameters ==>>: 911542201041919  ==  VD1.99.apk
+09-15 16:56:18.788 2846-2846/org.cso.MobileSpotBilling I/System.out: context org.cso.MobileSpotBilling.ActvLaunchApp@75ef235
+09-15 16:56:18.884 2846-2846/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityStarted:ActvLaunchApp
+09-15 16:56:18.885 2846-2846/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityResumed:ActvLaunchApp
+09-15 16:56:18.887 2846-2887/org.cso.MobileSpotBilling E/IMEINo: 911542201041919
+09-15 16:56:18.887 2846-2887/org.cso.MobileSpotBilling E/SOAPAddress: http://220.225.3.133/biharsbmservice/ValidateIMEINo.asmx?WSDL
+09-15 16:56:18.887 2846-2887/org.cso.MobileSpotBilling E/IP Address: http://220.225.3.133/ == http://220.225.3.149/
+09-15 16:56:18.928 2846-2886/org.cso.MobileSpotBilling I/OpenGLRenderer: Initialized EGL, version 1.4
+09-15 16:56:19.056 2846-2846/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityDestroyed:ActivityPreLaunch
+09-15 16:56:19.129 2846-2887/org.cso.MobileSpotBilling E/Response: {"FLAG":1,"FILENAME":"VD1.99.apk","STATUS":"SUCCESS","MESSAGE":"IMEI No FOUND with 911542201041919"}
+09-15 16:56:19.129 2846-2887/org.cso.MobileSpotBilling E/jsonTxt -: {"FLAG":1,"FILENAME":"VD1.99.apk","STATUS":"SUCCESS","MESSAGE":"IMEI No FOUND with 911542201041919"}
+09-15 16:56:19.129 2846-2887/org.cso.MobileSpotBilling E/FILENAME -: VD1.99.apk
+09-15 16:56:19.129 2846-2887/org.cso.MobileSpotBilling E/strVersion -: VD1.99.apk
+09-15 16:56:19.130 2846-2887/org.cso.MobileSpotBilling E/STATUS -: Inside FILENAME
+09-15 16:56:19.186 2846-2887/org.cso.MobileSpotBilling E/STATUS -: Inside If
+09-15 16:56:19.217 2846-2887/org.cso.MobileSpotBilling E/1: 911542201041919
+09-15 16:56:19.217 2846-2887/org.cso.MobileSpotBilling E/2: 1
+09-15 16:56:19.255 2846-2846/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityPaused:ActvLaunchApp
+09-15 16:56:19.269 2846-2846/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityCreated:ActvLogin
+09-15 16:56:19.307 2846-2846/org.cso.MobileSpotBilling E/Network: Network
+09-15 16:56:19.308 2846-2846/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityStarted:ActvLogin
+09-15 16:56:19.308 2846-2846/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityResumed:ActvLogin
+09-15 16:56:19.443 2846-2846/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityStopped:ActvLaunchApp
+09-15 16:56:19.443 2846-2846/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityDestroyed:ActvLaunchApp
+09-15 16:56:30.325 2846-2846/org.cso.MobileSpotBilling I/System.out:  UtilAppCommon.IMEI_Number911542201041919
+09-15 16:56:30.325 2846-2846/org.cso.MobileSpotBilling I/System.out: context android.app.ContextImpl@961ec08
+09-15 16:56:30.336 2846-2846/org.cso.MobileSpotBilling I/System.out: Entering into the database part 
+09-15 16:56:30.336 2846-2846/org.cso.MobileSpotBilling I/System.out: query---select * from UserInfo
+09-15 16:56:30.337 2846-2846/org.cso.MobileSpotBilling E/Redirect To ==>>: Main
+09-15 16:56:30.337 2846-2846/org.cso.MobileSpotBilling I/System.out: Entering into the database part 
+09-15 16:56:30.337 2846-2846/org.cso.MobileSpotBilling I/System.out: query---select * from UserInfo WHERE meterreader_id='FAT68' AND password='80961' 
+09-15 16:56:30.338 2846-2846/org.cso.MobileSpotBilling E/Authenticate: True
+09-15 16:56:30.339 2846-2846/org.cso.MobileSpotBilling I/System.out: total  : 1
+09-15 16:56:30.339 2846-2846/org.cso.MobileSpotBilling E/getUserInfo =>: total  : 1
+09-15 16:56:30.339 2846-2846/org.cso.MobileSpotBilling I/System.out: FAT68
+09-15 16:56:30.355 2846-2846/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityPaused:ActvLogin
+09-15 16:56:30.498 2846-2846/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityCreated:ActvivityMain
+09-15 16:56:30.523 2846-2846/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityStarted:ActvivityMain
+09-15 16:56:30.523 2846-2846/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityResumed:ActvivityMain
+09-15 16:56:30.960 2846-2846/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityStopped:ActvLogin
+09-15 16:56:30.961 2846-2846/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityDestroyed:ActvLogin
+09-15 16:56:31.368 2846-2846/org.cso.MobileSpotBilling I/System.out: context android.app.ContextImpl@5c00295
+09-15 16:56:31.381 2846-2846/org.cso.MobileSpotBilling I/System.out: Entering into the database part 
+09-15 16:56:31.381 2846-2846/org.cso.MobileSpotBilling E/query---: select * from BillInput
+09-15 16:56:31.405 2846-2846/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityPaused:ActvivityMain
+09-15 16:56:31.415 2846-2846/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityCreated:ActvBillingOption
+09-15 16:56:31.426 2846-2846/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityStarted:ActvBillingOption
+09-15 16:56:31.426 2846-2846/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityResumed:ActvBillingOption
+09-15 16:56:31.834 2846-2846/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityStopped:ActvivityMain
+09-15 16:56:31.834 2846-2846/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityDestroyed:ActvivityMain
+09-15 16:56:32.398 2846-2846/org.cso.MobileSpotBilling I/System.out: context android.app.ContextImpl@2beef4d
+09-15 16:56:32.449 2846-2846/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityPaused:ActvBillingOption
+09-15 16:56:32.462 2846-2846/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityCreated:ActvSequenceData
+09-15 16:56:32.480 2846-2846/org.cso.MobileSpotBilling I/System.out: context android.app.ContextImpl@744575a
+09-15 16:56:32.491 2846-2846/org.cso.MobileSpotBilling I/System.out: sdocode & stmt ::   BAAB ---  SQLiteProgram: SELECT DISTINCT sub_division_code  FROM BillInput
+09-15 16:56:32.492 2846-2846/org.cso.MobileSpotBilling I/System.out: MRU & stmt ::   BAAB8081 ---  SQLiteProgram: SELECT DISTINCT MRU FROM BillInput
+09-15 16:56:32.503 2846-2846/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityStarted:ActvSequenceData
+09-15 16:56:32.503 2846-2846/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityResumed:ActvSequenceData
+09-15 16:56:32.504 2846-2846/org.cso.MobileSpotBilling I/Image Capture: false
+09-15 16:56:32.914 2846-2846/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityStopped:ActvBillingOption
+09-15 16:56:32.914 2846-2846/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityDestroyed:ActvBillingOption
+09-15 16:56:33.362 2846-2846/org.cso.MobileSpotBilling I/System.out: context android.app.ContextImpl@744575a
+09-15 16:56:33.381 2846-2846/org.cso.MobileSpotBilling I/System.out: total  : 1
+09-15 16:56:33.381 2846-2846/org.cso.MobileSpotBilling E/getUserInfo =>: total  : 1
+09-15 16:56:33.381 2846-2846/org.cso.MobileSpotBilling I/System.out: FAT68
+09-15 16:56:33.381 2846-2846/org.cso.MobileSpotBilling E/GetConsumerInfoByField: 100000026  <>  Accno  <>  CONSUMER_NAME
+09-15 16:56:33.381 2846-2846/org.cso.MobileSpotBilling E/qry ==>>: select * from BillInput where CONTRACT_AC_NO='100000026'
+09-15 16:56:33.387 2846-2846/org.cso.MobileSpotBilling E/value ==>>: M/s L.N.SINHA
+09-15 16:56:33.388 2846-2846/org.cso.MobileSpotBilling E/GetConsumerInfoByField: 100000026  <>  Accno  <>  CONSUMER_NAME
+09-15 16:56:33.388 2846-2846/org.cso.MobileSpotBilling E/qry ==>>: select * from BillInput where CONTRACT_AC_NO='100000026'
+09-15 16:56:33.390 2846-2846/org.cso.MobileSpotBilling E/value ==>>: M/s L.N.SINHA
+09-15 16:56:33.390 2846-2846/org.cso.MobileSpotBilling I/System.out: Entering into the database part 
+09-15 16:56:33.397 2846-2846/org.cso.MobileSpotBilling E/Pole No: 0260165024
+09-15 16:56:33.397 2846-2846/org.cso.MobileSpotBilling E/getBillInputDetails->: Completed
+09-15 16:56:33.397 2846-2846/org.cso.MobileSpotBilling I/System.out: sudhir BTngenerated clicked on Entry formtrue
+09-15 16:56:33.409 2846-2846/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityPaused:ActvSequenceData
+09-15 16:56:33.434 2846-2846/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityCreated:ActvBilling
+09-15 16:56:33.440 2846-2846/org.cso.MobileSpotBilling E/validateDoubleBilling: Start
+09-15 16:56:33.440 2846-2846/org.cso.MobileSpotBilling I/System.out: context android.app.ContextImpl@2d56303
+09-15 16:56:33.448 2846-2846/org.cso.MobileSpotBilling E/AccountNo: 100000026
+09-15 16:56:33.454 2846-2846/org.cso.MobileSpotBilling I/System.out: context android.app.ContextImpl@2d56303
+09-15 16:56:33.461 2846-2846/org.cso.MobileSpotBilling I/System.out: Entering into the database part 
+09-15 16:56:33.468 2846-2846/org.cso.MobileSpotBilling E/Pole No: 0260165024
+09-15 16:56:33.468 2846-2846/org.cso.MobileSpotBilling E/getBillInputDetails->: Completed
+09-15 16:56:33.471 2846-2846/org.cso.MobileSpotBilling E/checkDoubleBilling =>>: select * from SAPBlueInput where CANumber = '100000026' and SCHEDULED_BILLING_DATE IS NOT NULL;
+09-15 16:56:33.473 2846-2846/org.cso.MobileSpotBilling E/checkDoubleBilling =>>: select * from SAPInput where CANumber = '100000026' and SCHEDULED_BILLING_DATE IS NOT NULL;
+09-15 16:56:33.474 2846-2846/org.cso.MobileSpotBilling I/System.out: context android.app.ContextImpl@2d56303
+09-15 16:56:33.481 2846-2846/org.cso.MobileSpotBilling I/System.out: Entering into the database part 
+09-15 16:56:33.485 2846-2846/org.cso.MobileSpotBilling E/Pole No: 0260165024
+09-15 16:56:33.485 2846-2846/org.cso.MobileSpotBilling E/getBillInputDetails->: Completed
+09-15 16:56:33.505 2846-2846/org.cso.MobileSpotBilling E/showConsumerDetails: End
+09-15 16:56:33.507 2846-2846/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityStarted:ActvBilling
+09-15 16:56:33.507 2846-2846/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityResumed:ActvBilling
+09-15 16:56:33.946 2846-2846/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivitySaveInstanceState:ActvSequenceData
+09-15 16:56:33.946 2846-2846/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityStopped:ActvSequenceData
+09-15 16:56:39.939 2846-2846/org.cso.MobileSpotBilling I/System.out: context org.cso.MobileSpotBilling.ActvBilling@d0b166a
+09-15 16:56:39.957 2846-2846/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1.Count ==>>  Select METER_CAP as Count from BillInput  ==  34
+09-15 16:56:39.957 2846-2846/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  
+09-15 16:56:39.957 2846-2846/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  9304040241
+09-15 16:56:39.957 2846-2846/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  9122407881
+09-15 16:56:39.957 2846-2846/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  
+09-15 16:56:39.957 2846-2846/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  9409589299
+09-15 16:56:39.957 2846-2846/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  
+09-15 16:56:39.957 2846-2846/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  
+09-15 16:56:39.957 2846-2846/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  9235191381
+09-15 16:56:39.957 2846-2846/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  
+09-15 16:56:39.957 2846-2846/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  9234551094
+09-15 16:56:39.957 2846-2846/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  
+09-15 16:56:39.957 2846-2846/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  
+09-15 16:56:39.957 2846-2846/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  9334280848
+09-15 16:56:39.957 2846-2846/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  9905361030
+09-15 16:56:39.957 2846-2846/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  
+09-15 16:56:39.957 2846-2846/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  
+09-15 16:56:39.957 2846-2846/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  
+09-15 16:56:39.957 2846-2846/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  9934025048
+09-15 16:56:39.958 2846-2846/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  
+09-15 16:56:39.958 2846-2846/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  9955121233
+09-15 16:56:39.958 2846-2846/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  9608614435
+09-15 16:56:39.958 2846-2846/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  
+09-15 16:56:39.958 2846-2846/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  
+09-15 16:56:39.958 2846-2846/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  9234943845
+09-15 16:56:39.958 2846-2846/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  
+09-15 16:56:39.958 2846-2846/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  
+09-15 16:56:39.958 2846-2846/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  9661787275
+09-15 16:56:39.958 2846-2846/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  
+09-15 16:56:39.958 2846-2846/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  7856044768
+09-15 16:56:39.958 2846-2846/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  9801253665
+09-15 16:56:39.958 2846-2846/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  8271361672
+09-15 16:56:39.958 2846-2846/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  
+09-15 16:56:39.958 2846-2846/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  
+09-15 16:56:39.958 2846-2846/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c1 ==>>  9693622807
+09-15 16:56:39.959 2846-2846/org.cso.MobileSpotBilling E/UtilDB: MobileNumberCheck ==>> c2.Count ==>>  Select MobileNo from SAPInput  ==  34
+09-15 16:56:39.959 2846-2846/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c2 ==>>  9876543211
+09-15 16:56:39.959 2846-2846/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c2 ==>>  9876543211
+09-15 16:56:39.959 2846-2846/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c2 ==>>  9876543211
+09-15 16:56:39.959 2846-2846/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c2 ==>>  9876543211
+09-15 16:56:39.959 2846-2846/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c2 ==>>  9876543212
+09-15 16:56:39.959 2846-2846/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c2 ==>>  9876543212
+09-15 16:56:39.959 2846-2846/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c2 ==>>  9876543213
+09-15 16:56:39.959 2846-2846/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c2 ==>>  9876543213
+09-15 16:56:39.959 2846-2846/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c2 ==>>  9876543214
+09-15 16:56:39.959 2846-2846/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c2 ==>>  9876543214
+09-15 16:56:39.960 2846-2846/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c2 ==>>  9876543251
+09-15 16:56:39.960 2846-2846/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c2 ==>>  9876543332
+09-15 16:56:39.960 2846-2846/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c2 ==>>  9876546540
+09-15 16:56:39.960 2846-2846/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c2 ==>>  9879879870
+09-15 16:56:39.960 2846-2846/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c2 ==>>  9876549870
+09-15 16:56:39.960 2846-2846/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c2 ==>>  9879879870
+09-15 16:56:39.960 2846-2846/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c2 ==>>  9876543210
+09-15 16:56:39.960 2846-2846/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c2 ==>>  9654654654
+09-15 16:56:39.960 2846-2846/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c2 ==>>  9369369369
+09-15 16:56:39.960 2846-2846/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c2 ==>>  9852585280
+09-15 16:56:39.960 2846-2846/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c2 ==>>  9639636300
+09-15 16:56:39.960 2846-2846/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c2 ==>>  9874563258
+09-15 16:56:39.960 2846-2846/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c2 ==>>  9852632580
+09-15 16:56:39.960 2846-2846/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c2 ==>>  9885236985
+09-15 16:56:39.960 2846-2846/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c2 ==>>  9875421147
+09-15 16:56:39.960 2846-2846/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c2 ==>>  9456456321
+09-15 16:56:39.960 2846-2846/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c2 ==>>  9856985685
+09-15 16:56:39.960 2846-2846/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c2 ==>>  9332211443
+09-15 16:56:39.960 2846-2846/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c2 ==>>  9123456789
+09-15 16:56:39.960 2846-2846/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c2 ==>>  9123456987
+09-15 16:56:39.960 2846-2846/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c2 ==>>  9663388552
+09-15 16:56:39.960 2846-2846/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c2 ==>>  9887744556
+09-15 16:56:39.960 2846-2846/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c2 ==>>  9665544778
+09-15 16:56:39.960 2846-2846/org.cso.MobileSpotBilling E/UtilDB: MobileNumberTrace ==>> c2 ==>>  9887744556
+09-15 16:56:39.962 2846-2846/org.cso.MobileSpotBilling I/System.out: context org.cso.config.AppController@7d74cbe
+09-15 16:56:39.979 2846-2846/org.cso.MobileSpotBilling E/InsertMobPoleConsCmpltd: Executed
+09-15 16:56:39.982 2846-2846/org.cso.MobileSpotBilling E/Network: Network
+09-15 16:56:39.984 2846-2846/org.cso.MobileSpotBilling E/StartBilling: Billing Started
+09-15 16:56:39.984 2846-2846/org.cso.MobileSpotBilling E/StartBilling: Reading Nxt Date
+09-15 16:56:39.984 2846-2846/org.cso.MobileSpotBilling E/StartBilling: Inside Nxt Date
+09-15 16:56:39.984 2846-2846/org.cso.MobileSpotBilling E/NXT_SCH_MTR_RDR_DATE>>: 2017.09.30
+09-15 16:56:39.984 2846-2846/org.cso.MobileSpotBilling E/SCH_MTR_RDR_DATE>>: 2017.08.31
+09-15 16:56:39.985 2846-2846/org.cso.MobileSpotBilling E/Date Time Equal =>: false
+09-15 16:56:39.986 2846-2846/org.cso.MobileSpotBilling E/Format Today =>: 15-09-2017 12:00:00
+09-15 16:56:39.986 2846-2846/org.cso.MobileSpotBilling E/Nxt =>: 30-09-2017 12:00:00
+09-15 16:56:39.986 2846-2846/org.cso.MobileSpotBilling E/Sch =>: 31-08-2017 12:00:00
+09-15 16:56:39.986 2846-2846/org.cso.MobileSpotBilling E/Date eqbm =>: true
+09-15 16:56:39.986 2846-2846/org.cso.MobileSpotBilling E/StartBilling: Done Reading Nxt Date
+09-15 16:56:39.986 2846-2846/org.cso.MobileSpotBilling I/System.out: context org.cso.MobileSpotBilling.ActvBilling@d0b166a
+09-15 16:56:40.001 2846-2846/org.cso.MobileSpotBilling I/ActvBilling: StartBilling ==>>   <<==>> null
+09-15 16:56:40.004 2846-2846/org.cso.MobileSpotBilling I/System.out: photo id ::::::: 201708_100000026
+09-15 16:56:40.005 2846-2846/org.cso.MobileSpotBilling I/ActvBilling Capt:  B isFinishing ==>> false
+09-15 16:56:40.025 2846-2846/org.cso.MobileSpotBilling I/ActvBilling Capt: A isFinishing ==>> false
+09-15 16:56:40.026 2846-2846/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityPaused:ActvBilling
+09-15 16:56:41.005 2846-2846/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityStopped:ActvBilling
+09-15 16:56:41.005 2846-2846/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityDestroyed:ActvBilling
+09-15 16:56:44.696 2846-2846/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityStarted:ActvSequenceData
+09-15 16:56:44.696 2846-2846/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityResumed:ActvSequenceData
+09-15 16:56:44.697 2846-2846/org.cso.MobileSpotBilling I/Image Capture: true
+09-15 16:56:44.745 2846-2846/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityPaused:ActvSequenceData
+09-15 16:56:44.778 2846-2846/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityCreated:ActvBilling
+09-15 16:56:44.799 2846-2846/org.cso.MobileSpotBilling I/System.out: context org.cso.MobileSpotBilling.ActvBilling@41def0e
+09-15 16:56:44.810 2846-2846/org.cso.MobileSpotBilling I/System.out: context org.cso.MobileSpotBilling.ActvBilling@41def0e
+09-15 16:56:44.820 2846-2846/org.cso.MobileSpotBilling I/System.out: data length----5
+09-15 16:56:44.820 2846-2846/org.cso.MobileSpotBilling E/insertIntoImageData: 100000026~201708_100000026.jpg~/storage/emulated/0/SBDocs/Photos_Crop/BAAB/BAAB8081~0~0 ==>> 5
+09-15 16:56:44.858 2846-2846/org.cso.MobileSpotBilling E/ActvBilling:  CropImage ==>>file
+09-15 16:56:44.859 2846-2846/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityStarted:ActvBilling
+09-15 16:56:44.859 2846-2846/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityResumed:ActvBilling
+09-15 16:56:45.367 2846-2846/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivitySaveInstanceState:ActvSequenceData
+09-15 16:56:45.367 2846-2846/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityStopped:ActvSequenceData
+09-15 16:56:58.695 2846-2846/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityPaused:ActvBilling
+09-15 16:56:59.215 2846-2846/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivitySaveInstanceState:ActvBilling
+09-15 16:56:59.215 2846-2846/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityStopped:ActvBilling

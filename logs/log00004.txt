@@ -1,0 +1,188 @@
+09-07 17:18:50.498 32227-32227/? I/art: Late-enabling -Xcheck:jni
+09-07 17:18:50.586 32227-32227/org.cso.MobileSpotBilling I/FirebaseInitProvider: FirebaseApp initialization unsuccessful
+09-07 17:18:50.607 32227-32227/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityCreated:ActvLaunchApp
+09-07 17:18:50.691 32227-32227/org.cso.MobileSpotBilling E/IMEI Number: 911542201041919
+09-07 17:18:50.692 32227-32227/org.cso.MobileSpotBilling I/System.out: context org.cso.config.AppController@98254c6
+09-07 17:18:50.709 32227-32227/org.cso.MobileSpotBilling E/intUserInfoRowCnt ==>>: 0
+09-07 17:18:50.710 32227-32227/org.cso.MobileSpotBilling E/Parameters ==>>: 911542201041919  ==  VD1.98.apk
+09-07 17:18:50.711 32227-32227/org.cso.MobileSpotBilling I/System.out: context org.cso.MobileSpotBilling.ActvLaunchApp@e299e33
+09-07 17:18:50.806 32227-32227/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityStarted:ActvLaunchApp
+09-07 17:18:50.806 32227-32227/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityResumed:ActvLaunchApp
+09-07 17:18:50.807 32227-32268/org.cso.MobileSpotBilling E/IMEINo: 911542201041919
+09-07 17:18:50.807 32227-32268/org.cso.MobileSpotBilling E/SOAPAddress: http://220.225.3.133/biharsbmservice/ValidateIMEINo.asmx?WSDL
+09-07 17:18:50.807 32227-32268/org.cso.MobileSpotBilling E/IP Address: http://220.225.3.133/ == http://220.225.3.149/
+09-07 17:18:50.812 32227-32227/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityPaused:ActvLaunchApp
+09-07 17:18:50.862 32227-32267/org.cso.MobileSpotBilling I/OpenGLRenderer: Initialized EGL, version 1.4
+09-07 17:18:50.983 32227-32227/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityResumed:ActvLaunchApp
+09-07 17:18:51.031 32227-32268/org.cso.MobileSpotBilling E/Response: {"FLAG":1,"FILENAME":"VD1.98.apk","STATUS":"SUCCESS","MESSAGE":"IMEI No FOUND with 911542201041919"}
+09-07 17:18:51.031 32227-32268/org.cso.MobileSpotBilling E/jsonTxt -: {"FLAG":1,"FILENAME":"VD1.98.apk","STATUS":"SUCCESS","MESSAGE":"IMEI No FOUND with 911542201041919"}
+09-07 17:18:51.031 32227-32268/org.cso.MobileSpotBilling E/FILENAME -: VD1.98.apk
+09-07 17:18:51.031 32227-32268/org.cso.MobileSpotBilling E/strVersion -: VD1.98.apk
+09-07 17:18:51.031 32227-32268/org.cso.MobileSpotBilling E/STATUS -: Inside FILENAME
+09-07 17:18:51.049 32227-32268/org.cso.MobileSpotBilling E/STATUS -: Inside If
+09-07 17:18:51.057 32227-32268/org.cso.MobileSpotBilling E/1: 911542201041919
+09-07 17:18:51.057 32227-32268/org.cso.MobileSpotBilling E/2: 1
+09-07 17:18:51.105 32227-32227/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityPaused:ActvLaunchApp
+09-07 17:18:51.117 32227-32227/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityCreated:ActvLogin
+09-07 17:18:51.158 32227-32227/org.cso.MobileSpotBilling E/Network: Network
+09-07 17:18:51.160 32227-32227/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityStarted:ActvLogin
+09-07 17:18:51.160 32227-32227/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityResumed:ActvLogin
+09-07 17:18:51.680 32227-32227/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityStopped:ActvLaunchApp
+09-07 17:18:51.680 32227-32227/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityDestroyed:ActvLaunchApp
+09-07 17:19:18.923 32227-32227/org.cso.MobileSpotBilling I/System.out:  UtilAppCommon.IMEI_Number911542201041919
+09-07 17:19:18.923 32227-32227/org.cso.MobileSpotBilling I/System.out: context android.app.ContextImpl@2a709c9
+09-07 17:19:18.937 32227-32227/org.cso.MobileSpotBilling I/System.out: Entering into the database part 
+09-07 17:19:18.938 32227-32227/org.cso.MobileSpotBilling I/System.out: query---select * from UserInfo
+09-07 17:19:18.939 32227-32227/org.cso.MobileSpotBilling E/Redirect To ==>>: Main
+09-07 17:19:18.942 32227-32227/org.cso.MobileSpotBilling I/System.out: context org.cso.MobileSpotBilling.ActvLogin@4a173da
+09-07 17:19:19.009 32227-32659/org.cso.MobileSpotBilling E/IMEI: 911542201041919
+09-07 17:19:19.358 32227-32659/org.cso.MobileSpotBilling E/Response: [{"METER_READER_ID":"FAT68","METER_READER_NAME":"TEST3","PASSCODE":"80961"}]
+09-07 17:19:19.431 32227-32659/org.cso.MobileSpotBilling E/User Record: FAT68|TEST3|80961|911542201041919
+09-07 17:19:19.431 32227-32659/org.cso.MobileSpotBilling E/Record Details:: FAT68|TEST3|80961|911542201041919
+09-07 17:19:19.432 32227-32659/org.cso.MobileSpotBilling I/System.out: data length----4
+09-07 17:19:19.432 32227-32659/org.cso.MobileSpotBilling E/User Insert: data length----4
+09-07 17:19:19.433 32227-32659/org.cso.MobileSpotBilling E/1: FAT68
+09-07 17:19:19.433 32227-32659/org.cso.MobileSpotBilling E/2: TEST3
+09-07 17:19:19.433 32227-32659/org.cso.MobileSpotBilling E/3: 80961
+09-07 17:19:19.433 32227-32659/org.cso.MobileSpotBilling E/4: 911542201041919
+09-07 17:19:19.445 32227-32659/org.cso.MobileSpotBilling E/User Insert: Data Inserted Successfully
+09-07 17:19:19.447 32227-32659/org.cso.MobileSpotBilling I/System.out: total  : 1
+09-07 17:19:19.447 32227-32659/org.cso.MobileSpotBilling E/getUserInfo =>: total  : 1
+09-07 17:19:19.447 32227-32659/org.cso.MobileSpotBilling I/System.out: FAT68
+09-07 17:19:19.456 32227-32227/org.cso.MobileSpotBilling I/System.out: UserInput Result::76
+09-07 17:19:19.456 32227-32227/org.cso.MobileSpotBilling E/strRedirectTo: Main
+09-07 17:19:19.511 32227-32227/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityPaused:ActvLogin
+09-07 17:19:19.547 32227-32227/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityCreated:ActvivityMain
+09-07 17:19:19.638 32227-32227/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityStarted:ActvivityMain
+09-07 17:19:19.638 32227-32227/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityResumed:ActvivityMain
+09-07 17:19:20.294 32227-32227/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityStopped:ActvLogin
+09-07 17:19:20.294 32227-32227/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityDestroyed:ActvLogin
+09-07 17:19:21.887 32227-32227/org.cso.MobileSpotBilling I/System.out: context android.app.ContextImpl@578cdf5
+09-07 17:19:21.900 32227-32227/org.cso.MobileSpotBilling I/System.out: Entering into the database part 
+09-07 17:19:21.901 32227-32227/org.cso.MobileSpotBilling E/query---: select * from BillInput
+09-07 17:19:21.920 32227-32227/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityPaused:ActvivityMain
+09-07 17:19:21.930 32227-32227/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityCreated:ActvivityHelp
+09-07 17:19:21.954 32227-32668/org.cso.MobileSpotBilling I/System.out: Checking Server
+09-07 17:19:21.957 32227-32227/org.cso.MobileSpotBilling E/Network Type:  ==>> 13
+09-07 17:19:21.960 32227-32227/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityStarted:ActvivityHelp
+09-07 17:19:21.960 32227-32227/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityResumed:ActvivityHelp
+09-07 17:19:22.403 32227-32227/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityStopped:ActvivityMain
+09-07 17:19:22.403 32227-32227/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityDestroyed:ActvivityMain
+09-07 17:19:23.770 32227-32227/org.cso.MobileSpotBilling E/Network Type:  ==>> 13
+09-07 17:19:23.771 32227-32268/org.cso.MobileSpotBilling I/System.out: Checking Server
+09-07 17:19:24.995 32227-32227/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityPaused:ActvivityHelp
+09-07 17:19:25.003 32227-32227/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityCreated:ActvivityMain
+09-07 17:19:25.027 32227-32227/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityStarted:ActvivityMain
+09-07 17:19:25.027 32227-32227/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityResumed:ActvivityMain
+09-07 17:19:25.464 32227-32227/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityStopped:ActvivityHelp
+09-07 17:19:25.465 32227-32227/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityDestroyed:ActvivityHelp
+09-07 17:19:27.194 32227-32227/org.cso.MobileSpotBilling I/System.out: context android.app.ContextImpl@5bfe73a
+09-07 17:19:27.202 32227-32227/org.cso.MobileSpotBilling I/System.out: Entering into the database part 
+09-07 17:19:27.202 32227-32227/org.cso.MobileSpotBilling E/query---: select * from BillInput
+09-07 17:19:27.204 32227-32227/org.cso.MobileSpotBilling E/btnSetup Value:  btnSetup
+09-07 17:19:27.230 32227-32227/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityPaused:ActvivityMain
+09-07 17:19:27.239 32227-32227/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityCreated:ActvSetupInfo
+09-07 17:19:27.254 32227-32227/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityStarted:ActvSetupInfo
+09-07 17:19:27.254 32227-32227/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityResumed:ActvSetupInfo
+09-07 17:19:27.682 32227-32227/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityStopped:ActvivityMain
+09-07 17:19:27.682 32227-32227/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityDestroyed:ActvivityMain
+09-07 17:19:28.436 32227-32227/org.cso.MobileSpotBilling I/System.out: context android.app.ContextImpl@bcc8160
+09-07 17:19:28.453 32227-32227/org.cso.MobileSpotBilling I/System.out: context android.app.ContextImpl@bcc8160
+09-07 17:19:29.910 32227-32227/org.cso.MobileSpotBilling I/System.out: context android.app.ContextImpl@bcc8160
+09-07 17:19:29.999 32227-32227/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityPaused:ActvSetupInfo
+09-07 17:19:30.011 32227-32227/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityCreated:ActvLogin
+09-07 17:19:30.038 32227-32227/org.cso.MobileSpotBilling E/Network: Network
+09-07 17:19:30.050 32227-32227/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityStarted:ActvLogin
+09-07 17:19:30.051 32227-32227/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityResumed:ActvLogin
+09-07 17:19:30.168 32227-32233/org.cso.MobileSpotBilling W/art: Suspending all threads took: 7.659ms
+09-07 17:19:30.180 32227-32235/org.cso.MobileSpotBilling W/SQLiteConnectionPool: A SQLiteConnection object for database '/data/user/0/org.cso.MobileSpotBilling/databases/MobileDb.db' was leaked!  Please fix your application to end transactions in progress properly and to close the database when it is no longer needed.
+09-07 17:19:30.538 32227-32227/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivitySaveInstanceState:ActvSetupInfo
+09-07 17:19:30.538 32227-32227/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityStopped:ActvSetupInfo
+09-07 17:19:47.733 32227-32227/org.cso.MobileSpotBilling I/System.out:  UtilAppCommon.IMEI_Number911542201041919
+09-07 17:19:47.733 32227-32227/org.cso.MobileSpotBilling I/System.out: context android.app.ContextImpl@9d41e69
+09-07 17:19:47.744 32227-32227/org.cso.MobileSpotBilling I/System.out: Entering into the database part 
+09-07 17:19:47.745 32227-32227/org.cso.MobileSpotBilling I/System.out: query---select * from UserInfo
+09-07 17:19:47.746 32227-32227/org.cso.MobileSpotBilling E/Redirect To ==>>: Setup
+09-07 17:19:47.747 32227-32227/org.cso.MobileSpotBilling I/System.out: context org.cso.MobileSpotBilling.ActvLogin@997c41c
+09-07 17:19:47.806 32227-32268/org.cso.MobileSpotBilling E/IMEI: 911542201041919
+09-07 17:19:48.087 32227-32268/org.cso.MobileSpotBilling E/Response: [{"METER_READER_ID":"FAT68","METER_READER_NAME":"TEST3","PASSCODE":"80961"}]
+09-07 17:19:48.087 32227-32268/org.cso.MobileSpotBilling E/User Record: FAT68|TEST3|80961|911542201041919
+09-07 17:19:48.087 32227-32268/org.cso.MobileSpotBilling E/Record Details:: FAT68|TEST3|80961|911542201041919
+09-07 17:19:48.102 32227-32268/org.cso.MobileSpotBilling I/System.out: data length----4
+09-07 17:19:48.102 32227-32268/org.cso.MobileSpotBilling E/User Insert: data length----4
+09-07 17:19:48.103 32227-32268/org.cso.MobileSpotBilling E/1: FAT68
+09-07 17:19:48.104 32227-32268/org.cso.MobileSpotBilling E/2: TEST3
+09-07 17:19:48.104 32227-32268/org.cso.MobileSpotBilling E/3: 80961
+09-07 17:19:48.104 32227-32268/org.cso.MobileSpotBilling E/4: 911542201041919
+09-07 17:19:48.185 32227-32268/org.cso.MobileSpotBilling E/User Insert: Data Inserted Successfully
+09-07 17:19:48.187 32227-32268/org.cso.MobileSpotBilling I/System.out: total  : 1
+09-07 17:19:48.187 32227-32268/org.cso.MobileSpotBilling E/getUserInfo =>: total  : 1
+09-07 17:19:48.187 32227-32268/org.cso.MobileSpotBilling I/System.out: FAT68
+09-07 17:19:48.203 32227-32227/org.cso.MobileSpotBilling I/System.out: UserInput Result::76
+09-07 17:19:48.203 32227-32227/org.cso.MobileSpotBilling E/strRedirectTo: Setup
+09-07 17:19:48.222 32227-32227/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityPaused:ActvLogin
+09-07 17:19:48.233 32227-32227/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityCreated:ActvDownloadInputData
+09-07 17:19:48.266 32227-32227/org.cso.MobileSpotBilling I/System.out: context android.app.ContextImpl@bf839aa
+09-07 17:19:48.275 32227-32227/org.cso.MobileSpotBilling I/System.out: total  : 1
+09-07 17:19:48.275 32227-32227/org.cso.MobileSpotBilling E/getUserInfo =>: total  : 1
+09-07 17:19:48.275 32227-32227/org.cso.MobileSpotBilling I/System.out: FAT68
+09-07 17:19:48.276 32227-32227/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityStarted:ActvDownloadInputData
+09-07 17:19:48.276 32227-32227/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityResumed:ActvDownloadInputData
+09-07 17:19:48.721 32227-32227/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityStopped:ActvLogin
+09-07 17:19:48.721 32227-32227/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityDestroyed:ActvLogin
+09-07 17:19:50.272 32227-32227/org.cso.MobileSpotBilling I/System.out: context android.app.ContextImpl@bf839aa
+09-07 17:19:50.281 32227-32227/org.cso.MobileSpotBilling I/System.out: Entering into the database part 
+09-07 17:19:50.281 32227-32227/org.cso.MobileSpotBilling E/query---: select * from BillInput
+09-07 17:19:50.284 32227-32227/org.cso.MobileSpotBilling E/App Version: VD1.98.apk
+09-07 17:19:50.284 32227-32227/org.cso.MobileSpotBilling E/Input Count: 0  ==>>  [Ljava.lang.String;@36aa14d
+09-07 17:19:50.285 32227-32227/org.cso.MobileSpotBilling I/System.out: context org.cso.MobileSpotBilling.ActvDownloadInputData@1a5402
+09-07 17:19:50.314 32227-32227/org.cso.MobileSpotBilling W/System.err: android.database.sqlite.SQLiteDoneException
+09-07 17:19:50.317 32227-32227/org.cso.MobileSpotBilling W/System.err:     at android.database.sqlite.SQLiteConnection.nativeExecuteForString(Native Method)
+09-07 17:19:50.317 32227-32227/org.cso.MobileSpotBilling W/System.err:     at android.database.sqlite.SQLiteConnection.executeForString(SQLiteConnection.java:639)
+09-07 17:19:50.317 32227-32227/org.cso.MobileSpotBilling W/System.err:     at android.database.sqlite.SQLiteSession.executeForString(SQLiteSession.java:685)
+09-07 17:19:50.317 32227-32227/org.cso.MobileSpotBilling W/System.err:     at android.database.sqlite.SQLiteStatement.simpleQueryForString(SQLiteStatement.java:128)
+09-07 17:19:50.317 32227-32227/org.cso.MobileSpotBilling W/System.err:     at org.cso.MSBUtil.UtilDB.getActiveMRU(UtilDB.java:1398)
+09-07 17:19:50.317 32227-32227/org.cso.MobileSpotBilling W/System.err:     at org.cso.MSBUtil.UtilDB.updateUserInfo(UtilDB.java:3444)
+09-07 17:19:50.317 32227-32227/org.cso.MobileSpotBilling W/System.err:     at org.cso.MobileSpotBilling.ActvDownloadInputData.onClick(ActvDownloadInputData.java:105)
+09-07 17:19:50.318 32227-32227/org.cso.MobileSpotBilling W/System.err:     at android.view.View.performClick(View.java:5210)
+09-07 17:19:50.318 32227-32227/org.cso.MobileSpotBilling W/System.err:     at android.view.View$PerformClick.run(View.java:21183)
+09-07 17:19:50.318 32227-32227/org.cso.MobileSpotBilling W/System.err:     at android.os.Handler.handleCallback(Handler.java:739)
+09-07 17:19:50.318 32227-32227/org.cso.MobileSpotBilling W/System.err:     at android.os.Handler.dispatchMessage(Handler.java:95)
+09-07 17:19:50.318 32227-32227/org.cso.MobileSpotBilling W/System.err:     at android.os.Looper.loop(Looper.java:148)
+09-07 17:19:50.318 32227-32227/org.cso.MobileSpotBilling W/System.err:     at android.app.ActivityThread.main(ActivityThread.java:5438)
+09-07 17:19:50.318 32227-32227/org.cso.MobileSpotBilling W/System.err:     at java.lang.reflect.Method.invoke(Native Method)
+09-07 17:19:50.318 32227-32227/org.cso.MobileSpotBilling W/System.err:     at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:762)
+09-07 17:19:50.318 32227-32227/org.cso.MobileSpotBilling W/System.err:     at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:652)
+09-07 17:19:50.319 32227-32227/org.cso.MobileSpotBilling W/System.err: android.database.sqlite.SQLiteDoneException
+09-07 17:19:50.319 32227-32227/org.cso.MobileSpotBilling W/System.err:     at android.database.sqlite.SQLiteConnection.nativeExecuteForString(Native Method)
+09-07 17:19:50.320 32227-32227/org.cso.MobileSpotBilling W/System.err:     at android.database.sqlite.SQLiteConnection.executeForString(SQLiteConnection.java:639)
+09-07 17:19:50.320 32227-32227/org.cso.MobileSpotBilling W/System.err:     at android.database.sqlite.SQLiteSession.executeForString(SQLiteSession.java:685)
+09-07 17:19:50.320 32227-32227/org.cso.MobileSpotBilling W/System.err:     at android.database.sqlite.SQLiteStatement.simpleQueryForString(SQLiteStatement.java:128)
+09-07 17:19:50.320 32227-32227/org.cso.MobileSpotBilling W/System.err:     at org.cso.MSBUtil.UtilDB.getSdoCode(UtilDB.java:1381)
+09-07 17:19:50.320 32227-32227/org.cso.MobileSpotBilling W/System.err:     at org.cso.MSBUtil.UtilDB.updateUserInfo(UtilDB.java:3445)
+09-07 17:19:50.320 32227-32227/org.cso.MobileSpotBilling W/System.err:     at org.cso.MobileSpotBilling.ActvDownloadInputData.onClick(ActvDownloadInputData.java:105)
+09-07 17:19:50.320 32227-32227/org.cso.MobileSpotBilling W/System.err:     at android.view.View.performClick(View.java:5210)
+09-07 17:19:50.320 32227-32227/org.cso.MobileSpotBilling W/System.err:     at android.view.View$PerformClick.run(View.java:21183)
+09-07 17:19:50.320 32227-32227/org.cso.MobileSpotBilling W/System.err:     at android.os.Handler.handleCallback(Handler.java:739)
+09-07 17:19:50.320 32227-32227/org.cso.MobileSpotBilling W/System.err:     at android.os.Handler.dispatchMessage(Handler.java:95)
+09-07 17:19:50.320 32227-32227/org.cso.MobileSpotBilling W/System.err:     at android.os.Looper.loop(Looper.java:148)
+09-07 17:19:50.320 32227-32227/org.cso.MobileSpotBilling W/System.err:     at android.app.ActivityThread.main(ActivityThread.java:5438)
+09-07 17:19:50.320 32227-32227/org.cso.MobileSpotBilling W/System.err:     at java.lang.reflect.Method.invoke(Native Method)
+09-07 17:19:50.320 32227-32227/org.cso.MobileSpotBilling W/System.err:     at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:762)
+09-07 17:19:50.320 32227-32227/org.cso.MobileSpotBilling W/System.err:     at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:652)
+09-07 17:19:50.321 32227-32227/org.cso.MobileSpotBilling E/SQLiteLog: (1) no such column: active_MRU
+09-07 17:19:50.321 32227-32227/org.cso.MobileSpotBilling I/System.out: DataBase Updated Exception::@@@@@@@@@@@@@@@@
+09-07 17:19:52.720 32227-32291/org.cso.MobileSpotBilling E/Response Object: [{"DIVISION_CODE":"BAA","DIVISION_NAME":"Fatuha","SUB_DIVISION_CODE":"BAAB","SUB_DIVISION_NAME":"Fatuha","ROUTE_SEQUENCE_NO":"147","MRU":"BAAB8025","AREA_TYPE":"Urban","CONNECTED_POLE_NIN_NUMBER":"","CONSUMER_LEGACY_ACC_NO":"FAT1701659","CONTRACT_AC_NO":"100000656","CONTRACT_NO":"700000403","CONSUMER_NAME":"Sri PARMATMA SINGH","ADDRESS":"DEVI CHAK FATUHA PATNA 803201","RATE_CATEGORY":"NDS-IID","BILLING_CYCLE":"1","FEEDER_TYPE":"","FEEDER_NAME":"11 KV O/G RADIO STN. FDR FROM FATH PSS","SHUNT_CAPACITY_REQUIRED_FLAG":"","SHUNT_CAPACITOR_INSTALLED_FLAG":"","METER_MANUFACTURER_SR_NO":"40-217179","SCHEDULED_BILLING_DATE":"2017.08.31","SAP_DEVICE_NO":"100000402","METER_RENT":"0","PRE_DECIMAL_MTR":"05","OVERALL_MF":"1.00000","NXT_SCH_MTR_RDR_DATE":"2017.08.31","MTR_CHANGE_FLAG":"","OLD_MTR_CONSUMPTION":"","OLD_MTR_DEMAND":"","NEW_MTR_INTIAL_READING":"","MTR_CHANGE_DATE":"","NEW_MTR_RENT":"0","CAT_CHANGE_FLAG":"N","CAT_CHANGE_DATE":"","OLD_CATEGORY":"","SANC_LOAD_CHANGE_FLAG":"N","SANC_LOAD_CHG_DT":"","OLD_SANC_LOAD":"","PHASE_CODE":"1","SANC_LOAD":"1.0000000","CONNECTED_LOAD":"","CONTRACT_DEMAND":"20.0000000","MMC_UNIT_OLD_RC":"","IIP_DISCOUNT_FLAG":"","SCH_MTR_READING_DT":"2017.07.31","PRV_MTR_READING_DT":"2016.07.31","PRV_BILL_DATE":"2016.07.31","PRV_READING_KWH":"6400","PRV_MTR_READING_NOTE":"OK","ED_EXEMPTED_FLAG":"","ARREAR_ENRGY_CHG":"1829.38","PAY_ACC":"","ARR_DPS":"9569.53","ED_ARRS":"74.52","ARRS_OTHR":"","AMT_KPT_ABEY":"","PUNITIVE_BILL":"","DPS_PUNITIVE_BILL":"","MTR_READING_REASON":"01","DPS_AMT_CURR_MON":"13.91","INTEREST_ON_SD":"","INCENTIVE":"","SECURITY_DEPOSIT":"","SD_REQ":"","PROV_BILL_ADJ_AMT":"0.00","CURR_INST_GNRL":"","CURR_MON_AMT":"","TOT_INST_AMT":"","LAST_PAY_AMT_MADE":"","LAST_PAY_DATE":"","LAST_RECEIPT_NO":"","PREV_KWH_CYCLE1":"50.0000000","PREV_KWH_CYCLE2":"50.0000000","PREV_KWH_CYCLE3":"50.0000000","AVG_KWH_3_CYCLE_DR_KWH":"1.6700000","AVG_KWH_12_CYCLE_KWH":"1.4300000","AVG_KWH_3_CYCLE_DEMAND":"20.0000000","AVG_KWH_12_CYCLE_DEMAND":"20.0000000","MSG_1":"","MSG_2":"","CHQ_DISH_FLAG":"N","DEMAND_FLAG":"Y","COM_CODE":"SBPD","NO_OF_DAYS_PREV_BILL":"31","TEMP_FLAG":"","SEASON_FLAG":"","MONTH_SEASONAL":"","SS_FLAG":"","IIP_DTY_EXEM_FLAG":"","PWR_FACTOR":"","IAS_FLAG":"","INSTALLATION":"5000000655","METER_MAKE":"","METER_COM_CONS":"O","DT_CODE":"ONM-FATH-DSS-019902","METER_CAP":"","LAST_ACT_READ":"6400","LAST_ACT_READ_DT":"","PREV_MON_BILL_AMT":"215.83","FLAG_FOR_BILL_ADJUSTMENT":"","PL_PERIOD_ENERGY_AMT":"","PL_PERIOD_GOVT_DUTY_AMT":"","PL_PERIOD_REBATE_AMT":"","IIP_CHARGES":"","SHUNT_CAP_CHARGES":"","AMT_1":"","AMT_2":"","AMT_3":"","DATE_1":"","DATE_2":"","DATE_3":"","FLAG_1":"","FLAG_2":"","MTR_RDR_ID":"FAT68","SBM_NUMBER":"911542201041919"},{"DIVISION_CODE":"BAA","DIVISION_NAME":"Fatuha","SUB_DIVISION_CODE":"BAAB","SUB_DIVISION_NAME":"Fatuha","ROUTE_SEQUENCE_NO":"151","MRU":"BAAB8025","AREA_TYPE":"","CONNECTED_POLE_NIN_NUMBER":"0260152006","CONSUMER_LEGACY_ACC_NO":"","CONTRACT_AC_NO":"100385838","CONTRACT_NO":"702111004","CONSUMER_NAME":"Smt SAKUNTI DEVI .","ADDRESS":"SONARU, FATUHA","RATE_CATEGORY":"DS-IID","BILLING_CYCLE":"1","FEEDER_TYPE":"","FEEDER_NAME":"11 KV O/G RADIO STN. FDR FROM FATH PSS","SHUNT_CAPACITY_REQUIRED_FLAG":"","SHUNT_CAPACITOR_INSTALLED_FLAG":"","METER_MANUFACTURER_SR_NO":"SDEW789","SCHEDULED_BILLING_DATE":"2017.07.31","SAP_DEVICE_NO":"102310901","METER_RENT":"0","PRE_DECIMAL_MTR":"05","OVERALL_MF":"1.00000","NXT_SCH_MTR_RDR_DATE":"2017.08.31","MTR_CHANGE_FLAG":"","OLD_MTR_CONSUMPTION":"","OLD_MTR_DEMAND":"","NEW_MTR_INTIAL_READING":"","MTR_CHANGE_DATE":"","NEW_MTR_RENT":"20.000","CAT_CHANGE_FLAG":"N","CAT_CHANGE_DATE":"","OLD_CATEGORY":"","SANC_LOAD_CHANGE_FLAG":"N","SANC_LOAD_CHG_DT":"","OLD_SANC_LOAD":"","PHASE_CODE":"1","SANC_LOAD":"1.0000000","CONNECTED_LOAD":"","CONTRACT_DEMAND":"1.0000000","MMC_UNIT_OLD_RC":"","IIP_DISCOUNT_FLAG":"","SCH_MTR_READING_DT":"2017.07.31","PRV_MTR_READING_DT":"2017.05.31","PRV_BILL_DATE":"2017.05.31","PRV_READING_KWH":"500","PRV_MTR_READING_NOTE":"OK","ED_EXEMPTED_FLAG":"","ARREAR_ENRGY_CHG":"2089.20","PAY_ACC
+09-07 17:19:52.722 32227-32291/org.cso.MobileSpotBilling E/Check Data ==>>: Length ==>> 2
+09-07 17:19:52.723 32227-32291/org.cso.MobileSpotBilling I/System.out: Pre Concatinatiokjjkjkjkkjkkln{"DIVISION_CODE":"BAA","DIVISION_NAME":"Fatuha","SUB_DIVISION_CODE":"BAAB","SUB_DIVISION_NAME":"Fatuha","ROUTE_SEQUENCE_NO":"147","MRU":"BAAB8025","AREA_TYPE":"Urban","CONNECTED_POLE_NIN_NUMBER":"","CONSUMER_LEGACY_ACC_NO":"FAT1701659","CONTRACT_AC_NO":"100000656","CONTRACT_NO":"700000403","CONSUMER_NAME":"Sri PARMATMA SINGH","ADDRESS":"DEVI CHAK FATUHA PATNA 803201","RATE_CATEGORY":"NDS-IID","BILLING_CYCLE":"1","FEEDER_TYPE":"","FEEDER_NAME":"11 KV O\/G RADIO STN. FDR FROM FATH PSS","SHUNT_CAPACITY_REQUIRED_FLAG":"","SHUNT_CAPACITOR_INSTALLED_FLAG":"","METER_MANUFACTURER_SR_NO":"40-217179","SCHEDULED_BILLING_DATE":"2017.08.31","SAP_DEVICE_NO":"100000402","METER_RENT":"0","PRE_DECIMAL_MTR":"05","OVERALL_MF":"1.00000","NXT_SCH_MTR_RDR_DATE":"2017.08.31","MTR_CHANGE_FLAG":"","OLD_MTR_CONSUMPTION":"","OLD_MTR_DEMAND":"","NEW_MTR_INTIAL_READING":"","MTR_CHANGE_DATE":"","NEW_MTR_RENT":"0","CAT_CHANGE_FLAG":"N","CAT_CHANGE_DATE":"","OLD_CATEGORY":"","SANC_LOAD_CHANGE_FLAG":"N","SANC_LOAD_CHG_DT":"","OLD_SANC_LOAD":"","PHASE_CODE":"1","SANC_LOAD":"1.0000000","CONNECTED_LOAD":"","CONTRACT_DEMAND":"20.0000000","MMC_UNIT_OLD_RC":"","IIP_DISCOUNT_FLAG":"","SCH_MTR_READING_DT":"2017.07.31","PRV_MTR_READING_DT":"2016.07.31","PRV_BILL_DATE":"2016.07.31","PRV_READING_KWH":"6400","PRV_MTR_READING_NOTE":"OK","ED_EXEMPTED_FLAG":"","ARREAR_ENRGY_CHG":"1829.38","PAY_ACC":"","ARR_DPS":"9569.53","ED_ARRS":"74.52","ARRS_OTHR":"","AMT_KPT_ABEY":"","PUNITIVE_BILL":"","DPS_PUNITIVE_BILL":"","MTR_READING_REASON":"01","DPS_AMT_CURR_MON":"13.91","INTEREST_ON_SD":"","INCENTIVE":"","SECURITY_DEPOSIT":"","SD_REQ":"","PROV_BILL_ADJ_AMT":"0.00","CURR_INST_GNRL":"","CURR_MON_AMT":"","TOT_INST_AMT":"","LAST_PAY_AMT_MADE":"","LAST_PAY_DATE":"","LAST_RECEIPT_NO":"","PREV_KWH_CYCLE1":"50.0000000","PREV_KWH_CYCLE2":"50.0000000","PREV_KWH_CYCLE3":"50.0000000","AVG_KWH_3_CYCLE_DR_KWH":"1.6700000","AVG_KWH_12_CYCLE_KWH":"1.4300000","AVG_KWH_3_CYCLE_DEMAND":"20.0000000","AVG_KWH_12_CYCLE_DEMAND":"20.0000000","MSG_1":"","MSG_2":"","CHQ_DISH_FLAG":"N","DEMAND_FLAG":"Y","COM_CODE":"SBPD","NO_OF_DAYS_PREV_BILL":"31","TEMP_FLAG":"","SEASON_FLAG":"","MONTH_SEASONAL":"","SS_FLAG":"","IIP_DTY_EXEM_FLAG":"","PWR_FACTOR":"","IAS_FLAG":"","INSTALLATION":"5000000655","METER_MAKE":"","METER_COM_CONS":"O","DT_CODE":"ONM-FATH-DSS-019902","METER_CAP":"","LAST_ACT_READ":"6400","LAST_ACT_READ_DT":"","PREV_MON_BILL_AMT":"215.83","FLAG_FOR_BILL_ADJUSTMENT":"","PL_PERIOD_ENERGY_AMT":"","PL_PERIOD_GOVT_DUTY_AMT":"","PL_PERIOD_REBATE_AMT":"","IIP_CHARGES":"","SHUNT_CAP_CHARGES":"","AMT_1":"","AMT_2":"","AMT_3":"","DATE_1":"","DATE_2":"","DATE_3":"","FLAG_1":"","FLAG_2":"","MTR_RDR_ID":"FAT68","SBM_NUMBER":"911542201041919"}
+09-07 17:19:52.723 32227-32291/org.cso.MobileSpotBilling I/System.out: Pre Concatination
+09-07 17:19:52.745 32227-32291/org.cso.MobileSpotBilling E/insertIntoBillInput: Start ==>> 116
+09-07 17:19:52.776 32227-32291/org.cso.MobileSpotBilling I/System.out: Pre Concatinatiokjjkjkjkkjkkln{"DIVISION_CODE":"BAA","DIVISION_NAME":"Fatuha","SUB_DIVISION_CODE":"BAAB","SUB_DIVISION_NAME":"Fatuha","ROUTE_SEQUENCE_NO":"151","MRU":"BAAB8025","AREA_TYPE":"","CONNECTED_POLE_NIN_NUMBER":"0260152006","CONSUMER_LEGACY_ACC_NO":"","CONTRACT_AC_NO":"100385838","CONTRACT_NO":"702111004","CONSUMER_NAME":"Smt SAKUNTI DEVI .","ADDRESS":"SONARU, FATUHA","RATE_CATEGORY":"DS-IID","BILLING_CYCLE":"1","FEEDER_TYPE":"","FEEDER_NAME":"11 KV O\/G RADIO STN. FDR FROM FATH PSS","SHUNT_CAPACITY_REQUIRED_FLAG":"","SHUNT_CAPACITOR_INSTALLED_FLAG":"","METER_MANUFACTURER_SR_NO":"SDEW789","SCHEDULED_BILLING_DATE":"2017.07.31","SAP_DEVICE_NO":"102310901","METER_RENT":"0","PRE_DECIMAL_MTR":"05","OVERALL_MF":"1.00000","NXT_SCH_MTR_RDR_DATE":"2017.08.31","MTR_CHANGE_FLAG":"","OLD_MTR_CONSUMPTION":"","OLD_MTR_DEMAND":"","NEW_MTR_INTIAL_READING":"","MTR_CHANGE_DATE":"","NEW_MTR_RENT":"20.000","CAT_CHANGE_FLAG":"N","CAT_CHANGE_DATE":"","OLD_CATEGORY":"","SANC_LOAD_CHANGE_FLAG":"N","SANC_LOAD_CHG_DT":"","OLD_SANC_LOAD":"","PHASE_CODE":"1","SANC_LOAD":"1.0000000","CONNECTED_LOAD":"","CONTRACT_DEMAND":"1.0000000","MMC_UNIT_OLD_RC":"","IIP_DISCOUNT_FLAG":"","SCH_MTR_READING_DT":"2017.07.31","PRV_MTR_READING_DT":"2017.05.31","PRV_BILL_DATE":"2017.05.31","PRV_READING_KWH":"500","PRV_MTR_READING_NOTE":"OK","ED_EXEMPTED_FLAG":"","ARREAR_ENRGY_CHG":"2089.20","PAY_ACC":"","ARR_DPS":"","ED_ARRS":"53.46","ARRS_OTHR":"","AMT_KPT_ABEY":"","PUNITIVE_BILL":"","DPS_PUNITIVE_BILL":"","MTR_READING_REASON":"01","DPS_AMT_CURR_MON":"","INTEREST_ON_SD":"","INCENTIVE":"","SECURITY_DEPOSIT":"400.00","SD_REQ":"","PROV_BILL_ADJ_AMT":"0.00","CURR_INST_GNRL":"","CURR_MON_AMT":"","TOT_INST_AMT":"","LAST_PAY_AMT_MADE":"","LAST_PAY_DATE":"","LAST_RECEIPT_NO":"","PREV_KWH_CYCLE1":"0","PREV_KWH_CYCLE2":"12.0000000","PREV_KWH_CYCLE3":"7.0000000","AVG_KWH_3_CYCLE_DR_KWH":"0.6600000","AVG_KWH_12_CYCLE_KWH":"0.4600000","AVG_KWH_3_CYCLE_DEMAND":"1.0000000","AVG_KWH_12_CYCLE_DEMAND":"1.0000000","MSG_1":"","MSG_2":"","CHQ_DISH_FLAG":"N","DEMAND_FLAG":"Y","COM_CODE":"SBPD","NO_OF_DAYS_PREV_BILL":"61","TEMP_FLAG":"","SEASON_FLAG":"","MONTH_SEASONAL":"000000000102486233","SS_FLAG":"","IIP_DTY_EXEM_FLAG":"","PWR_FACTOR":"","IAS_FLAG":"U","INSTALLATION":"5001596010","METER_MAKE":"GENUS","METER_COM_CONS":"C","DT_CODE":"ONM-FATH-DSS-019902","METER_CAP":"9801253665","LAST_ACT_READ":"500","LAST_ACT_READ_DT":"","PREV_MON_BILL_AMT":"398.90","FLAG_FOR_BILL_ADJUSTMENT":"","PL_PERIOD_ENERGY_AMT":"","PL_PERIOD_GOVT_DUTY_AMT":"","PL_PERIOD_REBATE_AMT":"","IIP_CHARGES":"","SHUNT_CAP_CHARGES":"","AMT_1":"","AMT_2":"","AMT_3":"","DATE_1":"2017.06.02","DATE_2":"","DATE_3":"","FLAG_1":"","FLAG_2":"","MTR_RDR_ID":"FAT68","SBM_NUMBER":"911542201041919"}
+09-07 17:19:52.776 32227-32291/org.cso.MobileSpotBilling I/System.out: Pre Concatination
+09-07 17:19:52.778 32227-32291/org.cso.MobileSpotBilling E/insertIntoBillInput: Start ==>> 116
+09-07 17:19:52.791 32227-32227/org.cso.MobileSpotBilling I/TAG: onPostExecute()
+09-07 17:19:52.817 32227-32227/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityPaused:ActvDownloadInputData
+09-07 17:19:52.866 32227-32227/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityStarted:ActvSetupInfo
+09-07 17:19:52.866 32227-32227/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityResumed:ActvSetupInfo
+09-07 17:19:53.222 32227-32227/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityStopped:ActvDownloadInputData
+09-07 17:19:53.222 32227-32227/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityDestroyed:ActvDownloadInputData

@@ -1,0 +1,79 @@
+09-06 15:27:51.877 21429-21429/org.cso.MobileSpotBilling I/FirebaseInitProvider: FirebaseApp initialization unsuccessful
+09-06 15:27:51.928 21429-21429/org.cso.MobileSpotBilling W/art: Before Android 4.1, method android.graphics.PorterDuffColorFilter android.support.graphics.drawable.VectorDrawableCompat.updateTintFilter(android.graphics.PorterDuffColorFilter, android.content.res.ColorStateList, android.graphics.PorterDuff$Mode) would have incorrectly overridden the package-private method in android.graphics.drawable.Drawable
+09-06 15:27:51.941 21429-21429/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityCreated:ActivityBT_Reading
+09-06 15:27:52.036 21429-21429/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityStarted:ActivityBT_Reading
+09-06 15:27:52.054 21429-21469/org.cso.MobileSpotBilling W/GooglePlayServicesUtil: Google Play services out of date.  Requires 9877000 but found 9683436
+09-06 15:27:52.066 21429-21429/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityResumed:ActivityBT_Reading
+09-06 15:27:52.068 21429-21429/org.cso.MobileSpotBilling I/System.out: 0
+09-06 15:27:52.118 21429-21429/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityPaused:ActivityBT_Reading
+09-06 15:27:52.174 21429-21470/org.cso.MobileSpotBilling I/OpenGLRenderer: Initialized EGL, version 1.4
+09-06 15:27:52.194 21429-21429/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivitySaveInstanceState:ActivityBT_Reading
+09-06 15:27:52.195 21429-21429/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityStopped:ActivityBT_Reading
+09-06 15:28:01.364 21429-21429/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityStarted:ActivityBT_Reading
+09-06 15:28:01.372 21429-21429/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityResumed:ActivityBT_Reading
+09-06 15:28:01.376 21429-21728/org.cso.MobileSpotBilling W/GooglePlayServicesUtil: Google Play services out of date.  Requires 9877000 but found 9683436
+09-06 15:28:01.380 21429-21429/org.cso.MobileSpotBilling I/System.out: 0
+09-06 15:28:01.831 21429-21429/org.cso.MobileSpotBilling I/System.out: device123164,null
+09-06 15:28:01.848 21429-21429/org.cso.MobileSpotBilling I/System.out: device123164,null
+09-06 15:28:01.874 21429-21429/org.cso.MobileSpotBilling I/System.out: device123164,null
+09-06 15:28:01.879 21429-21429/org.cso.MobileSpotBilling I/System.out: device123164,null
+09-06 15:28:02.068 21429-21429/org.cso.MobileSpotBilling I/System.out: device123164,null
+09-06 15:28:02.074 21429-21429/org.cso.MobileSpotBilling I/System.out: device123164,null
+09-06 15:28:02.121 21429-21429/org.cso.MobileSpotBilling I/System.out: device123164,null
+09-06 15:28:02.127 21429-21429/org.cso.MobileSpotBilling I/System.out: device123164,null
+09-06 15:28:02.384 21429-21429/org.cso.MobileSpotBilling I/System.out: device123164,null
+09-06 15:28:02.394 21429-21429/org.cso.MobileSpotBilling I/System.out: device123164,null
+09-06 15:28:02.424 21429-21429/org.cso.MobileSpotBilling I/System.out: device123164,null
+09-06 15:28:02.430 21429-21429/org.cso.MobileSpotBilling I/System.out: device123164,null
+09-06 15:28:02.755 21429-21429/org.cso.MobileSpotBilling I/System.out: device123164,null
+09-06 15:28:02.761 21429-21429/org.cso.MobileSpotBilling I/System.out: device123164,null
+09-06 15:28:02.773 21429-21429/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityPaused:ActivityBT_Reading
+09-06 15:28:02.823 21429-21429/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityCreated:PeripheralActivity
+09-06 15:28:02.889 21429-21429/org.cso.MobileSpotBilling I/System.out: isCheckedfalse
+09-06 15:28:02.889 21429-21429/org.cso.MobileSpotBilling I/System.out: isChecked2false
+09-06 15:28:02.898 21429-21429/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityStarted:PeripheralActivity
+09-06 15:28:02.898 21429-21429/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityResumed:PeripheralActivity
+09-06 15:28:03.371 21429-21429/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityStopped:ActivityBT_Reading
+09-06 15:28:03.373 21429-21429/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityDestroyed:ActivityBT_Reading
+09-06 15:28:04.091 21429-21429/org.cso.MobileSpotBilling I/System.out: ch value :android.bluetooth.BluetoothGattCharacteristic@4c3cd79,00002902-0000-1000-8000-00805f9b34fb
+09-06 15:28:04.092 21429-21429/org.cso.MobileSpotBilling I/System.out: ch value :00002902-0000-1000-8000-00805f9b34fb
+09-06 15:28:04.092 21429-21429/org.cso.MobileSpotBilling I/System.out: descriptorandroid.bluetooth.BluetoothGattDescriptor@48f8abe
+09-06 15:28:05.098 21429-21429/org.cso.MobileSpotBilling I/System.out: OGH BLE COMM MOD: [B@a58271f
+09-06 15:28:05.245 21429-21838/org.cso.MobileSpotBilling W/System.err: java.lang.NullPointerException: Attempt to invoke virtual method 'java.lang.String org.cso.MSBUtil.DatabaseHelper.checkUdpmIdAvailabilityAndInsert(java.lang.String)' on a null object reference
+09-06 15:28:05.245 21429-21838/org.cso.MobileSpotBilling W/System.err:     at org.cso.MobileSpotBilling.PeripheralActivity$ParseDataFromDevice.parseudpmInfofeed(PeripheralActivity.java:1038)
+09-06 15:28:05.246 21429-21838/org.cso.MobileSpotBilling W/System.err:     at org.cso.MobileSpotBilling.PeripheralActivity$ParseDataFromDevice.doInBackground(PeripheralActivity.java:951)
+09-06 15:28:05.246 21429-21838/org.cso.MobileSpotBilling W/System.err:     at org.cso.MobileSpotBilling.PeripheralActivity$ParseDataFromDevice.doInBackground(PeripheralActivity.java:844)
+09-06 15:28:05.246 21429-21838/org.cso.MobileSpotBilling W/System.err:     at android.os.AsyncTask$2.call(AsyncTask.java:296)
+09-06 15:28:05.246 21429-21838/org.cso.MobileSpotBilling W/System.err:     at java.util.concurrent.FutureTask.run(FutureTask.java:237)
+09-06 15:28:05.246 21429-21838/org.cso.MobileSpotBilling W/System.err:     at android.os.AsyncTask$SerialExecutor$1.run(AsyncTask.java:235)
+09-06 15:28:05.246 21429-21838/org.cso.MobileSpotBilling W/System.err:     at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1113)
+09-06 15:28:05.246 21429-21838/org.cso.MobileSpotBilling W/System.err:     at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:588)
+09-06 15:28:05.246 21429-21838/org.cso.MobileSpotBilling W/System.err:     at java.lang.Thread.run(Thread.java:818)
+                                                                       
+                                                                       --------- beginning of crash
+09-06 15:28:05.248 21429-21838/org.cso.MobileSpotBilling E/AndroidRuntime: FATAL EXCEPTION: AsyncTask #1
+                                                                           Process: org.cso.MobileSpotBilling, PID: 21429
+                                                                           java.lang.RuntimeException: An error occurred while executing doInBackground()
+                                                                               at android.os.AsyncTask$3.done(AsyncTask.java:310)
+                                                                               at java.util.concurrent.FutureTask.finishCompletion(FutureTask.java:354)
+                                                                               at java.util.concurrent.FutureTask.setException(FutureTask.java:223)
+                                                                               at java.util.concurrent.FutureTask.run(FutureTask.java:242)
+                                                                               at android.os.AsyncTask$SerialExecutor$1.run(AsyncTask.java:235)
+                                                                               at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1113)
+                                                                               at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:588)
+                                                                               at java.lang.Thread.run(Thread.java:818)
+                                                                            Caused by: java.lang.NullPointerException: Attempt to invoke virtual method 'void org.cso.MSBUtil.DatabaseHelper.addUdpmInfo(org.cso.MSBModel.Info)' on a null object reference
+                                                                               at org.cso.MobileSpotBilling.PeripheralActivity$ParseDataFromDevice.parseudpmInfofeed(PeripheralActivity.java:1043)
+                                                                               at org.cso.MobileSpotBilling.PeripheralActivity$ParseDataFromDevice.doInBackground(PeripheralActivity.java:951)
+                                                                               at org.cso.MobileSpotBilling.PeripheralActivity$ParseDataFromDevice.doInBackground(PeripheralActivity.java:844)
+                                                                               at android.os.AsyncTask$2.call(AsyncTask.java:296)
+                                                                               at java.util.concurrent.FutureTask.run(FutureTask.java:237)
+                                                                               at android.os.AsyncTask$SerialExecutor$1.run(AsyncTask.java:235) 
+                                                                               at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1113) 
+                                                                               at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:588) 
+                                                                               at java.lang.Thread.run(Thread.java:818) 
+09-06 15:28:05.260 21429-21429/org.cso.MobileSpotBilling I/Choreographer: Skipped 64 frames!  The application may be doing too much work on its main thread.
+09-06 15:28:05.327 21429-21429/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityPaused:PeripheralActivity
+09-06 15:28:05.457 21429-21435/org.cso.MobileSpotBilling W/art: Suspending all threads took: 23.345ms
+09-06 15:28:05.989 21429-21429/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityStopped:PeripheralActivity
+09-06 15:28:05.989 21429-21429/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityDestroyed:PeripheralActivity

@@ -1,0 +1,191 @@
+09-11 12:16:10.080 18400-18400/? I/art: Late-enabling -Xcheck:jni
+09-11 12:16:10.204 18400-18400/org.cso.MobileSpotBilling I/FirebaseInitProvider: FirebaseApp initialization unsuccessful
+09-11 12:16:10.229 18400-18400/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityCreated:ActvLaunchApp
+09-11 12:16:10.322 18400-18400/org.cso.MobileSpotBilling E/IMEI Number: 911542201041919
+09-11 12:16:10.324 18400-18400/org.cso.MobileSpotBilling I/System.out: context org.cso.config.AppController@cca3e4b
+09-11 12:16:10.344 18400-18400/org.cso.MobileSpotBilling E/intUserInfoRowCnt ==>>: 1
+09-11 12:16:10.344 18400-18400/org.cso.MobileSpotBilling E/User Count ==>>: FAT68
+09-11 12:16:10.344 18400-18400/org.cso.MobileSpotBilling E/User Count ==>>: TEST3
+09-11 12:16:10.344 18400-18400/org.cso.MobileSpotBilling E/User Count ==>>: 80961
+09-11 12:16:10.344 18400-18400/org.cso.MobileSpotBilling E/User Count ==>>: 911542201041919
+09-11 12:16:10.344 18400-18400/org.cso.MobileSpotBilling E/User Count ==>>: D8:80:39:F0:88:F9
+09-11 12:16:10.344 18400-18400/org.cso.MobileSpotBilling E/Parameters ==>>: 911542201041919  ==  VD1.98.apk
+09-11 12:16:10.346 18400-18400/org.cso.MobileSpotBilling I/System.out: context org.cso.MobileSpotBilling.ActvLaunchApp@811aca4
+09-11 12:16:10.459 18400-18400/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityStarted:ActvLaunchApp
+09-11 12:16:10.459 18400-18400/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityResumed:ActvLaunchApp
+09-11 12:16:10.462 18400-18442/org.cso.MobileSpotBilling E/IMEINo: 911542201041919
+09-11 12:16:10.462 18400-18442/org.cso.MobileSpotBilling E/SOAPAddress: http://220.225.3.133/biharsbmservice/ValidateIMEINo.asmx?WSDL
+09-11 12:16:10.465 18400-18442/org.cso.MobileSpotBilling E/IP Address: http://220.225.3.133/ == http://220.225.3.149/
+09-11 12:16:10.467 18400-18400/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityPaused:ActvLaunchApp
+09-11 12:16:10.532 18400-18441/org.cso.MobileSpotBilling I/OpenGLRenderer: Initialized EGL, version 1.4
+09-11 12:16:10.699 18400-18400/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityResumed:ActvLaunchApp
+09-11 12:16:10.754 18400-18442/org.cso.MobileSpotBilling E/Response: {"FLAG":1,"FILENAME":"VD1.98.apk","STATUS":"SUCCESS","MESSAGE":"IMEI No FOUND with 911542201041919"}
+09-11 12:16:10.755 18400-18442/org.cso.MobileSpotBilling E/jsonTxt -: {"FLAG":1,"FILENAME":"VD1.98.apk","STATUS":"SUCCESS","MESSAGE":"IMEI No FOUND with 911542201041919"}
+09-11 12:16:10.755 18400-18442/org.cso.MobileSpotBilling E/FILENAME -: VD1.98.apk
+09-11 12:16:10.755 18400-18442/org.cso.MobileSpotBilling E/strVersion -: VD1.98.apk
+09-11 12:16:10.755 18400-18442/org.cso.MobileSpotBilling E/STATUS -: Inside FILENAME
+09-11 12:16:10.773 18400-18442/org.cso.MobileSpotBilling E/STATUS -: Inside If
+09-11 12:16:10.781 18400-18442/org.cso.MobileSpotBilling E/1: 911542201041919
+09-11 12:16:10.781 18400-18442/org.cso.MobileSpotBilling E/2: 1
+09-11 12:16:10.811 18400-18400/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityPaused:ActvLaunchApp
+09-11 12:16:10.821 18400-18400/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityCreated:ActvLogin
+09-11 12:16:10.863 18400-18400/org.cso.MobileSpotBilling E/Network: Network
+09-11 12:16:10.866 18400-18400/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityStarted:ActvLogin
+09-11 12:16:10.866 18400-18400/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityResumed:ActvLogin
+09-11 12:16:11.335 18400-18400/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityStopped:ActvLaunchApp
+09-11 12:16:11.335 18400-18400/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityDestroyed:ActvLaunchApp
+09-11 12:16:19.751 18400-18400/org.cso.MobileSpotBilling I/System.out:  UtilAppCommon.IMEI_Number911542201041919
+09-11 12:16:19.751 18400-18400/org.cso.MobileSpotBilling I/System.out: context android.app.ContextImpl@4e1b66d
+09-11 12:16:19.767 18400-18400/org.cso.MobileSpotBilling I/System.out: Entering into the database part 
+09-11 12:16:19.767 18400-18400/org.cso.MobileSpotBilling I/System.out: query---select * from UserInfo
+09-11 12:16:19.768 18400-18400/org.cso.MobileSpotBilling E/Redirect To ==>>: Main
+09-11 12:16:19.768 18400-18400/org.cso.MobileSpotBilling I/System.out: Entering into the database part 
+09-11 12:16:19.768 18400-18400/org.cso.MobileSpotBilling I/System.out: query---select * from UserInfo WHERE meterreader_id='FAT68' AND password='80961' 
+09-11 12:16:19.769 18400-18400/org.cso.MobileSpotBilling E/Authenticate: True
+09-11 12:16:19.770 18400-18400/org.cso.MobileSpotBilling I/System.out: total  : 1
+09-11 12:16:19.770 18400-18400/org.cso.MobileSpotBilling E/getUserInfo =>: total  : 1
+09-11 12:16:19.770 18400-18400/org.cso.MobileSpotBilling I/System.out: FAT68
+09-11 12:16:19.784 18400-18400/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityPaused:ActvLogin
+09-11 12:16:19.804 18400-18400/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityCreated:ActvivityMain
+09-11 12:16:19.825 18400-18400/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityStarted:ActvivityMain
+09-11 12:16:19.825 18400-18400/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityResumed:ActvivityMain
+09-11 12:16:20.255 18400-18400/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityStopped:ActvLogin
+09-11 12:16:20.255 18400-18400/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityDestroyed:ActvLogin
+09-11 12:16:20.642 18400-18400/org.cso.MobileSpotBilling I/System.out: context android.app.ContextImpl@961ec08
+09-11 12:16:20.653 18400-18400/org.cso.MobileSpotBilling I/System.out: Entering into the database part 
+09-11 12:16:20.654 18400-18400/org.cso.MobileSpotBilling E/query---: select * from BillInput
+09-11 12:16:20.701 18400-18400/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityPaused:ActvivityMain
+09-11 12:16:20.713 18400-18400/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityCreated:ActvBillingOption
+09-11 12:16:20.730 18400-18400/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityStarted:ActvBillingOption
+09-11 12:16:20.730 18400-18400/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityResumed:ActvBillingOption
+09-11 12:16:21.159 18400-18400/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityStopped:ActvivityMain
+09-11 12:16:21.159 18400-18400/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityDestroyed:ActvivityMain
+09-11 12:16:21.409 18400-18400/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityPaused:ActvBillingOption
+09-11 12:16:21.425 18400-18400/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityCreated:ActvConsumerNbrInput
+09-11 12:16:21.442 18400-18400/org.cso.MobileSpotBilling I/System.out: context android.app.ContextImpl@eeb3311
+09-11 12:16:21.468 18400-18400/org.cso.MobileSpotBilling I/System.out: sdocode & stmt ::   BAAB ---  SQLiteProgram: SELECT DISTINCT sub_division_code  FROM BillInput
+09-11 12:16:21.472 18400-18400/org.cso.MobileSpotBilling I/System.out: MRU & stmt ::   BAAB8025 ---  SQLiteProgram: SELECT DISTINCT MRU FROM BillInput
+09-11 12:16:21.474 18400-18400/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityStarted:ActvConsumerNbrInput
+09-11 12:16:21.475 18400-18400/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityResumed:ActvConsumerNbrInput
+09-11 12:16:21.963 18400-18400/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityStopped:ActvBillingOption
+09-11 12:16:21.963 18400-18400/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityDestroyed:ActvBillingOption
+09-11 12:16:29.334 18400-18400/org.cso.MobileSpotBilling I/System.out: context android.app.ContextImpl@eeb3311
+09-11 12:16:29.341 18400-18400/org.cso.MobileSpotBilling I/System.out: total  : 1
+09-11 12:16:29.341 18400-18400/org.cso.MobileSpotBilling E/getUserInfo =>: total  : 1
+09-11 12:16:29.341 18400-18400/org.cso.MobileSpotBilling I/System.out: FAT68
+09-11 12:16:29.342 18400-18400/org.cso.MobileSpotBilling E/UtilAppCommon.acctNbr:::::: 100385838
+09-11 12:16:29.342 18400-18400/org.cso.MobileSpotBilling E/GetConsumerInfoByField: 100385838  <>  Accno  <>  CONSUMER_NAME
+09-11 12:16:29.342 18400-18400/org.cso.MobileSpotBilling E/qry ==>>: select * from BillInput where CONTRACT_AC_NO='100385838'
+09-11 12:16:29.349 18400-18400/org.cso.MobileSpotBilling E/value ==>>: Smt SAKUNTI DEVI .
+09-11 12:16:29.360 18400-18400/org.cso.MobileSpotBilling E/GetConsumerInfoByField: 100385838  <>  Accno  <>  CONSUMER_NAME
+09-11 12:16:29.361 18400-18400/org.cso.MobileSpotBilling E/qry ==>>: select * from BillInput where CONTRACT_AC_NO='100385838'
+09-11 12:16:29.362 18400-18400/org.cso.MobileSpotBilling E/value ==>>: Smt SAKUNTI DEVI .
+09-11 12:16:29.362 18400-18400/org.cso.MobileSpotBilling I/System.out: Entering into the database part 
+09-11 12:16:29.367 18400-18400/org.cso.MobileSpotBilling E/Pole No: 0260152006
+09-11 12:16:29.367 18400-18400/org.cso.MobileSpotBilling E/getBillInputDetails->: Completed
+09-11 12:16:29.367 18400-18400/org.cso.MobileSpotBilling I/System.out: sudhir BTngenerated clicked on Entry formtrue
+09-11 12:16:29.391 18400-18400/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityPaused:ActvConsumerNbrInput
+09-11 12:16:29.414 18400-18400/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityCreated:ActvBilling
+09-11 12:16:29.423 18400-18400/org.cso.MobileSpotBilling E/validateDoubleBilling: Start
+09-11 12:16:29.423 18400-18400/org.cso.MobileSpotBilling I/System.out: context android.app.ContextImpl@7e66f75
+09-11 12:16:29.434 18400-18400/org.cso.MobileSpotBilling E/AccountNo: 100385838
+09-11 12:16:29.437 18400-18400/org.cso.MobileSpotBilling I/System.out: context android.app.ContextImpl@7e66f75
+09-11 12:16:29.445 18400-18400/org.cso.MobileSpotBilling I/System.out: Entering into the database part 
+09-11 12:16:29.449 18400-18400/org.cso.MobileSpotBilling E/Pole No: 0260152006
+09-11 12:16:29.449 18400-18400/org.cso.MobileSpotBilling E/getBillInputDetails->: Completed
+09-11 12:16:29.451 18400-18400/org.cso.MobileSpotBilling E/checkDoubleBilling =>>: select * from SAPBlueInput where CANumber = '100385838' and SCHEDULED_BILLING_DATE IS NOT NULL;
+09-11 12:16:29.453 18400-18400/org.cso.MobileSpotBilling I/System.out: context org.cso.config.AppController@cca3e4b
+09-11 12:16:29.463 18400-18400/org.cso.MobileSpotBilling E/copySAPInputData: Started
+09-11 12:16:29.463 18400-18400/org.cso.MobileSpotBilling I/copySAPInputData C: 100385838 >> 5001596010 >> 31.08.2017 >>  >> OK >> 500 >> 0 >> 0 >>  >> 19.2189181 >> 72.8341581 >>  >> 1 >> 102310901
+09-11 12:16:29.463 18400-18400/org.cso.MobileSpotBilling E/copySAPInputData: Completed
+09-11 12:16:29.464 18400-18400/org.cso.MobileSpotBilling I/System.out: context org.cso.MobileSpotBilling.ActvBilling@6897f44
+09-11 12:16:29.518 18400-18400/org.cso.MobileSpotBilling E/checkDoubleBilling =>>: select * from SAPInput where CANumber = '100385838' and SCHEDULED_BILLING_DATE IS NOT NULL;
+09-11 12:16:29.518 18400-18516/org.cso.MobileSpotBilling E/Util Address Output: http://220.225.3.133/biharsbmservice/udmsvc.asmx?WSDL
+09-11 12:16:29.518 18400-18516/org.cso.MobileSpotBilling E/getBlueData Param: 5001596010|31.08.2017|000000000102486233|OK|500|0|0||19.2189181|72.8341581|2
+09-11 12:16:29.520 18400-18400/org.cso.MobileSpotBilling E/SCHEDULED_BILLING_DATE: 2017-08-31
+09-11 12:16:29.520 18400-18400/org.cso.MobileSpotBilling E/copySAPInputData: Started
+09-11 12:16:29.520 18400-18400/org.cso.MobileSpotBilling E/CANumber: 100385838
+09-11 12:16:29.520 18400-18400/org.cso.MobileSpotBilling E/copySAPInputData: Completed
+09-11 12:16:29.521 18400-18400/org.cso.MobileSpotBilling I/System.out: context org.cso.MobileSpotBilling.ActvBilling@6897f44
+09-11 12:16:31.881 18400-18516/org.cso.MobileSpotBilling I/Response getBlueData: [{"MESSAGE":"SUCCESS","SAPFLAG":"1"}]
+09-11 12:16:31.881 18400-18516/org.cso.MobileSpotBilling E/Util getBlueData: Completed
+09-11 12:16:31.900 18400-18533/org.cso.MobileSpotBilling E/Util Address Output: http://220.225.3.133/BiharSBMService/MobiletoMW.asmx?WSDL
+09-11 12:16:31.901 18400-18533/org.cso.MobileSpotBilling E/getOutputData Param: 5001596010|31.08.2017|102310901|MD|500|0|0.00|19.2189181|72.8341581|2|0||0260152006
+09-11 12:16:36.360 18400-18533/org.cso.MobileSpotBilling E/Response OutputData: [{"FLAG":"1","STATUS":"SUCCESS","MESSAGE_ID":"3","MESSAGE":"Bill Doc not created ","REC_DATE_TIME":"11 Sep 2017 12:15"}]
+09-11 12:16:36.360 18400-18533/org.cso.MobileSpotBilling E/Util getOutputData: Completed
+09-11 12:16:36.360 18400-18533/org.cso.MobileSpotBilling E/jsonTxt: [{"FLAG":"1","STATUS":"SUCCESS","MESSAGE_ID":"3","MESSAGE":"Bill Doc not created ","REC_DATE_TIME":"11 Sep 2017 12:15"}]
+09-11 12:16:36.360 18400-18533/org.cso.MobileSpotBilling E/MESSAGE_ID: 3
+09-11 12:16:36.379 18400-18533/org.cso.MobileSpotBilling E/No Output Data: 100385838
+09-11 12:16:36.380 18400-18533/org.cso.MobileSpotBilling E/Util Address Output: http://220.225.3.133/BiharSBMService/MobiletoMW.asmx?WSDL
+09-11 12:16:36.380 18400-18533/org.cso.MobileSpotBilling E/getOutputData Param: 5001596010|31.08.2017|102310901|MD|500|0|0.00|19.2189181|72.8341581|2|0||0260152006
+09-11 12:16:41.173 18400-18533/org.cso.MobileSpotBilling E/Response OutputData: [{"FLAG":"1","STATUS":"SUCCESS","MESSAGE_ID":"3","MESSAGE":"Bill Doc not created ","REC_DATE_TIME":"11 Sep 2017 12:15"}]
+09-11 12:16:41.174 18400-18533/org.cso.MobileSpotBilling E/Util getOutputData: Completed
+09-11 12:16:41.174 18400-18533/org.cso.MobileSpotBilling E/jsonTxt: [{"FLAG":"1","STATUS":"SUCCESS","MESSAGE_ID":"3","MESSAGE":"Bill Doc not created ","REC_DATE_TIME":"11 Sep 2017 12:15"}]
+09-11 12:16:41.174 18400-18533/org.cso.MobileSpotBilling E/MESSAGE_ID: 3
+09-11 12:16:41.197 18400-18533/org.cso.MobileSpotBilling E/No Output Data: 100385838
+09-11 12:16:41.199 18400-18533/org.cso.MobileSpotBilling W/System.err: java.lang.RuntimeException: Can't create handler inside thread that has not called Looper.prepare()
+09-11 12:16:41.199 18400-18533/org.cso.MobileSpotBilling W/System.err:     at android.os.Handler.<init>(Handler.java:200)
+09-11 12:16:41.199 18400-18533/org.cso.MobileSpotBilling W/System.err:     at android.os.Handler.<init>(Handler.java:114)
+09-11 12:16:41.199 18400-18533/org.cso.MobileSpotBilling W/System.err:     at android.widget.Toast$TN.<init>(Toast.java:345)
+09-11 12:16:41.199 18400-18533/org.cso.MobileSpotBilling W/System.err:     at android.widget.Toast.<init>(Toast.java:101)
+09-11 12:16:41.199 18400-18533/org.cso.MobileSpotBilling W/System.err:     at android.widget.Toast.makeText(Toast.java:259)
+09-11 12:16:41.199 18400-18533/org.cso.MobileSpotBilling W/System.err:     at org.cso.MSBAsync.AsyncGetOutputData.doInBackground(AsyncGetOutputData.java:79)
+09-11 12:16:41.199 18400-18533/org.cso.MobileSpotBilling W/System.err:     at org.cso.MSBAsync.AsyncGetOutputData.doInBackground(AsyncGetOutputData.java:26)
+09-11 12:16:41.199 18400-18533/org.cso.MobileSpotBilling W/System.err:     at android.os.AsyncTask$2.call(AsyncTask.java:296)
+09-11 12:16:41.199 18400-18533/org.cso.MobileSpotBilling W/System.err:     at java.util.concurrent.FutureTask.run(FutureTask.java:237)
+09-11 12:16:41.199 18400-18533/org.cso.MobileSpotBilling W/System.err:     at android.os.AsyncTask$SerialExecutor$1.run(AsyncTask.java:235)
+09-11 12:16:41.199 18400-18533/org.cso.MobileSpotBilling W/System.err:     at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1113)
+09-11 12:16:41.199 18400-18533/org.cso.MobileSpotBilling W/System.err:     at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:588)
+09-11 12:16:41.199 18400-18533/org.cso.MobileSpotBilling W/System.err:     at java.lang.Thread.run(Thread.java:818)
+09-11 12:16:41.199 18400-18533/org.cso.MobileSpotBilling E/AsyncOutdoInBackground: Can't create handler inside thread that has not called Looper.prepare()
+09-11 12:16:44.555 18400-18400/org.cso.MobileSpotBilling E/getImageByCANo: Started
+09-11 12:16:44.555 18400-18400/org.cso.MobileSpotBilling I/System.out: context org.cso.config.AppController@cca3e4b
+09-11 12:16:44.575 18400-18400/org.cso.MobileSpotBilling I/System.out: sdocode & stmt ::   BAAB ---  SQLiteProgram: SELECT DISTINCT sub_division_code  FROM BillInput
+09-11 12:16:44.576 18400-18400/org.cso.MobileSpotBilling I/System.out: MRU & stmt ::   BAAB8025 ---  SQLiteProgram: SELECT DISTINCT MRU FROM BillInput
+09-11 12:16:44.581 18400-18400/org.cso.MobileSpotBilling I/System.out: context org.cso.MobileSpotBilling.ActvBilling@6897f44
+09-11 12:16:44.609 18400-18400/org.cso.MobileSpotBilling E/getImageByCANo: Error ==>> Attempt to invoke interface method 'java.lang.String android.database.Cursor.getString(int)' on a null object reference
+09-11 12:16:44.609 18400-18400/org.cso.MobileSpotBilling W/System.err: java.lang.NullPointerException: Attempt to invoke interface method 'java.lang.String android.database.Cursor.getString(int)' on a null object reference
+09-11 12:16:44.609 18400-18400/org.cso.MobileSpotBilling W/System.err:     at org.cso.MobileSpotBilling.ActvBilling.getImageByCANo(ActvBilling.java:1939)
+09-11 12:16:44.609 18400-18400/org.cso.MobileSpotBilling W/System.err:     at org.cso.MobileSpotBilling.ActvBilling.validateDoubleBilling(ActvBilling.java:505)
+09-11 12:16:44.609 18400-18400/org.cso.MobileSpotBilling W/System.err:     at org.cso.MobileSpotBilling.ActvBilling.onCreate(ActvBilling.java:254)
+09-11 12:16:44.609 18400-18400/org.cso.MobileSpotBilling W/System.err:     at android.app.Activity.performCreate(Activity.java:6251)
+09-11 12:16:44.609 18400-18400/org.cso.MobileSpotBilling W/System.err:     at android.app.Instrumentation.callActivityOnCreate(Instrumentation.java:1110)
+09-11 12:16:44.609 18400-18400/org.cso.MobileSpotBilling W/System.err:     at android.app.ActivityThread.performLaunchActivity(ActivityThread.java:2370)
+09-11 12:16:44.610 18400-18400/org.cso.MobileSpotBilling W/System.err:     at android.app.ActivityThread.handleLaunchActivity(ActivityThread.java:2477)
+09-11 12:16:44.610 18400-18400/org.cso.MobileSpotBilling W/System.err:     at android.app.ActivityThread.-wrap11(ActivityThread.java)
+09-11 12:16:44.610 18400-18400/org.cso.MobileSpotBilling W/System.err:     at android.app.ActivityThread$H.handleMessage(ActivityThread.java:1345)
+09-11 12:16:44.610 18400-18400/org.cso.MobileSpotBilling W/System.err:     at android.os.Handler.dispatchMessage(Handler.java:102)
+09-11 12:16:44.610 18400-18400/org.cso.MobileSpotBilling W/System.err:     at android.os.Looper.loop(Looper.java:148)
+09-11 12:16:44.610 18400-18400/org.cso.MobileSpotBilling W/System.err:     at android.app.ActivityThread.main(ActivityThread.java:5438)
+09-11 12:16:44.610 18400-18400/org.cso.MobileSpotBilling W/System.err:     at java.lang.reflect.Method.invoke(Native Method)
+09-11 12:16:44.610 18400-18400/org.cso.MobileSpotBilling W/System.err:     at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:762)
+09-11 12:16:44.610 18400-18400/org.cso.MobileSpotBilling W/System.err:     at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:652)
+09-11 12:16:44.656 18400-18400/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityStarted:ActvBilling
+09-11 12:16:44.656 18400-18400/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityResumed:ActvBilling
+09-11 12:16:44.665 18400-18400/org.cso.MobileSpotBilling I/Choreographer: Skipped 833 frames!  The application may be doing too much work on its main thread.
+09-11 12:16:44.782 18400-18441/org.cso.MobileSpotBilling E/Surface: getSlotFromBufferLocked: unknown buffer: 0xaa6cce40
+09-11 12:16:44.793 18400-18441/org.cso.MobileSpotBilling E/Surface: getSlotFromBufferLocked: unknown buffer: 0xaa6ccd80
+09-11 12:16:44.799 18400-18400/org.cso.MobileSpotBilling E/getImageByCANo: Started
+09-11 12:16:44.800 18400-18400/org.cso.MobileSpotBilling I/System.out: context org.cso.config.AppController@cca3e4b
+09-11 12:16:44.812 18400-18400/org.cso.MobileSpotBilling I/System.out: sdocode & stmt ::   BAAB ---  SQLiteProgram: SELECT DISTINCT sub_division_code  FROM BillInput
+09-11 12:16:44.813 18400-18400/org.cso.MobileSpotBilling I/System.out: MRU & stmt ::   BAAB8025 ---  SQLiteProgram: SELECT DISTINCT MRU FROM BillInput
+09-11 12:16:44.815 18400-18400/org.cso.MobileSpotBilling I/System.out: context org.cso.MobileSpotBilling.ActvBilling@6897f44
+09-11 12:16:44.823 18400-18400/org.cso.MobileSpotBilling E/getImageByCANo: Error ==>> Attempt to invoke interface method 'java.lang.String android.database.Cursor.getString(int)' on a null object reference
+09-11 12:16:44.823 18400-18400/org.cso.MobileSpotBilling W/System.err: java.lang.NullPointerException: Attempt to invoke interface method 'java.lang.String android.database.Cursor.getString(int)' on a null object reference
+09-11 12:16:44.823 18400-18400/org.cso.MobileSpotBilling W/System.err:     at org.cso.MobileSpotBilling.ActvBilling.getImageByCANo(ActvBilling.java:1939)
+09-11 12:16:44.823 18400-18400/org.cso.MobileSpotBilling W/System.err:     at org.cso.MobileSpotBilling.ActvBilling.printdlg(ActvBilling.java:1851)
+09-11 12:16:44.823 18400-18400/org.cso.MobileSpotBilling W/System.err:     at org.cso.MobileSpotBilling.ActvBilling.access$000(ActvBilling.java:117)
+09-11 12:16:44.823 18400-18400/org.cso.MobileSpotBilling W/System.err:     at org.cso.MobileSpotBilling.ActvBilling$3.onFinish(ActvBilling.java:467)
+09-11 12:16:44.823 18400-18400/org.cso.MobileSpotBilling W/System.err:     at org.cso.MSBAsync.AsyncGetOutputData.onPostExecute(AsyncGetOutputData.java:228)
+09-11 12:16:44.824 18400-18400/org.cso.MobileSpotBilling W/System.err:     at org.cso.MSBAsync.AsyncGetOutputData.onPostExecute(AsyncGetOutputData.java:26)
+09-11 12:16:44.824 18400-18400/org.cso.MobileSpotBilling W/System.err:     at android.os.AsyncTask.finish(AsyncTask.java:663)
+09-11 12:16:44.824 18400-18400/org.cso.MobileSpotBilling W/System.err:     at android.os.AsyncTask.-wrap1(AsyncTask.java)
+09-11 12:16:44.824 18400-18400/org.cso.MobileSpotBilling W/System.err:     at android.os.AsyncTask$InternalHandler.handleMessage(AsyncTask.java:680)
+09-11 12:16:44.824 18400-18400/org.cso.MobileSpotBilling W/System.err:     at android.os.Handler.dispatchMessage(Handler.java:102)
+09-11 12:16:44.824 18400-18400/org.cso.MobileSpotBilling W/System.err:     at android.os.Looper.loop(Looper.java:148)
+09-11 12:16:44.824 18400-18400/org.cso.MobileSpotBilling W/System.err:     at android.app.ActivityThread.main(ActivityThread.java:5438)
+09-11 12:16:44.824 18400-18400/org.cso.MobileSpotBilling W/System.err:     at java.lang.reflect.Method.invoke(Native Method)
+09-11 12:16:44.824 18400-18400/org.cso.MobileSpotBilling W/System.err:     at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:762)
+09-11 12:16:44.824 18400-18400/org.cso.MobileSpotBilling W/System.err:     at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:652)
+09-11 12:16:45.225 18400-18400/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivitySaveInstanceState:ActvConsumerNbrInput
+09-11 12:16:45.225 18400-18400/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityStopped:ActvConsumerNbrInput

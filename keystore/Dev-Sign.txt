@@ -1,0 +1,7 @@
+KeyStore 
+Path - C:\Users\41008931\AndroidStudioProjects\MobileSpotBilling\keystore\keystoredev.jks
+Password - BSBDEV@2017
+
+Key
+Alias - key_bsbdev
+Password - BSBDEV@2017

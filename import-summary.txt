@@ -1,0 +1,309 @@
+ECLIPSE ANDROID PROJECT IMPORT SUMMARY
+======================================
+
+Ignored Files:
+--------------
+The following files were *not* copied into the new Gradle project; you
+should evaluate whether these are still needed in your project and if
+so manually move them:
+
+* BluetoothPrinter\
+* BluetoothPrinter\BTDiscovery.java
+* BluetoothPrinter\EscAdapter.java
+* BluetoothPrinter\EscBMPPrintActivity.java
+* BluetoothPrinter\EscBarcodeHeightActivity.java
+* BluetoothPrinter\EscChangeFontActivity.java
+* BluetoothPrinter\EscFontPropertesActivity.java
+* BluetoothPrinter\EscHorizontalActivity.java
+* BluetoothPrinter\EscListActivity.java
+* BluetoothPrinter\EscPaperFeedActivity.java
+* BluetoothPrinter\EscSetModeActivity.java
+* BluetoothPrinter\EscTextDataActivity.java
+* BluetoothPrinter\GenLogos.java
+* BluetoothPrinter\GenRowItem.java
+* BluetoothPrinter\GeneralBaseAdapter.java
+* BluetoothPrinter\GeneralPrinterActivity.java
+* BluetoothPrinter\GlobalPool.java
+* BluetoothPrinter\MainActivity.java
+* BluetoothPrinter\bluetooth\
+* BluetoothPrinter\bluetooth\BluetoothComm.java
+* BluetoothPrinter\bluetooth\BluetoothPair.java
+* DBs\
+* DBs\MobileDb.db
+* DBs\MobileDb240516.db
+* DBs\MobileDb_.db
+* SAPInput Duplicate.txt
+* VD1.92.apk
+* VD1.93.apk
+* VD1.93_.apk
+* VD1.94.apk
+* VP1.92.apk
+* VP1.93.apk
+* VP1.93_.apk
+* VP1.93__.apk
+* VP1.93___.apk
+* VP1.94.apk
+* VP1.94___.apk
+* ePOS-Print_SDK_JS_en_revB.pdf
+* epson.pdf
+* epson_logo_printing.pdf
+* ic_launcher-web.png
+* key.store
+* keystore
+* logs\
+* logs\log.txt
+* logs\log1.txt
+* logs\log10.txt
+* logs\log100.txt
+* logs\log101.txt
+* logs\log102.txt
+* logs\log103.txt
+* logs\log104.txt
+* logs\log105.txt
+* logs\log106.txt
+* logs\log107.txt
+* logs\log108.txt
+* logs\log109.txt
+* logs\log11.txt
+* logs\log110.txt
+* logs\log111.txt
+* logs\log112.txt
+* logs\log113.txt
+* logs\log114.txt
+* logs\log115.txt
+* logs\log116.txt
+* logs\log117.txt
+* logs\log118.txt
+* logs\log119.txt
+* logs\log12.txt
+* logs\log120.txt
+* logs\log121.txt
+* logs\log122.txt
+* logs\log123.txt
+* logs\log124.txt
+* logs\log125.xlsx
+* logs\log126.txt
+* logs\log127.txt
+* logs\log128.txt
+* logs\log129.txt
+* logs\log13.txt
+* logs\log130.txt
+* logs\log131.txt
+* logs\log132.txt
+* logs\log133.txt
+* logs\log134.txt
+* logs\log135.txt
+* logs\log136.txt
+* logs\log137.txt
+* logs\log138.txt
+* logs\log139.txt
+* logs\log14.txt
+* logs\log140.txt
+* logs\log141.txt
+* logs\log142.txt
+* logs\log143.txt
+* logs\log144.txt
+* logs\log145.txt
+* logs\log146.txt
+* logs\log147.txt
+* logs\log148.txt
+* logs\log149.txt
+* logs\log15.txt
+* logs\log150.txt
+* logs\log151.txt
+* logs\log152.txt
+* logs\log153.txt
+* logs\log154.txt
+* logs\log155.txt
+* logs\log156.txt
+* logs\log157.txt
+* logs\log158.txt
+* logs\log159.txt
+* logs\log16.txt
+* logs\log160.txt
+* logs\log161.txt
+* logs\log162.txt
+* logs\log163.txt
+* logs\log164.txt
+* logs\log165.txt
+* logs\log166.txt
+* logs\log167.txt
+* logs\log168.txt
+* logs\log169.txt
+* logs\log17.txt
+* logs\log170.txt
+* logs\log18.txt
+* logs\log19.txt
+* logs\log2.txt
+* logs\log20.txt
+* logs\log21.txt
+* logs\log22.txt
+* logs\log23.txt
+* logs\log24.txt
+* logs\log25.txt
+* logs\log26.txt
+* logs\log27.txt
+* logs\log28.txt
+* logs\log29.txt
+* logs\log3.txt
+* logs\log30.txt
+* logs\log31.txt
+* logs\log32.txt
+* logs\log33.txt
+* logs\log34.txt
+* logs\log35.txt
+* logs\log36.txt
+* logs\log37.txt
+* logs\log38.txt
+* logs\log39.txt
+* logs\log4.txt
+* logs\log40.txt
+* logs\log41.txt
+* logs\log42.txt
+* logs\log43.txt
+* logs\log44.txt
+* logs\log45.txt
+* logs\log46.txt
+* logs\log47.txt
+* logs\log48.txt
+* logs\log49.txt
+* logs\log5.txt
+* logs\log50.txt
+* logs\log51.txt
+* logs\log52.txt
+* logs\log53.txt
+* logs\log54.txt
+* logs\log55.txt
+* logs\log56.txt
+* logs\log57.txt
+* logs\log58.txt
+* logs\log59.txt
+* logs\log6.txt
+* logs\log60.txt
+* logs\log61.txt
+* logs\log62.txt
+* logs\log63.txt
+* logs\log64.txt
+* logs\log65.txt
+* logs\log66.txt
+* logs\log67.txt
+* logs\log68.txt
+* logs\log69.txt
+* logs\log7.txt
+* logs\log70.txt
+* logs\log71.txt
+* logs\log72.txt
+* logs\log73 PL - MD.txt
+* logs\log74 PL - RN.txt
+* logs\log75 PL - OK.txt
+* logs\log76 PL - PL.txt
+* logs\log77.txt
+* logs\log78.txt
+* logs\log79.txt
+* logs\log8.txt
+* logs\log80.txt
+* logs\log81.txt
+* logs\log82.txt
+* logs\log83.txt
+* logs\log84.txt
+* logs\log85.txt
+* logs\log86.txt
+* logs\log87.txt
+* logs\log88.txt
+* logs\log89.txt
+* logs\log9.txt
+* logs\log90.txt
+* logs\log91.txt
+* logs\log92.txt
+* logs\log93.txt
+* logs\log94.txt
+* logs\log95.txt
+* logs\log96.txt
+* logs\log97.txt
+* logs\log98.txt
+* logs\log99.txt
+* logs\logcat-100049170.xlsx
+* logs\logcat-2011.txt
+* logs\logcat-2011.xlsx
+* proguard-project.txt
+* res.zip
+* src.zip
+
+Replaced Jars with Dependencies:
+--------------------------------
+The importer recognized the following .jar files as third party
+libraries and replaced them with Gradle dependencies instead. This has
+the advantage that more explicit version information is known, and the
+libraries can be updated automatically. However, it is possible that
+the .jar file in your project was of an older version than the
+dependency we picked, which could render the project not compileable.
+You can disable the jar replacement in the import wizard and try again:
+
+android-support-v4.jar => com.android.support:support-v4:18.0.0
+gson-2.1.jar => com.google.code.gson:gson:2.1
+
+Potentially Missing Dependency:
+-------------------------------
+When we replaced the following .jar files with a Gradle dependency, we
+inferred the dependency version number from the filename. This
+specific version may not actually be available from the repository.
+If you get a build error stating that the dependency is missing, edit
+the version number to for example "+" to pick up the latest version
+instead. (This may require you to update your code if the library APIs
+have changed.)
+
+gson-2.1.jar => version 2.1 in com.google.code.gson:gson:2.1
+
+Replaced Libraries with Dependencies:
+-------------------------------------
+The importer recognized the following library projects as third party
+libraries and replaced them with Gradle dependencies instead. This has
+the advantage that more explicit version information is known, and the
+libraries can be updated automatically. However, it is possible that
+the source files in your project were of an older version than the
+dependency we picked, which could render the project not compileable.
+You can disable the library replacement in the import wizard and try
+again:
+
+appcompat-v7 => [com.android.support:appcompat-v7:18.0.0]
+
+Moved Files:
+------------
+Android Gradle projects use a different directory structure than ADT
+Eclipse projects. Here's how the projects were restructured:
+
+* AndroidManifest.xml => app\src\main\AndroidManifest.xml
+* assets\ => app\src\main\assets
+* libs\Analogics2inchBTPrinterAPI.jar => app\libs\Analogics2inchBTPrinterAPI.jar
+* libs\AnalogicsDecrypter.jar => app\libs\AnalogicsDecrypter.jar
+* libs\AnalogicsMultilingual_BT_Printer_2T_API_1_7.jar => app\libs\AnalogicsMultilingual_BT_Printer_2T_API_1_7.jar
+* libs\armeabi\libeposprint.so => app\src\main\jniLibs\armeabi\libeposprint.so
+* libs\btsdk.jar => app\libs\btsdk.jar
+* libs\commons-io-2.2.jar => app\libs\commons-io-2.2.jar
+* libs\commons-net-3.1.jar => app\libs\commons-net-3.1.jar
+* libs\ePOS-Print.jar => app\libs\ePOS-Print.jar
+* libs\iText-5.0.1.jar => app\libs\iText-5.0.1.jar
+* libs\ksoap2-android-assembly-3.0.0-jar-with-dependencies.jar => app\libs\ksoap2-android-assembly-3.0.0-jar-with-dependencies.jar
+* libs\opencsv-2.2.jar => app\libs\opencsv-2.2.jar
+* libs\opencv_library-2.4.3.jar => app\libs\opencv_library-2.4.3.jar
+* libs\org-apache-commons-codec.jar => app\libs\org-apache-commons-codec.jar
+* libs\snmp6_1.jar => app\libs\snmp6_1.jar
+* libs\ZSDK_ANDROID_API.jar => app\libs\ZSDK_ANDROID_API.jar
+* lint.xml => app\lint.xml
+* res\ => app\src\main\res\
+* src\ => app\src\main\java\
+
+Next Steps:
+-----------
+You can now build the project. The Gradle project needs network
+connectivity to download dependencies.
+
+Bugs:
+-----
+If for some reason your project does not build, and you determine that
+it is due to a bug or limitation of the Eclipse to Gradle importer,
+please file a bug at http://b.android.com with category
+Component-Tools.
+
+(This import summary is for your information only, and can be deleted
+after import once you are satisfied with the results.)

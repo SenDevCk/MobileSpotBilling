@@ -1,0 +1,36 @@
+08-17 15:34:06.143 29994-29994/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityCreated:ActivityBT_Reading
+08-17 15:34:06.284 29994-29994/org.cso.MobileSpotBilling E/LOC_BROADCASTER: onActivityStarted:ActivityBT_Reading
+08-17 15:34:06.296 29994-29994/org.cso.MobileSpotBilling E/AndroidRuntime: FATAL EXCEPTION: main
+                                                                           Process: org.cso.MobileSpotBilling, PID: 29994
+                                                                           java.lang.RuntimeException: Unable to start activity ComponentInfo{org.cso.MobileSpotBilling/org.cso.MobileSpotBilling.ActivityBT_Reading}: java.lang.IllegalArgumentException: AppIndex: The android-app URI host must match the package name and follow the format android-app://<package_name>/<scheme>/<host_path>. Provided URI: android-app://com.chakra.meterreader/http/host/path
+                                                                               at android.app.ActivityThread.performLaunchActivity(ActivityThread.java:2521)
+                                                                               at android.app.ActivityThread.handleLaunchActivity(ActivityThread.java:2601)
+                                                                               at android.app.ActivityThread.access$800(ActivityThread.java:178)
+                                                                               at android.app.ActivityThread$H.handleMessage(ActivityThread.java:1470)
+                                                                               at android.os.Handler.dispatchMessage(Handler.java:111)
+                                                                               at android.os.Looper.loop(Looper.java:194)
+                                                                               at android.app.ActivityThread.main(ActivityThread.java:5637)
+                                                                               at java.lang.reflect.Method.invoke(Native Method)
+                                                                               at java.lang.reflect.Method.invoke(Method.java:372)
+                                                                               at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:960)
+                                                                               at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:755)
+                                                                            Caused by: java.lang.IllegalArgumentException: AppIndex: The android-app URI host must match the package name and follow the format android-app://<package_name>/<scheme>/<host_path>. Provided URI: android-app://com.chakra.meterreader/http/host/path
+                                                                               at com.google.android.gms.internal.zznk.zzb(Unknown Source)
+                                                                               at com.google.android.gms.internal.zznk.zza(Unknown Source)
+                                                                               at com.google.android.gms.internal.zznj.zza(Unknown Source)
+                                                                               at com.google.android.gms.internal.zznk.zza(Unknown Source)
+                                                                               at com.google.android.gms.internal.zznk.start(Unknown Source)
+                                                                               at org.cso.MobileSpotBilling.ActivityBT_Reading.onStart(ActivityBT_Reading.java:374)
+                                                                               at android.app.Instrumentation.callActivityOnStart(Instrumentation.java:1244)
+                                                                               at android.app.Activity.performStart(Activity.java:6116)
+                                                                               at android.app.ActivityThread.performLaunchActivity(ActivityThread.java:2478)
+                                                                               at android.app.ActivityThread.handleLaunchActivity(ActivityThread.java:2601) 
+                                                                               at android.app.ActivityThread.access$800(ActivityThread.java:178) 
+                                                                               at android.app.ActivityThread$H.handleMessage(ActivityThread.java:1470) 
+                                                                               at android.os.Handler.dispatchMessage(Handler.java:111) 
+                                                                               at android.os.Looper.loop(Looper.java:194) 
+                                                                               at android.app.ActivityThread.main(ActivityThread.java:5637) 
+                                                                               at java.lang.reflect.Method.invoke(Native Method) 
+                                                                               at java.lang.reflect.Method.invoke(Method.java:372) 
+                                                                               at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:960) 
+                                                                               at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:755) 
