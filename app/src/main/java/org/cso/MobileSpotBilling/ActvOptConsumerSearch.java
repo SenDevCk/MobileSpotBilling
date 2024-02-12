@@ -92,22 +92,18 @@ public class ActvOptConsumerSearch extends Activity implements OnClickListener
 	   	  	
 	   	Button okButton = (Button) dialog.findViewById(R.id.btnSearchMtrNbr);	   	
 
-	   	okButton.setOnClickListener(new OnClickListener() 
-	   	{
-	   		public void onClick(View v) 
-	   		{
-	   		
-	   			if(edtMeterNbr.length()==0)
-	   			{
-						Toast.makeText(ActvOptConsumerSearch.this , "Please Enter Meter Number", Toast.LENGTH_LONG).show();
-						//errTxt.setText("Please Enter Account number");
-				}		
-	   			else
-	   			{
-	   				dialog.dismiss();	   					
-	   			}
-	   		}
-	   		});
+	   	okButton.setOnClickListener(v -> {
+
+			   if(edtMeterNbr.length()==0)
+			   {
+					Toast.makeText(ActvOptConsumerSearch.this , "Please Enter Meter Number", Toast.LENGTH_LONG).show();
+					//errTxt.setText("Please Enter Account number");
+			}
+			   else
+			   {
+				   dialog.dismiss();
+			   }
+		   });
 	 	   		
 	   }
 	   
@@ -123,21 +119,16 @@ public class ActvOptConsumerSearch extends Activity implements OnClickListener
 	   	
 	   	Button okButton = (Button) dialog.findViewById(R.id.btnSearchConsName);
 
-	   	okButton.setOnClickListener(new OnClickListener() 
-	   	{
-	   		
-	   		public void onClick(View v) 
-	   		{
-	   			if(edtConsumerName.length()==0)
-		   		{
-		   			Toast.makeText(ActvOptConsumerSearch.this , "Please Enter Consumer Name", Toast.LENGTH_LONG).show();
-		   		}
-	   			
-	   			else
-	   			{
-	   			dialog.dismiss();   			
-	   		}}
-	   	});
+	   	okButton.setOnClickListener(v -> {
+			   if(edtConsumerName.length()==0)
+			   {
+				   Toast.makeText(ActvOptConsumerSearch.this , "Please Enter Consumer Name", Toast.LENGTH_LONG).show();
+			   }
+
+			   else
+			   {
+			   dialog.dismiss();
+		   }});
 	   	
 	   		
 	   }
@@ -162,22 +153,16 @@ public class ActvOptConsumerSearch extends Activity implements OnClickListener
 
 	   	Button okButton = (Button) dialog.findViewById(R.id.btnSearchOldAcctNbr);
 	   	
-	   	okButton.setOnClickListener(new OnClickListener() 
-	   	{
-	   		
-	   		public void onClick(View v) 
-	   		{
-	   			if(edtOldAccNbr.length()==0)
-		   		{
-		   			Toast.makeText(ActvOptConsumerSearch.this , "Please Enter Old Account Number", Toast.LENGTH_LONG).show();
-					//errTxt.setText("Please Enter Account number");
-		   		}
-	   			else
-	   			{
-	   			dialog.dismiss();   			
-	   		}}
-
-	   	});
+	   	okButton.setOnClickListener(v -> {
+			   if(edtOldAccNbr.length()==0)
+			   {
+				   Toast.makeText(ActvOptConsumerSearch.this , "Please Enter Old Account Number", Toast.LENGTH_LONG).show();
+				//errTxt.setText("Please Enter Account number");
+			   }
+			   else
+			   {
+			   dialog.dismiss();
+		   }});
 	   	
 	   
 	   }

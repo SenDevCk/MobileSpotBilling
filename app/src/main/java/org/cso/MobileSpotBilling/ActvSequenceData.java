@@ -179,20 +179,14 @@ public class ActvSequenceData extends Activity implements OnClickListener {
 			utilDB.getBillInputDetails(UtilAppCommon.acctNbr,"CA Number");
 			AlertDialog.Builder dialogNext=new AlertDialog.Builder(ActvSequenceData.this);
 			dialogNext.setTitle("Select Reason for Non-Billing");
-			dialogNext.setItems(R.array.reasonForNextSequence, new DialogInterface.OnClickListener() {
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					valuePassed=which+3;
-					dialog.dismiss();
-					secondConfirmation(which+3);
-				}
+			dialogNext.setItems(R.array.reasonForNextSequence, (dialog, which) -> {
+				valuePassed=which+3;
+				dialog.dismiss();
+				secondConfirmation(which+3);
 			});
-			dialogNext.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					cancelPressed =true;
-					dialog.dismiss();
-				}
+			dialogNext.setNegativeButton("Cancel", (dialog, which) -> {
+				cancelPressed =true;
+				dialog.dismiss();
 			});
 			dialogNext.create();
 			dialogNext.show();
@@ -259,19 +253,11 @@ public class ActvSequenceData extends Activity implements OnClickListener {
 	public void secondConfirmation(final  int number){
 		AlertDialog.Builder dialogSecond=new AlertDialog.Builder(ActvSequenceData.this);
 		dialogSecond.setMessage("Are you sure you want to skip this consumer?");
-		dialogSecond.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				dialog.dismiss();
-				processedValueForNext(number);
-			}
+		dialogSecond.setPositiveButton("Yes", (dialog, which) -> {
+			dialog.dismiss();
+			processedValueForNext(number);
 		});
-		dialogSecond.setNegativeButton("No", new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				dialog.dismiss();
-			}
-		});
+		dialogSecond.setNegativeButton("No", (dialog, which) -> dialog.dismiss());
 		dialogSecond.create();
 		dialogSecond.show();
 	}

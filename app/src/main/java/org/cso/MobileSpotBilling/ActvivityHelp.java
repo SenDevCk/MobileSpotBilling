@@ -84,23 +84,17 @@ public class ActvivityHelp extends Activity{
 				finish();
 			}
 		});
-        btnHelpRefresh.setOnClickListener(new View.OnClickListener() {
-			
-			public void onClick(View v) {
-				 //UnpostedDataCount();
-			     SetInternetStatus();
-			     SetServerStatus();
-			     SetIMEI_Version();
-			     SetDataNetwork();
-			}
+        btnHelpRefresh.setOnClickListener(v -> {
+			 //UnpostedDataCount();
+			 SetInternetStatus();
+			 SetServerStatus();
+			 SetIMEI_Version();
+			 SetDataNetwork();
 		});
-        btnReprint.setOnClickListener(new View.OnClickListener() {
-			
-    			public void onClick(View v) {
-    				UtilDB utilObj=new UtilDB(getApplicationContext());
-    				utilObj.getDataForOutFileGen(getApplicationContext());
-    			}
-    		});
+        btnReprint.setOnClickListener(v -> {
+			UtilDB utilObj=new UtilDB(getApplicationContext());
+			utilObj.getDataForOutFileGen(getApplicationContext());
+		});
 
 	 }
    

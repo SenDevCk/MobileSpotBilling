@@ -94,39 +94,35 @@ public class ActvivityUpload extends Activity{
     	   ViewBilledUnpostedCons();
        }
        
-       lvUpload.setOnItemClickListener(new OnItemClickListener() {
-		@Override
-		public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
-				long arg3) {
-			// TODO Auto-generated method stub
-				if(Mode.compareToIgnoreCase("Binder Wise")==0)
-		       {
-					HashMap<String, String> map = new HashMap<String, String>();
-					map = mylist.get(arg2-1);
+       lvUpload.setOnItemClickListener((arg0, arg1, arg2, arg3) -> {
+		   // TODO Auto-generated method stub
+			   if(Mode.compareToIgnoreCase("Binder Wise")==0)
+			  {
+				   HashMap<String, String> map = new HashMap<String, String>();
+				   map = mylist.get(arg2-1);
 
-					toast = Toast.makeText(getApplicationContext(),
-							map.get("BINDER"), Toast.LENGTH_LONG);
-					toast.setGravity(Gravity.CENTER, 0, 0);
-					toast.show();
-				/*	SaveBulkDataAsync asyncsavebulkdata = new SaveBulkDataAsync(
-							ActvivityUpload.this, Mode, map.get("BINDER"));
-					asyncsavebulkdata.execute("");*/
-		       }
-		       else if(Mode.compareToIgnoreCase("Consumer Wise")==0)
-		       {
-		    	   HashMap<String, String> map = new HashMap<String, String>();
-					map = mylist.get(arg2-1);
+				   toast = Toast.makeText(getApplicationContext(),
+						   map.get("BINDER"), Toast.LENGTH_LONG);
+				   toast.setGravity(Gravity.CENTER, 0, 0);
+				   toast.show();
+			   /*	SaveBulkDataAsync asyncsavebulkdata = new SaveBulkDataAsync(
+						   ActvivityUpload.this, Mode, map.get("BINDER"));
+				   asyncsavebulkdata.execute("");*/
+			  }
+			  else if(Mode.compareToIgnoreCase("Consumer Wise")==0)
+			  {
+				  HashMap<String, String> map = new HashMap<String, String>();
+				   map = mylist.get(arg2-1);
 
-					toast = Toast.makeText(getApplicationContext(),
-							map.get("CONS_REF"), Toast.LENGTH_LONG);
-					toast.setGravity(Gravity.CENTER, 0, 0);
-					toast.show();
-					/*SaveBulkDataAsync asyncsavebulkdata = new SaveBulkDataAsync(
-							ActvivityUpload.this, Mode, map.get("CONS_REF"));
-					asyncsavebulkdata.execute("");*/
-		       }
-		}
-       });
+				   toast = Toast.makeText(getApplicationContext(),
+						   map.get("CONS_REF"), Toast.LENGTH_LONG);
+				   toast.setGravity(Gravity.CENTER, 0, 0);
+				   toast.show();
+				   /*SaveBulkDataAsync asyncsavebulkdata = new SaveBulkDataAsync(
+						   ActvivityUpload.this, Mode, map.get("CONS_REF"));
+				   asyncsavebulkdata.execute("");*/
+			  }
+	   });
        
 	 }
    

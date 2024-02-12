@@ -59,25 +59,16 @@ public class ActvSrcByMtrNo extends Activity {
         editMeterNbr =(EditText)findViewById(R.id.editMeterNbr);
         btnSearchMtrNbr=(Button)findViewById(R.id.btnSearchMtrNbr);
         
-        btnSearchMtrNbr.setOnClickListener(new View.OnClickListener() {
-			
-			public void onClick(View v) {
-				
-				search();
-			}
-		});
+        btnSearchMtrNbr.setOnClickListener(v -> search());
         
-        list.setOnItemClickListener(new OnItemClickListener() {
-	           
-			public void onItemClick(AdapterView<?> parent, View view, int position,long id) {
-				
-				HashMap<String, String> map=mylist.get(position-1);
-				
-             Toast.makeText(getApplicationContext(), map.get("acc_no").toString(), Toast.LENGTH_SHORT).show();
-             UtilAppCommon.acctNbr= map.get("acc_no").toString();
-             gotoBilling();
-         }
-     });
+        list.setOnItemClickListener((parent, view, position, id) -> {
+
+			HashMap<String, String> map=mylist.get(position-1);
+
+Toast.makeText(getApplicationContext(), map.get("acc_no").toString(), Toast.LENGTH_SHORT).show();
+UtilAppCommon.acctNbr= map.get("acc_no").toString();
+gotoBilling();
+});
        
     }
     void gotoBilling()

@@ -118,13 +118,7 @@ public class ActvReport extends Activity implements OnClickListener{
 		
 		Button okButton = (Button) dialog.findViewById(R.id.btnOk);		
 		
-		okButton.setOnClickListener(new OnClickListener() 
-		{
-			public void onClick(View v) 
-			{
-				dialog.dismiss();				
-			}
-		});
+		okButton.setOnClickListener(v -> dialog.dismiss());
 	}
 	private void DisplayNewConsumerList() 
 	{
@@ -137,13 +131,7 @@ public class ActvReport extends Activity implements OnClickListener{
 		Button okButton = (Button) dialog.findViewById(R.id.btnOk);		
 		
 
-		okButton.setOnClickListener(new OnClickListener() 
-		{
-			public void onClick(View v) 
-			{
-				dialog.dismiss();				
-			}
-		});
+		okButton.setOnClickListener(v -> dialog.dismiss());
 	}
      
 	

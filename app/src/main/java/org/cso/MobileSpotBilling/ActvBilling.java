@@ -917,13 +917,11 @@ public class ActvBilling extends Activity implements OnClickListener, TaskCallba
 						});
 
 				altDialog.setNegativeButton("Cancel",
-						new DialogInterface.OnClickListener() {
-							public void onClick(DialogInterface dialog, int which) {
-								// altDialog.
-								startActivity(new Intent(getBaseContext(),
-										ActvConsumerNbrInput.class));
-								finish();
-							}
+						(dialog, which) -> {
+							// altDialog.
+							startActivity(new Intent(getBaseContext(),
+									ActvConsumerNbrInput.class));
+							finish();
 						});
 				altDialog.show();
 				utilsTochkDb.close();
@@ -1113,26 +1111,22 @@ public class ActvBilling extends Activity implements OnClickListener, TaskCallba
 									}
 								});
 						ad.setButton(DialogInterface.BUTTON_NEGATIVE, "No",
-								new DialogInterface.OnClickListener() {
-
-									public void onClick(DialogInterface dialog,
-														int which) {
-										// TODO Auto-generated method stub
-										ad.dismiss();
-										// startActivity(getIntent());
-										//startActivity(new Intent(getApplicationContext(), ActvBillingOption.class));
-										//startActivity(new Intent(getBaseContext(), SyncMobPoleActivity.class));
-										if(UtilAppCommon.billType.equalsIgnoreCase("A"))
-											startActivity(new Intent(getBaseContext(), ActvConsumerNbrInput.class));
-										else if(UtilAppCommon.billType.equalsIgnoreCase("L"))
-											startActivity(new Intent(getBaseContext(), ActvLegacyNbrInput.class));
-										else if(UtilAppCommon.billType.equalsIgnoreCase("S"))
-											startActivity(new Intent(getBaseContext(), ActvSequenceData.class));
-										else if(UtilAppCommon.billType.equalsIgnoreCase("M"))
-											startActivity(new Intent(getBaseContext(), MeterNbrInput.class));
-										else
-											startActivity(new Intent(getBaseContext(), ActvBillingOption.class));
-									}
+								(dialog, which) -> {
+									// TODO Auto-generated method stub
+									ad.dismiss();
+									// startActivity(getIntent());
+									//startActivity(new Intent(getApplicationContext(), ActvBillingOption.class));
+									//startActivity(new Intent(getBaseContext(), SyncMobPoleActivity.class));
+									if(UtilAppCommon.billType.equalsIgnoreCase("A"))
+										startActivity(new Intent(getBaseContext(), ActvConsumerNbrInput.class));
+									else if(UtilAppCommon.billType.equalsIgnoreCase("L"))
+										startActivity(new Intent(getBaseContext(), ActvLegacyNbrInput.class));
+									else if(UtilAppCommon.billType.equalsIgnoreCase("S"))
+										startActivity(new Intent(getBaseContext(), ActvSequenceData.class));
+									else if(UtilAppCommon.billType.equalsIgnoreCase("M"))
+										startActivity(new Intent(getBaseContext(), MeterNbrInput.class));
+									else
+										startActivity(new Intent(getBaseContext(), ActvBillingOption.class));
 								});
 						ad.show();
 					}
@@ -1397,29 +1391,25 @@ public class ActvBilling extends Activity implements OnClickListener, TaskCallba
 								}
 							});
 					ad1.setButton(DialogInterface.BUTTON_NEGATIVE, "No",
-							new DialogInterface.OnClickListener() {
-
-								public void onClick(DialogInterface dialog,
-										int which) {
-									// TODO Auto-generated method stub
-									ad1.dismiss();
-									// startActivity(getIntent());
-									//startActivity(new Intent(ctx, ActvBillingOption.class));
-									//if(UtilAppCommon.inSAPSendMsg.equalsIgnoreCase("1"))
-									//	startActivity(new Intent(getBaseContext(), PoleMobileActivity.class));
-									//else 
-										if(UtilAppCommon.billType.equalsIgnoreCase("A"))
-										startActivity(new Intent(getBaseContext(), ActvConsumerNbrInput.class));
-									else if(UtilAppCommon.billType.equalsIgnoreCase("L"))
-										startActivity(new Intent(getBaseContext(), ActvLegacyNbrInput.class));
-									else if(UtilAppCommon.billType.equalsIgnoreCase("S"))
-										startActivity(new Intent(getBaseContext(), ActvSequenceData.class));
-									else if(UtilAppCommon.billType.equalsIgnoreCase("M"))
-										startActivity(new Intent(getBaseContext(), MeterNbrInput.class));
-									else
-										startActivity(new Intent(getBaseContext(), ActvBillingOption.class));
-									finish();
-								}
+							(dialog, which) -> {
+								// TODO Auto-generated method stub
+								ad1.dismiss();
+								// startActivity(getIntent());
+								//startActivity(new Intent(ctx, ActvBillingOption.class));
+								//if(UtilAppCommon.inSAPSendMsg.equalsIgnoreCase("1"))
+								//	startActivity(new Intent(getBaseContext(), PoleMobileActivity.class));
+								//else
+									if(UtilAppCommon.billType.equalsIgnoreCase("A"))
+									startActivity(new Intent(getBaseContext(), ActvConsumerNbrInput.class));
+								else if(UtilAppCommon.billType.equalsIgnoreCase("L"))
+									startActivity(new Intent(getBaseContext(), ActvLegacyNbrInput.class));
+								else if(UtilAppCommon.billType.equalsIgnoreCase("S"))
+									startActivity(new Intent(getBaseContext(), ActvSequenceData.class));
+								else if(UtilAppCommon.billType.equalsIgnoreCase("M"))
+									startActivity(new Intent(getBaseContext(), MeterNbrInput.class));
+								else
+									startActivity(new Intent(getBaseContext(), ActvBillingOption.class));
+								finish();
 							});
 					ad1.show();
 					//printbill();

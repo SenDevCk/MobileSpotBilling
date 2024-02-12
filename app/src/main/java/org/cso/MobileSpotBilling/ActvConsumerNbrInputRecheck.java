@@ -132,48 +132,46 @@ public class ActvConsumerNbrInputRecheck extends Activity implements OnClickList
 										"Cancel"};
 					AlertDialog.Builder builder = new AlertDialog.Builder(ActvConsumerNbrInputRecheck.this);
 					builder.setTitle("Select Remark");
-					builder.setItems(remarks, new DialogInterface.OnClickListener() {
-						public void onClick(DialogInterface dialog, final int item) {
-							
-							if(item!=2)
-							{
-								
-								final Dialog inputdialog = new Dialog(ActvConsumerNbrInputRecheck.this);
-					            inputdialog.setContentView(R.layout.form_inputtext_dialog);
-					            inputdialog.setTitle("Enter actual reading:");
-					            inputdialog.setCancelable(true);
+					builder.setItems(remarks, (dialog, item) -> {
 
-					            (inputdialog.findViewById(R.id.btnDialogOK)).setOnClickListener(new OnClickListener() {
-					            @Override
-					                public void onClick(View v) {
-					            	if(((EditText)inputdialog.findViewById(R.id.etDialogText)).getText().toString().length()>0)
-									  {
-										  //AsyncRecheckReq asyncrecheckobj=new AsyncRecheckReq(ActvConsumerNbrInputRecheck.this, UtilAppCommon.ui.COMPANY_ID, UtilAppCommon.in.CONTRACT_AC_NO, UtilAppCommon.in.BILL_MTH,Integer.parseInt(((EditText)inputdialog.findViewById(R.id.etDialogText)).getText().toString()), remarks[item]);
-										  //asyncrecheckobj.execute();
-										  Toast.makeText(ActvConsumerNbrInputRecheck.this, "Sending request", Toast.LENGTH_LONG).show();
+						if(item!=2)
+						{
+
+							final Dialog inputdialog = new Dialog(ActvConsumerNbrInputRecheck.this);
+							inputdialog.setContentView(R.layout.form_inputtext_dialog);
+							inputdialog.setTitle("Enter actual reading:");
+							inputdialog.setCancelable(true);
+
+							(inputdialog.findViewById(R.id.btnDialogOK)).setOnClickListener(new OnClickListener() {
+							@Override
+								public void onClick(View v1) {
+								if(((EditText)inputdialog.findViewById(R.id.etDialogText)).getText().toString().length()>0)
+								  {
+									  //AsyncRecheckReq asyncrecheckobj=new AsyncRecheckReq(ActvConsumerNbrInputRecheck.this, UtilAppCommon.ui.COMPANY_ID, UtilAppCommon.in.CONTRACT_AC_NO, UtilAppCommon.in.BILL_MTH,Integer.parseInt(((EditText)inputdialog.findViewById(R.id.etDialogText)).getText().toString()), remarks[item]);
+									  //asyncrecheckobj.execute();
+									  Toast.makeText(ActvConsumerNbrInputRecheck.this, "Sending request", Toast.LENGTH_LONG).show();
+									  inputdialog.dismiss();
+								  }else
+								  {
+									  Toast.makeText(ActvConsumerNbrInputRecheck.this, "Invalid reading", Toast.LENGTH_LONG).show();
+								  }
+								}
+							});
+							(inputdialog.findViewById(R.id.btnDialogCancel)).setOnClickListener(new OnClickListener() {
+								@Override
+									public void onClick(View v1) {
+
 										  inputdialog.dismiss();
-									  }else
-									  {
-										  Toast.makeText(ActvConsumerNbrInputRecheck.this, "Invalid reading", Toast.LENGTH_LONG).show();
-									  }
-					                }
-					            }); 
-					            (inputdialog.findViewById(R.id.btnDialogCancel)).setOnClickListener(new OnClickListener() {
-					                @Override
-					                    public void onClick(View v) {
-					                      
-					                          inputdialog.dismiss();
-					                    }
-					                }); 
-					            inputdialog.show();
-								
-							}
-							else
-							{
-								dialog.dismiss();
-							}
-							
+									}
+								});
+							inputdialog.show();
+
 						}
+						else
+						{
+							dialog.dismiss();
+						}
+
 					});
 					AlertDialog alert = builder.create();
 					alert.show();
@@ -184,11 +182,7 @@ public class ActvConsumerNbrInputRecheck extends Activity implements OnClickList
 					altDialog.setTitle("Mobile data is off !");
 					altDialog.setMessage("Please turn on internet ."); // here																				// add
 					altDialog.setPositiveButton("Ok",
-							new DialogInterface.OnClickListener() {
-								public void onClick(DialogInterface dialog, int which) {
-									dialog.dismiss();
-								}
-							});
+							(dialog, which) -> dialog.dismiss());
 					
 					altDialog.show();
 				}

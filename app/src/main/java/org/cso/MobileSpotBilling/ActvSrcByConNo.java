@@ -55,25 +55,17 @@ public class ActvSrcByConNo extends Activity {
         edtOldAccnbr =(EditText)findViewById(R.id.edtOldAccnbr);
         btnSearchOldAcctNbr=(Button)findViewById(R.id.btnSearchOldAcctNbr);
         
-        btnSearchOldAcctNbr.setOnClickListener(new View.OnClickListener() {
-			
-			public void onClick(View v) {
-				search();
-			}
-		});
-        list.setOnItemClickListener(new OnItemClickListener() {
-	           
-			public void onItemClick(AdapterView<?> parent, View view, int position,long id) {
-				
-				HashMap<String, String> map=mylist.get(position-1);
-				
-             Toast.makeText(getApplicationContext(), map.get("ACC_NO").toString(), Toast.LENGTH_SHORT).show();
-             UtilAppCommon.acctNbr= map.get("ACC_NO").toString();
-             gotoBilling();             
-            		 
-            // String.format("%04d", straccno);
-         }
-     });
+        btnSearchOldAcctNbr.setOnClickListener(v -> search());
+        list.setOnItemClickListener((parent, view, position, id) -> {
+
+			HashMap<String, String> map=mylist.get(position-1);
+
+Toast.makeText(getApplicationContext(), map.get("ACC_NO").toString(), Toast.LENGTH_SHORT).show();
+UtilAppCommon.acctNbr= map.get("ACC_NO").toString();
+gotoBilling();
+
+// String.format("%04d", straccno);
+});
        
     }
     void gotoBilling()

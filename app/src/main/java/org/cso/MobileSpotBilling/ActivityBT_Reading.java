@@ -153,37 +153,33 @@ public class ActivityBT_Reading extends AppCompatActivity {
 
 
 
-        currentDeviceList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view,
-                                    int position, long ids) {
-                // TODO Auto-generated method stub
-                if (bluetoothAdapter.isEnabled()) {
-                    Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
-                    startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
-                    final BluetoothDevice device = mDevicesListAdapter.getDevice(position);
-                    if (device == null) return;
-                    final Intent intent = new Intent(ActivityBT_Reading.this, PeripheralActivity.class);
-                    intent.putExtra(PeripheralActivity.EXTRAS_DEVICE_NAME, device.getName());
-                    intent.putExtra(PeripheralActivity.EXTRAS_DEVICE_ADDRESS, device.getAddress());
-                    intent.putExtra(PeripheralActivity.EXTRAS_DEVICE_RSSI, mDevicesListAdapter.getRssi(position));
-                    if (mScanning) {
-                        mScanning = false;
-                        invalidateOptionsMenu();
-                        mBleWrapper.stopScanning();
-                    }
-                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    //startActivityForResult(intent, 6);
-                    //if(device.getName().equalsIgnoreCase("123164"))
-                    if(device.getName().equalsIgnoreCase(UtilAppCommon.in.PWR_FACTOR))
-                        startActivity(intent);
-                    else
-                        Toast.makeText(getApplicationContext(), "Please select a valid bluetooth meter.", Toast.LENGTH_LONG).show();
-                    //finish();
-                } else {
-                    Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
-                    startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
+        currentDeviceList.setOnItemClickListener((parent, view, position, ids) -> {
+            // TODO Auto-generated method stub
+            if (bluetoothAdapter.isEnabled()) {
+                Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+                startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
+                final BluetoothDevice device = mDevicesListAdapter.getDevice(position);
+                if (device == null) return;
+                final Intent intent = new Intent(ActivityBT_Reading.this, PeripheralActivity.class);
+                intent.putExtra(PeripheralActivity.EXTRAS_DEVICE_NAME, device.getName());
+                intent.putExtra(PeripheralActivity.EXTRAS_DEVICE_ADDRESS, device.getAddress());
+                intent.putExtra(PeripheralActivity.EXTRAS_DEVICE_RSSI, mDevicesListAdapter.getRssi(position));
+                if (mScanning) {
+                    mScanning = false;
+                    invalidateOptionsMenu();
+                    mBleWrapper.stopScanning();
                 }
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                //startActivityForResult(intent, 6);
+                //if(device.getName().equalsIgnoreCase("123164"))
+                if(device.getName().equalsIgnoreCase(UtilAppCommon.in.PWR_FACTOR))
+                    startActivity(intent);
+                else
+                    Toast.makeText(getApplicationContext(), "Please select a valid bluetooth meter.", Toast.LENGTH_LONG).show();
+                //finish();
+            } else {
+                Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+                startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
             }
         });
 
@@ -353,31 +349,22 @@ public class ActivityBT_Reading extends AppCompatActivity {
 
         dialog.show();
 
-        okBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View arg0) {
-                sharedPreferences = getSharedPreferences(MYPREFERENCES, Context.MODE_PRIVATE);
+        okBtn.setOnClickListener(arg0 -> {
+            sharedPreferences = getSharedPreferences(MYPREFERENCES, Context.MODE_PRIVATE);
 
-                SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-                SharedPreferences.Editor editor = preferences.edit();
-                editor.putString(IPADDRESS, ipaddress.getText().toString());
-                editor.putString(PORT, portaddress.getText().toString());
-                editor.apply();
+            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+            SharedPreferences.Editor editor = preferences.edit();
+            editor.putString(IPADDRESS, ipaddress.getText().toString());
+            editor.putString(PORT, portaddress.getText().toString());
+            editor.apply();
 
-                SharedPreferences.Editor serverioeditor = sharedPreferences.edit();
-                serverioeditor.putString(IPADDRESS, ipaddress.getText().toString());
-                serverioeditor.putString(PORT, portaddress.getText().toString());
-                serverioeditor.commit();
-                dialog.dismiss();
-            }
+            SharedPreferences.Editor serverioeditor = sharedPreferences.edit();
+            serverioeditor.putString(IPADDRESS, ipaddress.getText().toString());
+            serverioeditor.putString(PORT, portaddress.getText().toString());
+            serverioeditor.commit();
+            dialog.dismiss();
         });
-        cancelBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View arg0) {
-                dialog.dismiss();
-
-            }
-        });
+        cancelBtn.setOnClickListener(arg0 -> dialog.dismiss());
     }
 
 
@@ -561,28 +548,25 @@ public class ActivityBT_Reading extends AppCompatActivity {
             }
         });
 
-        btn_ok.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!validateName()) {
-                    return;
-                }
-                else {
-                    Calendar c = Calendar.getInstance();
-
-                    SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy HH:mm:ss");
-                    String timestamp_ac = df.format(c.getTime());
-
-                    SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-                    SharedPreferences.Editor editor = preferences.edit();
-                    editor.putString("dcMeterReading",input_dc.getText().toString());
-                    editor.putString("timestamp_dc",timestamp_ac);
-                    editor.apply();
-                    //Intent in = new Intent(getApplicationContext(), DcMeterReading.class);
-                    //startActivity(in);
-                }
-
+        btn_ok.setOnClickListener(v -> {
+            if (!validateName()) {
+                return;
             }
+            else {
+                Calendar c = Calendar.getInstance();
+
+                SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy HH:mm:ss");
+                String timestamp_ac = df.format(c.getTime());
+
+                SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                SharedPreferences.Editor editor = preferences.edit();
+                editor.putString("dcMeterReading",input_dc.getText().toString());
+                editor.putString("timestamp_dc",timestamp_ac);
+                editor.apply();
+                //Intent in = new Intent(getApplicationContext(), DcMeterReading.class);
+                //startActivity(in);
+            }
+
         });
 
         dialog.show();

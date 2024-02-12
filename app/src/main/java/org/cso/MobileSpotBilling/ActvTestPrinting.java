@@ -175,11 +175,8 @@ public class ActvTestPrinting extends Activity {
 		@SuppressWarnings("deprecation")
 		public void run() {
 			try {
-				Toast.makeText(getApplicationContext(), "Sending Data",
-						Toast.LENGTH_LONG).show();
-
-				ZebraPrinterConnection thePrinterConn = new BluetoothPrinterConnection(
-						address);
+				Toast.makeText(getApplicationContext(), "Sending Data", Toast.LENGTH_LONG).show();
+				ZebraPrinterConnection thePrinterConn = new BluetoothPrinterConnection(address);
 				thePrinterConn.open();
 				// Initialize
 
@@ -187,10 +184,8 @@ public class ActvTestPrinting extends Activity {
 				
 				// Open the connection - physical connection is established
 				// here.
-				ZebraPrinter printer = ZebraPrinterFactory
-						.getInstance(thePrinterConn);
-				PrinterLanguage pcLanguage = printer
-						.getPrinterControlLanguage();
+				ZebraPrinter printer = ZebraPrinterFactory.getInstance(thePrinterConn);
+				PrinterLanguage pcLanguage = printer.getPrinterControlLanguage();
 				Toast.makeText(getApplicationContext(),
 						"Language: " + pcLanguage, Toast.LENGTH_LONG).show();
 
@@ -204,10 +199,8 @@ public class ActvTestPrinting extends Activity {
 				cpclData += "CENTER\r\n";
 			
 				//cpclData += "UNDERLINE ON\r\n";
-				cpclData += PrintUtilZebra
-						.PrintNext("Billing Summary    ");
-				cpclData += PrintUtilZebra
-						.PrintNext("*******************   ");
+				cpclData += PrintUtilZebra.PrintNext("Billing Summary    ");
+				cpclData += PrintUtilZebra.PrintNext("*******************   ");
 
 
 				cpclData += "LEFT\r\n";
@@ -218,7 +211,6 @@ public class ActvTestPrinting extends Activity {
                           int cnt=0;
 						if (c.moveToFirst()) {
 							do {
-						
 								cpclData += PrintUtilZebra.PrintNext(String.format(
 										"%s   %s   %s   %s   %s",c.getString(0),c.getString(1),c.getString(2),c.getString(3),c.getString(4)));
 							} while (c.moveToNext());

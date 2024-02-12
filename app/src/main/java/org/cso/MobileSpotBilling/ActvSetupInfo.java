@@ -254,23 +254,15 @@ public class ActvSetupInfo  extends Activity implements OnClickListener
 				ad.setTitle("Confirm");
 				ad.setMessage("Existing data will be deleted before downloading new data?");
 				ad.setButton(DialogInterface.BUTTON_POSITIVE, "Yes",
-						new DialogInterface.OnClickListener() {
-			
-							public void onClick(DialogInterface dialog,
-									int which) {
-								// TODO Auto-generated method stub
-								ad.dismiss();
-								showDownLoadDataWin();
-							}
+						(dialog, which) -> {
+							// TODO Auto-generated method stub
+							ad.dismiss();
+							showDownLoadDataWin();
 						});
 				ad.setButton(DialogInterface.BUTTON_NEGATIVE, "No",
-						new DialogInterface.OnClickListener() {
-			
-							public void onClick(DialogInterface dialog,
-									int which) {
-								// TODO Auto-generated method stub
-								ad.dismiss();
-							}
+						(dialog, which) -> {
+							// TODO Auto-generated method stub
+							ad.dismiss();
 						});
 				ad.show();
 			}
@@ -351,28 +343,24 @@ public class ActvSetupInfo  extends Activity implements OnClickListener
 		
 		AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setTitle("Select Printer Type");
-        builder.setItems(R.array.PrinterType, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int item) {
-            	final String devicetype=context.getResources().getStringArray(R.array.PrinterType)[item];
-            	
-            	AlertDialog.Builder builder = new AlertDialog.Builder(context);
-		        builder.setTitle("Select Printing Device");
-		        builder.setAdapter(adapter, new DialogInterface.OnClickListener() {
-		            public void onClick(DialogInterface dialog, int item) {
-		            	HashMap<String, String> map=devicesadapter.get(item);
-		            	  
-		              	Toast.makeText(context,map.get("Name")+" : "+ map.get("Address"), Toast.LENGTH_LONG).show();
-		              	UtilDB dbobj=new UtilDB(context);
-		              	dbobj.UpdatePrinterInfo(map.get("Address"), devicetype);
-		              	String[] Printer=dbobj.GetPrinterInfo();
-		              	Toast.makeText(context,"Printer Configured Successfully\n"+Printer[0]+" : "+Printer[1], Toast.LENGTH_LONG).show();
-		              	
-		            }
-		        });
-		        AlertDialog alert = builder.create();
-		        alert.show();           	
-            }
-        });
+        builder.setItems(R.array.PrinterType, (dialog, item) -> {
+			final String devicetype=context.getResources().getStringArray(R.array.PrinterType)[item];
+
+			AlertDialog.Builder builder1 = new AlertDialog.Builder(context);
+			builder1.setTitle("Select Printing Device");
+			builder1.setAdapter(adapter, (dialog1, item1) -> {
+				HashMap<String, String> map=devicesadapter.get(item1);
+
+				  Toast.makeText(context,map.get("Name")+" : "+ map.get("Address"), Toast.LENGTH_LONG).show();
+				  UtilDB dbobj=new UtilDB(context);
+				  dbobj.UpdatePrinterInfo(map.get("Address"), devicetype);
+				  String[] Printer=dbobj.GetPrinterInfo();
+				  Toast.makeText(context,"Printer Configured Successfully\n"+Printer[0]+" : "+Printer[1], Toast.LENGTH_LONG).show();
+
+			});
+			AlertDialog alert = builder1.create();
+			alert.show();
+		});
         AlertDialog alert = builder.create();
         alert.show();	   
    }
@@ -424,13 +412,7 @@ public class ActvSetupInfo  extends Activity implements OnClickListener
 	
 	   	Button okButton = (Button) dialog.findViewById(R.id.btnOk);
 	
-	   	okButton.setOnClickListener(new OnClickListener() 
-	   	{
-	   		public void onClick(View v) 
-	   		{
-	   			dialog.dismiss();   			
-	   		}
-	   	});
+	   	okButton.setOnClickListener(v -> dialog.dismiss());
    }
    
 	public void DeleteFolders()
