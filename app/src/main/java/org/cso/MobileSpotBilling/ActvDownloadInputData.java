@@ -11,6 +11,7 @@ import org.cso.MSBUtil.UtilDB;
 import org.cso.MobileSpotBilling.R;
 
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -37,7 +38,8 @@ public class ActvDownloadInputData extends Activity implements OnClickListener,T
 	String Param = "";
 	TextView txtVersion;
 	
-    @Override
+    @SuppressLint("MissingInflatedId")
+	@Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dg_downloadinputdata);

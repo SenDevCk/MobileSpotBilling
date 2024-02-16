@@ -80,12 +80,9 @@ public class MyJobService extends JobService {
 
         // Uses a handler to delay the execution of jobFinished().
         Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                sendMessage(MSG_COLOR_STOP, params.getJobId());
-                jobFinished(params, false);
-            }
+        handler.postDelayed(() -> {
+            sendMessage(MSG_COLOR_STOP, params.getJobId());
+            jobFinished(params, false);
         }, duration);
         Log.i(TAG, "on start job: " + params.getJobId());
 

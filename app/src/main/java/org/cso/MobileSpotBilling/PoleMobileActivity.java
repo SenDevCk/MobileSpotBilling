@@ -208,11 +208,8 @@ public class PoleMobileActivity extends Activity implements OnClickListener, Tas
 		}
 		//ImageProcessing imageProcessing = new ImageProcessing();
 		
-		AsyncImage asyncImage = new AsyncImage(this ,new OnBillGenerate() {
-			@Override
-			public void onFinish() {
-				// TODO Auto-generated method stub
-			}
+		AsyncImage asyncImage = new AsyncImage(this , () -> {
+			// TODO Auto-generated method stub
 		});
 		
 		//String strArray[] = imageProcessing.processImage(AppDir, file, this, cursorImage.getString(1), CANo);

@@ -48,16 +48,13 @@ public class BilledUnbilled extends Activity{
 	        list.addHeaderView(header, null, false);
 	        list.setAdapter(adapter);
 
-	        list.setOnItemClickListener(new OnItemClickListener() {
-		           
-				public void onItemClick(AdapterView<?> parent, View view, int position,long id) {
-					Intent intentConsumerListTest=new Intent(BilledUnbilled.this, ConsumerListTest.class);
-					HashMap<String,String> map =mylist.get(position-1);
-					intentConsumerListTest.putExtra("MRU",map.get("MRU").toString());
-					intentConsumerListTest.putExtra("View", "UnbilledList");
-					startActivity(intentConsumerListTest);
-	         }
-	     });
+	        list.setOnItemClickListener((parent, view, position, id) -> {
+				Intent intentConsumerListTest=new Intent(BilledUnbilled.this, ConsumerListTest.class);
+				HashMap<String,String> map =mylist.get(position-1);
+				intentConsumerListTest.putExtra("MRU",map.get("MRU").toString());
+				intentConsumerListTest.putExtra("View", "UnbilledList");
+				startActivity(intentConsumerListTest);
+});
 	    }
 	    @Override
 	 public boolean onCreateOptionsMenu(Menu menu) {

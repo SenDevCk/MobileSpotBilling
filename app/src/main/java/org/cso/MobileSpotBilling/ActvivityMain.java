@@ -79,10 +79,7 @@ public class ActvivityMain extends Activity implements OnClickListener, TaskCall
 			asyncValidate.execute(UtilAppCommon.IMEI_Number);
 			finish();
 		}*/
-
-
-
-		setContentView(R.layout.main);
+        setContentView(R.layout.main);
 		File file = null;
 		String AppDir = Environment.getExternalStorageDirectory().getPath()
 				+ "/SBDocs";
@@ -527,7 +524,8 @@ public class ActvivityMain extends Activity implements OnClickListener, TaskCall
 			gstno = "NBGSTNO12457896";
 			//textData.append(header + "\n");
 			//textData.append("**********************\n");
-			//textData.append("खाता नंबर     :   " + "1234" + "\n");
+			//textData.append("
+            // :   " + "1234" + "\n");
 			/*textData.append("प्रमंडल         :   " + "1234" + "\n");
 			textData.append("अवर प्रमंडल     :   " + "1234" + "\n");
 			textData.append("उपभोक्ता  संख्या :   " + "123456789" + "\n");

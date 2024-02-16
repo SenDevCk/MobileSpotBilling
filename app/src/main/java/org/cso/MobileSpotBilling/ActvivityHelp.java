@@ -213,7 +213,8 @@ public class ActvivityHelp extends Activity{
             btnHelpSync.setEnabled(false);
         }
  
-        @Override
+        @SuppressLint("SuspiciousIndentation")
+		@Override
         protected Void doInBackground(Void... arg0) {
         	//status=NetworkUtil.isConnectedToServer("http://220.225.3.133/BiharSBMService/MobiletoMW.asmx", 10000);	//Devp
         	status=NetworkUtil.isConnectedToServer("http://220.225.3.149/BiharSBMService/MobiletoMW.asmx", 5000);		//Prod

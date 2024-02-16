@@ -18,6 +18,7 @@ import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
@@ -75,7 +76,8 @@ public class ActvConsumerNbrInputForDuplicateBill extends Activity implements On
 	     }
 	     return true;
     }
-    public void onBackPressed() {
+    @SuppressLint("SuspiciousIndentation")
+	public void onBackPressed() {
 	     // do something on back.
 		 finish();
 		 	if(UtilAppCommon.inSAPSendMsg.equalsIgnoreCase("1"))
