@@ -20,9 +20,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
 
 
-public class ActvVerifySetUpInfo extends Activity implements OnClickListener{
+public class ActvVerifySetUpInfo extends AppCompatActivity implements OnClickListener{
     /** Called when the activity is first created. */
 	UtilDB  util;
 	EditText username,password;	
@@ -55,10 +56,11 @@ public class ActvVerifySetUpInfo extends Activity implements OnClickListener{
     }
     
     public void onBackPressed() {
-		 //startActivity(new Intent(this, ActvSetupInfo.class)); 
-		 finish();
-	     return;
-	 }   
+		//startActivity(new Intent(this, ActvSetupInfo.class));
+		super.onBackPressed();
+		//finish();
+		return;
+	}
        
 	public void onClick(View view) {		
 			startActivity(new Intent(this, ActvSetupInfo.class));

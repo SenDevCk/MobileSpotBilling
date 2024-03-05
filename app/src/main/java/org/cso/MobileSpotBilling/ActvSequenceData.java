@@ -15,6 +15,9 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
 import org.cso.MSBAsync.AsyncGetOutputData;
 import org.cso.MSBModel.StructSAPInput;
 import org.cso.MSBUtil.CryptographyUtil;
@@ -26,17 +29,26 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-public class ActvSequenceData extends Activity implements OnClickListener {
+public class ActvSequenceData extends AppCompatActivity implements OnClickListener {
 
 	int itmpCounter = 0;
 	int iInitCounter = 0;
 	int iMaxCounter = 0;
 	boolean cancelPressed = false;
 	int valuePassed=0;
+
+	Toolbar toolbar;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.sequencedata);
+
+		toolbar= findViewById(R.id.toolbar_bill_bysequence);
+		//toolbar.setLogo(getResources().getDrawable(R.drawable.sbpscl_logo));
+		toolbar.setTitle("Bill By Sequence");
+		setSupportActionBar(toolbar);
+		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		getSupportActionBar().setDisplayShowHomeEnabled(true);
 
 		/*Log.i("Image Capture", "" + UtilAppCommon.blImageCapture);
 		if(UtilAppCommon.blImageCapture)	{
@@ -99,31 +111,6 @@ public class ActvSequenceData extends Activity implements OnClickListener {
 			startActivity(new Intent(this, ActvBilling.class));
 		}
 	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		//getMenuInflater().inflate(R.menu.act_demo, menu);
-		return true;
-	}
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
-		int id = item.getItemId();
-		if (id == R.id.action_settings) {
-			return true;
-		}
-		return super.onOptionsItemSelected(item);
-	}
-    public void onBackPressed() {
-	     // do something on back.
-		 startActivity(new Intent(this, ActvBillingOption.class));  
-		 finish();
-	     return;
-	 }
 	@Override
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
@@ -417,5 +404,12 @@ public class ActvSequenceData extends Activity implements OnClickListener {
 			String longitude = String.valueOf(gps.getLongitude());
 			return String.valueOf(gps.getLatitude()) + "¥" + String.valueOf(gps.getLongitude());
 		}
+	}
+
+	@Override
+	public boolean onSupportNavigateUp() {
+		//  closePrinter();
+		onBackPressed();
+		return true;
 	}
 }

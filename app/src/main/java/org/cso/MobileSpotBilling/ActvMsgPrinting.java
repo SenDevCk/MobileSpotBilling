@@ -40,9 +40,11 @@ import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import HPRTAndroidSDK.HPRTPrinterHelper;
 
-public class ActvMsgPrinting extends Activity {
+public class ActvMsgPrinting extends AppCompatActivity {
 	/** Called when the activity is first created. */
 	private BluetoothAdapter mBluetoothAdapter = null;
 	static final UUID MY_UUID = UUID.randomUUID();

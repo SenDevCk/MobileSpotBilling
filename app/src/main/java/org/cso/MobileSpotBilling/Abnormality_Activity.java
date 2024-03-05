@@ -19,14 +19,24 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-public class Abnormality_Activity extends Activity implements OnClickListener, TaskCallback {
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
+public class Abnormality_Activity extends AppCompatActivity implements OnClickListener, TaskCallback {
 
 	Spinner spAbnormality = null;
+	Toolbar toolbar;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_abnormality);
-		
+
+		toolbar = findViewById(R.id.toolbar_abnormality);
+		//toolbar.setLogo(getResources().getDrawable(R.drawable.sbpscl_logo));
+		toolbar.setTitle("Abnormality Details");
+		setSupportActionBar(toolbar);
+		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		getSupportActionBar().setDisplayShowHomeEnabled(true);
 		Button submitBtn = (Button) findViewById(R.id.ContinueBtn);
         submitBtn.setOnClickListener(this);
         
@@ -43,25 +53,13 @@ public class Abnormality_Activity extends Activity implements OnClickListener, T
 		}
         //spAbnormality.setOnItemSelectedListener(this);
 	}
-
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.mainmenu, menu);
+	public boolean onSupportNavigateUp() {
+		//  closePrinter();
+		onBackPressed();
 		return true;
 	}
 
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
-		int id = item.getItemId();
-		if (id == R.id.action_settings) {
-			return true;
-		}
-		return super.onOptionsItemSelected(item);
-	}
 
 	@Override
 	public void done() {

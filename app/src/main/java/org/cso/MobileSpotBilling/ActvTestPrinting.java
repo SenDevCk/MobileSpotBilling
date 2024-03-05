@@ -66,7 +66,9 @@ import android.widget.EditText;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
-public class ActvTestPrinting extends Activity {
+import androidx.appcompat.app.AppCompatActivity;
+
+public class ActvTestPrinting extends AppCompatActivity {
 	/** Called when the activity is first created. */
 	private BluetoothAdapter mBluetoothAdapter = null;
 	static final UUID MY_UUID = UUID.randomUUID();

@@ -50,21 +50,31 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
- 
-public class ActvivityHelp extends Activity{
+
+public class ActvivityHelp extends AppCompatActivity {
     /** Called when the activity is first created. */
 	
 	static String strResponse; 
 	TextView tvHelpUPDataCnt,tvHelpImei,tvHelpVersion,tvHelpDataNetwork;
 	ImageView ivHelpIntConSts,ivHelpSrvConSts;
 	Button btnHelpOK,btnHelpRefresh,btnReprint,btnHelpSync;
-	
+	Toolbar toolbar;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) { 
     	super.onCreate(savedInstanceState);
-        setContentView(R.layout.layout_help); 
+        setContentView(R.layout.layout_help);
+
+		toolbar= findViewById(R.id.toolbar_help);
+		//toolbar.setLogo(getResources().getDrawable(R.drawable.sbpscl_logo));
+		toolbar.setTitle("Help");
+		setSupportActionBar(toolbar);
+		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		getSupportActionBar().setDisplayShowHomeEnabled(true);
+
         btnHelpOK=(Button)findViewById(R.id.btnHelpOK);
         btnHelpRefresh=(Button)findViewById(R.id.btnHelpRefresh);
         btnReprint=(Button)findViewById(R.id.btnHelpReprint);
@@ -77,12 +87,9 @@ public class ActvivityHelp extends Activity{
         SetDataNetwork();
        
         final Context c=this;
-        btnHelpOK.setOnClickListener(new View.OnClickListener() {
-			
-			public void onClick(View v) {
-				startActivity(new Intent(getApplicationContext(), ActvivityMain.class));
-				finish();
-			}
+        btnHelpOK.setOnClickListener(v -> {
+			startActivity(new Intent(getApplicationContext(), ActvivityMain.class));
+			finish();
 		});
         btnHelpRefresh.setOnClickListener(v -> {
 			 //UnpostedDataCount();
@@ -97,8 +104,14 @@ public class ActvivityHelp extends Activity{
 		});
 
 	 }
-   
-   
+
+
+	@Override
+	public boolean onSupportNavigateUp() {
+		onBackPressed();
+		return true;
+	}
+
     void UnpostedDataCount()
     {
     	UtilDB util=new UtilDB(getBaseContext());
@@ -178,26 +191,7 @@ public class ActvivityHelp extends Activity{
     }
     
     
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-    	super.onCreateOptionsMenu(menu);
-      MenuInflater inflater = getMenuInflater();
-      inflater.inflate(R.menu.mainmenu, menu);
-      return true;
-    }
-    public boolean onOptionsItemSelected(MenuItem item) {
-	   	 switch (item.getItemId()) {
-	   	 case R.id.home:
-	   		/*finish();
-	 		 startActivity(new Intent(this, ActvivityHelp.class));*/
-	   		finish();	   	 
-	    	 Intent intent = new Intent(this, ActvivityMain.class);  
-	    	 startActivity(intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));  
-	         startActivity(intent);
-	 		 break;
-	   	 }
-	     return true;
-    }
+
     
     private class AsyncCheckServer extends AsyncTask<Void, Void, Void> {
     	
@@ -241,9 +235,7 @@ public class ActvivityHelp extends Activity{
     
     @Override
     public void onBackPressed() {
- 		 startActivity(new Intent(this, ActvivityMain.class));
- 		 finish();
- 	     return;
- 	 }
+		super.onBackPressed();
+	}
 }
 

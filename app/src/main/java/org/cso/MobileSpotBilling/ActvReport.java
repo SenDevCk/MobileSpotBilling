@@ -13,132 +13,120 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 
-public class ActvReport extends Activity implements OnClickListener{
-	
-	@Override
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
+public class ActvReport extends AppCompatActivity implements OnClickListener {
+
+    Toolbar toolbar;
+
+    @Override
     public void onCreate(Bundle savedInstanceState) {
-    	
+
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.reports); 
+        setContentView(R.layout.reports);
+        toolbar = findViewById(R.id.toolbar_report);
+        //toolbar.setLogo(getResources().getDrawable(R.drawable.sbpscl_logo));
+        toolbar.setTitle("Report");
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
         Button MeterChangeList = (Button) findViewById(R.id.btnMtrChangeList);
-        MeterChangeList.setOnClickListener(this); 
+        MeterChangeList.setOnClickListener(this);
 
         Button unbilledConsList = (Button) findViewById(R.id.btnNewConsumerList);
-        unbilledConsList.setOnClickListener(this); 
+        unbilledConsList.setOnClickListener(this);
 
         Button NewConsumerList = (Button) findViewById(R.id.btnUnbilledConsumerList);
-        NewConsumerList.setOnClickListener(this); 
-        
+        NewConsumerList.setOnClickListener(this);
+
         Button ReconnectionListList = (Button) findViewById(R.id.btnReconnectionList);
-        ReconnectionListList.setOnClickListener(this); 
-   
+        ReconnectionListList.setOnClickListener(this);
+
         Button SummaryList = (Button) findViewById(R.id.btnSummaryList);
-        SummaryList.setOnClickListener(this); 
-	}
-	@Override
-        public boolean onCreateOptionsMenu(Menu menu) {
-        	super.onCreateOptionsMenu(menu);
-          MenuInflater inflater = getMenuInflater();
-          inflater.inflate(R.menu.mainmenu, menu);
-          return true;
+        SummaryList.setOnClickListener(this);
+    }
+
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
+
+    public void onClick(View v) {
+        // TODO Auto-generated method stub
+
+        int id = v.getId();
+        Intent intentConsumerListTest = new Intent(this, ConsumerListTest.class);
+
+        switch (id) {
+            case R.id.btnNewConsumerList:
+                //finish();
+                intentConsumerListTest.putExtra("View", "UnBilledConsumerList");
+                startActivity(new Intent(this, BilledUnbilled.class));
+                break;
+            case R.id.btnReconnectionList:
+                //finish();
+                intentConsumerListTest.putExtra("View", "OutSortConsumerList");
+                startActivity(intentConsumerListTest);
+                break;
+            case R.id.btnUnbilledConsumerList:
+                //finish();
+
+                startActivity(new Intent(this, ActvUnbilledListPrinting.class));
+                break;
+            case R.id.btnMtrChangeList:
+                //finish();
+                intentConsumerListTest.putExtra("View", "NetworkFailureList");
+                startActivity(intentConsumerListTest);
+                break;
+            case R.id.btnSummaryList:
+                //finish();
+                startActivity(new Intent(this, ActvSummaryPrinting.class));
+                break;
         }
-	
-       public boolean onOptionsItemSelected(MenuItem item) {
-   	   	 switch (item.getItemId()) {
-   	   	 case R.id.home:
-   	   		/*finish();
-   	 		 startActivity(new Intent(ActvReport.this, ActvivityMain.class));*/
-   	   		 finish();	   	 
-   	   		 Intent intent = new Intent(this, ActvivityMain.class);  
-   	   		 startActivity(intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));  
-   	   		 startActivity(intent);
-   	 		 break;
-   	   	 }
-   	     return true;
-       }
-	public void onClick(View v) 
-	{
-		// TODO Auto-generated method stub
-		
-		int id = v.getId();
-		Intent intentConsumerListTest=new Intent(this, ConsumerListTest.class);
 
-		switch(id)
-		{
-		case R.id.btnNewConsumerList:
-			//finish();
-			intentConsumerListTest.putExtra("View", "UnBilledConsumerList");
-			startActivity(new Intent(this, BilledUnbilled.class));
-			break;
-		case R.id.btnReconnectionList:
-			//finish();
-			intentConsumerListTest.putExtra("View", "OutSortConsumerList");
-			startActivity(intentConsumerListTest);
-			break;
-		case R.id.btnUnbilledConsumerList:
-			//finish();
 
-			startActivity(new Intent(this, ActvUnbilledListPrinting.class));
-			break;
-		case R.id.btnMtrChangeList:
-			//finish();
-			intentConsumerListTest.putExtra("View", "NetworkFailureList");
-			startActivity(intentConsumerListTest);
-			break;
-		case R.id.btnSummaryList:
-			//finish();
-			startActivity(new Intent(this, ActvSummaryPrinting.class));
-			break;
-		}
-		
-		
-	}
-	private void DisplayUnbilledConsumerList() 
-	{
-		final Dialog dialog = new Dialog(this);
-		dialog.setContentView(R.layout.dg_rptconsumerlist);
-		dialog.setTitle("Unbilled Consumer List:");
-		dialog.show();		
-		
-		Button okButton = (Button) dialog.findViewById(R.id.btnOk);
-		okButton.setOnClickListener(new OnClickListener() 
-		{
-			public void onClick(View v) 
-			{
-				dialog.dismiss();				
-			}
-		});
-	}
-	private void DisplayReconnectionList() 
-	{
-		final Dialog dialog = new Dialog(this);
-		dialog.setContentView(R.layout.dg_rptconsumerlist);
-		dialog.setTitle("Reconnection List:");
-		dialog.show();		
-		
-		Button okButton = (Button) dialog.findViewById(R.id.btnOk);		
-		
-		okButton.setOnClickListener(v -> dialog.dismiss());
-	}
-	private void DisplayNewConsumerList() 
-	{
-		
-		final Dialog dialog = new Dialog(this);
-		dialog.setContentView(R.layout.dg_rptconsumerlist);
-		dialog.setTitle("New Consumer List:");
-		dialog.show();		
-		
-		Button okButton = (Button) dialog.findViewById(R.id.btnOk);		
-		
+    }
 
-		okButton.setOnClickListener(v -> dialog.dismiss());
-	}
-     
-	
-	@Override
-	public void onBackPressed() {
-		super.onBackPressed();
-		startActivity(new Intent(this, ActvivityMain.class));
-		finish();
-	}
-	}
+    private void DisplayUnbilledConsumerList() {
+        final Dialog dialog = new Dialog(this);
+        dialog.setContentView(R.layout.dg_rptconsumerlist);
+        dialog.setTitle("Unbilled Consumer List:");
+        dialog.show();
+
+        Button okButton = (Button) dialog.findViewById(R.id.btnOk);
+        okButton.setOnClickListener(new OnClickListener() {
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+    }
+
+    private void DisplayReconnectionList() {
+        final Dialog dialog = new Dialog(this);
+        dialog.setContentView(R.layout.dg_rptconsumerlist);
+        dialog.setTitle("Reconnection List:");
+        dialog.show();
+
+        Button okButton = (Button) dialog.findViewById(R.id.btnOk);
+
+        okButton.setOnClickListener(v -> dialog.dismiss());
+    }
+
+    private void DisplayNewConsumerList() {
+
+        final Dialog dialog = new Dialog(this);
+        dialog.setContentView(R.layout.dg_rptconsumerlist);
+        dialog.setTitle("New Consumer List:");
+        dialog.show();
+
+        Button okButton = (Button) dialog.findViewById(R.id.btnOk);
+
+
+        okButton.setOnClickListener(v -> dialog.dismiss());
+    }
+
+
+}

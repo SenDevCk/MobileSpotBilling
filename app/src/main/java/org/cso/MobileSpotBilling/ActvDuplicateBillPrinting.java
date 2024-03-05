@@ -61,7 +61,9 @@ import android.widget.EditText;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
-public class ActvDuplicateBillPrinting extends Activity {
+import androidx.appcompat.app.AppCompatActivity;
+
+public class ActvDuplicateBillPrinting extends AppCompatActivity {
 	/** Called when the activity is first created. */
 	/** Called when the activity is first created. */
 	private BluetoothAdapter mBluetoothAdapter = null;

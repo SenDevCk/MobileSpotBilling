@@ -66,7 +66,9 @@ import android.widget.EditText;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
-public class ActvUnbilledListPrinting extends Activity {
+import androidx.appcompat.app.AppCompatActivity;
+
+public class ActvUnbilledListPrinting extends AppCompatActivity {
 	/** Called when the activity is first created. */
 	private BluetoothAdapter mBluetoothAdapter = null;
 	static final UUID MY_UUID = UUID.randomUUID();
@@ -147,12 +149,7 @@ public class ActvUnbilledListPrinting extends Activity {
 
 	}
 
-	public void onBackPressed() {
-		// do something on back.
-		finish();
-		// startActivity(new Intent(this, ActvivityMain.class));
-		return;
-	}
+
 
 	
 	class ZebraThermal extends Thread {

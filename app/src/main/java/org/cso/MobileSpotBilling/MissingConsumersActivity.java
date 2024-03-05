@@ -20,14 +20,24 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-public class MissingConsumersActivity extends Activity implements OnClickListener, TaskCallback {
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
+public class MissingConsumersActivity extends AppCompatActivity implements OnClickListener, TaskCallback {
 
 	Button submitBtn;
+	Toolbar toolbar;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_missing_consumers);
-		
+		//toolbar
+		toolbar = findViewById(R.id.toolbar_missing_consumer);
+		toolbar.setTitle("Update Consumer Details");
+		setSupportActionBar(toolbar);
+		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		getSupportActionBar().setDisplayShowHomeEnabled(true);
+
         submitBtn = (Button) findViewById(R.id.ContinueBtn);
         submitBtn.setOnClickListener(this);
         
@@ -36,6 +46,13 @@ public class MissingConsumersActivity extends Activity implements OnClickListene
 	}
 
 	@Override
+	public boolean onSupportNavigateUp() {
+		//  closePrinter();
+		onBackPressed();
+		return true;
+	}
+
+/*	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		//getMenuInflater().inflate(R.menu.missing_consumers, menu);
@@ -50,9 +67,12 @@ public class MissingConsumersActivity extends Activity implements OnClickListene
 		int id = item.getItemId();
 		if (id == R.id.action_settings) {
 			return true;
-		}
-		return super.onOptionsItemSelected(item);
-	}
+		} *//*else if (id == R.id.home) {
+			finish();
+			return true;
+		}*//*
+		return true;
+	}*/
 
 	@Override
 	public void onClick(View v) {
@@ -194,9 +214,10 @@ public class MissingConsumersActivity extends Activity implements OnClickListene
 	}
 	
 	 public void onBackPressed() {
-	     // do something on back.
-		 startActivity(new Intent(this, ActvivityMain.class));
-		 finish();
+		 // do something on back.
+		 //startActivity(new Intent(this, ActvivityMain.class));
+		 //finish();
+		 super.onBackPressed();
 	 }
 	
 

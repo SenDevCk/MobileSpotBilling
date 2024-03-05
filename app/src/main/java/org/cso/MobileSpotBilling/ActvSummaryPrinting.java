@@ -66,7 +66,9 @@ import android.widget.EditText;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
-public class ActvSummaryPrinting extends Activity {
+import androidx.appcompat.app.AppCompatActivity;
+
+public class ActvSummaryPrinting extends AppCompatActivity {
 	/** Called when the activity is first created. */
 	private BluetoothAdapter mBluetoothAdapter = null;
 	static final UUID MY_UUID = UUID.randomUUID();
@@ -151,7 +153,8 @@ public class ActvSummaryPrinting extends Activity {
 
 	public void onBackPressed() {
 		// do something on back.
-		finish();
+		super.onBackPressed();
+		//finish();
 		// startActivity(new Intent(this, ActvivityMain.class));
 		return;
 	}

@@ -21,13 +21,23 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class MeterNbrInput extends Activity implements OnClickListener {
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
+public class MeterNbrInput extends AppCompatActivity implements OnClickListener {
+    Toolbar toolbar;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_meter_nbr_input);
-		
+
+		toolbar= findViewById(R.id.toolbar_bill_meterno);
+		//toolbar.setLogo(getResources().getDrawable(R.drawable.sbpscl_logo));
+		toolbar.setTitle("Bill By Meter Number");
+		setSupportActionBar(toolbar);
+		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		getSupportActionBar().setDisplayShowHomeEnabled(true);
+
 		UtilAppCommon.billType = "M";
 		UtilDB util = new UtilDB(getBaseContext());		
 		UtilAppCommon.sdoCode=util.getSdoCode();
@@ -44,25 +54,11 @@ public class MeterNbrInput extends Activity implements OnClickListener {
 	}
 
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		//getMenuInflater().inflate(R.menu.meter_nbr_input, menu);
+	public boolean onSupportNavigateUp() {
+		//  closePrinter();
+		onBackPressed();
 		return true;
 	}
-
-    public boolean onOptionsItemSelected(MenuItem item) {
-	   	 switch (item.getItemId()) {
-	   	 case R.id.home:
-	   		/*finish();
-	 		 startActivity(new Intent(this, ActvivityMain.class));*/
-	   		finish();	   	 
-	    	 Intent intent = new Intent(this, ActvivityMain.class);  
-	    	 startActivity(intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));  
-	         startActivity(intent);
-	   		 break;
-	     }
-	     return true;
-   }
 
 	@Override
 	protected void onResume() {
@@ -74,13 +70,6 @@ public class MeterNbrInput extends Activity implements OnClickListener {
 		}
 	}
 
-
-    public void onBackPressed() {
-	     // do something on back.
-		 startActivity(new Intent(this, ActvBillingOption.class));  
-		 finish();
-	     return;
-	 }
 
 	@Override
 	public void onClick(View v) {

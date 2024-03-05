@@ -41,16 +41,27 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class ActvBillingOption extends Activity implements OnClickListener{
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
+public class ActvBillingOption extends AppCompatActivity implements OnClickListener{
     /** Called when the activity is first created. */
 	SQLiteDatabase db;
 	MyHelper helper;
+	Toolbar toolbar;
 	private BluetoothAdapter mBluetoothAdapter = null;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);        
        
         setContentView(R.layout.billingoption);
+		toolbar= findViewById(R.id.toolbar_bill_opti);
+		//toolbar.setLogo(getResources().getDrawable(R.drawable.sbpscl_logo));
+		toolbar.setTitle("Billing");
+		setSupportActionBar(toolbar);
+		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		getSupportActionBar().setDisplayShowHomeEnabled(true);
+
         Button ByAcctNbr = (Button) findViewById(R.id.btnAcctNbr);
         ByAcctNbr.setOnClickListener(this);
         
@@ -84,28 +95,14 @@ public class ActvBillingOption extends Activity implements OnClickListener{
       //showModifySetup();
         
     }
-    
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-      MenuInflater inflater = getMenuInflater();
-      inflater.inflate(R.menu.mainmenu, menu);
-      return true;
-    }
-    
-    
-    public boolean onOptionsItemSelected(MenuItem item) {
-	   	 switch (item.getItemId()) {
-	   	 case R.id.home:
-	   		/*finish();
-	 		 startActivity(new Intent(this, ActvivityMain.class));*/
-	    	 Intent intent = new Intent(this, ActvivityMain.class);  
-	    	 startActivity(intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));  
-	         startActivity(intent);
-	   		 break;
-	     }
-	     return true;
-    }
-    
+
+
+	@Override
+	public boolean onSupportNavigateUp() {
+		//  closePrinter();
+		onBackPressed();
+		return true;
+	}
 	public void onClick(View v) {
 		Intent intent = new Intent(this,ActvBilling.class);
 			switch(v.getId()){
@@ -114,14 +111,14 @@ public class ActvBillingOption extends Activity implements OnClickListener{
 			intent.putExtra("btn", "A");
 			UtilAppCommon.billType = "A";
 			startActivity(new Intent(this, ActvConsumerNbrInput.class));
-			finish();
+			//finish();
 			break;
 			
 		case R.id.btnLegacyNbr:
 			intent.putExtra("btn", "L");
 			UtilAppCommon.billType = "L";
 			startActivity(new Intent(this, ActvLegacyNbrInput.class));
-			finish();
+			//finish();
 			break;
 			
 		case R.id.btnSequence:
@@ -131,7 +128,7 @@ public class ActvBillingOption extends Activity implements OnClickListener{
 				intent.putExtra("btn", "S");
 				UtilAppCommon.billType = "S";
 				startActivity(new Intent(this, ActvSequenceData.class));
-				finish();
+				//finish();
 			}
 			else
 				Toast.makeText(getApplicationContext(),"Please check unbilled consumer & bill by CA number!", Toast.LENGTH_LONG).show();
@@ -141,7 +138,7 @@ public class ActvBillingOption extends Activity implements OnClickListener{
 			intent.putExtra("btn", "M");
 			UtilAppCommon.billType = "M";
 			startActivity(new Intent(this, MeterNbrInput.class));
-			finish();
+			//finish();
 			break;
 			
 		case R.id.btnRouteOrder:
@@ -173,7 +170,7 @@ public class ActvBillingOption extends Activity implements OnClickListener{
 						//intent.putExtra("btn", "A");
 						UtilAppCommon.billType = "";
 						startActivity(new Intent(this, ActvConsumerNbrInputForDuplicateBill.class));
-						finish();
+						//finish();
 					}
 			break;
 			
@@ -191,11 +188,12 @@ public class ActvBillingOption extends Activity implements OnClickListener{
 	}
 
 	public void onBackPressed() {
-	     // do something on back.
-		 finish();
-		 startActivity(new Intent(this, ActvivityMain.class));  
-		
-	     return;
-	 }
+		// do something on back.
+		//finish();
+		//startActivity(new Intent(this, ActvivityMain.class));
+
+		super.onBackPressed();
+		return;
+	}
 	
 }

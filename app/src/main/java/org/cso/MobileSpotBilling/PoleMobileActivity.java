@@ -25,17 +25,27 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-public class PoleMobileActivity extends Activity implements OnClickListener, TaskCallback {
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
+public class PoleMobileActivity extends AppCompatActivity implements OnClickListener, TaskCallback {
 
 	String AppDir = "";
 	Button submitBtn;
+	Toolbar toolbar;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_pole_mobile);
 		
 		Log.e("PoleMobileActivity", "Started");
-		
+
+		toolbar = findViewById(R.id.toolbar_updt_condet);
+		//toolbar.setLogo(getResources().getDrawable(R.drawable.sbpscl_logo));
+		toolbar.setTitle("Syncronize");
+		setSupportActionBar(toolbar);
+		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		getSupportActionBar().setDisplayShowHomeEnabled(true);
 		//Log.e("Pole No", UtilAppCommon.in.CONNECTED_POLE_NIN_NUMBER);
 		//Log.e("Mobile No", UtilAppCommon.in.METER_CAP);
 		
@@ -50,24 +60,11 @@ public class PoleMobileActivity extends Activity implements OnClickListener, Tas
         
         getImageByCANo(UtilAppCommon.acctNbr);
 	}
-
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		//getMenuInflater().inflate(R.menu.pole_mobile, menu);
+	public boolean onSupportNavigateUp() {
+		//  closePrinter();
+		onBackPressed();
 		return true;
-	}
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
-		int id = item.getItemId();
-		if (id == R.id.action_settings) {
-			return true;
-		}
-		return super.onOptionsItemSelected(item);
 	}
 
 	@Override

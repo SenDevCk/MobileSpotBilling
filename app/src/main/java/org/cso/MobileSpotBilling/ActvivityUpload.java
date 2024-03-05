@@ -60,9 +60,10 @@ import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
 
- 
-public class ActvivityUpload extends Activity{
+
+public class ActvivityUpload extends AppCompatActivity {
     /** Called when the activity is first created. */
 	
 	static String strResponse; 

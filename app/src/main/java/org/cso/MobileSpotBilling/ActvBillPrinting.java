@@ -79,9 +79,11 @@ import android.widget.Toast;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import HPRTAndroidSDK.HPRTPrinterHelper;
 
-public class ActvBillPrinting extends Activity {
+public class ActvBillPrinting extends AppCompatActivity {
 	/** Called when the activity is first created. */
 	private BluetoothAdapter mBluetoothAdapter = null;
 	static final UUID MY_UUID = UUID.randomUUID();

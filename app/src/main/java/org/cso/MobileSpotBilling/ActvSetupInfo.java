@@ -47,10 +47,12 @@ import android.widget.SimpleAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
-public class ActvSetupInfo  extends Activity implements OnClickListener
+public class ActvSetupInfo  extends AppCompatActivity implements OnClickListener
 {
 	Activity activity = null;
 	private SpinnerData binderItems[];
@@ -64,13 +66,18 @@ public class ActvSetupInfo  extends Activity implements OnClickListener
 	HashMap<String, String> devicemap=null;
 	ArrayList<HashMap<String, String>> devicesadapter;
 	private static final int PERMISSION_BLUETOOTH = 12;
-	
+	Toolbar toolbar;
 	@Override
     public void onCreate(Bundle savedInstanceState) {
-    	
 		UtilAppCommon.strImageCount = "";
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.setupinfo); 
+        setContentView(R.layout.setupinfo);
+		toolbar= findViewById(R.id.toolbar_setupinfo);
+		//toolbar.setLogo(getResources().getDrawable(R.drawable.sbpscl_logo));
+		toolbar.setTitle("Setup");
+		setSupportActionBar(toolbar);
+		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		getSupportActionBar().setDisplayShowHomeEnabled(true);
         activity = this;
         
         mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
@@ -104,6 +111,16 @@ public class ActvSetupInfo  extends Activity implements OnClickListener
         btnUpdateUserInfo.setOnClickListener(this);
 	}
 
+
+
+	@Override
+	public boolean onSupportNavigateUp() {
+		//  closePrinter();
+		onBackPressed();
+		return true;
+	}
+
+
 	@Override
 	public void onRequestPermissionsResult(int requestCode,
 										   String permissions[], int[] grantResults) {
@@ -129,29 +146,7 @@ public class ActvSetupInfo  extends Activity implements OnClickListener
 	}
 
 
-	@Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-    	super.onCreateOptionsMenu(menu);
-      MenuInflater inflater = getMenuInflater();
-      inflater.inflate(R.menu.mainmenu, menu);
-      return true;
-    }
 
-   public boolean onOptionsItemSelected(MenuItem item) {
-	   	 switch (item.getItemId()) {
-	   	 case R.id.home:
-	   		/*finish();
-	 		 startActivity(new Intent(ActvSetupInfo.this, ActvivityMain.class));*/
-	   		 finish();	   	 
-	    	 Intent intent = new Intent(this, ActvivityMain.class);  
-	    	 startActivity(intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));  
-	         startActivity(intent);
-	 		 break;
-	   	 }
-	     return true;
-   }
-   
-   
    public void onClick(View v) 
 	{
 		// TODO Auto-generated method stub
@@ -294,10 +289,11 @@ public class ActvSetupInfo  extends Activity implements OnClickListener
    }
    
    public void onBackPressed() {
-		 startActivity(new Intent(this, ActvivityMain.class));
-		 finish();
-	     return;
-	 }
+	   super.onBackPressed();
+	   //startActivity(new Intent(this, ActvivityMain.class));
+	   //finish();
+	   return;
+   }
   /* @Override
 	public void onBackPressed() {
 	 Intent setIntent = new Intent(Intent.ACTION_MAIN);

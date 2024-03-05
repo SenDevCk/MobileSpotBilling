@@ -1,121 +1,108 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="fill_parent"
-    android:orientation="vertical"
-    android:background="@drawable/backgroundboarder">
+    android:layout_height="match_parent"
+    android:background="@drawable/backgroundboarder"
+    >
 
-  <LinearLayout  android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-    <TextView
-        android:layout_width="match_parent"
+    <LinearLayout
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:padding="15dp"
         android:background="@drawable/headerboarder"
-        android:paddingLeft="5dp"
-        android:text="User Login :"
-        android:textColor="#ffffff"
-        android:textSize="22dp" />
+        android:orientation="vertical">
 
-    </LinearLayout>>
-       
+        <ImageView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/sbpscl_logo"/>
 
-   			<LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
-
-		   <EditText
-		       android:id="@+id/edtTxtUserName"
-		       style="@style/StyleEditText"
-		       android:layout_width="match_parent"
-		       android:layout_height="wrap_content"
-		       android:layout_marginLeft="10dp"
-		       android:layout_marginRight="10dp"
-		       android:layout_marginTop="3dp"
-		       android:layout_marginBottom="3dp"
-        	   android:textSize="18dp"
-		       android:ems="10"
-		       android:hint="Meter Reader ID"
-		       android:inputType="none"
-		       android:maxLength="16"
-		       android:singleLine="true"
-		       />
-
-        </LinearLayout> 
-       
-		<LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
-
-   		<EditText
-		       android:id="@+id/edtTxtPassword"		       
-		       style="@style/StyleEditText"
-		         android:layout_width="match_parent"
-		       android:layout_height="wrap_content"
-		       android:layout_marginLeft="10dp"
-		       android:layout_marginRight="10dp"
-		       android:layout_marginTop="3dp"
-		        android:layout_marginBottom="3dp"
-		       android:ems="10"
-		       android:hint="Password"
-		       android:inputType="none"
-		       android:password="true"
-		       android:maxLength="12"
-		       android:singleLine="true"/>
-   		
-	</LinearLayout>
-        
-	<LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-        
-        <Button
-            android:id="@+id/btnLogin"
-            style="@style/btnStyleBeige"
-            android:layout_width="100dp"
-            android:layout_height="50dp"
-          	android:layout_marginTop="15dp"
-            android:layout_marginLeft="50dp"
-            android:text="Login" />
-
-        <Button
-            android:id="@+id/btnCancel"             
-            style="@style/btnStyleBeige"
-            android:layout_width="100dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginLeft="12dp"
-            android:text="Cancel" />
-    </LinearLayout>
-    
-	<LinearLayout
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-             android:visibility="invisible"
-             >
+            android:paddingLeft="7dp"
+            android:layout_margin="5dp"
+            android:text="User Login "
+            android:textStyle="bold"
+            android:gravity="center"
+            android:visibility="gone"
+            android:textColor="#ffffff"
+            android:textSize="25dp" />
 
-   		<TextView
-		       android:id="@+id/TxtVersion"		       
-		       style="@style/StyleEditText"
-		        android:layout_width="match_parent"
-		       android:layout_height="wrap_content"
-		       android:layout_marginLeft="10dp"
-		       android:layout_marginRight="10dp"
-		       android:layout_marginTop="3dp"
-		       android:layout_marginBottom="3dp"
-		       android:ems="10"
-		       android:text="@string/app_fileversion"
-		       android:singleLine="true"/>
-   		
-	</LinearLayout>
-	
-		<LinearLayout
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/edtTxtUserName"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@android:color/white"
+            android:padding="5dp"
+            android:layout_marginTop="3dp"
+            android:layout_marginBottom="3dp"
+            android:hint="Meter Reader ID"
+            android:inputType="text"
+            android:singleLine="true"
+            android:focusable="true"
+            android:maxLength="16"
+            android:textSize="18dp" />
+
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/edtTxtPassword"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@android:color/white"
+            android:padding="5dp"
+            android:layout_marginTop="3dp"
+            android:layout_marginBottom="3dp"
+            android:hint="Password"
+            android:inputType="textPassword"
+            android:maxLength="12"
+            android:singleLine="true"
+             />
+
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:visibility="visible"
-            >
-   		
-		<Button
+            android:layout_margin="5dp">
+
+            <Button
+                android:id="@+id/btnLogin"
+                style="@style/btnStyleBeige"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight=".45"
+                android:text="Login" />
+            <View
+                android:layout_width="0dp"
+                android:layout_weight=".1"
+                android:layout_height="50dp"></View>
+            <Button
+                android:id="@+id/btnCancel"
+                style="@style/btnStyleBeige"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight=".45"
+                android:text="Cancel" />
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/TxtVersion"
+            style="@style/StyleEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="3dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="3dp"
+            android:text="@string/app_fileversion"
+            android:visibility="gone" />
+
+
+        <Button
             android:id="@+id/btnPrinterTest"
             style="@style/btnStyleBeige"
             android:layout_width="match_parent"
@@ -123,9 +110,9 @@
             android:layout_margin="5dp"
             android:text="Test Printer"
             android:visibility="invisible" />
-   		
-	</LinearLayout>
-	
-	
-     
-</LinearLayout>
+
+
+    </LinearLayout>
+
+
+</RelativeLayout>

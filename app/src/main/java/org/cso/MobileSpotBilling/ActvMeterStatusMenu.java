@@ -42,16 +42,25 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class ActvMeterStatusMenu extends Activity implements OnItemClickListener, TaskCallback{
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
+public class ActvMeterStatusMenu extends AppCompatActivity implements OnItemClickListener, TaskCallback{
 	String value1 ;
 	String item1;
 	boolean canMD=true, canPL=true;
 	int mdLeft=0, plLeft=0;
+	Toolbar toolbar;
 	@Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.meter_status_list);
-
+		toolbar = findViewById(R.id.toolbar_mtr_sts_menu);
+		//toolbar.setLogo(getResources().getDrawable(R.drawable.sbpscl_logo));
+		toolbar.setTitle("Meter Status Menu");
+		setSupportActionBar(toolbar);
+		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		getSupportActionBar().setDisplayShowHomeEnabled(true);
 		if(!UtilAppCommon.blAbnormalityCheck) {
 			UtilAppCommon.blAbnormalityCheck = true;
 			Intent inAbnormality = new Intent(this, Abnormality_Activity.class);
@@ -141,34 +150,11 @@ public class ActvMeterStatusMenu extends Activity implements OnItemClickListener
     }
 
 	@Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-      MenuInflater inflater = getMenuInflater();
-      inflater.inflate(R.menu.mainmenu, menu);
-      return true;
-    }
-
-    public boolean onOptionsItemSelected(MenuItem item) {
-	   	 switch (item.getItemId()) {
-	   	 case R.id.home:
-	   		/*finish();
-	 		 startActivity(new Intent(this, ActvivityMain.class));*/
-	   		finish();	   	 
-	    	 Intent intent = new Intent(this, ActvivityMain.class);  
-	    	 
-	    	 startActivity(intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));  
-	         startActivity(intent);
-	   		 break;
-	     }
-	     return true;
-    }
-
-    public void onBackPressed() {
-	     // do something on back.
-		finish();
-		//startActivity(new Intent(this, ActvBillingOption.class));
-		//startActivity(new Intent(this, ActvConsumerNbrInput.class));
-		return;
-	 }
+	public boolean onSupportNavigateUp() {
+		//  closePrinter();
+		onBackPressed();
+		return true;
+	}
 
 	public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
 		// TODO Auto-generated method stub

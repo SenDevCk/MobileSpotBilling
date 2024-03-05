@@ -1,26 +1,11 @@
 package org.cso.MobileSpotBilling;
 
 import org.cso.MSBUtil.CryptographyUtil;
-import org.cso.MSBUtil.GPSLocation;
-import org.cso.MSBUtil.NetworkUtil;
 import org.cso.MSBUtil.UtilAppCommon;
 import org.cso.MSBUtil.UtilDB;
-import org.cso.MobileSpotBilling.R;
-
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.location.Criteria;
-import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -29,13 +14,22 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class ActvConsumerNbrInput extends Activity implements OnClickListener{
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
+public class ActvConsumerNbrInput extends AppCompatActivity implements OnClickListener{
 		EditText editText_accNo;
+		Toolbar toolbar;
 	@Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.consumernbrinput);
-
+		toolbar= findViewById(R.id.toolbar_nbr_input_rechek);
+		//toolbar.setLogo(getResources().getDrawable(R.drawable.sbpscl_logo));
+		toolbar.setTitle("Bill By Account Number");
+		setSupportActionBar(toolbar);
+		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		getSupportActionBar().setDisplayShowHomeEnabled(true);
         UtilAppCommon.billType = "A";
         
 		UtilAppCommon.inSAPSendMsg = "";
@@ -61,27 +55,13 @@ public class ActvConsumerNbrInput extends Activity implements OnClickListener{
         //Log.e("GPS ==>> ", gps.getLocation(getApplicationContext()));
         
     }
-	
- @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-      MenuInflater inflater = getMenuInflater();
-      inflater.inflate(R.menu.mainmenu, menu);
-      return true;
-    }
- 
-    public boolean onOptionsItemSelected(MenuItem item) {
-	   	 switch (item.getItemId()) {
-	   	 case R.id.home:
-	   		/*finish();
-	 		 startActivity(new Intent(this, ActvivityMain.class));*/
-	   		finish();	   	 
-	    	 Intent intent = new Intent(this, ActvivityMain.class);  
-	    	 startActivity(intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));  
-	         startActivity(intent);
-	   		 break;
-	     }
-	     return true;
-    }
+
+	@Override
+	public boolean onSupportNavigateUp() {
+		//  closePrinter();
+		onBackPressed();
+		return true;
+	}
 
 	@Override
 	protected void onResume() {
@@ -94,13 +74,6 @@ public class ActvConsumerNbrInput extends Activity implements OnClickListener{
 		}
 	}
 
-
-	public void onBackPressed() {
-	     // do something on back.
-		 startActivity(new Intent(this, ActvBillingOption.class));  
-		 finish();
-	     return;
-	 }
     
 	public void onClick(View v) {
 		TextView errTxt = (TextView)findViewById(R.id.nullBinderSubdivErrLbl);

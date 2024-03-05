@@ -44,13 +44,15 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
+import androidx.appcompat.widget.Toolbar;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.ActivityChooserView;
 import androidx.core.content.ContextCompat;
 
 import HPRTAndroidSDK.HPRTPrinterHelper;
 
-public class ActvivityMain extends Activity implements OnClickListener, TaskCallback {
+public class ActvivityMain extends AppCompatActivity implements OnClickListener {
 	/** Called when the activity is first created. */
 	UtilDB util;
 	static String strResponse;
@@ -59,6 +61,7 @@ public class ActvivityMain extends Activity implements OnClickListener, TaskCall
 	ArrayList<HashMap<String, String>> mylist;
 	SimpleAdapter adapter;
     boolean showalert=true;
+	Toolbar toolbar;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -80,6 +83,9 @@ public class ActvivityMain extends Activity implements OnClickListener, TaskCall
 			finish();
 		}*/
         setContentView(R.layout.main);
+		toolbar= findViewById(R.id.toolbar_main);
+		//toolbar.setLogo(getResources().getDrawable(R.drawable.sbpscl_logo));
+		toolbar.setTitle("BMB");
 		File file = null;
 		String AppDir = Environment.getExternalStorageDirectory().getPath()
 				+ "/SBDocs";
@@ -239,7 +245,7 @@ public class ActvivityMain extends Activity implements OnClickListener, TaskCall
 				startActivity(new Intent(getBaseContext(), ActvBillingOption.class));
 				//UtilAppCommon.strRedirectTo = "Billing";
 				//startActivity(new Intent(getBaseContext(), ActvLogin.class));
-				finish();
+				//finish();
 			} else {
 				toast = Toast.makeText(getApplicationContext(),
 						"Please download the input data for Billing!",
@@ -254,7 +260,7 @@ public class ActvivityMain extends Activity implements OnClickListener, TaskCall
 				if(mylist.size() >= 1)
 				{
 					startActivity(new Intent(this, ActvSummary.class));
-					finish();
+					//finish();
 				}
 				else
 					Toast.makeText(getApplicationContext(),
@@ -270,7 +276,7 @@ public class ActvivityMain extends Activity implements OnClickListener, TaskCall
 				Log.e("btnSetup Value"," btnSetup");
 				//UtilAppCommon.strRedirectTo = "Setup";
 				startActivity(new Intent(this, ActvSetupInfo.class));
-				finish();
+				//finish();
 			break;
 			
 		case R.id.btnMissingCons:
@@ -278,9 +284,6 @@ public class ActvivityMain extends Activity implements OnClickListener, TaskCall
 
 			if (lIntAvailableInputDataCount > 0) {
 				startActivity(new Intent(this, MissingConsumersActivity.class));
-				//UtilAppCommon.strRedirectTo = "Billing";
-				//startActivity(new Intent(getBaseContext(), ActvLogin.class));
-				finish();
 			} else {
 				toast = Toast.makeText(getApplicationContext(),
 						"Please download the input data for Missing Conumers!",
@@ -315,7 +318,7 @@ public class ActvivityMain extends Activity implements OnClickListener, TaskCall
 				startActivity(new Intent(this, ActivitySyncData.class));
 				//UtilAppCommon.strRedirectTo = "Billing";
 				//startActivity(new Intent(getBaseContext(), ActvLogin.class));
-				finish();
+				//finish();
 			} 
 			else if(!NetworkUtil.isOnline(ActvivityMain.this,null))
 			{
@@ -379,7 +382,7 @@ public class ActvivityMain extends Activity implements OnClickListener, TaskCall
 
 			if (lIntAvailableInputDataCount > 0) {
 				startActivity(new Intent(this, ActvReport.class));
-				finish();
+				//finish();
 			} else {
 				toast = Toast
 						.makeText(
@@ -392,7 +395,7 @@ public class ActvivityMain extends Activity implements OnClickListener, TaskCall
 			break;
 		case R.id.btnHelp:
 			startActivity(new Intent(this, ActvivityHelp.class));
-			finish();
+			//finish();
 			break;
 		case R.id.btnQuit:
 			
@@ -412,9 +415,10 @@ public class ActvivityMain extends Activity implements OnClickListener, TaskCall
 	}
 
 	public void onBackPressed() {
-		 //quitApp();
-		 finish();
-		this.moveTaskToBack(true);
+		//quitApp();
+		//finish();
+		//this.moveTaskToBack(true);
+		super.onBackPressed();
 		return;
 	}
 

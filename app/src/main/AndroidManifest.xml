@@ -44,7 +44,7 @@
 
     <uses-feature android:name="android.hardware.camera" android:required="true" />
 
-    <application
+   <!-- <application
         android:name="org.cso.config.AppController"
         android:allowBackup="true"
         android:allowTaskReparenting="true"
@@ -52,7 +52,21 @@
         android:label="@string/app_name"
         android:theme="@style/MSBTheme"
         android:requestLegacyExternalStorage="true"
-        android:usesCleartextTraffic="true">
+        android:largeHeap="true"
+        android:usesCleartextTraffic="true">-->
+    <!--        android:networkSecurityConfig="@xml/network_security_config"-->
+    <application
+        android:allowBackup="false"
+        android:fullBackupContent="false"
+        android:hardwareAccelerated="false"
+        android:icon="@drawable/sbpscl_logo"
+        android:installLocation="internalOnly"
+        android:label="@string/app_name"
+        android:roundIcon="@drawable/sbpscl_logo"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true"
+        tools:replace="android:allowBackup">
         <activity
             android:name=".ActvivityMain"
             android:label="@string/app_name"
@@ -112,9 +126,8 @@
             android:screenOrientation="landscape" />
         <activity
             android:name=".ActvLogin"
-            android:clearTaskOnLaunch="true"
-            android:finishOnTaskLaunch="true"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateVisible"/>
         <activity
             android:name=".ActvReport"
             android:clearTaskOnLaunch="true"
@@ -281,9 +294,8 @@
             android:name=".DcMeterReading"
             android:label=""
             android:screenOrientation="portrait"
-            android:theme="@style/MyMaterialTheme"></activity>
+           ></activity>
         <activity android:name=".ActivityPreLaunch"
-            android:theme="@style/MyMaterialTheme"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

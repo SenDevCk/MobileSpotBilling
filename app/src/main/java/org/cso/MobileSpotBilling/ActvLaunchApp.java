@@ -39,10 +39,12 @@ import java.lang.ref.WeakReference;
 import static org.cso.MSBUtil.UtilAppCommon.WORK_DURATION_KEY;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
-public class ActvLaunchApp extends Activity implements TaskCallback {
+public class ActvLaunchApp extends AppCompatActivity implements TaskCallback {
 
 	TextView txtVersion;
 	private static final int PERMISSION_READ_STATE = 10;
@@ -65,11 +67,17 @@ public class ActvLaunchApp extends Activity implements TaskCallback {
 	private IncomingMessageHandler mHandler;
 
 	TelephonyManager telephonyManager = null;
+	Toolbar toolbar;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_actv_launch_app);
-
+		toolbar = findViewById(R.id.toolbar_act_lanch);
+		//toolbar.setLogo(getResources().getDrawable(R.drawable.sbpscl_logo));
+		toolbar.setTitle(getResources().getString(R.string.app_version));
+		//setSupportActionBar(toolbar);
+		//getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		//getSupportActionBar().setDisplayShowHomeEnabled(true);
 		if (ContextCompat.checkSelfPermission(ActvLaunchApp.this, Manifest.permission.READ_PHONE_STATE)
 				!= PackageManager.PERMISSION_GRANTED) {
 			ActivityCompat.requestPermissions(ActvLaunchApp.this, new String[]{Manifest.permission.READ_PHONE_STATE}, PERMISSION_READ_STATE);
@@ -127,9 +135,9 @@ public class ActvLaunchApp extends Activity implements TaskCallback {
 	@Override
 	public void onRequestPermissionsResult(int requestCode,
 										   String permissions[], int[] grantResults) {
+		super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 		switch (requestCode) {
-			case PERMISSION_READ_STATE:
-			{
+			case PERMISSION_READ_STATE: {
 				if (grantResults.length > 0
 						&& grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 					// permission granted!
@@ -180,24 +188,12 @@ public class ActvLaunchApp extends Activity implements TaskCallback {
 		}
 	}
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		//getMenuInflater().inflate(R.menu.actv_launch_app, menu);
+	/*@Override
+	public boolean onSupportNavigateUp() {
+		//  closePrinter();
+		onBackPressed();
 		return true;
-	}
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
-		int id = item.getItemId();
-		if (id == R.id.action_settings) {
-			return true;
-		}
-		return super.onOptionsItemSelected(item);
-	}
+	}*/
 
 	@Override
 	public void done() {

@@ -2,17 +2,23 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" 
-     android:background="@drawable/backgroundboarder">
- 	<TextView
- 	    android:id="@+id/tvConsumerListHeader"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@drawable/backgroundboarder">
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/app_bar_abnormality"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/headerboarder"
-        android:paddingLeft="5dp"
-        android:text="Consumer List"
-        android:textColor="#ffffff"
-        android:textSize="22dp" />
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar_conlist"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:layout_scrollFlags="scroll|enterAlways"
+            app:popupTheme="@style/AppTheme" />
+    </com.google.android.material.appbar.AppBarLayout>
 
     <TextView
         android:id="@+id/tvConsumerListTestNOR"

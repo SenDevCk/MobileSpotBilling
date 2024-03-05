@@ -19,7 +19,7 @@ public class UtilSvrData {
 	private String SOAPAddress;
 	
 	//private String DevHostName = "http://220.225.3.133/";
-	private String DevHostName = "http://112.133.239.225/";   //Dev New
+	//private String DevHostName = "http://112.133.239.225/";   //Dev New
 	//private String ProHostName = "http://220.225.3.132/";		//DC IP Address Old
 	private String ProHostName = /*"http://220.225.3.149/"*/"https://www.bihardiscom.co.in/";		//DC IP Address New
 	//private String ProHostName = "http://220.227.230.133/";		//DR IP Address
@@ -29,13 +29,13 @@ public class UtilSvrData {
 	//private String strProAlternateHost = "http://125.16.220.2/"; 125.16.220.4
 	
 	//New Airtel IP
-	private String strDevAlternateHost = "http://125.16.220.4/";
+	//private String strDevAlternateHost = "http://125.16.220.4/";
 	private String strProAlternateHost = /*"http://125.16.220.4/"*/"https://www.bihardiscom.co.in/";
 	
 	//private String strHostNameConstant = "http://220.225.3.133/";		//Development
-	private String strHostNameConstant = "http://112.133.239.225/";		//Development  New
+	//private String strHostNameConstant = "http://112.133.239.225/";		//Development  New
 	//private String strHostNameConstant = /*"http://220.225.3.149/"*/"https://www.bihardiscom.co.in/";		//Production	//DC IP Address
-	//private String strHostNameConstant = "http://220.227.230.133/";		//Production	//DR IP Address
+	private String strHostNameConstant = "http://220.227.230.133/";		//Production	//DR IP Address
 	
 	private SoapObject request=null;
 	private SoapObject response=null;
@@ -45,8 +45,8 @@ public class UtilSvrData {
 	
 	public UtilSvrData(){
 		if(UtilAppCommon.strHostName.equals(""))
-			UtilAppCommon.strHostName = DevHostName;
-			//UtilAppCommon.strHostName = ProHostName;
+			//UtilAppCommon.strHostName = DevHostName;
+			UtilAppCommon.strHostName = ProHostName;
 	}
 		
 	public String getJsonInputData(String strParam)
@@ -172,12 +172,12 @@ public class UtilSvrData {
 		}
 		catch (SocketTimeoutException ste)
 		{
-			//Log.e("getValidDevice E",UtilAppCommon.strHostName + " == " +  strHostNameConstant);
+			Log.e("getValidDevice E",UtilAppCommon.strHostName + " == " +  strHostNameConstant);
 			if(UtilAppCommon.strHostName.equals(strHostNameConstant))
 			{
 				Log.e("getValDev STE", ste.toString());
-				UtilAppCommon.strHostName = DevHostName;
-				//UtilAppCommon.strHostName = strProAlternateHost;
+				//UtilAppCommon.strHostName = DevHostName;
+				UtilAppCommon.strHostName = strProAlternateHost;
 				//Log.e("getValidDevice E strProAlternateHost", strProAlternateHost);
 				return "Timeout";
 			}			
@@ -194,8 +194,8 @@ public class UtilSvrData {
 			Log.e("getValidDevice SE", se.toString());
 			if(UtilAppCommon.strHostName.equals(strHostNameConstant))
 			{
-				UtilAppCommon.strHostName = DevHostName;
-				//UtilAppCommon.strHostName = strProAlternateHost;
+				//UtilAppCommon.strHostName = DevHostName;
+				UtilAppCommon.strHostName = strProAlternateHost;
 			}
 			return "Network Issue";
 		}
@@ -252,16 +252,16 @@ public class UtilSvrData {
 		{
 			//System.out.println("getOutputData E ==>> " + ex.getMessage());
 			Log.e("getOutputData STE", ste.getMessage());
-			UtilAppCommon.strHostName = strDevAlternateHost;
-			//UtilAppCommon.strHostName = strProAlternateHost;
+			//UtilAppCommon.strHostName = strDevAlternateHost;
+			UtilAppCommon.strHostName = strProAlternateHost;
 			return "Network Issue / Not Reachable";
 		}
 		catch (SocketException se)
 		{
 			//System.out.println("getOutputData E ==>> " + ex.getMessage());
 			Log.e("getOutputData SE", se.getMessage());
-			UtilAppCommon.strHostName = strDevAlternateHost;
-			//UtilAppCommon.strHostName = strProAlternateHost;
+			//UtilAppCommon.strHostName = strDevAlternateHost;
+			UtilAppCommon.strHostName = strProAlternateHost;
 			return "Network Issue / Not Reachable";
 		}
 		catch (Exception ex)
@@ -559,16 +559,16 @@ public class UtilSvrData {
 		{
 			//System.out.println("getOutputData E ==>> " + ex.getMessage());
 			Log.e("getBlueData STE", ste.getMessage());
-			//UtilAppCommon.strHostName = strProAlternateHost;
-			UtilAppCommon.strHostName = DevHostName;
+			UtilAppCommon.strHostName = strProAlternateHost;
+			//UtilAppCommon.strHostName = DevHostName;
 			return "Network Issue / Not Reachable";
 		}
 		catch (SocketException se)
 		{
 			//System.out.println("getOutputData E ==>> " + ex.getMessage());
 			Log.e("getBlueData SE", se.getMessage());
-			//UtilAppCommon.strHostName = strProAlternateHost;
-			UtilAppCommon.strHostName = DevHostName;
+			UtilAppCommon.strHostName = strProAlternateHost;
+			//UtilAppCommon.strHostName = DevHostName;
 			return "Network Issue / Not Reachable";
 		}
 		catch (Exception ex)

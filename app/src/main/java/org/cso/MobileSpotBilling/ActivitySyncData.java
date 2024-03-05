@@ -46,18 +46,29 @@ import android.widget.EditText;
 import android.widget.TextView.BufferType;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
 //import javax.imageio.*;
 
-public class ActivitySyncData extends Activity implements OnClickListener, TaskCallback {
+public class ActivitySyncData extends AppCompatActivity implements OnClickListener, TaskCallback {
 
     String photoId = "";
     File file, compfile;
+	Toolbar toolbar;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_sync_bills);
-		
+
+		toolbar = findViewById(R.id.toolbar_syncronize);
+		//toolbar.setLogo(getResources().getDrawable(R.drawable.sbpscl_logo));
+		toolbar.setTitle("Syncronize");
+		setSupportActionBar(toolbar);
+		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		getSupportActionBar().setDisplayShowHomeEnabled(true);
+
 		Button calculateBillBtn = (Button) findViewById(R.id.btnSyncData);
 	    calculateBillBtn.setOnClickListener(this);
 	    
@@ -74,30 +85,17 @@ public class ActivitySyncData extends Activity implements OnClickListener, TaskC
 	    
 	    //
 	}
+
+	@Override
+	public boolean onSupportNavigateUp() {
+		//  closePrinter();
+		onBackPressed();
+		return true;
+	}
 	
 	private ProgressDialog pDialog = null;
 	private Context context;
 	int cnt;
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		//getMenuInflater().inflate(R.menu.activity_sync_data, menu);
-		return true;
-	}
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
-		int id = item.getItemId();
-		if (id == R.id.action_settings) {
-			return true;
-		}
-
-
-		return super.onOptionsItemSelected(item);
-	}
 
 	@Override
 	public void onClick(View v) {
@@ -357,11 +355,7 @@ public class ActivitySyncData extends Activity implements OnClickListener, TaskC
 		finish();
 	}
 	
-   public void onBackPressed() {
-		 startActivity(new Intent(this, ActvivityMain.class));
-		 finish();
-	     return;
-	 }
+
    
 	public boolean StoreByteImage() 
 	{

@@ -44,12 +44,17 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class ActvCurrReading extends Activity implements OnClickListener,TaskCallback{
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
+public class ActvCurrReading extends AppCompatActivity implements OnClickListener, TaskCallback {
 
     String strMtrStatus;
     Button calculateBillBtn;
     boolean blFlag = true, blDialFlag = false;
-    LinearLayout linelayPowFact = null, linelayKVAH = null, linelayMaxDemandKVA=null, linelayKWH=null, linelayMaxDemand=null;
+    LinearLayout linelayPowFact = null, linelayKVAH = null, linelayMaxDemandKVA = null, linelayKWH = null, linelayMaxDemand = null;
+    Toolbar toolbar;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
@@ -57,44 +62,45 @@ public class ActvCurrReading extends Activity implements OnClickListener,TaskCal
         System.out.println("**********Inside ActvCurrReading*********** ");
         setContentView(R.layout.currreadinginput);
 
+        toolbar = findViewById(R.id.toolbar_currentred_inpt);
+        //toolbar.setLogo(getResources().getDrawable(R.drawable.sbpscl_logo));
+        toolbar.setTitle("Current Reading Input");
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
         linelayPowFact = (LinearLayout) findViewById(R.id.PowFactorLineLayout);
         linelayKVAH = (LinearLayout) findViewById(R.id.CurrentReadingKVAHLineLayout);
-        linelayMaxDemandKVA=(LinearLayout)findViewById(R.id.maxDemandKVALayout);
-        linelayKWH=(LinearLayout)findViewById(R.id.CurrentReadingKWH);
-        linelayMaxDemand=(LinearLayout)findViewById(R.id.LinearLayoutMaxDemand);
+        linelayMaxDemandKVA = (LinearLayout) findViewById(R.id.maxDemandKVALayout);
+        linelayKWH = (LinearLayout) findViewById(R.id.CurrentReadingKWH);
+        linelayMaxDemand = (LinearLayout) findViewById(R.id.LinearLayoutMaxDemand);
 
         Intent intent = getIntent();
         strMtrStatus = intent.getExtras().getString("MeterStatus");
-        if(!intent.getExtras().getString("MeterStatus").equalsIgnoreCase("Ok"))
-        {
+        if (!intent.getExtras().getString("MeterStatus").equalsIgnoreCase("Ok")) {
             ((EditText) findViewById(R.id.CurrentReadingEdit)).setEnabled(false);
-            if(intent.getExtras().getString("MeterStatus").equalsIgnoreCase("MD") || intent.getExtras().getString("MeterStatus").equalsIgnoreCase("PL"))
+            if (intent.getExtras().getString("MeterStatus").equalsIgnoreCase("MD") || intent.getExtras().getString("MeterStatus").equalsIgnoreCase("PL"))
                 ((EditText) findViewById(R.id.CurrentReadingEdit)).setText(UtilAppCommon.in.PRV_READING_KWH);
-            else
-            {
+            else {
                 ((EditText) findViewById(R.id.CurrentReadingEdit)).setText("0");
                 ((EditText) findViewById(R.id.MaxDemandEdit)).setEnabled(false);
                 ((EditText) findViewById(R.id.MaxDemandEdit)).setText("0.00");
                 ((EditText) findViewById(R.id.PowFactorEdit)).setEnabled(false);
                 ((EditText) findViewById(R.id.PowFactorEdit)).setText("0.00");
             }
-        }
-        else
-        {
+        } else {
             ((EditText) findViewById(R.id.PowFactorEdit)).setText("0.00");
-            if(UtilAppCommon.in.RATE_CATEGORY.equalsIgnoreCase("NDS-IID(B)") ||
+            if (UtilAppCommon.in.RATE_CATEGORY.equalsIgnoreCase("NDS-IID(B)") ||
                     UtilAppCommon.in.RATE_CATEGORY.equalsIgnoreCase("SS-I")
-                     || UtilAppCommon.in.RATE_CATEGORY.equalsIgnoreCase("IAS-IM"))
-            {
+                    || UtilAppCommon.in.RATE_CATEGORY.equalsIgnoreCase("IAS-IM")) {
 
                 ((EditText) findViewById(R.id.CurrentReadingEditKVAH)).setEnabled(false);
                 ((EditText) findViewById(R.id.CurrentReadingEditKVAH)).setText("0");
                 ((EditText) findViewById(R.id.PowFactorEdit)).setEnabled(true);
                 ((EditText) findViewById(R.id.PowFactorEdit)).setText("0.00");
                 linelayKVAH.setVisibility(View.INVISIBLE);
-            }
-            else if(UtilAppCommon.in.RATE_CATEGORY.equalsIgnoreCase("HGN") /*||
-                    UtilAppCommon.in.RATE_CATEGORY.equalsIgnoreCase("LTEV")*/){
+            } else if (UtilAppCommon.in.RATE_CATEGORY.equalsIgnoreCase("HGN") /*||
+                    UtilAppCommon.in.RATE_CATEGORY.equalsIgnoreCase("LTEV")*/) {
                 linelayMaxDemand.setVisibility(View.GONE);
                 ((EditText) findViewById(R.id.MaxDemandEdit)).setEnabled(false);
                 ((EditText) findViewById(R.id.MaxDemandEdit)).setText("0.00");
@@ -104,8 +110,7 @@ public class ActvCurrReading extends Activity implements OnClickListener,TaskCal
                 ((EditText) findViewById(R.id.CurrentReadingEditKVAH)).setText("0");
                 linelayKVAH.setVisibility(View.INVISIBLE);
 
-            }
-            else if(UtilAppCommon.in.RATE_CATEGORY.equalsIgnoreCase("DS-III(D)")){
+            } else if (UtilAppCommon.in.RATE_CATEGORY.equalsIgnoreCase("DS-III(D)")) {
                 ((EditText) findViewById(R.id.CurrentReadingEdit)).setText("0");
                 ((EditText) findViewById(R.id.CurrentReadingEditKVAH)).setEnabled(false);
                 ((EditText) findViewById(R.id.CurrentReadingEditKVAH)).setText("0");
@@ -114,11 +119,10 @@ public class ActvCurrReading extends Activity implements OnClickListener,TaskCal
                 linelayKVAH.setVisibility(View.INVISIBLE);
                 linelayPowFact.setVisibility(View.INVISIBLE);
 
-            }
-            else if(!(UtilAppCommon.in.RATE_CATEGORY.equalsIgnoreCase("LTIS-ID") ||
+            } else if (!(UtilAppCommon.in.RATE_CATEGORY.equalsIgnoreCase("LTIS-ID") ||
                     UtilAppCommon.in.RATE_CATEGORY.equalsIgnoreCase("LTIS-IID") ||
                     UtilAppCommon.in.RATE_CATEGORY.equalsIgnoreCase("PUBWW") ||
-                    UtilAppCommon.in.RATE_CATEGORY.equalsIgnoreCase("IAS-IIM")||
+                    UtilAppCommon.in.RATE_CATEGORY.equalsIgnoreCase("IAS-IIM") ||
                     UtilAppCommon.in.RATE_CATEGORY.equalsIgnoreCase("LTEV")))  //LTEV added
             {
                 /**
@@ -135,18 +139,14 @@ public class ActvCurrReading extends Activity implements OnClickListener,TaskCal
                 linelayPowFact.setVisibility(View.INVISIBLE);
 
 
-
-
                 /**
                  * Setting Visibility of KVAH to visible hence commenting code below and adding visibility to KVAH*/
                 //linelayKVAH.setVisibility(View.INVISIBLE);
 
 
-
-            }
-            else if(UtilAppCommon.in.RATE_CATEGORY.equalsIgnoreCase("LTIS-ID") ||
+            } else if (UtilAppCommon.in.RATE_CATEGORY.equalsIgnoreCase("LTIS-ID") ||
                     UtilAppCommon.in.RATE_CATEGORY.equalsIgnoreCase("LTIS-IID") ||
-                    UtilAppCommon.in.RATE_CATEGORY.equalsIgnoreCase("PUBWW")||
+                    UtilAppCommon.in.RATE_CATEGORY.equalsIgnoreCase("PUBWW") ||
                     UtilAppCommon.in.RATE_CATEGORY.equalsIgnoreCase("IAS-IIM") ||
                     UtilAppCommon.in.RATE_CATEGORY.equalsIgnoreCase("LTEV"))    //LTEV added
             {
@@ -155,7 +155,7 @@ public class ActvCurrReading extends Activity implements OnClickListener,TaskCal
                 ((EditText) findViewById(R.id.MaxDemandEdit)).setText("0.00");
                 ((EditText) findViewById(R.id.CurrentReadingEditKVAH)).setEnabled(true);
                 ((EditText) findViewById(R.id.CurrentReadingEditKVAH)).setText("0");
-                ((EditText)findViewById(R.id.MaxDemandKVAEdit)).setText("0.00");
+                ((EditText) findViewById(R.id.MaxDemandKVAEdit)).setText("0.00");
                 linelayMaxDemandKVA.setVisibility(View.VISIBLE);
                 ((EditText) findViewById(R.id.CurrentReadingEdit)).setText("0");
                 ((EditText) findViewById(R.id.PowFactorEdit)).setEnabled(false);
@@ -163,9 +163,7 @@ public class ActvCurrReading extends Activity implements OnClickListener,TaskCal
                 linelayKVAH.setVisibility(View.VISIBLE);
                 linelayPowFact.setVisibility(View.INVISIBLE);
                 //((EditText) findViewById(R.id.CurrentReadingEditKVAH)).setText("0");
-            }
-            else
-            {
+            } else {
                 ((EditText) findViewById(R.id.PowFactorEdit)).setEnabled(false);
                 ((EditText) findViewById(R.id.PowFactorEdit)).setText("0.00");
                 linelayPowFact.setVisibility(View.INVISIBLE);
@@ -192,44 +190,26 @@ public class ActvCurrReading extends Activity implements OnClickListener,TaskCal
     		}    	*/
         }
 
-        ((TextView) findViewById(R.id.NameTxt1)).setText(String.format(""+ UtilAppCommon.in.CONSUMER_NAME));
-        ((TextView) findViewById(R.id.CurrentStatusTxt)).setText(""+ intent.getExtras().getString("MeterStatus"));
-        String prvrdg="";
-        prvrdg=String.valueOf(getIntent().getExtras().getDouble("prvrdg"));
+        ((TextView) findViewById(R.id.NameTxt1)).setText(String.format("" + UtilAppCommon.in.CONSUMER_NAME));
+        ((TextView) findViewById(R.id.CurrentStatusTxt)).setText("" + intent.getExtras().getString("MeterStatus"));
+        String prvrdg = "";
+        prvrdg = String.valueOf(getIntent().getExtras().getDouble("prvrdg"));
 
-        ((TextView) findViewById(R.id.PrevReadingTxt)).setText(""+prvrdg.substring(0,prvrdg.length()-2));
+        ((TextView) findViewById(R.id.PrevReadingTxt)).setText("" + prvrdg.substring(0, prvrdg.length() - 2));
         calculateBillBtn = (Button) findViewById(R.id.CalculateBtn);
         calculateBillBtn.setOnClickListener(this);
     }
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.mainmenu, menu);
-        return true;
-    }
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.home:
-	   		/*finish();
-	 		 startActivity(new Intent(this, ActvivityMain.class));*/
-                finish();
-                Intent intent = new Intent(this, ActvivityMain.class);
-                startActivity(intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
-                startActivity(intent);
-                break;
-        }
-        return true;
-    }
-    public void onBackPressed() {
-        // do something on back.
-        finish();
-        //startActivity(new Intent(this, ActvBillingOption.class));
 
-        return;
+    @Override
+    public boolean onSupportNavigateUp() {
+        //  closePrinter();
+        onBackPressed();
+        return true;
     }
+
     public void onClick(View v) {
         // TODO Auto-generated method stub
-        switch(v.getId()){
+        switch (v.getId()) {
             case R.id.CalculateBtn:
 
                 Log.e("Current Read", "Started");
@@ -249,64 +229,56 @@ public class ActvCurrReading extends Activity implements OnClickListener,TaskCal
                     final String reading = ((EditText) findViewById(R.id.CurrentReadingEdit)).getText().toString();
                     final String demand = ((EditText) findViewById(R.id.MaxDemandEdit)).getText().toString();
                     String powFactor = ((EditText) findViewById(R.id.PowFactorEdit)).getText().toString();
-                    final String maxDemandKVA=((EditText) findViewById(R.id.MaxDemandKVAEdit)).getText().toString();
+                    final String maxDemandKVA = ((EditText) findViewById(R.id.MaxDemandKVAEdit)).getText().toString();
 
                     NumberFormat formatter = new DecimalFormat("#0.00");
                     iPowFactor = Double.parseDouble(powFactor);
                     iMaxDemand = Double.parseDouble(demand);
                     try {
                         iMaxDemandKVA = Double.parseDouble(maxDemandKVA);
-                    }
-                    catch (Exception e){
+                    } catch (Exception e) {
                         iMaxDemandKVA = 0.0;
                     }
 
-                    if(reading.trim().equalsIgnoreCase("") && readingKVAH.trim().equalsIgnoreCase(""))
-                    {
+                    if (reading.trim().equalsIgnoreCase("") && readingKVAH.trim().equalsIgnoreCase("")) {
                         Toast.makeText(getApplicationContext(),
                                 "Please enter value for reading",
                                 Toast.LENGTH_LONG).show();
                         //break;
                         blFlag = false;
                         return;
-                    }
-                    else{
-                        if(!reading.trim().equalsIgnoreCase("")){
+                    } else {
+                        if (!reading.trim().equalsIgnoreCase("")) {
 
                         }
                     }
 
-                    if(reading.trim().equalsIgnoreCase("") && readingKVAH.trim().equalsIgnoreCase(""))
-                    {
+                    if (reading.trim().equalsIgnoreCase("") && readingKVAH.trim().equalsIgnoreCase("")) {
                         Toast.makeText(getApplicationContext(),
                                 "Please enter value for reading",
                                 Toast.LENGTH_LONG).show();
                         //break;
                         blFlag = false;
-                    }
-                    else
-                    {
+                    } else {
 
 
-                        if(UtilAppCommon.in.RATE_CATEGORY.equalsIgnoreCase("LTIS-ID")
+                        if (UtilAppCommon.in.RATE_CATEGORY.equalsIgnoreCase("LTIS-ID")
                                 || UtilAppCommon.in.RATE_CATEGORY.equalsIgnoreCase("LTIS-IID")
                                 || UtilAppCommon.in.RATE_CATEGORY.equalsIgnoreCase("PUBWW")
-                                || UtilAppCommon.in.RATE_CATEGORY.equalsIgnoreCase("IAS-IIM")||
-                                UtilAppCommon.in.RATE_CATEGORY.equalsIgnoreCase("LTEV")){   //LTEV added
-                            if(readingKVAH.trim().equalsIgnoreCase(""))
-                            {
+                                || UtilAppCommon.in.RATE_CATEGORY.equalsIgnoreCase("IAS-IIM") ||
+                                UtilAppCommon.in.RATE_CATEGORY.equalsIgnoreCase("LTEV")) {   //LTEV added
+                            if (readingKVAH.trim().equalsIgnoreCase("")) {
                                 Toast.makeText(getApplicationContext(),
                                         "Please enter value for reading",
                                         Toast.LENGTH_LONG).show();
                                 //break;
                                 blFlag = false;
                                 return;
-                            }
-                            else{
-                                iReading=Double.parseDouble(readingKVAH);
+                            } else {
+                                iReading = Double.parseDouble(readingKVAH);
                             }
 
-                            if(Double.parseDouble(reading) > Double.parseDouble(readingKVAH)){
+                            if (Double.parseDouble(reading) > Double.parseDouble(readingKVAH)) {
                                 Toast.makeText(getApplicationContext(),
                                         "KVAH reading must be greater than equal to KWH",
                                         Toast.LENGTH_LONG).show();
@@ -336,29 +308,25 @@ public class ActvCurrReading extends Activity implements OnClickListener,TaskCal
 //                            }
 
 
-
-                            if(iMaxDemandKVA <= 0.0){
+                            if (iMaxDemandKVA <= 0.0) {
                                 Toast.makeText(getApplicationContext(),
                                         "Please value for Max Demand",
                                         Toast.LENGTH_LONG).show();
-                                blFlag=false;
+                                blFlag = false;
                                 return;
-                            }else{
-                                iMaxDemand=iMaxDemandKVA;
+                            } else {
+                                iMaxDemand = iMaxDemandKVA;
                             }
 
 
-                        }
-                        else
+                        } else
                             iReading = Double.parseDouble(reading);
 
-                        if(UtilAppCommon.in.PRV_READING_KWH.toString().trim().equalsIgnoreCase("") ||
-                                UtilAppCommon.in.PRV_READING_KWH == null){
+                        if (UtilAppCommon.in.PRV_READING_KWH.toString().trim().equalsIgnoreCase("") ||
+                                UtilAppCommon.in.PRV_READING_KWH == null) {
                             iPrevRead = 0;
 
-                        }
-                        else
-                        {
+                        } else {
                             try {
                                 iPrevRead = Double.parseDouble(UtilAppCommon.in.PRV_READING_KWH.toString().trim());
                             } catch (NumberFormatException e) {
@@ -372,7 +340,7 @@ public class ActvCurrReading extends Activity implements OnClickListener,TaskCal
                         iPreDecimal = Double.parseDouble(UtilAppCommon.in.PRE_DECIMAL_MTR);
                     }
 
-                    if(UtilAppCommon.in.PRV_READING_KWH.toString().trim().equalsIgnoreCase("") ||
+                    if (UtilAppCommon.in.PRV_READING_KWH.toString().trim().equalsIgnoreCase("") ||
                             UtilAppCommon.in.PRV_READING_KWH == null)
                         iPrevRead = 0;
 				
@@ -386,51 +354,40 @@ public class ActvCurrReading extends Activity implements OnClickListener,TaskCal
 				}				
 				
 				else */
-                    if((UtilAppCommon.in.RATE_CATEGORY.equalsIgnoreCase("NDS-IID(B)") ||
+                    if ((UtilAppCommon.in.RATE_CATEGORY.equalsIgnoreCase("NDS-IID(B)") ||
                             UtilAppCommon.in.RATE_CATEGORY.equalsIgnoreCase("SS-I")
-                           /* || UtilAppCommon.in.RATE_CATEGORY.equalsIgnoreCase("IAS-IIM")*/ ||
+                            /* || UtilAppCommon.in.RATE_CATEGORY.equalsIgnoreCase("IAS-IIM")*/ ||
                             UtilAppCommon.in.RATE_CATEGORY.equalsIgnoreCase("IAS-IM")
                             || UtilAppCommon.in.RATE_CATEGORY.equalsIgnoreCase("HGN")
-                           /* || UtilAppCommon.in.RATE_CATEGORY.equalsIgnoreCase("LTEV")*/)
-                    && ((iPowFactor = powerFactorValue(powFactor)) == -1.0 ))
-                    {
+                            /* || UtilAppCommon.in.RATE_CATEGORY.equalsIgnoreCase("LTEV")*/)
+                            && ((iPowFactor = powerFactorValue(powFactor)) == -1.0)) {
                         blFlag = false;
-                    }
-
-                    else if((UtilAppCommon.in.RATE_CATEGORY.equalsIgnoreCase("NDS-IID(B)") ||
+                    } else if ((UtilAppCommon.in.RATE_CATEGORY.equalsIgnoreCase("NDS-IID(B)") ||
                             UtilAppCommon.in.RATE_CATEGORY.equalsIgnoreCase("SS-I")
                             /*|| UtilAppCommon.in.RATE_CATEGORY.equalsIgnoreCase("IAS-IIM")*/ ||
                             UtilAppCommon.in.RATE_CATEGORY.equalsIgnoreCase("IAS-IM"))
-                            && (Double.parseDouble(reading) <= 0))
-                    {
+                            && (Double.parseDouble(reading) <= 0)) {
                         Toast.makeText(getApplicationContext(),
                                 "Please enter value for Reading KWH more than 0.",
                                 Toast.LENGTH_LONG).show();
                         //break;
                         blFlag = false;
-                    }
-
-                    else if((iMaxDemand <= 0 || iMaxDemand > 200) &&
+                    } else if ((iMaxDemand <= 0 || iMaxDemand > 200) &&
                             !UtilAppCommon.in.RATE_CATEGORY.equalsIgnoreCase("HGN") /*&&
-                            !UtilAppCommon.in.RATE_CATEGORY.equalsIgnoreCase("LTEV")*/)
-                    {
+                            !UtilAppCommon.in.RATE_CATEGORY.equalsIgnoreCase("LTEV")*/) {
                         Toast.makeText(getApplicationContext(),
                                 "Please enter Max Demand value more than 0 and less than or equal to 200.",
                                 Toast.LENGTH_LONG).show();
                         //break;
                         blFlag = false;
-                    }
-                    else if(strMtrStatus.equalsIgnoreCase("ok") && reading.length() > iPreDecimal)
-                    {
+                    } else if (strMtrStatus.equalsIgnoreCase("ok") && reading.length() > iPreDecimal) {
                         Toast.makeText(getApplicationContext(),
-                                "Please enter reading upto "+ UtilAppCommon.in.PRE_DECIMAL_MTR + " digits. Please re-enter reading again.",
+                                "Please enter reading upto " + UtilAppCommon.in.PRE_DECIMAL_MTR + " digits. Please re-enter reading again.",
                                 Toast.LENGTH_LONG).show();
                         //break;
                         blFlag = false;
-                    }
-                    else if((UtilAppCommon.in.PRV_MTR_READING_NOTE.equalsIgnoreCase("ok") && iReading < iPrevRead) ||
-                            (UtilAppCommon.in.PRV_MTR_READING_NOTE.equalsIgnoreCase("pl") && iReading < iLastActual))
-                    {
+                    } else if ((UtilAppCommon.in.PRV_MTR_READING_NOTE.equalsIgnoreCase("ok") && iReading < iPrevRead) ||
+                            (UtilAppCommon.in.PRV_MTR_READING_NOTE.equalsIgnoreCase("pl") && iReading < iLastActual)) {
                         final AlertDialog ad1 = new AlertDialog.Builder(this)
                                 .create();
                         ad1.setTitle("Confirm");
@@ -443,7 +400,7 @@ public class ActvCurrReading extends Activity implements OnClickListener,TaskCal
                                         // TODO Auto-generated method stub
 
                                         ad1.dismiss();
-                                        if(blFlag)
+                                        if (blFlag)
                                             billing();
                                         //blDialFlag = true;
                                         //billdlg();
@@ -468,9 +425,7 @@ public class ActvCurrReading extends Activity implements OnClickListener,TaskCal
                                     }
                                 });
                         ad1.show();
-                    }
-                    else
-                    {
+                    } else {
                         billing();
                     }
                     //if(blFlag)
@@ -484,16 +439,15 @@ public class ActvCurrReading extends Activity implements OnClickListener,TaskCal
         }
     }
 
-    public double powerFactorValue(String powFactor){
+    public double powerFactorValue(String powFactor) {
         double iPowFactor = -1.0;
-        if(powFactor == null || powFactor.trim().length() == 0){
+        if (powFactor == null || powFactor.trim().length() == 0) {
             Toast.makeText(getApplicationContext(),
                     "Please enter value for Power Factor",
                     Toast.LENGTH_LONG).show();
             //break;
             blFlag = false;
-        }
-        else{
+        } else {
             int indexOfDecimal = powFactor.indexOf(".");
             if (indexOfDecimal >= 0) {
                 if ((powFactor.length() - (indexOfDecimal + 1)) > 2) {
@@ -503,8 +457,8 @@ public class ActvCurrReading extends Activity implements OnClickListener,TaskCal
                     //break;
                     blFlag = false;
                 } else {
-                    if(powFactor.indexOf(".") == 0){
-                        powFactor="0"+powFactor;
+                    if (powFactor.indexOf(".") == 0) {
+                        powFactor = "0" + powFactor;
                     }
                     iPowFactor = Double.parseDouble(powFactor);
                     if (iPowFactor >= 1 || iPowFactor <= 0) {
@@ -529,11 +483,8 @@ public class ActvCurrReading extends Activity implements OnClickListener,TaskCal
         return iPowFactor;
     }
 
-    public void billing()
-    {
-        try
-
-        {
+    public void billing() {
+        try {
             final Intent intent = getIntent();
             double iPowFactor = 0;
             final String reading = ((EditText) findViewById(R.id.CurrentReadingEdit)).getText().toString();
@@ -542,12 +493,12 @@ public class ActvCurrReading extends Activity implements OnClickListener,TaskCal
             String demandKVA = ((EditText) findViewById(R.id.MaxDemandKVAEdit)).getText().toString();
             final String powFactor = ((EditText) findViewById(R.id.PowFactorEdit)).getText().toString();
 
-            if(UtilAppCommon.in.RATE_CATEGORY.equalsIgnoreCase("LTIS-ID")
+            if (UtilAppCommon.in.RATE_CATEGORY.equalsIgnoreCase("LTIS-ID")
                     || UtilAppCommon.in.RATE_CATEGORY.equalsIgnoreCase("LTIS-IID")
                     || UtilAppCommon.in.RATE_CATEGORY.equalsIgnoreCase("PUBWW")
-                    ||UtilAppCommon.in.RATE_CATEGORY.equalsIgnoreCase("IAS-IIM")||
-                    UtilAppCommon.in.RATE_CATEGORY.equalsIgnoreCase("LTEV")){
-                demand=demandKVA;
+                    || UtilAppCommon.in.RATE_CATEGORY.equalsIgnoreCase("IAS-IIM") ||
+                    UtilAppCommon.in.RATE_CATEGORY.equalsIgnoreCase("LTEV")) {
+                demand = demandKVA;
             }
             calculateBillBtn.setEnabled(false);
 
@@ -571,38 +522,37 @@ public class ActvCurrReading extends Activity implements OnClickListener,TaskCal
 
                 int temp = Integer.parseInt(UtilAppCommon.in.SCHEDULED_BILLING_DATE.substring(5, 7));
                 String strtemp = "";
-                if(temp <= 9)
+                if (temp <= 9)
                     strtemp = "0" + Integer.parseInt(UtilAppCommon.in.SCHEDULED_BILLING_DATE.substring(5, 7));
                 else
-                    strtemp = ""  + Integer.parseInt(UtilAppCommon.in.SCHEDULED_BILLING_DATE.substring(5, 7));
+                    strtemp = "" + Integer.parseInt(UtilAppCommon.in.SCHEDULED_BILLING_DATE.substring(5, 7));
 
                 String strtemp1 = "";
 
                 int temp1 = Integer.parseInt(UtilAppCommon.in.SCHEDULED_BILLING_DATE.substring(8, 10));
-                if(temp1 <= 9)
+                if (temp1 <= 9)
                     strtemp1 = "0" + Integer.parseInt(UtilAppCommon.in.SCHEDULED_BILLING_DATE.substring(8, 10));
                 else
-                    strtemp1 = ""  + Integer.parseInt(UtilAppCommon.in.SCHEDULED_BILLING_DATE.substring(8, 10));
+                    strtemp1 = "" + Integer.parseInt(UtilAppCommon.in.SCHEDULED_BILLING_DATE.substring(8, 10));
 
                 nxtDate = strtemp1 + "." + strtemp
                         + "." + Integer.parseInt(UtilAppCommon.in.SCHEDULED_BILLING_DATE.substring(0, 4));
 
 
-
-                copySAPInputData[0] = UtilAppCommon.in.CONTRACT_AC_NO;				//cursor.getString(0);	CANumber
-                copySAPInputData[1] = UtilAppCommon.in.INSTALLATION;				//cursor.getString(1); 	Installation
-                copySAPInputData[2] = strlocation.split("¥")[0];					//cursor.getString(8);	Latitude
-                copySAPInputData[3] = strlocation.split("¥")[1];					//cursor.getString(9);	Longitude
-                copySAPInputData[4] = reading;										//cursor.getString(5);	CurrentReadingKwh
-                copySAPInputData[5] = demand;										//cursor.getString(7);	MaxDemd
-                copySAPInputData[6] = formatter.format(iPowFactor);					//cursor.getString(8);	PowerFactor
-                copySAPInputData[7] = strMtrStatus;									//cursor.getString(4);	MtrReadingNote
-                copySAPInputData[8] = SAPInformat.format(today.getTime()) ;			//cursor.getString(3);	MtrReadingDate
-                copySAPInputData[9] = nxtDate;										//cursor.getString(2);	SCHEDULED_BILLING_DATE
-                copySAPInputData[10] = UtilAppCommon.in.SAP_DEVICE_NO;				//cursor.getString(12);	SAP_DEVICE_NO
-                copySAPInputData[11] = "1";											//"2"					ProcessedFlag
-                copySAPInputData[12] = "0";											//"0"
-                copySAPInputData[13] = readingKVAH;									//cursor.getString(6);	CurrentReadingKVAH
+                copySAPInputData[0] = UtilAppCommon.in.CONTRACT_AC_NO;                //cursor.getString(0);	CANumber
+                copySAPInputData[1] = UtilAppCommon.in.INSTALLATION;                //cursor.getString(1); 	Installation
+                copySAPInputData[2] = strlocation.split("¥")[0];                    //cursor.getString(8);	Latitude
+                copySAPInputData[3] = strlocation.split("¥")[1];                    //cursor.getString(9);	Longitude
+                copySAPInputData[4] = reading;                                        //cursor.getString(5);	CurrentReadingKwh
+                copySAPInputData[5] = demand;                                        //cursor.getString(7);	MaxDemd
+                copySAPInputData[6] = formatter.format(iPowFactor);                    //cursor.getString(8);	PowerFactor
+                copySAPInputData[7] = strMtrStatus;                                    //cursor.getString(4);	MtrReadingNote
+                copySAPInputData[8] = SAPInformat.format(today.getTime());            //cursor.getString(3);	MtrReadingDate
+                copySAPInputData[9] = nxtDate;                                        //cursor.getString(2);	SCHEDULED_BILLING_DATE
+                copySAPInputData[10] = UtilAppCommon.in.SAP_DEVICE_NO;                //cursor.getString(12);	SAP_DEVICE_NO
+                copySAPInputData[11] = "1";                                            //"2"					ProcessedFlag
+                copySAPInputData[12] = "0";                                            //"0"
+                copySAPInputData[13] = readingKVAH;                                    //cursor.getString(6);	CurrentReadingKVAH
 
                 Log.e("SCHEDULED_BILLING_DATE", UtilAppCommon.in.SCHEDULED_BILLING_DATE.substring(0, 4) + "-" + UtilAppCommon.in.SCHEDULED_BILLING_DATE.substring(5, 7) + "-" + UtilAppCommon.in.SCHEDULED_BILLING_DATE.substring(8, 10));
                 Log.e("SCHEDULED_BILLING_DATE", UtilAppCommon.in.SCHEDULED_BILLING_DATE + " <==> " + nxtDate);
@@ -622,7 +572,7 @@ public class ActvCurrReading extends Activity implements OnClickListener,TaskCal
 
                 //AsyncGetOutputData asyncGetOutputData = new AsyncGetOutputData(this);
                 // 20.11.15
-                AsyncGetOutputData asyncGetOutputData = new AsyncGetOutputData(this,new OnBillGenerate() {
+                AsyncGetOutputData asyncGetOutputData = new AsyncGetOutputData(this, new OnBillGenerate() {
 
                     @Override
                     public void onFinish() {
@@ -658,18 +608,17 @@ public class ActvCurrReading extends Activity implements OnClickListener,TaskCal
             //Log.e("Current Read", "Completed");
             //finish();
 
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
             Log.e("Curr Read Bill E", e.getMessage());
         }
     }
 
-    public String showSettingsAlert(){
-        GPSTracker gps  = new GPSTracker(ActvCurrReading.this);
+    public String showSettingsAlert() {
+        GPSTracker gps = new GPSTracker(ActvCurrReading.this);
 
-        if(gps.canGetLocation()){
+        if (gps.canGetLocation()) {
 
             String latitude = String.valueOf(gps.getLatitude());
             String longitude = String.valueOf(gps.getLongitude());
@@ -677,7 +626,7 @@ public class ActvCurrReading extends Activity implements OnClickListener,TaskCal
             // \n is for new line
             //Toast.makeText(getApplicationContext(), "Your Location is - \nLat: " + latitude + "\nLong: " + longitude, Toast.LENGTH_LONG).show();
             return String.valueOf(gps.getLatitude()) + "¥" + String.valueOf(gps.getLongitude());
-        }else{
+        } else {
             // can't get location
             // GPS or Network is not enabled
             // Ask user to enable GPS/network in settings
@@ -688,8 +637,9 @@ public class ActvCurrReading extends Activity implements OnClickListener,TaskCal
             return String.valueOf(gps.getLatitude()) + "¥" + String.valueOf(gps.getLongitude());
         }
     }
+
     // 20.11.15
-    private void printdlg(){
+    private void printdlg() {
         {
             // need to be change for photo
             getImageByCANo(UtilAppCommon.acctNbr);
@@ -714,13 +664,13 @@ public class ActvCurrReading extends Activity implements OnClickListener,TaskCal
                         ad.dismiss();
                         // startActivity(getIntent());
                         //startActivity(new Intent(getApplicationContext(), ActvBillingOption.class));
-                        if(UtilAppCommon.billType.equalsIgnoreCase("A"))
+                        if (UtilAppCommon.billType.equalsIgnoreCase("A"))
                             startActivity(new Intent(getBaseContext(), ActvConsumerNbrInput.class));
-                        else if(UtilAppCommon.billType.equalsIgnoreCase("L"))
+                        else if (UtilAppCommon.billType.equalsIgnoreCase("L"))
                             startActivity(new Intent(getBaseContext(), ActvLegacyNbrInput.class));
-                        else if(UtilAppCommon.billType.equalsIgnoreCase("S"))
+                        else if (UtilAppCommon.billType.equalsIgnoreCase("S"))
                             startActivity(new Intent(getBaseContext(), ActvSequenceData.class));
-                        else if(UtilAppCommon.billType.equalsIgnoreCase("M"))
+                        else if (UtilAppCommon.billType.equalsIgnoreCase("M"))
                             startActivity(new Intent(getBaseContext(), MeterNbrInput.class));
                         else
                             startActivity(new Intent(getBaseContext(), ActvBillingOption.class));
@@ -728,6 +678,7 @@ public class ActvCurrReading extends Activity implements OnClickListener,TaskCal
             ad.show();
         }
     }
+
     //20.11.15
     private void Write2SbmOut() {
         // TODO Auto-generated method stub
@@ -743,15 +694,12 @@ public class ActvCurrReading extends Activity implements OnClickListener,TaskCal
             //printbill();
             int cnt;
             cnt = util1.getBillOutputRowCount(UtilAppCommon.acctNbr);
-            System.out.println("Output cnt .."+cnt);
-            if(cnt != 0)
-            {
-                Log.e("Write2SbmOut - Count", "Valid - " + cnt );
+            System.out.println("Output cnt .." + cnt);
+            if (cnt != 0) {
+                Log.e("Write2SbmOut - Count", "Valid - " + cnt);
                 util1.getOutputBillRecord(UtilAppCommon.acctNbr);
                 startActivity(new Intent(this, ActvBillPrinting.class)); // used to print bill through printer
-            }
-            else
-            {
+            } else {
                 startActivity(new Intent(this, ActvMsgPrinting.class)); // used to print bill through printer
 				/*if(UtilAppCommon.inSAPMsgID.toString().equals("4") || UtilAppCommon.inSAPMsgID.toString().equals("5"))
 					startActivity(new Intent(this, ActvMsgPrinting.class)); // used to print bill through printer
@@ -795,11 +743,9 @@ public class ActvCurrReading extends Activity implements OnClickListener,TaskCal
         try {
             PdfWriter.getInstance(document, new FileOutputStream(file));
             document.open();
-            if(UtilAppCommon.inSAPMsgID.equalsIgnoreCase("6"))
-            {
+            if (UtilAppCommon.inSAPMsgID.equalsIgnoreCase("6")) {
                 createTable1(document);
-            }
-            else
+            } else
                 createTableMsg(document);
             document.close();
             // ADDED BY DKR
@@ -836,11 +782,11 @@ public class ActvCurrReading extends Activity implements OnClickListener,TaskCal
 
             PdfPTable table = new PdfPTable(2);
             table.addCell("COMPANY :");
-            table.addCell(UtilAppCommon.out.Company+"CL");
+            table.addCell(UtilAppCommon.out.Company + "CL");
             table.addCell("BILL FOR");
-            table.addCell( UtilAppCommon.out.BillMonth);
+            table.addCell(UtilAppCommon.out.BillMonth);
             table.addCell("CONSUMER DETAILS");
-            table.addCell( "");
+            table.addCell("");
 
             table.addCell("BILL NO");
             table.addCell(UtilAppCommon.out.BillNo);
@@ -848,7 +794,7 @@ public class ActvCurrReading extends Activity implements OnClickListener,TaskCal
             table.addCell("DIVISION");
             table.addCell(UtilAppCommon.out.Division);
             table.addCell("Sub Div");
-            table.addCell( UtilAppCommon.out.SubDivision);
+            table.addCell(UtilAppCommon.out.SubDivision);
 
             table.addCell("CA NUMBER");
             table.addCell(UtilAppCommon.out.CANumber);
@@ -867,9 +813,9 @@ public class ActvCurrReading extends Activity implements OnClickListener,TaskCal
             table.addCell(UtilAppCommon.out.PoleNo);
 
             table.addCell("METER NO:  PH:");
-            table.addCell(UtilAppCommon.out.MtrNo+" "+UtilAppCommon.out.Phase);
+            table.addCell(UtilAppCommon.out.MtrNo + " " + UtilAppCommon.out.Phase);
             table.addCell("MTR COMP");
-            table.addCell( UtilAppCommon.out.MtrMake
+            table.addCell(UtilAppCommon.out.MtrMake
                     .equals("C") ? "Company" : UtilAppCommon.out.MtrMake
                     .equals("S") ? "Consumer" : "");
 
@@ -877,7 +823,7 @@ public class ActvCurrReading extends Activity implements OnClickListener,TaskCal
             table.addCell(UtilAppCommon.out.Category);
             // table.addCell("ADDR1");
             table.addCell("SL  CL  CD");
-            table.addCell(UtilAppCommon.out.SanctLoad+" "+UtilAppCommon.out.ConnectedLoad+" "+ UtilAppCommon.out.CD);
+            table.addCell(UtilAppCommon.out.SanctLoad + " " + UtilAppCommon.out.ConnectedLoad + " " + UtilAppCommon.out.CD);
             table.addCell("SD");
             table.addCell(UtilAppCommon.out.SD);
             table.addCell("BILLED DAYS ");
@@ -890,9 +836,9 @@ public class ActvCurrReading extends Activity implements OnClickListener,TaskCal
             table.addCell("READING");
             table.addCell("DATE STS");
             table.addCell(UtilAppCommon.out.PreviusReading);
-            table.addCell(UtilAppCommon.out.PrevusMtrRdgDt+" "+UtilAppCommon.out.PreviusMtrReadingNote);
+            table.addCell(UtilAppCommon.out.PrevusMtrRdgDt + " " + UtilAppCommon.out.PreviusMtrReadingNote);
             table.addCell(UtilAppCommon.out.CurrentReading);
-            table.addCell(UtilAppCommon.out.CurrentMtrRdgDt+" "+UtilAppCommon.out.CurrentMtrReadingNote);
+            table.addCell(UtilAppCommon.out.CurrentMtrRdgDt + " " + UtilAppCommon.out.CurrentMtrReadingNote);
 
 
             PdfPTable table2 = new PdfPTable(2);
@@ -904,32 +850,26 @@ public class ActvCurrReading extends Activity implements OnClickListener,TaskCal
 
 
             table2.addCell("RECD DEMD:   PF:");
-            table2.addCell(UtilAppCommon.out.RecordedDemd+"  "+ UtilAppCommon.out.PowerFactor);
+            table2.addCell(UtilAppCommon.out.RecordedDemd + "  " + UtilAppCommon.out.PowerFactor);
 
             PdfPTable table3 = new PdfPTable(2);
-            String mmcunits,avg;
-            if (UtilAppCommon.out.Category.equals("DS-II")||UtilAppCommon.out.Category.equals("NDS-I"))
-            {
+            String mmcunits, avg;
+            if (UtilAppCommon.out.Category.equals("DS-II") || UtilAppCommon.out.Category.equals("NDS-I")) {
                 mmcunits = "0";
-            }
-            else
-            {
+            } else {
                 mmcunits = UtilAppCommon.out.MMCUnits;
             }
-            if (UtilAppCommon.out.Type.equalsIgnoreCase("ACTUAL"))
-            {
-                avg ="";
-            }
-            else
-            {
+            if (UtilAppCommon.out.Type.equalsIgnoreCase("ACTUAL")) {
+                avg = "";
+            } else {
                 avg = UtilAppCommon.out.Average;
             }
 
             table3.addCell("MMC UNITS:  AVG:");
-            table3.addCell(mmcunits+ "  "+ avg);
+            table3.addCell(mmcunits + "  " + avg);
 
             table3.addCell("BLD UNITS: TYPE :");
-            table3.addCell(UtilAppCommon.out.BilledUnits+" "+ UtilAppCommon.out.Type);
+            table3.addCell(UtilAppCommon.out.BilledUnits + " " + UtilAppCommon.out.Type);
 
             table3.addCell("ARREAR DETAILS:");
             table3.addCell("");
@@ -995,11 +935,11 @@ public class ActvCurrReading extends Activity implements OnClickListener,TaskCal
             table3.addCell("");
 
             table3.addCell("UPTO");
-            table3.addCell(UtilAppCommon.out.AmtPayableUptoDt+":"+UtilAppCommon.out.AmtPayableUptoAmt);
+            table3.addCell(UtilAppCommon.out.AmtPayableUptoDt + ":" + UtilAppCommon.out.AmtPayableUptoAmt);
             table3.addCell("BY");
-            table3.addCell(UtilAppCommon.out.AmtPayablePYDt+":"+UtilAppCommon.out.AmtPayablePYAmt);
+            table3.addCell(UtilAppCommon.out.AmtPayablePYDt + ":" + UtilAppCommon.out.AmtPayablePYAmt);
             table3.addCell("AFTER");
-            table3.addCell(UtilAppCommon.out.AmtPayableAfterDt+":"+UtilAppCommon.out.AmtPayableAfterAmt);
+            table3.addCell(UtilAppCommon.out.AmtPayableAfterDt + ":" + UtilAppCommon.out.AmtPayableAfterAmt);
 
             table3.addCell("DETAILS OF LAST PAYMENT");
             table3.addCell("");
@@ -1036,9 +976,9 @@ public class ActvCurrReading extends Activity implements OnClickListener,TaskCal
 
         PdfPTable table = new PdfPTable(2);
         table.addCell("COMPANY :");
-        table.addCell(UtilAppCommon.in.COM_CODE+"CL");
+        table.addCell(UtilAppCommon.in.COM_CODE + "CL");
         table.addCell("   ");
-        table.addCell( "   ");
+        table.addCell("   ");
         table.addCell("CA NUMBER");
         table.addCell(UtilAppCommon.in.CONTRACT_AC_NO);
 
@@ -1049,7 +989,7 @@ public class ActvCurrReading extends Activity implements OnClickListener,TaskCal
         table.addCell("Category");
         table.addCell(UtilAppCommon.in.RATE_CATEGORY);
 
-        String mtrsts="";
+        String mtrsts = "";
         if (UtilAppCommon.SAPIn.MtrReadingNote.equalsIgnoreCase("PL"))
             mtrsts = "House Lock";
         else if (UtilAppCommon.SAPIn.MtrReadingNote.equalsIgnoreCase("RN"))
@@ -1060,19 +1000,18 @@ public class ActvCurrReading extends Activity implements OnClickListener,TaskCal
             mtrsts = "Actual";
 
         table.addCell("Current Mtr Sts:");
-        table.addCell( mtrsts);
+        table.addCell(mtrsts);
 
-        if (UtilAppCommon.SAPIn.MtrReadingNote.equalsIgnoreCase("OK"))
-        {
+        if (UtilAppCommon.SAPIn.MtrReadingNote.equalsIgnoreCase("OK")) {
             table.addCell("MTR Rdg Dt:");
             table.addCell(UtilAppCommon.SAPIn.MtrReadingDate);
 
             table.addCell("Current Mtr Rdg(Kwh):");
-            table.addCell( UtilAppCommon.SAPIn.CurrentReadingKwh);
+            table.addCell(UtilAppCommon.SAPIn.CurrentReadingKwh);
             table.addCell("Max Demd:");
-            table.addCell( UtilAppCommon.SAPIn.MaxDemd);
+            table.addCell(UtilAppCommon.SAPIn.MaxDemd);
             table.addCell("PF:");
-            table.addCell( UtilAppCommon.SAPIn.PowerFactor);
+            table.addCell(UtilAppCommon.SAPIn.PowerFactor);
 
         }
         table.addCell("    ");
@@ -1081,12 +1020,12 @@ public class ActvCurrReading extends Activity implements OnClickListener,TaskCal
         table.addCell("The Bill could not be generated now.");
         table.addCell("Please collect your bill .");
 
-        table.addCell("From "+UtilAppCommon.in.COM_CODE+"CL Website" );
+        table.addCell("From " + UtilAppCommon.in.COM_CODE + "CL Website");
         table.addCell("after 2 days");
 
-        table.addCell("Message Id" );
+        table.addCell("Message Id");
         table.addCell(UtilAppCommon.SAPIn.MsgId);
-        table.addCell("Message " );
+        table.addCell("Message ");
         table.addCell(UtilAppCommon.SAPIn.strMsg);
 
         document.add(table);
@@ -1094,14 +1033,12 @@ public class ActvCurrReading extends Activity implements OnClickListener,TaskCal
         Log.e("createTableMsg", "End");
     }
 
-    public void done()
-    {
+    public void done() {
         finish();
 //		startActivity(new Intent(this, ActvivityMain.class));
     }
 
-    public void getImageByCANo(String CANo)
-    {
+    public void getImageByCANo(String CANo) {
         String AppDir = "";
 
         Log.e("getImageByCANo", "Started");
@@ -1112,14 +1049,13 @@ public class ActvCurrReading extends Activity implements OnClickListener,TaskCal
         Cursor cursorImage = utildb.getUnCompressedImage(CANo);
         File file = null;
         //getUnCompressedImage
-        if(cursorImage != null)
-        {
+        if (cursorImage != null) {
             cursorImage.moveToFirst();
-            file = new File(AppDir , cursorImage.getString(1));
+            file = new File(AppDir, cursorImage.getString(1));
         }
         //ImageProcessing imageProcessing = new ImageProcessing();
 
-        AsyncImage asyncImage = new AsyncImage(this ,new OnBillGenerate() {
+        AsyncImage asyncImage = new AsyncImage(this, new OnBillGenerate() {
             @Override
             public void onFinish() {
                 // TODO Auto-generated method stub
@@ -1136,12 +1072,11 @@ public class ActvCurrReading extends Activity implements OnClickListener,TaskCal
         credentials[4] = f.getAbsolutePath() + "/" + cursorImage.getString(1);
         credentials[5] = utildb.getActiveMRU();
 
-        if(credentials != null)
+        if (credentials != null)
             asyncImage.execute(credentials);
 
         Log.e("getImageByCANo", "Completed");
     }
-
 
 
 }

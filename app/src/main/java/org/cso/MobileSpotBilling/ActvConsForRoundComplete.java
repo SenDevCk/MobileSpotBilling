@@ -8,7 +8,9 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
 
-public class ActvConsForRoundComplete extends Activity{
+import androidx.appcompat.app.AppCompatActivity;
+
+public class ActvConsForRoundComplete extends AppCompatActivity {
 	@Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

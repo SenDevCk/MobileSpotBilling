@@ -122,7 +122,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-public class ActvBilling extends Activity implements OnClickListener, TaskCallback {
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
+public class ActvBilling extends AppCompatActivity implements OnClickListener, TaskCallback {
+
+	Toolbar toolbar;
 	Context context = this;
 	String currentStatus;
 	double currentReading;
@@ -298,6 +303,17 @@ public class ActvBilling extends Activity implements OnClickListener, TaskCallba
 			finish();
 		}
 
+	}
+
+	@Override
+	public boolean onSupportNavigateUp() {
+		//  closePrinter();
+		try {
+			file.delete();
+		} catch (Exception ex) {
+		}
+		onBackPressed();
+		return true;
 	}
 
 	/*private boolean validateDoubleBilling() {
@@ -1159,34 +1175,17 @@ public class ActvBilling extends Activity implements OnClickListener, TaskCallba
 		//Log.e("showLayout", "Completed");
 	}
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		MenuInflater inflater = getMenuInflater();
-		inflater.inflate(R.menu.mainmenu, menu);
-		return true;
-	}
 
-	public boolean onOptionsItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
-		case R.id.home:
-			finish();
-			Intent intent = new Intent(this, ActvivityMain.class);
-			startActivity(intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
-			startActivity(intent);
-			break;
-		}
-		return true;
-	}
 
 	public void onBackPressed() {
-
 		try {
 			file.delete();
 		} catch (Exception ex) {
 		}
-		finish();
+		super.onBackPressed();
+		//finish();
 
-		startActivity(new Intent(this, ActvBillingOption.class));
+		//startActivity(new Intent(this, ActvBillingOption.class));
 		return;
 	}
 
@@ -1888,7 +1887,12 @@ public class ActvBilling extends Activity implements OnClickListener, TaskCallba
 	
 	private void showConsumerDetails() {
 		setContentView(R.layout.consumerdetails);
-		
+				toolbar = findViewById(R.id.toolbar_condet);
+		//toolbar.setLogo(getResources().getDrawable(R.drawable.sbpscl_logo));
+		toolbar.setTitle("Consumer Details");
+		setSupportActionBar(toolbar);
+		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		getSupportActionBar().setDisplayShowHomeEnabled(true);
 		View customerLayout = findViewById(R.id.CustomerDetailsLayout);
 		customerLayout.setVisibility(View.VISIBLE);
 

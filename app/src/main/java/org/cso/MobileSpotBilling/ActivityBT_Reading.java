@@ -3,7 +3,6 @@ package org.cso.MobileSpotBilling;
 import android.Manifest;
 
 
-
 import android.os.Bundle;
 import android.app.Dialog;
 import android.app.ProgressDialog;
@@ -37,6 +36,7 @@ import android.widget.Toast;
 
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
@@ -86,6 +86,8 @@ public class ActivityBT_Reading extends AppCompatActivity {
 
     private GoogleApiClient client;
 
+    Toolbar toolbar;
+
     public static SpannableString bold(String s) {
         SpannableString spanString = new SpannableString(s);
         spanString.setSpan(new StyleSpan(Typeface.BOLD), 0,
@@ -106,6 +108,12 @@ public class ActivityBT_Reading extends AppCompatActivity {
 
         setContentView(R.layout.activity_scanner);
 
+        toolbar = findViewById(R.id.toolbar_avl_mtr);
+        //toolbar.setLogo(getResources().getDrawable(R.drawable.sbpscl_logo));
+        toolbar.setTitle("Available Meters");
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
         String[] PermissionsLocation = {Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.WRITE_EXTERNAL_STORAGE};
         for (int i = 0; i < PermissionsLocation.length; i++) {
 
@@ -152,7 +160,6 @@ public class ActivityBT_Reading extends AppCompatActivity {
         }
 
 
-
         currentDeviceList.setOnItemClickListener((parent, view, position, ids) -> {
             // TODO Auto-generated method stub
             if (bluetoothAdapter.isEnabled()) {
@@ -172,7 +179,7 @@ public class ActivityBT_Reading extends AppCompatActivity {
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 //startActivityForResult(intent, 6);
                 //if(device.getName().equalsIgnoreCase("123164"))
-                if(device.getName().equalsIgnoreCase(UtilAppCommon.in.PWR_FACTOR))
+                if (device.getName().equalsIgnoreCase(UtilAppCommon.in.PWR_FACTOR))
                     startActivity(intent);
                 else
                     Toast.makeText(getApplicationContext(), "Please select a valid bluetooth meter.", Toast.LENGTH_LONG).show();
@@ -229,6 +236,13 @@ public class ActivityBT_Reading extends AppCompatActivity {
     }
 
     @Override
+    public boolean onSupportNavigateUp() {
+        //  closePrinter();
+        onBackPressed();
+        return true;
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.scanning, menu);
@@ -255,18 +269,18 @@ public class ActivityBT_Reading extends AppCompatActivity {
                 //UtilAppCommon.in.SCHEDULED_BILLING_DATE = "2017.07.31";
                 int temp = Integer.parseInt(UtilAppCommon.in.SCH_MTR_READING_DT.substring(5, 7));
                 String strtemp = "";
-                if(temp <= 9)
+                if (temp <= 9)
                     strtemp = "0" + Integer.parseInt(UtilAppCommon.in.SCH_MTR_READING_DT.substring(5, 7));
                 else
-                    strtemp = ""  + Integer.parseInt(UtilAppCommon.in.SCH_MTR_READING_DT.substring(5, 7));
+                    strtemp = "" + Integer.parseInt(UtilAppCommon.in.SCH_MTR_READING_DT.substring(5, 7));
 
                 String strtemp1 = "";
 
                 int temp1 = Integer.parseInt(UtilAppCommon.in.SCH_MTR_READING_DT.substring(8, 10));
-                if(temp1 <= 9)
+                if (temp1 <= 9)
                     strtemp1 = "0" + Integer.parseInt(UtilAppCommon.in.SCH_MTR_READING_DT.substring(8, 10));
                 else
-                    strtemp1 = ""  + Integer.parseInt(UtilAppCommon.in.SCH_MTR_READING_DT.substring(8, 10));
+                    strtemp1 = "" + Integer.parseInt(UtilAppCommon.in.SCH_MTR_READING_DT.substring(8, 10));
 
                 String nxtDate = strtemp1 + "." + strtemp
                         + "." + Integer.parseInt(UtilAppCommon.in.SCH_MTR_READING_DT.substring(0, 4));
@@ -287,7 +301,7 @@ public class ActivityBT_Reading extends AppCompatActivity {
                 strBluetoothInput[11] = UtilAppCommon.in.CONTRACT_AC_NO;    //CA Number
                 strBluetoothInput[12] = "0";
 
-                Toast.makeText(ActivityBT_Reading.this, "No meter found hence previous reading "+strBluetoothInput[4]+" is taken.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ActivityBT_Reading.this, "No meter found hence previous reading " + strBluetoothInput[4] + " is taken.", Toast.LENGTH_SHORT).show();
 
                 /*
                 strBluetoothInput[0] = "5001603503";
@@ -326,6 +340,9 @@ public class ActivityBT_Reading extends AppCompatActivity {
                 String port = sharedPreferences.getString(PORT, "7071");
                 dialogForServerSetting(getResources().getString(R.string.setting_title), ipAddress, port);
                 break;*/
+            case R.id.action_home:
+                finish();
+                break;
         }
         invalidateOptionsMenu();
         return true;
@@ -419,7 +436,7 @@ public class ActivityBT_Reading extends AppCompatActivity {
 
 
     /* make sure that potential scanning will take no longer
-    * than <SCANNING_TIMEOUT> seconds from now on */
+     * than <SCANNING_TIMEOUT> seconds from now on */
     private void addScanningTimeout() {
         Runnable timeout = new Runnable() {
             @Override
@@ -443,10 +460,7 @@ public class ActivityBT_Reading extends AppCompatActivity {
         mDevicesListAdapter.clearList();
     }
 
-    public void onBackPressed() {
-        finish();
-        super.onBackPressed();
-    }
+
 
     @Override
     public void onStart() {
@@ -551,8 +565,7 @@ public class ActivityBT_Reading extends AppCompatActivity {
         btn_ok.setOnClickListener(v -> {
             if (!validateName()) {
                 return;
-            }
-            else {
+            } else {
                 Calendar c = Calendar.getInstance();
 
                 SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy HH:mm:ss");
@@ -560,8 +573,8 @@ public class ActivityBT_Reading extends AppCompatActivity {
 
                 SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
                 SharedPreferences.Editor editor = preferences.edit();
-                editor.putString("dcMeterReading",input_dc.getText().toString());
-                editor.putString("timestamp_dc",timestamp_ac);
+                editor.putString("dcMeterReading", input_dc.getText().toString());
+                editor.putString("timestamp_dc", timestamp_ac);
                 editor.apply();
                 //Intent in = new Intent(getApplicationContext(), DcMeterReading.class);
                 //startActivity(in);
@@ -631,10 +644,10 @@ public class ActivityBT_Reading extends AppCompatActivity {
         }
     }
 
-    public String showSettingsAlert(){
-        GPSTracker gps  = new GPSTracker(ActivityBT_Reading.this);
+    public String showSettingsAlert() {
+        GPSTracker gps = new GPSTracker(ActivityBT_Reading.this);
 
-        if(gps.canGetLocation()){
+        if (gps.canGetLocation()) {
 
             String latitude = String.valueOf(gps.getLatitude());
             String longitude = String.valueOf(gps.getLongitude());
@@ -642,7 +655,7 @@ public class ActivityBT_Reading extends AppCompatActivity {
             // \n is for new line
             //Toast.makeText(getApplicationContext(), "Your Location is - \nLat: " + latitude + "\nLong: " + longitude, Toast.LENGTH_LONG).show();
             return String.valueOf(gps.getLatitude()) + "¥" + String.valueOf(gps.getLongitude());
-        }else{
+        } else {
             // can't get location
             // GPS or Network is not enabled
             // Ask user to enable GPS/network in settings
