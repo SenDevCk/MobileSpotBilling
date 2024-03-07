@@ -2,7 +2,7 @@
 <resources>
 
     <string name="home">Main</string>
-    <string name="app_name">BMB(B4.1.8)</string>
+    <string name="app_name">BMB (B4.1.8)</string>
     <string name="app_version">B4.1.8</string>
     <string name="appcode_version">C4.1.8</string>
     <string name="app_fileversion">VP4.1.8.apk</string>

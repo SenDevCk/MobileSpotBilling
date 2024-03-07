@@ -171,7 +171,7 @@ public class Abnormality_Activity extends AppCompatActivity implements OnClickLi
 		
 		case R.id.CancelBtn:
 			finish();
-			startActivity(new Intent(this, ActvivityMain.class));
+			//startActivity(new Intent(this, ActvivityMain.class));
 			break;
 		}		
 	}

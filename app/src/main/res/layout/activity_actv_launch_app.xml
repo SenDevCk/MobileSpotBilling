@@ -4,7 +4,7 @@
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
 	android:orientation="vertical"
-	android:background="@drawable/backgroundboarder">
+	android:background="@drawable/bg1">
 	<com.google.android.material.appbar.AppBarLayout
 		android:id="@+id/app_bar_act_lnch"
 		android:layout_width="match_parent"
@@ -23,6 +23,8 @@
     <TextView
 		android:id="@+id/TxtVersion"
 		android:layout_width="match_parent"
-		android:layout_height="wrap_content"></TextView>
+		android:layout_height="wrap_content"
+		android:visibility="invisible"
+		android:text="@string/app_version"/>
 
 </LinearLayout>

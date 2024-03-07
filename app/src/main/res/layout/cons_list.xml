@@ -4,7 +4,8 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:background="@drawable/backgroundboarder">
+    android:background="@android:color/white"
+   >
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/app_bar_abnormality"
         android:layout_width="match_parent"
@@ -23,11 +24,10 @@
     <TextView
         android:id="@+id/tvConsumerListTestNOR"
         android:layout_width="match_parent"
-        android:layout_height="36dp"
+        android:layout_height="wrap_content"
         android:hint="No of Records"
-        android:textColor="#FFFF66"
-        android:layout_marginRight="20dp"
-		android:gravity="right"  />
+        android:padding="7dp"
+		android:gravity="right"/>
 
 <!--     <LinearLayout -->
 <!--         android:layout_width="match_parent" -->
@@ -71,8 +71,8 @@
     <EditText
         android:id="@+id/tveditTextSearch"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp"
+        android:layout_height="40dp"
+        android:layout_margin_top="5dp"
         android:ems="10"
         android:hint="Enter text to search"
         android:inputType="textPersonName"

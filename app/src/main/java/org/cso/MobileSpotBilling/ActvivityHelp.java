@@ -88,7 +88,7 @@ public class ActvivityHelp extends AppCompatActivity {
        
         final Context c=this;
         btnHelpOK.setOnClickListener(v -> {
-			startActivity(new Intent(getApplicationContext(), ActvivityMain.class));
+			//startActivity(new Intent(getApplicationContext(), ActvivityMain.class));
 			finish();
 		});
         btnHelpRefresh.setOnClickListener(v -> {

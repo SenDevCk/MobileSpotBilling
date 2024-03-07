@@ -20,10 +20,6 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -60,6 +56,7 @@ public class ConsumerListTest extends AppCompatActivity {
         System.out.println("bellow mnth is ::::::   " + bellowMonth);
         UtilDB util = new UtilDB(getBaseContext());
         tvConsumerListTestNOR = (TextView) findViewById(R.id.tvConsumerListTestNOR);
+        tvConsumerListTestNOR.setVisibility(View.GONE);
        // tvConsumerListHeader = (TextView) findViewById(R.id.tvConsumerListHeader);
         tveditTextSearch = (EditText) findViewById(R.id.tveditTextSearch);
         list = (ListView) findViewById(R.id.lvConsumerListTestConList);
@@ -167,8 +164,8 @@ public class ConsumerListTest extends AppCompatActivity {
                 new String[]{"ACC_NO", "NAME", "ADDR", "METER_MANUFACTURER_SR_NO"},
                 //new int[] {R.id.newConsBinder,R.id.newConsAccNo, R.id.newConsName, R.id.newConsAddr});
                 new int[]{R.id.newConsAccNo, R.id.newConsName, R.id.newConsAddr, R.id.newConsMeterNo});
-        tvConsumerListTestNOR.setText("Number of record(s) found :    " + listToShow.size());
-
+        //tvConsumerListTestNOR.setText("Number of record(s) found :    " + listToShow.size());
+          toolbar.setSubtitle("Records : "+listToShow.size());
         //LayoutInflater inflater = getLayoutInflater();
 
         // final View header = inflater.inflate(R.layout.newcons_header, (ViewGroup) (list),false);

@@ -1,110 +1,114 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-	android:layout_width="match_parent"
-	android:layout_height="fill_parent"
-	xmlns:app="http://schemas.android.com/apk/res-auto"
-	android:scrollbars="horizontal"
-	android:background="@drawable/backgroundboarder">
-    
-    
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="fill_parent"
+    android:background="@android:color/white"
+    android:scrollbars="horizontal">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/app_bar_ucd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar_updt_condet"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:layout_scrollFlags="scroll|enterAlways"
+            app:popupTheme="@style/AppTheme" />
+    </com.google.android.material.appbar.AppBarLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical" >
+        android:orientation="vertical"
+        android:layout_centerInParent="true"
+        android:padding="10dp">
 
-		<com.google.android.material.appbar.AppBarLayout
-			android:id="@+id/app_bar_ucd"
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
-			<androidx.appcompat.widget.Toolbar
-				android:id="@+id/toolbar_updt_condet"
-				android:layout_width="match_parent"
-				android:layout_height="?attr/actionBarSize"
-				android:background="?attr/colorPrimary"
-				app:layout_scrollFlags="scroll|enterAlways"
-				app:popupTheme="@style/AppTheme" />
-		</com.google.android.material.appbar.AppBarLayout>
-	   
-		 <LinearLayout android:layout_width="match_parent"
-		     android:layout_height="wrap_content"
-		     android:layout_marginTop="10dp"
-		     android:layout_marginLeft="10dp"
-		     android:layout_marginRight="5dp">
-	       			
-		 	<TextView 
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:paddingLeft="10dp"
-			android:text="Pole Number  :"
-			android:textStyle="bold"
-			android:textSize="18dp"
-			android:textColor="@android:color/white"/>
-		 
-			<EditText 
-			style="@style/StyleEditText"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:layout_gravity="center"
-	        android:textSize="18sp" 
-	        android:ems="8"
-	        android:hint=" Pole No"
-	        android:layout_marginLeft="25dp"
-	        android:maxLength="20"
-	        android:id="@+id/PoleNoTxt"/>
-			
-      </LinearLayout>
-           
-	  <LinearLayout android:layout_width="match_parent"
-	     android:layout_height="wrap_content"
-	     android:layout_marginTop="10dp"
-	     android:layout_marginLeft="10dp"
-	     android:layout_marginRight="5dp">
-	       			
-		 	<TextView
-		 	    android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:paddingLeft="10dp"
-				android:textStyle="bold"
-				android:textSize="18dp"
-				android:textColor="@android:color/white"
-		 	    android:text="Mobile No :"/>
-	       			 
-   			 <EditText 
-   			    style="@style/StyleEditText"
-		        android:layout_width="wrap_content"
-		        android:layout_height="wrap_content"
-		        android:layout_gravity="center"
-		        android:textSize="18sp" 
-		        android:ems="8"
-		        android:hint=" Mobile No"
-		        android:layout_marginLeft="25dp"
-		        android:inputType="number"
-		        android:maxLength="10"
-		        android:id="@+id/MobileNoTxt"/>
-		 </LinearLayout>
-	       		     		      	
-	  <LinearLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">  	
-         <Button 
-		    android:id="@+id/ContinueBtn"
-		    style="@style/btnStyleBeige"
-            android:layout_width="100dp"
-            android:layout_height="50dp"
-          	android:layout_marginTop="15dp"
-            android:layout_marginLeft="50dp"
-	        android:text="Update" /> 
-	        
-         <Button 
-		    android:id="@+id/CancelBtn"
-		    style="@style/btnStyleBeige"
-            android:layout_width="100dp"
-            android:layout_height="50dp"
-          	android:layout_marginTop="15dp"
-            android:layout_marginLeft="50dp"
-	        android:text="Cancel" />
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight=".4"
+                android:text="Pole Number  :"
+                android:layout_gravity="center_vertical"
+                android:textColor="@android:color/darker_gray"
+                android:textSize="18dp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/PoleNoTxt"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight=".6"
+                android:layout_gravity="center"
+                android:hint=" Pole No"
+                android:textColor="@android:color/black"
+                android:maxLength="20"
+                android:textSize="18sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+           >
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight=".4"
+                android:text="Mobile No :"
+                android:textColor="@android:color/darker_gray"
+                android:textSize="18dp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/MobileNoTxt"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight=".6"
+                android:hint=" Mobile No"
+                android:textColor="@android:color/black"
+                android:inputType="number"
+                android:maxLength="10"
+                android:textSize="18sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp">
+
+            <Button
+                android:id="@+id/ContinueBtn"
+                android:layout_width="0dp"
+                android:layout_weight=".45"
+                android:layout_height="40dp"
+                android:background="@android:color/holo_green_dark"
+                android:textColor="@android:color/white"
+                android:text="Update" />
+            <View
+                android:layout_width="0dp"
+                android:layout_weight=".1"
+                android:layout_height="50dp"/>
+            <Button
+                android:id="@+id/CancelBtn"
+                android:layout_width="0dp"
+                android:layout_weight=".45"
+                android:layout_height="40dp"
+                android:background="@android:color/holo_red_dark"
+                android:textColor="@android:color/white"
+                android:text="Cancel" />
         </LinearLayout>
     </LinearLayout>
-</ScrollView>
+</RelativeLayout>

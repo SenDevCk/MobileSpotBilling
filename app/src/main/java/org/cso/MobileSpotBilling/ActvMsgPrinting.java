@@ -45,6 +45,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import HPRTAndroidSDK.HPRTPrinterHelper;
 
 public class ActvMsgPrinting extends AppCompatActivity {
+
+	public ActvMsgPrinting(){
+
+	}
 	/** Called when the activity is first created. */
 	private BluetoothAdapter mBluetoothAdapter = null;
 	static final UUID MY_UUID = UUID.randomUUID();
@@ -158,7 +162,8 @@ public class ActvMsgPrinting extends AppCompatActivity {
 
 	public void onBackPressed() {
 		// do something on back.
-		finish();
+		super.onBackPressed();
+		//finish();
 		// startActivity(new Intent(this, ActvivityMain.class));
 		return;
 	}
@@ -773,7 +778,7 @@ public class ActvMsgPrinting extends AppCompatActivity {
 		}
     }
 
-	class TVSPrinter extends Thread {
+	public class TVSPrinter extends Thread {
 
 		private String address = null;
 		BluetoothDevice device = null;

@@ -3,14 +3,10 @@ package org.cso.MobileSpotBilling;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-
-import org.cso.MSBModel.StructSAPInput;
 import org.cso.MSBUtil.CryptographyUtil;
 import org.cso.MSBUtil.UtilAppCommon;
 
 import org.cso.MSBUtil.UtilDB;
-import org.cso.MobileSpotBilling.R;
-
 import com.itextpdf.text.Chunk;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;

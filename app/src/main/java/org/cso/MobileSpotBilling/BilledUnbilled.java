@@ -47,6 +47,7 @@ public class BilledUnbilled extends AppCompatActivity {
 
         UtilDB util = new UtilDB(getBaseContext());
         tvBilledUnbilledNOR = (TextView) findViewById(R.id.tvBilledUnbilledNOR);
+        tvBilledUnbilledNOR.setVisibility(View.GONE);
         ListView list = (ListView) findViewById(R.id.lvBilledUnbilledList);
         mylist = util.getBuBlistItems();
         util.close();
@@ -54,7 +55,8 @@ public class BilledUnbilled extends AppCompatActivity {
                 new String[]{"MRU", "BILLED", "UNBILLED", "TOTAL"},
                 new int[]{R.id.bubBinder, R.id.bubBilled, R.id.bubUnbilled, R.id.bubTotal});
         LayoutInflater inflater = getLayoutInflater();
-        tvBilledUnbilledNOR.setText("No. Of Record Found:" + mylist.size());
+        //tvBilledUnbilledNOR.setText("No. Of Record Found:" + mylist.size());
+        toolbar.setSubtitle("Records : "+mylist.size());
         final View header = inflater.inflate(R.layout.bub_header, (ViewGroup) (list), false);
         list.addHeaderView(header, null, false);
         list.setAdapter(adapter);

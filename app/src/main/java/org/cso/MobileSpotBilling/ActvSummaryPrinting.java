@@ -130,7 +130,8 @@ public class ActvSummaryPrinting extends AppCompatActivity {
 		} else {
 			Toast.makeText(this, "No Printer Configured", Toast.LENGTH_LONG)
 					.show();
-			startActivity(new Intent(getBaseContext(), ActvReport.class));
+			finish();
+			//startActivity(new Intent(getBaseContext(), ActvReport.class));
 /*			if(UtilAppCommon.blActyncBtn)
 				startActivity(new Intent(getBaseContext(), SyncMobPoleActivity.class));
 			else if(UtilAppCommon.inSAPSendMsg.equalsIgnoreCase("1") && !UtilAppCommon.blActyncBtn)
@@ -414,8 +415,8 @@ public class ActvSummaryPrinting extends AppCompatActivity {
 		}
 		
 		finally {
-			
-			startActivity(new Intent(getBaseContext(), ActvReport.class));
+			finish();
+			//startActivity(new Intent(getBaseContext(), ActvReport.class));
 	}
 	return;
 

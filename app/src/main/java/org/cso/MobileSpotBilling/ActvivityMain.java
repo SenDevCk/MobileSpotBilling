@@ -85,7 +85,7 @@ public class ActvivityMain extends AppCompatActivity implements OnClickListener 
         setContentView(R.layout.main);
 		toolbar= findViewById(R.id.toolbar_main);
 		//toolbar.setLogo(getResources().getDrawable(R.drawable.sbpscl_logo));
-		toolbar.setTitle("BMB");
+		toolbar.setTitle(getResources().getString(R.string.app_name));
 		File file = null;
 		String AppDir = Environment.getExternalStorageDirectory().getPath()
 				+ "/SBDocs";
