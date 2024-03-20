@@ -1,19 +1,21 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="50dp"
     android:background="@android:color/white"
     android:orientation="horizontal"
-    android:padding="10dp">
+    >
     <!-- android:descendantFocusability="blocksDescendants" >  -->
-
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="5dp">
     <TextView
         android:id="@+id/bubBinder"
         android:layout_width="0dp"
-        android:layout_weight=".1"
+        android:layout_weight=".3"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
         android:padding="5dp"
-        android:textSize="15sp"
+        android:textSize="12sp"
         android:textColor="@android:color/holo_red_dark"
         android:textStyle="bold"
         android:text="NA"/>
@@ -21,7 +23,7 @@
     <TextView
         android:id="@+id/bubBilled"
         android:layout_width="0dp"
-        android:layout_weight=".1"
+        android:layout_weight=".2"
         android:layout_height="wrap_content"
         android:padding="5dp"
         android:textColor="@android:color/black"
@@ -32,7 +34,7 @@
     <TextView
         android:id="@+id/bubUnbilled"
         android:layout_width="0dp"
-        android:layout_weight=".4"
+        android:layout_weight=".25"
         android:layout_height="wrap_content"
         android:padding="5dp"
         android:textColor="@android:color/black"
@@ -42,11 +44,16 @@
     <TextView
         android:id="@+id/bubTotal"
         android:layout_width="0dp"
-        android:layout_weight=".4"
+        android:layout_weight=".25"
         android:layout_height="wrap_content"
         android:padding="5dp"
         android:textColor="@android:color/black"
         android:text="NA"
         android:textSize="15sp" />
-
 </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/colorPrimary"></View>
+</RelativeLayout>

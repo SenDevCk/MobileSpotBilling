@@ -3,8 +3,7 @@
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
-	android:orientation="vertical"
-	android:background="@drawable/backgroundboarder">
+	android:orientation="vertical">
     
 	  <!-- <Button
               android:id="@+id/btnCancel"
@@ -27,44 +26,40 @@
 			app:layout_scrollFlags="scroll|enterAlways"
 			app:popupTheme="@style/AppTheme" />
 	</com.google.android.material.appbar.AppBarLayout>
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:background="@drawable/edit_text_box">
 
-	    <EditText
-	        android:id="@+id/editMeterNbr"
-	        android:layout_width="174dp"
-	        android:layout_height="wrap_content"
-	        android:layout_alignParentLeft="true"
-	        android:layout_alignParentTop="true"
-	        android:layout_toLeftOf="@+id/btnSearchMtrNbr"
-	        android:ems="10"
-	        android:hint="Meter Number"
-	        android:inputType="none"
-	        android:maxLength="12"
-	        android:singleLine="true" >
+		<com.google.android.material.textfield.TextInputEditText
+			android:id="@+id/editMeterNbr"
+			android:layout_width="0dp"
+			android:layout_weight=".9"
+			android:layout_height="40dp"
+			android:hint="enter old a/c number..."
+			android:inputType="none"
+			android:maxLength="12"
+			android:paddingLeft="5dp"
+			android:singleLine="true"
+			android:drawableLeft="@android:drawable/ic_menu_search"
+			android:background="@android:color/white"
+			/>
 
-	        <requestFocus />
-	    </EditText>
+		<Button
+			android:id="@+id/btnSearchMtrNbr"
+			style="@style/btnStyleBeige"
+			android:layout_width="0dp"
+			android:layout_weight=".1"
+			android:layout_height="40dp"
+			android:drawableLeft="@android:drawable/ic_menu_search"
+			/>
 
-	    <Button
-	        android:id="@+id/btnSearchMtrNbr"
-	        style="?android:attr/buttonStyleSmall"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:layout_alignBottom="@+id/editMeterNbr"
-	        android:layout_alignParentRight="true"
-	        android:layout_alignParentTop="true"
-	        android:text="Search" />
-
-    </RelativeLayout>
-
-    
+	</LinearLayout>
     <ListView
         android:id="@+id/lvActvSrcByMtrNo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/backgroundboarder" >
+       >
 
     </ListView>
     

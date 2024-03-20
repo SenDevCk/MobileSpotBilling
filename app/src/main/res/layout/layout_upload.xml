@@ -1,19 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout  xmlns:android="http://schemas.android.com/apk/res/android"
-		    android:layout_width="fill_parent"
-		    android:layout_height="fill_parent"
-		    android:scrollbars="vertical"
-		    android:orientation="vertical"
-            android:background="@drawable/backgroundboarder" >
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/headerboarder"
-        android:paddingLeft="5dp"
-        android:text="Upload Billed Data"
-        android:textColor="#ffffff"
-        android:textSize="22dp" />
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:scrollbars="vertical"
+	android:orientation="vertical">
+	<com.google.android.material.appbar.AppBarLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
+		<androidx.appcompat.widget.Toolbar
+			android:id="@+id/toolbar_upload"
+			android:layout_width="match_parent"
+			android:layout_height="?attr/actionBarSize"
+			android:background="?attr/colorPrimary"
+			app:layout_scrollFlags="scroll|enterAlways"
+			app:popupTheme="@style/AppTheme" />
+	</com.google.android.material.appbar.AppBarLayout>
     <ListView
         android:id="@+id/lvUpload"
         android:layout_width="match_parent"

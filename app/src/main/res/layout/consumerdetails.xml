@@ -1,270 +1,252 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-	android:layout_width="match_parent"
-	android:layout_height="fill_parent"
-	xmlns:app="http://schemas.android.com/apk/res-auto"
-	android:scrollbars="horizontal"
-	android:background="@drawable/backgroundboarder"
-	android:id="@+id/CustomerDetailsLayout">
-    
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/CustomerDetailsLayout"
+    android:layout_width="match_parent"
+    android:layout_height="fill_parent"
+    android:background="@android:color/white"
+    android:scrollbars="horizontal">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/app_bar_condet"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar_condet"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:layout_scrollFlags="scroll|enterAlways"
+            app:popupTheme="@style/AppTheme" />
+    </com.google.android.material.appbar.AppBarLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical" >
+        android:layout_below="@+id/app_bar_condet"
+        android:orientation="vertical"
+        android:padding="10dp">
 
-		<com.google.android.material.appbar.AppBarLayout
-			android:id="@+id/app_bar_condet"
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
 
-			<androidx.appcompat.widget.Toolbar
-				android:id="@+id/toolbar_condet"
-				android:layout_width="match_parent"
-				android:layout_height="?attr/actionBarSize"
-				android:background="?attr/colorPrimary"
-				app:layout_scrollFlags="scroll|enterAlways"
-				app:popupTheme="@style/AppTheme" />
-		</com.google.android.material.appbar.AppBarLayout>
-	   
-	       			 <LinearLayout android:layout_width="match_parent"
-	       			     android:layout_height="wrap_content"
-	       			     android:layout_marginTop="10dp"
-	       			     android:layout_marginLeft="10dp"
-	       			     android:layout_marginRight="5dp">
-	       			
-	       			 <TextView 
-		    		 android:layout_width="wrap_content"
-	       			 android:layout_height="wrap_content"
-	         		 android:paddingLeft="10dp"
-	                 android:text="Account Number  :"
-	                 android:textStyle="bold"
-	       			 android:textSize="18dp"
-	       			 android:textColor="@android:color/white"/>
-	       			 <TextView 
-		    		 android:layout_width="wrap_content"
-	       			 android:layout_height="wrap_content"
-	         		 android:paddingLeft="10dp"
-	                 android:id="@+id/AccNoTxt"
-	                 
-	       			 android:textSize="18sp"	       			 
-	       			 android:textColor="#FFFF66"/>
-                     </LinearLayout>
-                     
-	       			  <LinearLayout android:layout_width="match_parent"
-	       			     android:layout_height="wrap_content"
-	       			     android:layout_marginTop="10dp"
-	       			     android:layout_marginLeft="10dp"
-	       			     android:layout_marginRight="5dp">
-	       			
-	       			 <TextView 
-		    		 android:layout_width="wrap_content"
-	       			 android:layout_height="wrap_content"
-	         		 android:paddingLeft="101dp"
-	                 android:text="Name :"
-	                 android:textStyle="bold"
-	       			 android:textSize="18dp"
-	       			 android:textColor="@android:color/white"/>
-	       			 <TextView 
-		    		 android:layout_width="wrap_content"
-	       			 android:layout_height="wrap_content"
-	         		 android:layout_gravity="left"
-	         		 android:paddingLeft="10dp"
-	                 android:id="@+id/NameTxt"
-	       			 android:textSize="18sp"
-	       			 android:textColor="#FFFF66"/>
-                     </LinearLayout>
-	       		
-	       		
-	        	<LinearLayout android:layout_width="match_parent"
-	       			     android:layout_height="wrap_content"
-	       			     android:layout_marginTop="10dp"
-	       			     android:layout_marginLeft="10dp"
-	       			     android:layout_marginRight="5dp">
-	       			
-	       			 <TextView 
-		    		 android:layout_width="wrap_content"
-	       			 android:layout_height="wrap_content"
-	         		 android:paddingLeft="85dp"
-	                 android:text="Address :"
-	                 android:textStyle="bold"
-	       			 android:textSize="18sp"
-	       			 android:textColor="@android:color/white"/>
-	       			 <TextView 
-		    		 android:layout_width="wrap_content"
-	       			 android:layout_height="wrap_content"
-	         		 android:layout_gravity="left"
-	         		 android:paddingLeft="10dp"
-	                 android:id="@+id/AddressTxt"
-	       			 android:textSize="18sp"
-	       			 android:textColor="#FFFF66"/>
-                     </LinearLayout>
-	       		
-	        	<LinearLayout android:layout_width="match_parent"
-	       			     android:layout_height="wrap_content"
-	       			     android:layout_marginTop="10dp"
-	       			     android:layout_marginLeft="10dp"
-	       			     android:layout_marginRight="5dp">
-	       			
-	       			 <TextView 
-		    		 android:layout_width="wrap_content"
-	       			 android:layout_height="wrap_content"
-	         		 android:paddingLeft="36dp"
-	                 android:text="Meter Number :"
-	                 android:textStyle="bold"
-	       			 android:textSize="18sp"
-	       			 android:textColor="@android:color/white"/>
-	       			 <TextView 
-		    		 android:layout_width="wrap_content"
-	       			 android:layout_height="wrap_content"
-	         		 android:layout_gravity="left"
-	         		 android:paddingLeft="10dp"
-	                 android:id="@+id/MeterNoTxt"
-	       			 android:textSize="18sp"
-	       			 android:textColor="#FFFF66"/>
-                     </LinearLayout>
-	        	
-	        	<LinearLayout android:layout_width="match_parent"
-	       			     android:layout_height="wrap_content"
-	       			     android:layout_marginTop="10dp"
-	       			     android:layout_marginLeft="10dp"
-	       			     android:layout_marginRight="5dp">
-	       			
-	       			 <TextView 
-		    		 android:layout_width="wrap_content"
-	       			 android:layout_height="wrap_content"
-	         		 android:paddingLeft="66dp"
-	                 android:text="Tariff Code :"
-	                 android:textStyle="bold"
-	       			 android:textSize="18sp"
-	       			 android:textColor="@android:color/white"/>
-	       			 <TextView 
-		    		 android:layout_width="wrap_content"
-	       			 android:layout_height="wrap_content"
-	         		 android:layout_gravity="left"
-	         		 android:paddingLeft="10dp"
-	                 android:id="@+id/TariffCodeTxt"
-	       			 android:textSize="18sp"
-	       			 android:textColor="#FFFF66"/>
-                     </LinearLayout>
-	        	
-	        	<LinearLayout android:layout_width="match_parent"
-	       			     android:layout_height="wrap_content"
-	       			     android:layout_marginTop="10dp"
-	       			     android:layout_marginLeft="10dp"
-	       			     android:layout_marginRight="5dp">
-	       			
-	       			 <TextView 
-		    		 android:layout_width="wrap_content"
-	       			 android:layout_height="wrap_content"
-	         		 android:paddingLeft="63dp"
-	                 android:text="Conn. Load :"
-	                 android:textStyle="bold"
-	       			 android:textSize="18sp"
-	       			 android:textColor="@android:color/white"/>
-	       			 <TextView 
-		    		 android:layout_width="wrap_content"
-	       			 android:layout_height="wrap_content"
-	         		 android:layout_gravity="left"
-	         		 android:paddingLeft="10dp"
-	                 android:id="@+id/MaxLoadTxt"
-	       			 android:textSize="18sp"
-	       			 android:textColor="#FFFF66"/>
-                     </LinearLayout>
-	        	
-	        	<LinearLayout android:layout_width="match_parent"
-	       			     android:layout_height="wrap_content"
-	       			     android:layout_marginTop="10dp"
-	       			     android:layout_marginLeft="10dp"
-	       			     android:layout_marginRight="5dp">
-	       			
-	       			 <TextView 
-		    		 android:layout_width="wrap_content"
-	       			 android:layout_height="wrap_content"
-	         		 android:paddingLeft="25dp"
-	                 android:text="Prev. Meter Stat :"
-	                 android:textStyle="bold"
-	       			 android:textSize="18sp"
-	       			 android:textColor="@android:color/white"/>
-	       			 
-	       			 <TextView 
-		    		 android:layout_width="wrap_content"
-	       			 android:layout_height="wrap_content"
-	         		 android:layout_gravity="left"
-	         		 android:paddingLeft="10dp"
-	                 android:id="@+id/PrevMeterStatusTxt"
-	       			 android:textSize="18sp"
-	       			 android:textColor="#FFFF66"/>
-                     </LinearLayout>
-                     
-	        	
-	   <LinearLayout android:layout_width="match_parent"
-		     android:layout_height="wrap_content"
-		     android:layout_marginTop="10dp"
-		     android:layout_marginLeft="10dp"
-		     android:layout_marginRight="5dp">
-	       			
-		 	<TextView 
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:paddingLeft="10dp"
-			android:text="Pole Number  :"
-			android:textStyle="bold"
-			android:textSize="18dp"
-			android:textColor="@android:color/white"/>
-		 
-			<EditText 
-			style="@style/StyleEditText"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:layout_gravity="center"
-	        android:textSize="18sp" 
-	        android:ems="8"
-	        android:hint=" Pole No"
-	        android:layout_marginLeft="25dp"
-	        android:maxLength="10"
-	        android:inputType="number"
-	        android:id="@+id/PoleNoTxt"/>
-			
-      </LinearLayout>
-      
-	  <LinearLayout android:layout_width="match_parent"
-	     android:layout_height="wrap_content"
-	     android:layout_marginTop="10dp"
-	     android:layout_marginLeft="10dp"
-	     android:layout_marginRight="5dp">
-	       			
-		 	<TextView
-		 	    android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:paddingLeft="10dp"
-				android:textStyle="bold"
-				android:textSize="18dp"
-				android:textColor="@android:color/white"
-		 	    android:text="Mobile No :"/>
-	       			 
-   			 <EditText 
-   			    style="@style/StyleEditText"
-		        android:layout_width="wrap_content"
-		        android:layout_height="wrap_content"
-		        android:layout_gravity="center"
-		        android:textSize="18sp" 
-		        android:ems="8"
-		        android:hint=" Mobile No"
-		        android:layout_marginLeft="25dp"
-		        android:inputType="number"
-		        android:maxLength="10"
-		        android:id="@+id/MobileNoTxt"/>
-		 </LinearLayout>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight=".4"
+                android:text="Account Number"
+                android:textColor="@color/colorPrimaryDark"
+                android:textStyle="bold" />
 
-		<Button
-			android:id="@+id/ContinueBtn"
-			style="@style/btnStyleBeige"
-			android:layout_width="100dp"
-			android:layout_height="wrap_content"
-			android:layout_gravity="center_horizontal"
-			android:layout_margin="10dp"
-			android:text="Continue" />
+            <TextView
+                android:id="@+id/AccNoTxt"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight=".6"
+                android:textColor="@android:color/black"
+                android:textSize="18sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight=".4"
+                android:text="Name"
+                android:textColor="@color/colorPrimaryDark"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/NameTxt"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight=".6"
+                android:textColor="@android:color/black"
+                android:textSize="18sp" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight=".4"
+                android:text="Address"
+                android:textColor="@color/colorPrimaryDark"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/AddressTxt"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight=".6"
+                android:textColor="@android:color/black"
+                android:textSize="18sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight=".4"
+                android:text="Meter Number"
+                android:textColor="@color/colorPrimaryDark"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/MeterNoTxt"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight=".6"
+                android:textColor="@android:color/black"
+                android:textSize="18sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight=".4"
+                android:text="Tariff Code"
+                android:textColor="@color/colorPrimaryDark"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/TariffCodeTxt"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight=".6"
+                android:textColor="@android:color/black"
+                android:textSize="18sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight=".4"
+                android:text="Conn. Load"
+                android:textColor="@color/colorPrimaryDark"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/MaxLoadTxt"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight=".6"
+                android:paddingLeft="10dp"
+                android:textColor="@android:color/black"
+                android:textSize="18sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight=".4"
+                android:text="Prev. Meter Stat"
+                android:textColor="@color/colorPrimaryDark"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/PrevMeterStatusTxt"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight=".6"
+                android:paddingLeft="10dp"
+                android:textColor="@android:color/black"
+                android:textSize="18sp" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Pole Number"
+                android:textColor="@color/colorPrimaryDark"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/PoleNoTxt"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:hint=" Pole No"
+                android:inputType="number"
+                android:layout_marginTop="7dp"
+                android:textColor="@android:color/black"
+                android:textSize="18sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Mobile No"
+                android:textColor="@color/colorPrimaryDark"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/MobileNoTxt"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="7dp"
+                android:hint=" Mobile No"
+                android:inputType="number"
+                android:maxLength="10"
+                android:textColor="@android:color/black"
+                android:textSize="18sp" />
+        </LinearLayout>
+
+
     </LinearLayout>
 
-</ScrollView>
+    <Button
+        android:id="@+id/ContinueBtn"
+        style="@style/btnStyleBeige"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/colorPrimaryDark"
+        android:text="Continue"
+        android:textColor="@android:color/white" />
+</RelativeLayout>

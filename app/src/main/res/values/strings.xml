@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
     <string name="home">Main</string>
     <string name="app_name">BMB (B4.1.8)</string>
     <string name="app_version">B4.1.8</string>
     <string name="appcode_version">C4.1.8</string>
     <string name="app_fileversion">VP4.1.8.apk</string>
-
     <string name="consumer_details">Consumer Details</string>
     <string name="billing_by_account_no">Billing By Account Number</string>
     <string name="meter_status">Meter Status</string>
@@ -15,12 +13,9 @@
     <string name="remarks">Remarks</string>
     <string name="print_bill">Print Bill</string>
     <string name="bt_meter">Meter List</string>
-
     <string-array name="sub_div"></string-array>
-
     <string name="title_activity_act_demo">ActDemo</string>
     <string name="action_settings">Settings</string>
-
     <string name="available_Meters">List of Available Meters</string>
     <string name="data_unavailable">Presently No Data Available.</string>
     <string name="noDevice"> No Device Installed for this connection  </string>
@@ -43,7 +38,6 @@
     <string name="hint_name">Enter AC Meter Reading:</string>
     <string name="hint_name_dc">Enter DC Meter Reading:</string>
     <string name="err_msg_name">Enter valid meter reading</string>
-
     <string-array name="PrinterType">
         <item>Analogic Thermal</item>
         <!--<item>Analogic Thermal-Hin</item>-->
@@ -54,12 +48,10 @@
         <!--<item>Mini Portable Thermal</item>-->
        <!-- <item>Zebra Thermal</item>-->
     </string-array>
-
     <string-array name="PrintLang">
         <item>English</item>
         <item>Hindi</item>
     </string-array>
-
     <string-array name="Abnormality">
         <item>All ok</item>
         <item>Meter on height</item>
@@ -77,7 +69,6 @@
         <item>Mtr. Digit Mismatch</item>
         <item>Others</item>
     </string-array>
-
     <string name="title_activity_actv_launch_app">Application Launch</string>
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_pole_mobile">Mobile-Pole Updation</string>
@@ -89,13 +80,9 @@
     <string name="title_activity_seq_sync">Synchronize</string>
     <string name="title_activity_sync_mob_pole">Synchronize Mobile-Pole</string>
     <string name="title_activity_abnormality_">Abnormality</string>
-
-
     <string-array name="reasonForNextSequence">
-
         <item>Disconnected</item>
         <item>Not in MRU</item>
         <item>Property Demolished</item>
     </string-array>
-
 </resources>

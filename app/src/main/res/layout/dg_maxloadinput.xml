@@ -23,7 +23,7 @@
      <Button
         android:id="@+id/dialogButtonMaxloadConfirm"
         android:layout_width="100dp"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:text="Confirm"
         android:background="@drawable/buttonbackground1"
         android:textSize="18dp"
@@ -35,7 +35,7 @@
      <Button
         android:id="@+id/dialogButtonMaxLoadCancle"
         android:layout_width="100dp"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:text="Cancel"
         android:textSize="18dp"
         android:textColor="@android:color/white"

@@ -1,51 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-	android:layout_width="fill_parent"
-	android:layout_height="fill_parent"
-	xmlns:app="http://schemas.android.com/apk/res-auto"
-	android:scrollbars="vertical"
-	android:background="@drawable/backgroundboarder">
-    
-    <LinearLayout 
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
     android:orientation="vertical">
 
 
-		<com.google.android.material.appbar.AppBarLayout
-			android:id="@+id/app_bar_billopt"
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/app_bar_billopt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
-			<androidx.appcompat.widget.Toolbar
-				android:id="@+id/toolbar_bill_search"
-				android:layout_width="match_parent"
-				android:layout_height="?attr/actionBarSize"
-				android:background="?attr/colorPrimary"
-				app:layout_scrollFlags="scroll|enterAlways"
-				app:popupTheme="@style/AppTheme" />
-		</com.google.android.material.appbar.AppBarLayout>
-        	
-			<Button
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar_bill_search"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:layout_scrollFlags="scroll|enterAlways"
+            app:popupTheme="@style/AppTheme" />
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="10dp">
+
+        <Button
             android:id="@+id/btnMeterNbrSearch"
+            style="@style/btnStyleBeige"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
             android:layout_marginTop="10dp"
-            style="@style/Widget.Button"
-            android:text="Meter Number" 
-            android:textSize="20dp"/>
-        
-    		<Button
+            android:text="Meter Number"
+            android:textSize="20dp" />
+
+        <Button
             android:id="@+id/btnConsNameSearch"
-           style="@style/Widget.Button"
-            android:text="Consumer Name" 
-            android:textSize="20dp"/>
-            
-            <Button
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            style="@style/btnStyleBeige"
+            android:text="Consumer Name"
+            android:textSize="20dp"
+            android:layout_marginTop="10dp"/>
+
+        <Button
             android:id="@+id/btnOldAcctNbrSearch"
-            style="@style/Widget.Button"
-            android:text="Old Account Number" 
-            android:textSize="20dp"/>
-         
+            style="@style/btnStyleBeige"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:text="Old Account Number"
+            android:layout_marginTop="10dp"/>
+    </LinearLayout>
+
 </LinearLayout>
-</ScrollView>
 

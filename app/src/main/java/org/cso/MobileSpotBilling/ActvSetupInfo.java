@@ -304,39 +304,40 @@ public class ActvSetupInfo  extends AppCompatActivity implements OnClickListener
 	}*/
    void SetupPrinter()
    {
+	   try {
+		   devicesadapter.clear();
+		   mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+		   adapter = new InteractiveArrayAdapter(this, R.layout.rowlayout, devicesadapter,
+				   new String[]{"Name"},
+				   new int[]{R.id.tvLvRowName});
+		   if (mBluetoothAdapter == null) {
+			   Toast.makeText(this, "Bluetooth not available.", Toast.LENGTH_LONG).show();
+			   return;
+		   }
+		   if (!mBluetoothAdapter.isEnabled()) {
+			   mBluetoothAdapter.enable();
+			   return;
+		   }
 
-	   devicesadapter.clear();
-	   mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-       adapter=new InteractiveArrayAdapter(this,R.layout.rowlayout, devicesadapter,
-       		new String[] {"Name"},
-       new int[] {R.id.tvLvRowName});
-		if (mBluetoothAdapter == null) {
-		Toast.makeText(this, "Bluetooth not available.",Toast.LENGTH_LONG).show();
-		return;
-		}
-		if (!mBluetoothAdapter.isEnabled()) {
-			mBluetoothAdapter.enable();
-			return;
-		} 
-		
-		devices=mBluetoothAdapter.getBondedDevices();
-		
-		if (devices.size() > 0) {
-		    // Loop through paired devices
-		    for (BluetoothDevice device : devices) {
-		        // Add the name and address to an array adapter to show in a ListView
-		    	devicemap=new HashMap<String,String>();
-		    	devicemap.put("Name", device.getName());
-		    	devicemap.put("Address", device.getAddress());
-		    	devicesadapter.add(devicemap);
-		    }
-		}
-		else
-		{
-			devicesadapter.clear();
-			Toast.makeText(getApplicationContext(),"No Device is Paired", Toast.LENGTH_SHORT);
-		}
-		
+		   devices = mBluetoothAdapter.getBondedDevices();
+
+		   if (devices.size() > 0) {
+			   // Loop through paired devices
+			   for (BluetoothDevice device : devices) {
+				   // Add the name and address to an array adapter to show in a ListView
+				   devicemap = new HashMap<String, String>();
+				   devicemap.put("Name", device.getName());
+				   devicemap.put("Address", device.getAddress());
+				   devicesadapter.add(devicemap);
+			   }
+		   } else {
+			   devicesadapter.clear();
+			   Toast.makeText(getApplicationContext(), "No Device is Paired", Toast.LENGTH_SHORT);
+		   }
+	   }catch (Exception ex){
+		   ex.printStackTrace();
+		   Toast.makeText(activity, ""+ex.getMessage(), Toast.LENGTH_SHORT).show();
+	   }
 		AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setTitle("Select Printer Type");
         builder.setItems(R.array.PrinterType, (dialog, item) -> {
@@ -344,16 +345,23 @@ public class ActvSetupInfo  extends AppCompatActivity implements OnClickListener
 
 			AlertDialog.Builder builder1 = new AlertDialog.Builder(context);
 			builder1.setTitle("Select Printing Device");
-			builder1.setAdapter(adapter, (dialog1, item1) -> {
-				HashMap<String, String> map=devicesadapter.get(item1);
+			if (devices==null) {
+				builder1.setMessage("No device found !");
+			} else if (devices.size()>0) {
+				builder1.setAdapter(adapter, (dialog1, item1) -> {
+					HashMap<String, String> map = devicesadapter.get(item1);
 
-				  Toast.makeText(context,map.get("Name")+" : "+ map.get("Address"), Toast.LENGTH_LONG).show();
-				  UtilDB dbobj=new UtilDB(context);
-				  dbobj.UpdatePrinterInfo(map.get("Address"), devicetype);
-				  String[] Printer=dbobj.GetPrinterInfo();
-				  Toast.makeText(context,"Printer Configured Successfully\n"+Printer[0]+" : "+Printer[1], Toast.LENGTH_LONG).show();
+					Toast.makeText(context, map.get("Name") + " : " + map.get("Address"), Toast.LENGTH_LONG).show();
+					UtilDB dbobj = new UtilDB(context);
+					dbobj.UpdatePrinterInfo(map.get("Address"), devicetype);
+					String[] Printer = dbobj.GetPrinterInfo();
+					Toast.makeText(context, "Printer Configured Successfully\n" + Printer[0] + " : " + Printer[1], Toast.LENGTH_LONG).show();
 
-			});
+				});
+			}
+			else{
+				builder1.setMessage("No device found !");
+			}
 			AlertDialog alert = builder1.create();
 			alert.show();
 		});

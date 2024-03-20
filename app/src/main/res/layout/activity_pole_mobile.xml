@@ -94,8 +94,7 @@
                 android:layout_width="0dp"
                 android:layout_weight=".45"
                 android:layout_height="40dp"
-                android:background="@android:color/holo_green_dark"
-                android:textColor="@android:color/white"
+                style="@style/btnStyleBeige"
                 android:text="Update" />
             <View
                 android:layout_width="0dp"
@@ -106,8 +105,7 @@
                 android:layout_width="0dp"
                 android:layout_weight=".45"
                 android:layout_height="40dp"
-                android:background="@android:color/holo_red_dark"
-                android:textColor="@android:color/white"
+                style="@style/btnStyleCancle"
                 android:text="Cancel" />
         </LinearLayout>
     </LinearLayout>

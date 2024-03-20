@@ -109,7 +109,12 @@ public class ActvSummaryPrinting extends AppCompatActivity {
 		// Added on 3.7.2014
 		UtilDB dbObj = new UtilDB(getApplicationContext());
 		String[] printer = dbObj.GetPrinterInfo();
-		if (printer[1].compareToIgnoreCase("Zebra Thermal") == 0) {
+		if (printer[1]==null){
+			Toast.makeText(this, "No Printer Configured", Toast.LENGTH_LONG)
+					.show();
+			finish();
+		}
+		else if (printer[1].compareToIgnoreCase("Zebra Thermal") == 0) {
 			sendDatazebra = new ZebraThermal(printer[0]);
 			Thread t = new Thread(sendDatazebra);
 			t.run();

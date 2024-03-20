@@ -40,8 +40,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight=".3"
                 android:text="Name :"
-                android:textColor="@android:color/darker_gray"
-                android:textSize="18dp" />
+                android:textColor="@color/colorPrimaryDark"
+                 />
 
             <TextView
                 android:id="@+id/NameTxt1"
@@ -50,7 +50,7 @@
                 android:layout_weight=".6"
                 android:textColor="@android:color/black"
                 android:textSize="18sp"
-                android:text="NA"/>
+                android:text="N/A"/>
 
         </LinearLayout>
 
@@ -64,9 +64,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight=".3"
-                android:text="Status :"
-                android:textSize="18dp"
-                android:textColor="@android:color/darker_gray"/>
+                android:text="Status"
+                android:textColor="@color/colorPrimaryDark"/>
 
             <TextView
                 android:id="@+id/CurrentStatusTxt"
@@ -75,7 +74,7 @@
                 android:layout_weight=".6"
                 android:textColor="@android:color/black"
                 android:textSize="18sp"
-                android:text="NA"/>
+                android:text="N/A"/>
         </LinearLayout>
 
         <LinearLayout
@@ -115,7 +114,7 @@
                 android:layout_weight=".3"
                 android:layout_gravity="center_vertical"
                 android:text="Curr. Read (KWH)"
-                android:textColor="@android:color/darker_gray"
+                android:textColor="@color/colorPrimaryDark"
                  />
 
             <EditText
@@ -140,7 +139,7 @@
                 android:layout_weight=".3"
                 android:layout_gravity="center_vertical"
                 android:text="Curr. Read (KVAH)"
-                android:textColor="@android:color/darker_gray"
+                android:textColor="@color/colorPrimaryDark"
                 />
 
             <EditText
@@ -164,7 +163,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight=".3"
                 android:layout_gravity="center_vertical"
-                android:textColor="@android:color/darker_gray"
+                android:textColor="@color/colorPrimaryDark"
                 android:text="Max. Demand (KW)" />
 
             <EditText
@@ -217,6 +216,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight=".3"
+                android:textColor="@color/colorPrimaryDark"
                 android:text="Pow. Factor"
                 />
 
@@ -238,7 +238,6 @@
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_alignParentBottom="true"
-        android:textColor="@android:color/white"
-        android:background="@android:color/holo_green_dark"
+        style="@style/btnStyleBeige"
         android:text="Confirm" />
 </RelativeLayout>

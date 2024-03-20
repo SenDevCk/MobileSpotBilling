@@ -58,7 +58,7 @@ public class ActvConsumerNbrInputForDuplicateBill extends AppCompatActivity impl
         ((TextView) findViewById(R.id.binderTxt)).setText(UtilAppCommon.binder);
 
 
-        Button submitBtn = (Button) findViewById(R.id.btnGenerateDupl);
+        Button submitBtn =  findViewById(R.id.btnGenerateDupl);
         submitBtn.setOnClickListener(this);
 
     }
@@ -74,6 +74,7 @@ public class ActvConsumerNbrInputForDuplicateBill extends AppCompatActivity impl
     public void onBackPressed() {
         // do something on back.
         //finish();
+        super.onBackPressed();
         if (UtilAppCommon.inSAPSendMsg.equalsIgnoreCase("1"))
             startActivity(new Intent(getBaseContext(), PoleMobileActivity.class));
         else if (UtilAppCommon.billType.equalsIgnoreCase("A"))
@@ -86,8 +87,6 @@ public class ActvConsumerNbrInputForDuplicateBill extends AppCompatActivity impl
             startActivity(new Intent(getBaseContext(), MeterNbrInput.class));
         else
             startActivity(new Intent(getBaseContext(), ActvBillingOption.class));
-        super.onBackPressed();
-        return;
     }
 
     public void onClick(View v) {
@@ -158,7 +157,7 @@ public class ActvConsumerNbrInputForDuplicateBill extends AppCompatActivity impl
 				}*/
                 else {
                     UtilAppCommon.bBtnGenerateClicked = true;
-                    System.out.println("sudhir BTngenerated clicked on Entry form" + UtilAppCommon.bBtnGenerateClicked);
+                    System.err.println("sudhir BTngenerated clicked on Entry form" + UtilAppCommon.bBtnGenerateClicked);
                     startActivity(new Intent(this, ActvBilling.class));
                 }
                 break;

@@ -2,66 +2,67 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg1"
-    >
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/bg1">
 
     <LinearLayout
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:padding="15dp"
         android:background="@drawable/headerboarder"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="20dp">
 
-        <ImageView
+        <de.hdodenhof.circleimageview.CircleImageView
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:layout_gravity="center_horizontal"
-            android:src="@drawable/sbpscl_logo"/>
+            android:src="@drawable/sbpscl_logo"
+            app:civ_border_color="#2196F3"
+            app:civ_border_width="2dp" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingLeft="7dp"
             android:layout_margin="5dp"
-            android:text="User Login "
-            android:textStyle="bold"
             android:gravity="center"
-            android:visibility="gone"
+            android:paddingLeft="7dp"
+            android:text="User Login "
             android:textColor="#ffffff"
-            android:textSize="25dp" />
+            android:textSize="25dp"
+            android:textStyle="bold"
+            android:visibility="gone" />
 
 
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/edtTxtUserName"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:background="@android:color/white"
-            android:padding="5dp"
-            android:layout_marginTop="3dp"
+            android:layout_marginTop="10dp"
             android:layout_marginBottom="3dp"
-            android:hint="Meter Reader ID"
-            android:textStyle="bold"
-            android:inputType="text"
-            android:singleLine="true"
+            android:background="@android:color/white"
             android:focusable="true"
+            android:hint="Meter Reader ID"
+            android:inputType="text"
             android:maxLength="16"
-            android:textSize="18dp" />
+            android:padding="5dp"
+            android:singleLine="true"
+            android:textSize="18dp"
+            android:textStyle="bold" />
 
 
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/edtTxtPassword"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:background="@android:color/white"
-            android:padding="5dp"
             android:layout_marginTop="3dp"
             android:layout_marginBottom="3dp"
+            android:background="@android:color/white"
             android:hint="Password"
             android:inputType="textPassword"
             android:maxLength="12"
-            android:singleLine="true"
-             />
+            android:padding="5dp"
+            android:singleLine="true" />
 
 
         <LinearLayout
@@ -71,25 +72,23 @@
 
             <Button
                 android:id="@+id/btnLogin"
+                style="@style/btnStyleSuccess"
                 android:layout_width="0dp"
-                android:layout_height="50dp"
+                android:layout_height="40dp"
                 android:layout_weight=".45"
-                android:background="@color/colorAccent"
-                android:textStyle="bold"
-                android:textColor="@android:color/white"
                 android:text="Login" />
+
             <View
                 android:layout_width="0dp"
-                android:layout_weight=".1"
-                android:layout_height="50dp"></View>
+                android:layout_height="40dp"
+                android:layout_weight=".1"></View>
+
             <Button
                 android:id="@+id/btnCancel"
+                style="@style/btnStyleCancle"
                 android:layout_width="0dp"
-                android:layout_height="50dp"
+                android:layout_height="40dp"
                 android:layout_weight=".45"
-                android:background="@color/colorAccent"
-                android:textStyle="bold"
-                android:textColor="@android:color/white"
                 android:text="Cancel" />
         </LinearLayout>
 
@@ -111,10 +110,10 @@
             android:id="@+id/btnPrinterTest"
             style="@style/btnStyleBeige"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:layout_margin="5dp"
             android:text="Test Printer"
-            android:visibility="invisible" />
+            android:visibility="gone" />
 
 
     </LinearLayout>

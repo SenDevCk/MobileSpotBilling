@@ -4,7 +4,7 @@
     android:layout_height="fill_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:background="@drawable/backgroundboarder">
+    >
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/app_bar_summary"
         android:layout_width="match_parent"
@@ -18,11 +18,12 @@
             app:layout_scrollFlags="scroll|enterAlways"
             app:popupTheme="@style/AppTheme" />
     </com.google.android.material.appbar.AppBarLayout>
-    <TextView
+    <!--<TextView
         android:id="@+id/tvSummaryNOR"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="No. Of Records" />
+        android:padding="10dp"
+        android:hint="No. Of Records" />-->
     <ListView
         android:id="@+id/lvSummaryList"
         android:layout_width="fill_parent"

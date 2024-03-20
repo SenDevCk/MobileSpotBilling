@@ -1272,7 +1272,8 @@ public class ActvBilling extends AppCompatActivity implements OnClickListener, T
 
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		// TODO Auto-generated method stub
-
+       super.onActivityResult(requestCode,resultCode,data);
+	   Log.d("result data",data.getExtras().toString());
 		if (resultCode == RESULT_OK) {
 			switch (requestCode) {
 			
@@ -1880,6 +1881,7 @@ public class ActvBilling extends AppCompatActivity implements OnClickListener, T
 		catch(Exception e)
 		//Log.e("StartBilling", "Completed");
 		{
+			e.printStackTrace();
             Toast.makeText(ActvBilling.this, "Step17 Completed", Toast.LENGTH_SHORT).show();
 			Log.e("StartBilling E", e.getMessage());
 		}
@@ -2045,16 +2047,16 @@ public class ActvBilling extends AppCompatActivity implements OnClickListener, T
 		Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 		//intent.putExtra(MediaStore.EXTRA_SCREEN_ORIENTATION, Ori)
 		try {
-			String AppDir = Environment.getExternalStorageDirectory().getPath()
+			String appDir = Environment.getExternalStorageDirectory().getPath()
 					+ "/SBDocs/Photos";
 
-			String sdocdfilepath = AppDir + "/" + UtilAppCommon.in.SUB_DIVISION_CODE;
+			String sdocdfilepath = appDir + "/" + UtilAppCommon.in.SUB_DIVISION_CODE;
 			File sdofile = new File(sdocdfilepath);
 			if (!sdofile.exists()) {
                 Toast.makeText(ActvBilling.this, "Step18 Completed", Toast.LENGTH_SHORT).show();
 				sdofile.mkdir();
 			}
-			String binderfilepath = AppDir + "/" + UtilAppCommon.in.SUB_DIVISION_CODE
+			String binderfilepath = appDir + "/" + UtilAppCommon.in.SUB_DIVISION_CODE
 					+ "/" + UtilAppCommon.in.MRU;
 			File binderfile = new File(binderfilepath);
 			if (!binderfile.exists()) {
@@ -2111,6 +2113,7 @@ public class ActvBilling extends AppCompatActivity implements OnClickListener, T
 			startActivityForResult(intent, CAMERA_CAPTURE_IMAGE_REQUEST_CODE);
 			Log.i("ActvBilling Capt", "A isFinishing ==>> " + isFinishing());
 		} catch (Exception e) {
+			e.printStackTrace();
 			System.out.println(e.toString());
 		}
 	}
@@ -2181,27 +2184,26 @@ public class ActvBilling extends AppCompatActivity implements OnClickListener, T
 
 	
 	void CropImage() {
-
 		try {
 			Log.v("ActvBilling","**************************"+photoFolderSaved);
 			Log.v("ActvBilling","**************************"+photoAddressSaved);
 
 			File file=new File(photoFolderSaved);
-			Log.v("ActvBilling","**************************1");
-			File fileList[]=file.listFiles();
+			//Log.v("ActvBilling","**************************1");
+			File[] fileList=file.listFiles();
 			Log.v("ActvBilling","*************************2");
 			File file2=new File(photoAddressSaved);
 			Log.v("ActvBilling","**************************"+file.getAbsolutePath());
 			Log.v("ActvBilling","**************************"+file2.getAbsolutePath());
 			//Log.v("ActvBilling","**************************"+file2.getAbsolutePath());
 
-			for(File fileName : fileList){
-				Log.v("ActvBilling","**************************"+fileName.getAbsolutePath());
-				if(!fileName.getAbsolutePath().equalsIgnoreCase(file2.getAbsolutePath())){
-					Log.v("ActvBilling","*****************File Name Not Matched*********"+fileName.getAbsolutePath());
-					fileName.delete();
+				for (File fileName : fileList) {
+					Log.v("ActvBilling", "**************************" + fileName.getAbsolutePath());
+					if (!fileName.getAbsolutePath().equalsIgnoreCase(file2.getAbsolutePath())) {
+						Log.v("ActvBilling", "*****************File Name Not Matched*********" + fileName.getAbsolutePath());
+						fileName.delete();
+					}
 				}
-			}
 
 
 			UtilAppCommon.blImageCapture = false;

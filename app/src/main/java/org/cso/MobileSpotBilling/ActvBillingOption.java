@@ -52,8 +52,7 @@ public class ActvBillingOption extends AppCompatActivity implements OnClickListe
 	private BluetoothAdapter mBluetoothAdapter = null;
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);        
-       
+        super.onCreate(savedInstanceState);
         setContentView(R.layout.billingoption);
 		toolbar= findViewById(R.id.toolbar_bill_opti);
 		//toolbar.setLogo(getResources().getDrawable(R.drawable.sbpscl_logo));

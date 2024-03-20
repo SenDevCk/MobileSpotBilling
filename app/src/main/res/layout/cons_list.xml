@@ -72,11 +72,13 @@
         android:id="@+id/tveditTextSearch"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:layout_margin_top="5dp"
+        android:layout_marginTop="5dp"
         android:ems="10"
         android:hint="Enter text to search"
+        android:background="@drawable/edit_text_box"
+        android:drawableLeft="@android:drawable/ic_menu_search"
         android:inputType="textPersonName"
-        android:textColor="@android:color/white" />
+        android:textColor="@android:color/black" />
 
     <ListView
         android:id="@+id/lvConsumerListTestConList"

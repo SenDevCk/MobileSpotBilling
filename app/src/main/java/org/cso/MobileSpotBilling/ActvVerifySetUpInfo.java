@@ -21,39 +21,32 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 
 public class ActvVerifySetUpInfo extends AppCompatActivity implements OnClickListener{
     /** Called when the activity is first created. */
 	UtilDB  util;
 	EditText username,password;	
-		
+		Toolbar toolbar;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.dg_verifysetupinfo);        
+        setContentView(R.layout.dg_verifysetupinfo);
+		toolbar = findViewById(R.id.toolbar_versetinfo);
+		//toolbar.setLogo(getResources().getDrawable(R.drawable.sbpscl_logo));
+		toolbar.setTitle("Setup information");
+		setSupportActionBar(toolbar);
+		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		getSupportActionBar().setDisplayShowHomeEnabled(true);
         showVerifySetupInfo();       
     }
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-    	super.onCreateOptionsMenu(menu);
-      MenuInflater inflater = getMenuInflater();
-      inflater.inflate(R.menu.mainmenu, menu);
-      return true;
-    }
-    public boolean onOptionsItemSelected(MenuItem item) {
-	   	 switch (item.getItemId()) {
-	   	 case R.id.home:
-	   		/*finish();
-	 		startActivity(new Intent(this, ActvivityMain.class));*/
-	   		finish();	   	 
-	    	 Intent intent = new Intent(this, ActvivityMain.class);  
-	    	 startActivity(intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));  
-	         startActivity(intent);
-	   		break;
-	     }
-	     return true;
-    }
+	@Override
+	public boolean onSupportNavigateUp() {
+		//  closePrinter();
+		onBackPressed();
+		return true;
+	}
     
     public void onBackPressed() {
 		//startActivity(new Intent(this, ActvSetupInfo.class));

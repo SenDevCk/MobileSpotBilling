@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:installLocation="internalOnly"
     android:versionCode="1"
     android:versionName="@string/app_version">
-
     <uses-sdk android:minSdkVersion="21" />
-
+     <!-- android:installLocation="internalOnly"-->
     <!--<permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <permission android:name="android.permission.CAMERA"/>
@@ -23,17 +21,20 @@
     <permission android:name="android.permission.READ_EXTERNAL_STORAGE" />-->
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
     <uses-permission android:name="android.permission.BLUETOOTH_SCAN" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADVERTISE" />
     <uses-permission android:name="android.permission.READ_PRIVILEGED_PHONE_STATE"
         tools:ignore="ProtectedPermissions" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.LOCATION_HARDWARE"
+    <uses-permission
+        android:name="android.permission.LOCATION_HARDWARE"
         tools:ignore="ProtectedPermissions" />
-    <uses-permission android:name="android.permission.BLUETOOTH" />
-    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
@@ -41,72 +42,85 @@
     <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
     <!-- <uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION" /> -->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-
-    <uses-feature android:name="android.hardware.camera" android:required="true" />
-
-   <!-- <application
-        android:name="org.cso.config.AppController"
-        android:allowBackup="true"
-        android:allowTaskReparenting="true"
-        android:icon="@drawable/sbpscl_logo"
-        android:label="@string/app_name"
-        android:theme="@style/MSBTheme"
-        android:requestLegacyExternalStorage="true"
-        android:largeHeap="true"
-        android:usesCleartextTraffic="true">-->
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
+    <uses-permission android:name="android.permission.ACCESS_MEDIA_LOCATION" />
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="29" />
+    <uses-permission
+        android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"
+        tools:ignore="ProtectedPermissions" />
+    <uses-permission
+        android:name="android.permission.CLEAR_APP_CACHE"
+        tools:ignore="ProtectedPermissions" />
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="true" />
+    <uses-feature
+        android:name="android.hardware.bluetooth_le"
+        android:required="true" />
+    <!-- <application
+         android:name="org.cso.config.AppController"
+         android:allowBackup="true"
+         android:allowTaskReparenting="true"
+         android:icon="@drawable/sbpscl_logo"
+         android:label="@string/app_name"
+         android:theme="@style/MSBTheme"
+         android:requestLegacyExternalStorage="true"
+         android:largeHeap="true"
+         android:usesCleartextTraffic="true">-->
     <!--        android:networkSecurityConfig="@xml/network_security_config"-->
     <application
-        android:allowBackup="false"
-        android:fullBackupContent="false"
-        android:hardwareAccelerated="false"
+        android:allowBackup="true"
         android:icon="@drawable/sbpscl_logo"
         android:installLocation="internalOnly"
         android:label="@string/app_name"
+        android:largeHeap="true"
+        android:requestLegacyExternalStorage="true"
         android:roundIcon="@drawable/sbpscl_logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:replace="android:allowBackup">
         <activity
+            android:name=".ActivityPreLaunch"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+        </activity>
+        <activity
             android:name=".ActvivityMain"
-            android:label="@string/app_name"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ActvBillingOption"
             android:icon="@drawable/mobile_logo"
-            android:label="@string/app_name"
             android:logo="@drawable/mobile_logo"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ActvBilling"
-            android:description="@string/billing"
-            android:label="@string/billing"
-            android:configChanges="orientation|keyboardHidden|screenSize" />
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            />
         <activity
             android:name=".ActvConsumerNbrInput"
             android:clearTaskOnLaunch="true"
             android:configChanges="orientation"
-            android:description="@string/app_name"
             android:finishOnTaskLaunch="true"
-            android:label="@string/app_name"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ActvConsumerNbrInputRecheck"
             android:clearTaskOnLaunch="true"
             android:configChanges="orientation"
-            android:description="@string/app_name"
             android:finishOnTaskLaunch="true"
-            android:label="@string/app_name"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ActvMeterStatusMenu"
-            android:description="@string/meter_status"
-            android:label="@string/meter_status"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ActvCurrReading"
-            android:description="@string/bill_calculation"
-            android:label="@string/bill_calculation"
             android:screenOrientation="portrait" />
         <activity android:name=".ActvConsForRoundComplete" />
         <activity
@@ -121,32 +135,22 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".BilledUnbilled"
-            android:clearTaskOnLaunch="true"
-            android:finishOnTaskLaunch="true"
-            android:screenOrientation="landscape" />
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ActvLogin"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateVisible"/>
+            android:windowSoftInputMode="stateVisible" />
         <activity
             android:name=".ActvReport"
-            android:clearTaskOnLaunch="true"
-            android:finishOnTaskLaunch="true"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ActvOptConsumerSearch"
-            android:clearTaskOnLaunch="true"
-            android:finishOnTaskLaunch="true"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ActvSetupInfo"
-            android:clearTaskOnLaunch="true"
-            android:finishOnTaskLaunch="true"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ConsumerListTest"
-            android:clearTaskOnLaunch="true"
-            android:finishOnTaskLaunch="true"
             android:screenOrientation="portrait" />
         <!--
         <activity
@@ -162,95 +166,57 @@
         -->
         <activity
             android:name=".ActvDownloadInputData"
-            android:clearTaskOnLaunch="true"
-            android:finishOnTaskLaunch="true"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ActvVerifySetUpInfo"
-            android:clearTaskOnLaunch="true"
-            android:finishOnTaskLaunch="true"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ActvModifySetUpInfo"
-            android:clearTaskOnLaunch="true"
-            android:finishOnTaskLaunch="true"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ActvDuplicateBillPrinting"
-            android:clearTaskOnLaunch="true"
-            android:finishOnTaskLaunch="true"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ActvConsumerNbrInputForDuplicateBill"
-            android:clearTaskOnLaunch="true"
-            android:finishOnTaskLaunch="true"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ActvSrcByMtrNo"
-            android:clearTaskOnLaunch="true"
-            android:finishOnTaskLaunch="true"
             android:screenOrientation="landscape" />
         <activity
             android:name=".ActvSrcByConName"
-            android:clearTaskOnLaunch="true"
-            android:finishOnTaskLaunch="true"
             android:screenOrientation="landscape" />
         <activity
             android:name=".ActvSrcByConNo"
-            android:clearTaskOnLaunch="true"
-            android:finishOnTaskLaunch="true"
             android:screenOrientation="landscape" />
         <activity
             android:name=".ActvSummary"
-            android:clearTaskOnLaunch="true"
-            android:finishOnTaskLaunch="true"
-            android:screenOrientation="landscape" />
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ActvivityHelp"
-            android:clearTaskOnLaunch="true"
-            android:finishOnTaskLaunch="true"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ActvivityUpload"
-            android:clearTaskOnLaunch="true"
-            android:finishOnTaskLaunch="true"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ActvLegacyNbrInput"
-            android:clearTaskOnLaunch="true"
-            android:finishOnTaskLaunch="true"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ActvSequenceData"
-            android:clearTaskOnLaunch="true"
-            android:finishOnTaskLaunch="true"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ActvLaunchApp"
-            android:clearTaskOnLaunch="true"
-            android:finishOnTaskLaunch="true"
-            android:screenOrientation="portrait">
-
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".ActvMsgPrinting"
-            android:description="@string/print_bill"
-            android:label="@string/print_bill"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ActvUnbilledListPrinting"
-            android:description="@string/print_bill"
-            android:label="@string/print_bill"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ActvSummaryPrinting"
-            android:description="@string/print_bill"
-            android:label="@string/print_bill"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ActvTestPrinting"
-            android:description="@string/print_bill"
-            android:label="@string/print_bill"
             android:screenOrientation="portrait" />
         <activity
             android:name=".PoleMobileActivity"
@@ -293,18 +259,11 @@
         <activity
             android:name=".DcMeterReading"
             android:label=""
-            android:screenOrientation="portrait"
-           ></activity>
-        <activity android:name=".ActivityPreLaunch"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-
-        </activity>
-
+            android:screenOrientation="portrait"></activity>
+        <service
+            android:name="org.cso.service.MyJobService"
+            android:exported="true"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="org.cso.MobileSpotBilling.fileprovider"
@@ -314,12 +273,7 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
-        <service
-            android:name="org.cso.service.MyJobService"
-            android:permission="android.permission.BIND_JOB_SERVICE"
-            android:exported="true"/>
+
 
     </application>
-
-
 </manifest>

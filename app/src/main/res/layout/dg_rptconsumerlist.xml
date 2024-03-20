@@ -24,13 +24,12 @@
    <LinearLayout
 	            android:layout_width="match_parent"
 	            android:layout_height="65dp"
-	            android:background="@drawable/linearlayoutbackgroundboarder"
 	            android:paddingTop="8dp">
 	
 	          <Button
 	              android:id="@+id/btnOk"
 	              android:layout_width="100dp"
-	              android:layout_height="wrap_content"
+	              android:layout_height="40dp"
 	              android:background="@drawable/buttonbackground1"
 	              android:layout_gravity="left"
 	              android:layout_marginLeft="110dp"

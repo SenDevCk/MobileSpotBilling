@@ -31,25 +31,26 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp">
+            android:layout_marginTop="10dp"
+            android:orientation="vertical"
+            android:background="@drawable/edit_text_box">
 
             <TextView
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight=".4"
                 android:text="CA Number"
-                android:textColor="@android:color/darker_gray"
-                android:textSize="18dp"
-                android:textStyle="bold" />
+                android:textColor="@color/colorPrimary"
+                android:textSize="11dp"
+                 />
 
             <EditText
                 android:id="@+id/AccNoTxt"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:layout_weight=".6"
                 android:hint=" Acc No"
                 android:inputType="number"
                 android:textColor="@android:color/black"
+                android:background="@android:color/white"
                 android:textSize="18sp" />
 
         </LinearLayout>
@@ -57,25 +58,26 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp">
+            android:layout_marginTop="10dp"
+            android:orientation="vertical"
+            android:background="@drawable/edit_text_box">
 
             <TextView
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight=".4"
                 android:text="Legacy Number:"
-                android:textColor="@android:color/darker_gray"
-                android:textSize="18dp"
-                android:layout_gravity="center_vertical"
-                android:textStyle="bold" />
+                android:textColor="@color/colorPrimary"
+                android:textSize="11dp"
+                />
 
             <EditText
                 android:id="@+id/LegNoTxt"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:layout_weight=".6"
                 android:hint=" Legacy No"
                 android:textColor="@android:color/black"
+                android:background="@android:color/white"
                 android:maxLength="20"
                 android:textSize="18sp" />
 
@@ -84,25 +86,25 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp">
+            android:layout_marginTop="10dp"
+            android:orientation="vertical"
+            android:background="@drawable/edit_text_box">
 
             <TextView
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight=".4"
                 android:text="Name"
-                android:layout_gravity="center_vertical"
-                android:textColor="@android:color/darker_gray"
-                android:textSize="18dp"
-                android:textStyle="bold" />
+                android:textColor="@color/colorPrimary"
+                android:textSize="11dp"
+                 />
 
             <EditText
                 android:id="@+id/ConNameTxt"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight=".6"
                 android:hint="Name"
                 android:textColor="@android:color/black"
+                android:background="@android:color/white"
                 android:paddingLeft="10dp"
                 android:maxLength="50"
                 android:textSize="18sp" />
@@ -111,54 +113,54 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp">
+            android:layout_marginTop="10dp"
+            android:orientation="vertical"
+            android:background="@drawable/edit_text_box">
 
             <TextView
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight=".4"
-                android:text="Pole No :"
-                android:textColor="@android:color/darker_gray"
-                android:textSize="18dp"
-                android:layout_gravity="center_vertical"
-                android:textStyle="bold" />
+                android:text="Pole No"
+                android:textColor="@color/colorPrimary"
+                android:textSize="11dp"
+               />
 
             <EditText
                 android:id="@+id/PoleNoTxt"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight=".6"
                 android:hint=" Pole No"
                 android:textColor="@android:color/black"
                 android:maxLength="20"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:background="@android:color/white"/>
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp">
+            android:layout_marginTop="10dp"
+            android:orientation="vertical"
+            android:background="@drawable/edit_text_box">
 
             <TextView
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight=".4"
-                android:text="Mobile No :"
-                android:textColor="@android:color/darker_gray"
-                android:textSize="18dp"
-                android:layout_gravity="center_vertical"
-                android:textStyle="bold" />
+                android:text="Mobile No"
+                android:textColor="@color/colorPrimary"
+                android:textSize="11dp"
+                 />
 
             <EditText
                 android:id="@+id/MobileNoTxt"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:layout_weight=".6"
                 android:hint=" Mobile No"
                 android:inputType="number"
                 android:textColor="@android:color/black"
                 android:maxLength="10"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:background="@android:color/white"/>
         </LinearLayout>
 
 
@@ -175,17 +177,15 @@
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_weight=".5"
-            android:background="@android:color/holo_green_dark"
             android:text="Update"
             android:textColor="@android:color/white" />
 
         <Button
             android:id="@+id/CancelBtn"
-            style="@style/btnStyleBeige"
+            style="@style/btnStyleCancle"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_weight=".5"
-            android:background="@android:color/holo_red_dark"
             android:text="Cancel"
             android:textColor="@android:color/white" />
     </LinearLayout>

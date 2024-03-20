@@ -56,7 +56,7 @@ public class BilledUnbilled extends AppCompatActivity {
                 new int[]{R.id.bubBinder, R.id.bubBilled, R.id.bubUnbilled, R.id.bubTotal});
         LayoutInflater inflater = getLayoutInflater();
         //tvBilledUnbilledNOR.setText("No. Of Record Found:" + mylist.size());
-        toolbar.setSubtitle("Records : "+mylist.size());
+        toolbar.setSubtitle("Total Records : "+mylist.size());
         final View header = inflater.inflate(R.layout.bub_header, (ViewGroup) (list), false);
         list.addHeaderView(header, null, false);
         list.setAdapter(adapter);

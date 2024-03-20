@@ -4,7 +4,7 @@
 	android:layout_height="fill_parent"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
 	android:orientation="vertical"
-	android:background="@drawable/backgroundboarder">
+	>
 	<com.google.android.material.appbar.AppBarLayout
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
@@ -18,35 +18,35 @@
 			app:layout_scrollFlags="scroll|enterAlways"
 			app:popupTheme="@style/AppTheme" />
 	</com.google.android.material.appbar.AppBarLayout>
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-		android:layout_marginTop="10dp">
+		android:background="@drawable/edit_text_box">
 
-	          <EditText
+	          <com.google.android.material.textfield.TextInputEditText
 	              android:id="@+id/edtOldAccnbr"
-	              android:layout_width="195dp"
-	              android:layout_height="wrap_content"
-	              android:layout_alignParentLeft="true"
-	              android:layout_toLeftOf="@+id/btnSearchOldAcctNbr"
-	              android:layout_weight="1"
-	              android:ems="10"
-	              android:hint="OldAcc no"
+	              android:layout_width="0dp"
+	              android:layout_weight=".9"
+				  android:layout_height="40dp"
+	              android:hint="enter old a/c number..."
 	              android:inputType="none"
 	              android:maxLength="12"
-	              android:singleLine="true" />
+				  android:paddingLeft="5dp"
+	              android:singleLine="true"
+				  android:drawableLeft="@android:drawable/ic_menu_search"
+				  android:background="@android:color/white"
+				  />
 
 	          <Button
 	              android:id="@+id/btnSearchOldAcctNbr"
-	              style="?android:attr/buttonStyleSmall"
-	              android:layout_width="wrap_content"
-	              android:layout_height="wrap_content"
-	              android:layout_alignBottom="@+id/edtOldAccnbr"
-	              android:layout_alignParentRight="true"
-	              android:layout_alignParentTop="true"
-	              android:text="Search" />
+	              style="@style/btnStyleBeige"
+	              android:layout_width="0dp"
+				  android:layout_weight=".1"
+	              android:layout_height="40dp"
+	              android:drawableLeft="@android:drawable/ic_menu_search"
+	               />
 
-    </RelativeLayout>
+    </LinearLayout>
 
     <ListView
         android:id="@+id/lvSrcByAcNo"

@@ -1,66 +1,26 @@
 package org.cso.MobileSpotBilling;
 
 
-import java.io.File;
-
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-
-//import org.cso.MSBAsync.SaveBulkDataAsync;
-import org.cso.MSBUtil.AppUtil;
-import org.cso.MSBUtil.NetworkUtil;
-import org.cso.MSBUtil.UtilAppCommon;
-import org.cso.MSBUtil.UtilDB;
-import org.cso.MobileSpotBilling.R;
-
-import com.itextpdf.text.Utilities;
-
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.Dialog;
-import android.app.ProgressDialog;
-import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.pm.ActivityInfo;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
-import android.content.pm.PackageManager.NameNotFoundException;
-import android.graphics.drawable.Drawable;
-
-import android.media.ExifInterface;
-import android.net.ConnectivityManager;
-import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
-import android.telephony.TelephonyManager;
 import android.view.Gravity;
 import android.view.LayoutInflater;
-//import android.service.textservice.SpellCheckerService.Session;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.View.OnClickListener;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.AdapterView;
-//import android.view.textservice.SuggestionsInfo;
-//import android.view.textservice.TextInfo;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView; 
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
+import org.cso.MSBUtil.UtilDB;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 
 public class ActvivityUpload extends AppCompatActivity {
@@ -73,11 +33,18 @@ public class ActvivityUpload extends AppCompatActivity {
 	ArrayList<HashMap<String, String>> mylist;
 	SimpleAdapter adapter;
 	Toast toast;
+	Toolbar toolbar;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) { 
     	super.onCreate(savedInstanceState);
-        setContentView(R.layout.layout_upload); 
+        setContentView(R.layout.layout_upload);
+		toolbar= findViewById(R.id.toolbar_upload);
+		//toolbar.setLogo(getResources().getDrawable(R.drawable.sbpscl_logo));
+		toolbar.setTitle("Upload Billed Data");
+		setSupportActionBar(toolbar);
+		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		getSupportActionBar().setDisplayShowHomeEnabled(true);
         lvUpload=(ListView)findViewById(R.id.lvUpload);
         mylist = new ArrayList<HashMap<String, String>>();
         
@@ -126,29 +93,14 @@ public class ActvivityUpload extends AppCompatActivity {
 	   });
        
 	 }
-   
-    
-    
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-    	super.onCreateOptionsMenu(menu);
-      MenuInflater inflater = getMenuInflater();
-      inflater.inflate(R.menu.mainmenu, menu);
-      return true;
-    }
-    public boolean onOptionsItemSelected(MenuItem item) {
-	   	 switch (item.getItemId()) {
-	   	 case R.id.home:
-	   		/*finish();
-	 		 startActivity(new Intent(this, ActvivityHelp.class));*/
-	   		finish();	   	 
-	    	 Intent intent = new Intent(this, ActvivityMain.class);  
-	    	 startActivity(intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));  
-	         startActivity(intent);
-	 		 break;
-	   	 }
-	     return true;
-    }
+
+
+
+	@Override
+	public boolean onSupportNavigateUp() {
+		onBackPressed();
+		return true;
+	}
     
 
     void ViewBinderSummary() {

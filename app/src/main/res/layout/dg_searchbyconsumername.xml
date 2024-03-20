@@ -4,7 +4,7 @@
 	android:layout_height="match_parent"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
 	android:orientation="vertical"
-	android:background="@drawable/backgroundboarder">
+	>
 	<com.google.android.material.appbar.AppBarLayout
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
@@ -18,34 +18,33 @@
 			app:layout_scrollFlags="scroll|enterAlways"
 			app:popupTheme="@style/AppTheme" />
 	</com.google.android.material.appbar.AppBarLayout>
-     <RelativeLayout
+     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+		 android:layout_margin="5dp">
 
 	          <EditText
 	              android:id="@+id/edtTxtConName"
-	              android:layout_width="195dp"
-	              android:layout_height="wrap_content"
+	              android:layout_width="0dp"
+	              android:layout_height="40dp"
 	              android:layout_alignParentLeft="true"
-	              android:layout_toLeftOf="@+id/btnSearchConsName"
-	              android:layout_weight="1"
-	              android:ems="10"
+	              android:layout_weight=".8"
 	              android:hint="Consumer Name"
 	              android:inputType="none"
 	              android:maxLength="12"
+				  android:background="@drawable/edit_text_box"
+				  android:drawableLeft="@android:drawable/ic_menu_search"
 	              android:singleLine="true" />
 
 	          <Button
 	              android:id="@+id/btnSearchConsName"
-	              style="?android:attr/buttonStyleSmall"
-	              android:layout_width="wrap_content"
-	              android:layout_height="wrap_content"
-	              android:layout_alignBottom="@+id/edtTxtConName"
-	              android:layout_alignParentRight="true"
-	              android:layout_alignParentTop="true"
+	              style="@style/btnStyleBeige"
+	              android:layout_width="0dp"
+				  android:layout_weight=".2"
+	              android:layout_height="40dp"
 	              android:text="Search" />
 
-    </RelativeLayout>
+    </LinearLayout>
 
     <ListView
         android:id="@+id/lvSrcByConName"

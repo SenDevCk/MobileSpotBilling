@@ -10,28 +10,30 @@
     
  
      <TextView android:id="@+id/drBinderCell"
-         android:layout_width="170dp"
+         android:layout_width="0dp"
          android:layout_height="wrap_content"
          android:padding="5dp"
          android:layout_marginLeft="10dp"
-         android:layout_weight="1" 
+         android:layout_weight=".25"
          android:textAppearance="?android:attr/textAppearanceLarge" />
  
      <TextView android:id="@+id/drBilledCell"
-         android:layout_width="170dp"
+         android:layout_width="0dp"
          android:layout_height="wrap_content"
          android:padding="5dp" 
-         android:layout_weight="1" 
+         android:layout_weight=".25"
          android:textAppearance="?android:attr/textAppearanceLarge" />
  
      <TextView android:id="@+id/drTotalCell"
-         android:layout_width="170dp"
+         android:layout_width="0dp"
          android:layout_height="wrap_content" 
-         android:padding="5dp" 
+         android:padding="5dp"
+         android:layout_weight=".25"
          android:textAppearance="?android:attr/textAppearanceLarge" />
      
      <TextView android:id="@+id/drUnitcell"
-         android:layout_width="170dp"
+         android:layout_width="0dp"
+         android:layout_weight=".25"
          android:layout_height="wrap_content" 
          android:padding="5dp" 
          android:textAppearance="?android:attr/textAppearanceLarge" />

@@ -77,8 +77,8 @@ public class ActvLogin extends AppCompatActivity implements OnClickListener,Task
 
     private void init() {
 
-        username = (EditText) findViewById(R.id.edtTxtUserName);
-        password = (EditText) findViewById(R.id.edtTxtPassword);
+        username =  findViewById(R.id.edtTxtUserName);
+        password =  findViewById(R.id.edtTxtPassword);
         //imm.showSoftInput(password, InputMethodManager.SHOW_IMPLICIT);
         txtVersion = (TextView) findViewById(R.id.TxtVersion);
         UtilAppCommon.strAppVersion = txtVersion.getText().toString();
@@ -128,6 +128,7 @@ public class ActvLogin extends AppCompatActivity implements OnClickListener,Task
         /*UtilDB utildb = new UtilDB(getBaseContext());
         utildb.insertIntoUserInfo("meterreader_id|METER_READER_NAME|password|IMEINo");
         startActivity(new Intent(this, ActvivityMain.class));*/
+        //System.err.println("IMEI_Number : "+UtilAppCommon.IMEI_Number);
 
     }
 
@@ -153,28 +154,6 @@ public class ActvLogin extends AppCompatActivity implements OnClickListener,Task
         return imei;
     }
 
-
-
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        super.onCreateOptionsMenu(menu);
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.mainmenu, menu);
-        return true;
-    }
-
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.home:
-                finish();
-                Intent intent = new Intent(this, ActvivityMain.class);
-                startActivity(intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
-                startActivity(intent);
-                break;
-        }
-        return true;
-    }
 
     public void onClick(View view) {
         int id = view.getId();
@@ -360,7 +339,11 @@ public class ActvLogin extends AppCompatActivity implements OnClickListener,Task
         int location = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION);
         int camra = ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA);
         int storage = ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        int storage2 = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE);
+        int read_media = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_MEDIA_IMAGES);
         int blutooth = ContextCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH);
+        int blutoothscan = ContextCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_SCAN);
+        int blutooth_conn = ContextCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_CONNECT);
 
         List<String> listPermissionsNeeded = new ArrayList<>();
 
@@ -373,8 +356,20 @@ public class ActvLogin extends AppCompatActivity implements OnClickListener,Task
         if (storage != PackageManager.PERMISSION_GRANTED) {
             listPermissionsNeeded.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
         }
+        if (storage2 != PackageManager.PERMISSION_GRANTED) {
+            listPermissionsNeeded.add(Manifest.permission.READ_EXTERNAL_STORAGE);
+        }
+        if (read_media != PackageManager.PERMISSION_GRANTED) {
+            listPermissionsNeeded.add(Manifest.permission.READ_MEDIA_IMAGES);
+        }
         if (blutooth != PackageManager.PERMISSION_GRANTED) {
             listPermissionsNeeded.add(Manifest.permission.BLUETOOTH);
+        }
+        if (blutooth_conn != PackageManager.PERMISSION_GRANTED) {
+            listPermissionsNeeded.add(Manifest.permission.BLUETOOTH_CONNECT);
+        }
+        if (blutoothscan!= PackageManager.PERMISSION_GRANTED) {
+            listPermissionsNeeded.add(Manifest.permission.BLUETOOTH_SCAN);
         }
 
         if (!listPermissionsNeeded.isEmpty()) {

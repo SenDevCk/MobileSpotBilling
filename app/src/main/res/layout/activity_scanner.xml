@@ -35,7 +35,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp">
+            android:layout_marginRight="5dp"
+            android:layout_below="@+id/availableMeterMessage">
 
         </ListView>
 
@@ -43,12 +44,10 @@
             android:id="@+id/nodata"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
+           android:layout_centerInParent="true"
             android:text="@string/data_unavailable"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textStyle="italic"
-            android:visibility="invisible" />
+            android:visibility="invisible"
+            android:textColor="@android:color/holo_red_dark"/>
 
         <TextView
             android:id="@+id/availableMeterMessage"

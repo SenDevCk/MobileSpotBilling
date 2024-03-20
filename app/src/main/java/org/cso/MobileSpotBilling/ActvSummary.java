@@ -24,7 +24,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 public class ActvSummary extends AppCompatActivity {
-    TextView tvSummaryNOR;
+    //TextView tvSummaryNOR;
     Toolbar toolbar;
 
     public void onCreate(Bundle savedInstanceState) {
@@ -37,7 +37,7 @@ public class ActvSummary extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         UtilDB util = new UtilDB(getBaseContext());
-        tvSummaryNOR = (TextView) findViewById(R.id.tvSummaryNOR);
+        //tvSummaryNOR = (TextView) findViewById(R.id.tvSummaryNOR);
         ListView list = (ListView) findViewById(R.id.lvSummaryList);
         //ArrayList<HashMap<String, String>> mylist =util.getSummary();
         ArrayList<HashMap<String, String>> mylist = util.getSummaryReport1();
@@ -51,7 +51,8 @@ public class ActvSummary extends AppCompatActivity {
 
 
         LayoutInflater inflater = getLayoutInflater();
-        tvSummaryNOR.setText("No. Of Record Found:" + mylist.size());
+        //tvSummaryNOR.setText("No. Of Record Found:" + mylist.size());
+        toolbar.setSubtitle("No. Of Record Found : " + mylist.size());
         final View header = inflater.inflate(R.layout.summarylist_header, (ViewGroup) (list), false);
         list.addHeaderView(header, null, false);
         list.setAdapter(adapter);

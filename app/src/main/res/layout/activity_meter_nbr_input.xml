@@ -37,10 +37,9 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight=".3"
-                android:text="Sub-Division :"
-                android:textColor="@android:color/darker_gray"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                android:text="Sub-Division"
+                android:textColor="@color/colorPrimaryDark"
+                />
 
             <TextView
                 android:id="@+id/subDivisionTxt"
@@ -61,10 +60,9 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight=".3"
-                android:text="MRU    :"
-                android:textColor="@android:color/darker_gray"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                android:text="MRU"
+                android:textColor="@color/colorPrimaryDark"
+                 />
 
             <TextView
                 android:id="@+id/binderTxt"
@@ -81,40 +79,42 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="7dp"
-            android:gravity="center_vertical">
+            android:background="@android:color/darker_gray"
+            android:gravity="center_vertical"
+            android:orientation="vertical"
+            android:padding="10dp">
 
             <TextView
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:layout_weight=".3"
-                android:text="Meter Number   :"
-                android:textColor="@android:color/darker_gray"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                android:text="Meter Number"
+                android:textColor="@color/colorPrimaryDark"
+                />
 
             <EditText
                 android:id="@+id/MeterNbrEdit"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight=".6"
-                android:hint=" Meter No "
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:hint="Enter Meter No "
                 android:maxLength="15"
+                android:layout_marginTop="7dp"
                 android:paddingLeft="10dp"
-                android:textSize="18sp" />
+                android:textColor="@android:color/black"
+                android:background="@android:color/darker_gray"
+                android:textStyle="bold"
+                />
 
         </LinearLayout>
 
         <Button
             android:id="@+id/btnGenerate"
             style="@style/btnStyleBeige"
-            android:layout_width="150dp"
-            android:layout_height="40dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
             android:textStyle="bold"
-            android:textColor="@android:color/white"
-            android:background="@android:color/holo_green_light"
-            android:layout_marginLeft="85dp"
-            android:layout_marginTop="20dp"
+            android:layout_gravity="right"
             android:text="Continue"
             android:textSize="22sp" />
 
