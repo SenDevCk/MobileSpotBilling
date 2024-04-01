@@ -3,8 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:versionCode="1"
     android:versionName="@string/app_version">
+
     <uses-sdk android:minSdkVersion="21" />
-     <!-- android:installLocation="internalOnly"-->
+    <!-- android:installLocation="internalOnly"-->
     <!--<permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <permission android:name="android.permission.CAMERA"/>
@@ -26,7 +27,8 @@
     <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
     <uses-permission android:name="android.permission.BLUETOOTH_SCAN" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADVERTISE" />
-    <uses-permission android:name="android.permission.READ_PRIVILEGED_PHONE_STATE"
+    <uses-permission
+        android:name="android.permission.READ_PRIVILEGED_PHONE_STATE"
         tools:ignore="ProtectedPermissions" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
@@ -44,18 +46,22 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
     <uses-permission android:name="android.permission.ACCESS_MEDIA_LOCATION" />
-    <uses-permission
-        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
-        android:maxSdkVersion="29" />
+    <uses-permission android:name="android.permission.READ_MEDIA_VISUAL_USER_SELECTED" />
+    <!-- <uses-permission
+         android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+         android:maxSdkVersion="29" /> -->
     <uses-permission
         android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"
         tools:ignore="ProtectedPermissions" />
     <uses-permission
         android:name="android.permission.CLEAR_APP_CACHE"
         tools:ignore="ProtectedPermissions" />
+
     <uses-feature
         android:name="android.hardware.camera"
         android:required="true" />
+    <uses-feature android:name="android.hardware.camera.autofocus"
+        android:required="true"/>
     <uses-feature
         android:name="android.hardware.bluetooth_le"
         android:required="true" />
@@ -102,8 +108,7 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".ActvBilling"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            />
+            android:configChanges="orientation|keyboardHidden|screenSize" />
         <activity
             android:name=".ActvConsumerNbrInput"
             android:clearTaskOnLaunch="true"
@@ -153,16 +158,16 @@
             android:name=".ConsumerListTest"
             android:screenOrientation="portrait" />
         <!--
-        <activity
-            android:name=".RptRCList"
-            android:clearTaskOnLaunch="true"
-            android:finishOnTaskLaunch="true"
-            android:screenOrientation="portrait"></activity>
-        <activity
-            android:name=".RptMeterChange"
-            android:clearTaskOnLaunch="true"
-            android:finishOnTaskLaunch="true"
-            android:screenOrientation="portrait"></activity>
+            <activity
+                android:name=".RptRCList"
+                android:clearTaskOnLaunch="true"
+                android:finishOnTaskLaunch="true"
+                android:screenOrientation="portrait"></activity>
+            <activity
+                android:name=".RptMeterChange"
+                android:clearTaskOnLaunch="true"
+                android:finishOnTaskLaunch="true"
+                android:screenOrientation="portrait"></activity>
         -->
         <activity
             android:name=".ActvDownloadInputData"
@@ -205,7 +210,7 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".ActvLaunchApp"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ActvMsgPrinting"
             android:screenOrientation="portrait" />
@@ -220,37 +225,37 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".PoleMobileActivity"
-            android:label="@string/title_activity_pole_mobile" />
+            android:screenOrientation="portrait" />
         <activity
             android:name=".MeterNbrInput"
-            android:label="@string/title_activity_meter_nbr_input" />
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ActivitySyncData"
-            android:label="@string/title_activity_activity_sync_data" />
+            android:screenOrientation="portrait" />
         <activity
             android:name=".IntermediateActivity"
-            android:label="@string/title_activity_intermediate" />
+            android:screenOrientation="portrait" />
         <activity
             android:name=".MissingConsumersActivity"
-            android:label="@string/title_activity_missing_consumers" />
+            android:screenOrientation="portrait" />
         <activity
             android:name=".InterDupActivity"
-            android:label="@string/title_activity_inter_dup" />
+            android:screenOrientation="portrait" />
         <activity
             android:name=".SeqSyncActivity"
-            android:label="@string/title_activity_seq_sync" />
+            android:screenOrientation="portrait" />
         <activity
             android:name=".SyncMobPoleActivity"
-            android:label="@string/title_activity_sync_mob_pole" />
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Abnormality_Activity"
-            android:label="@string/title_activity_abnormality_" />
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ActivityBT_Reading"
             android:clearTaskOnLaunch="true"
             android:finishOnTaskLaunch="true"
             android:screenOrientation="portrait"
-            android:theme="@style/ATheme"></activity>
+            android:theme="@style/ATheme" />
         <activity
             android:name=".PeripheralActivity"
             android:label=""
@@ -259,7 +264,7 @@
         <activity
             android:name=".DcMeterReading"
             android:label=""
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <service
             android:name="org.cso.service.MyJobService"
             android:exported="true"
@@ -273,7 +278,5 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
-
-
     </application>
 </manifest>

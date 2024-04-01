@@ -870,13 +870,13 @@ public class ActvBillPrinting extends AppCompatActivity {
 				builder.addText(".\n");
 				try {
 
-					Drawable PhotoPath = getResources().getDrawable(R.drawable.azadi);
+					Drawable PhotoPath = getResources().getDrawable(R.drawable.chunav);
 
 					System.out.println("Photo: " + PhotoPath);
 					BitmapFactory bf = new BitmapFactory();
-					builder.addImage(bf.decodeResource(getResources(), R.drawable.azadi), 0, 0, bf
-									.decodeResource(getResources(), R.drawable.azadi).getWidth(),
-							bf.decodeResource(getResources(), R.drawable.azadi).getHeight(),
+					builder.addImage(bf.decodeResource(getResources(), R.drawable.chunav), 0, 0, bf
+									.decodeResource(getResources(), R.drawable.chunav).getWidth(),
+							bf.decodeResource(getResources(), R.drawable.chunav).getHeight(),
 							Builder.PARAM_DEFAULT);
 					*//*builder.addImage(bf.decodeFile(PhotoPath), 0, 0, bf
 									.decodeFile(PhotoPath).getWidth(),
@@ -985,13 +985,13 @@ public class ActvBillPrinting extends AppCompatActivity {
 				builder.addText(".\n");
 				try {
 
-					Drawable PhotoPath = getResources().getDrawable(R.drawable.azadi);
+					Drawable PhotoPath = getResources().getDrawable(R.drawable.chunav);
 
 					System.out.println("Photo: " + PhotoPath);
 					BitmapFactory bf = new BitmapFactory();
-					builder.addImage(bf.decodeResource(getResources(), R.drawable.azadi), 0, 0, bf
-									.decodeResource(getResources(), R.drawable.azadi).getWidth(),
-							bf.decodeResource(getResources(), R.drawable.azadi).getHeight(),
+					builder.addImage(bf.decodeResource(getResources(), R.drawable.chunav), 0, 0, bf
+									.decodeResource(getResources(), R.drawable.chunav).getWidth(),
+							bf.decodeResource(getResources(), R.drawable.chunav).getHeight(),
 							Builder.PARAM_DEFAULT);
 					/*builder.addImage(bf.decodeFile(PhotoPath), 0, 0, bf
 									.decodeFile(PhotoPath).getWidth(),
@@ -2247,13 +2247,13 @@ public class ActvBillPrinting extends AppCompatActivity {
 
 				try {
 
-					Drawable PhotoPath = getResources().getDrawable(R.drawable.azadi);
+					Drawable PhotoPath = getResources().getDrawable(R.drawable.chunav);
 
 					System.out.println("Photo: " + PhotoPath);
 					BitmapFactory bf = new BitmapFactory();
-					builder.addImage(bf.decodeResource(getResources(), R.drawable.azadi), 0, 0, bf
-									.decodeResource(getResources(), R.drawable.azadi).getWidth(),
-							bf.decodeResource(getResources(), R.drawable.azadi).getHeight(),
+					builder.addImage(bf.decodeResource(getResources(), R.drawable.chunav), 0, 0, bf
+									.decodeResource(getResources(), R.drawable.chunav).getWidth(),
+							bf.decodeResource(getResources(), R.drawable.chunav).getHeight(),
 							Builder.PARAM_DEFAULT);
 					/*builder.addImage(bf.decodeFile(PhotoPath), 0, 0, bf
 									.decodeFile(PhotoPath).getWidth(),
@@ -4561,7 +4561,7 @@ public class ActvBillPrinting extends AppCompatActivity {
 	public void tvsPrintImageAzadi() {
 
 		BitmapFactory.Options bitmapOptions = new BitmapFactory.Options();
-		Bitmap bmp_print = BitmapFactory.decodeResource(getResources(), R.drawable.azadi1);
+		Bitmap bmp_print = BitmapFactory.decodeResource(getResources(), R.drawable.chunav);
 		bmp_print = getResizedBitmap(bmp_print, 400);
 
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
