@@ -57,6 +57,7 @@ public class ActvLogin extends AppCompatActivity implements OnClickListener,Task
     private static final int PERMISSION_CAMERA = 14;
     private static final int PERMISSION_WRITE_EXTERNAL_STORAGE = 15;
     private boolean initse;
+    int read_media;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -158,9 +159,8 @@ public class ActvLogin extends AppCompatActivity implements OnClickListener,Task
     public void onClick(View view) {
         int id = view.getId();
         switch (id) {
-
             case R.id.btnLogin:
-                String uname = username.getText().toString().trim().toUpperCase();
+                String uname = username.getText().toString().trim();
                 String pass = password.getText().toString();
                 credentialParam[0] = uname;    //UtilAppCommon.IMEI_Number;
                 credentialParam[1] = pass;
@@ -338,29 +338,28 @@ public class ActvLogin extends AppCompatActivity implements OnClickListener,Task
     private boolean checkAndRequestPermissions() {
         int location = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION);
         int camra = ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA);
-        int storage = ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
-        int storage2 = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE);
-        int read_media = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_MEDIA_IMAGES);
+        // only for gingerbread and newer versions
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.TIRAMISU) {
+            read_media = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_MEDIA_IMAGES);
+        }else {
+            read_media = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE);
+        }
+        int write_storage = ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
         int blutooth = ContextCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH);
         int blutoothscan = ContextCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_SCAN);
         int blutooth_conn = ContextCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_CONNECT);
-
         List<String> listPermissionsNeeded = new ArrayList<>();
-
         if (location != PackageManager.PERMISSION_GRANTED) {
             listPermissionsNeeded.add(Manifest.permission.ACCESS_FINE_LOCATION);
         }
         if (camra != PackageManager.PERMISSION_GRANTED) {
             listPermissionsNeeded.add(Manifest.permission.CAMERA);
         }
-        if (storage != PackageManager.PERMISSION_GRANTED) {
+        if (write_storage != PackageManager.PERMISSION_GRANTED) {
             listPermissionsNeeded.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
         }
-        if (storage2 != PackageManager.PERMISSION_GRANTED) {
-            listPermissionsNeeded.add(Manifest.permission.READ_EXTERNAL_STORAGE);
-        }
         if (read_media != PackageManager.PERMISSION_GRANTED) {
-            listPermissionsNeeded.add(Manifest.permission.READ_MEDIA_IMAGES);
+            listPermissionsNeeded.add((android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.TIRAMISU)?Manifest.permission.READ_MEDIA_IMAGES:Manifest.permission.READ_EXTERNAL_STORAGE);
         }
         if (blutooth != PackageManager.PERMISSION_GRANTED) {
             listPermissionsNeeded.add(Manifest.permission.BLUETOOTH);
