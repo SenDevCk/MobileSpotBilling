@@ -260,6 +260,17 @@ public class ActvLaunchApp extends AppCompatActivity implements TaskCallback {
 		tm.schedule(builder.build());
 	}
 
+	@Override
+	protected void onResume() {
+		super.onResume();
+		Log.e("onResume", "ActvLaunchApp");
+	}
+
+	@Override
+	protected void onRestart() {
+		super.onRestart();
+		Log.e("onRestart", "ActvLaunchApp");
+	}
 
 	/**
 	 * A {@link Handler} allows you to send messages associated with a thread. A {@link Messenger}

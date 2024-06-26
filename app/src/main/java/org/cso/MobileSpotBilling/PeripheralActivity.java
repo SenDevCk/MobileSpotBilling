@@ -196,6 +196,14 @@ public class PeripheralActivity extends AppCompatActivity implements BleWrapperU
 
     }
 
+
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        Log.e("onRestart", "PeripheralActivity");
+    }
+
     public static SpannableString bold(String s) {
         SpannableString spanString = new SpannableString(s);
         spanString.setSpan(new StyleSpan(Typeface.BOLD), 0,
@@ -741,6 +749,7 @@ public class PeripheralActivity extends AppCompatActivity implements BleWrapperU
     @Override
     protected void onResume() {
         super.onResume();
+        Log.e("onResume", "PeripheralActivity");
         AppController.changeLocale();
         if (mBleWrapper == null) mBleWrapper = new BleWrapper(this, this);
         mBleWrapper.initialize();

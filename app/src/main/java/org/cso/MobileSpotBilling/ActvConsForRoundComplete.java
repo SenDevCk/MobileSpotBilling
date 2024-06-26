@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -39,4 +40,9 @@ public class ActvConsForRoundComplete extends AppCompatActivity {
 					});
 			alertDialog.show();
     }
+	@Override
+	protected void onResume() {
+		super.onResume();
+		Log.e("onResume","ActvConsForRoundComplete");
+	}
 }

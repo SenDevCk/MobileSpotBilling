@@ -517,10 +517,10 @@ public class ActvSetupInfo  extends AppCompatActivity implements OnClickListener
 							+ utildb.getActiveMRU();*/
 					
 					//Temporary Change Added
-					String AppDir = Environment.getExternalStorageDirectory().getPath()
+					/*String AppDir = Environment.getExternalStorageDirectory().getPath()
 							+ "/SBDocs/Photos_Crop" + "/" + utildb.getSdoCode() + "/"
-							+ utildb.getActiveMRU();
-					
+							+ utildb.getActiveMRU();*/
+					String AppDir=getExternalFilesDir(Environment.DIRECTORY_PICTURES+"/SBDocs/Photos_Crop/"+utildb.getSdoCode()+"/"+ utildb.getActiveMRU()).getPath();
 					file = new File(AppDir , cursorImage.getString(1));
 					File f = new File(AppDir);
 					String fullPath = f.getAbsolutePath();
@@ -534,13 +534,9 @@ public class ActvSetupInfo  extends AppCompatActivity implements OnClickListener
 					
 					//Log.e("AsyncImage Call"," Month ==>> " + cursorImage.getString(1).substring(4, 6));
 					//Log.e("AsyncImage Call"," Year ==>> " + cursorImage.getString(1).substring(0, 4));
-					AsyncImage asyncImage = new AsyncImage(this,new OnBillGenerate() {
-						
-						@Override
-						public void onFinish() {
-							// TODO Auto-generated method stub
-							
-						}
+					AsyncImage asyncImage = new AsyncImage(this, () -> {
+						// TODO Auto-generated method stub
+
 					});
 					asyncImage.execute(credentials);
 				}while(cursorImage.moveToNext());

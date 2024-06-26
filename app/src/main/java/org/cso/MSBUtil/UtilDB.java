@@ -1646,13 +1646,17 @@ public class UtilDB extends Activity {
 		String query = null;
 
 		int intUserInfoRowCount = 0;
+        try {
+			System.out.println("Entering into the database part \n");
 
-		System.out.println("Entering into the database part \n");
-		
-		query = String.format("select * from UserInfo");
-		System.out.println("query---" + query);
-		Cursor c = db.rawQuery(query, null);
-		intUserInfoRowCount = c.getCount();
+			query = String.format("select * from UserInfo");
+			System.out.println("query---" + query);
+			Cursor c = db.rawQuery(query, null);
+			intUserInfoRowCount = c.getCount();
+		}catch (Exception ex){
+			ex.printStackTrace();
+			Log.e("Userinfo",ex.getMessage());
+		}
 		//intUserInfoRowCount=1;
 		return intUserInfoRowCount;
 
@@ -3419,12 +3423,19 @@ public class UtilDB extends Activity {
 		int intUserInfoRowCount = 0;
 
 		System.out.println("Entering into the database part \n");
-
-		query = String.format(
-				"select * from UserInfo WHERE meterreader_id='%s' AND password='%s' ", UserName, Password);
-		System.out.println("query---" + query);
-		Cursor c = db.rawQuery(query, null);
-		intUserInfoRowCount = c.getCount();
+        try {
+			query = "select * from UserInfo where meterreader_id=? and password=?";
+			Cursor c = db.rawQuery(query, new String[]{UserName.trim().toUpperCase(), Password.trim()});
+			/*query = String.format(
+					"select * from UserInfo WHERE meterreader_id='%s' AND password='%s' ", UserName.trim(), Password.trim());
+			System.out.println("query---" + query);*/
+			//Cursor c = db.rawQuery(query, null);
+			intUserInfoRowCount = c.getCount();
+		}catch (Exception ex){
+			ex.printStackTrace();
+			Log.e("UserInfo",ex.getMessage());
+			return false;
+		}
 		//intUserInfoRowCount = 1;
 		if (intUserInfoRowCount > 0) {
 			Log.e("Authenticate", "True");

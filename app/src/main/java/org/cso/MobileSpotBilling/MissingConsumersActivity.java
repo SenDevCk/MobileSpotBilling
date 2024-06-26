@@ -44,7 +44,17 @@ public class MissingConsumersActivity extends AppCompatActivity implements OnCli
         Button cancelBtn = (Button) findViewById(R.id.CancelBtn);
         cancelBtn.setOnClickListener(this);
 	}
+	@Override
+	protected void onResume() {
+		super.onResume();
+		Log.e("onResume", "MissingConsumersActivity");
+	}
 
+	@Override
+	protected void onRestart() {
+		super.onRestart();
+		Log.e("onRestart", "MissingConsumersActivity");
+	}
 	@Override
 	public boolean onSupportNavigateUp() {
 		//  closePrinter();

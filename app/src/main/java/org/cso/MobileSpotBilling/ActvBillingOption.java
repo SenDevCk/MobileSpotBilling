@@ -194,5 +194,10 @@ public class ActvBillingOption extends AppCompatActivity implements OnClickListe
 		super.onBackPressed();
 		return;
 	}
-	
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		Log.e("onResume","ActvBillingOption");
+	}
 }

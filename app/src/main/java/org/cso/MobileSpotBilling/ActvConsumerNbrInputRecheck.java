@@ -16,6 +16,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.text.InputType;
 import android.text.method.KeyListener;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -65,6 +66,12 @@ public class ActvConsumerNbrInputRecheck extends AppCompatActivity implements On
         //  closePrinter();
         onBackPressed();
         return true;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.e("onResume", "ActvConsumerNbrInputRecheck");
     }
 
     public void onClick(View v) {

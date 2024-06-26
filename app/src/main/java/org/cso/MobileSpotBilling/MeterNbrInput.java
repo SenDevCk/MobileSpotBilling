@@ -53,6 +53,12 @@ public class MeterNbrInput extends AppCompatActivity implements OnClickListener 
         GPSLocation gps = new GPSLocation();
 	}
 
+
+	@Override
+	protected void onRestart() {
+		super.onRestart();
+		Log.e("onRestart", "MeterNbrInput");
+	}
 	@Override
 	public boolean onSupportNavigateUp() {
 		//  closePrinter();
@@ -63,6 +69,7 @@ public class MeterNbrInput extends AppCompatActivity implements OnClickListener 
 	@Override
 	protected void onResume() {
 		super.onResume();
+		Log.e("onRestart", "MeterNbrInput");
 		Log.i("Image Capture", "" + UtilAppCommon.blImageCapture);
 		UtilAppCommon.bBtnGenerateClicked = true;
 		if(UtilAppCommon.blImageCapture)	{

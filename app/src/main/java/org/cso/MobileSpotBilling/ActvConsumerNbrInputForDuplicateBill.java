@@ -69,7 +69,11 @@ public class ActvConsumerNbrInputForDuplicateBill extends AppCompatActivity impl
         onBackPressed();
         return true;
     }
-
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.e("onResume", "ActvConsumerNbrInputForDuplicateBill");
+    }
     @SuppressLint("SuspiciousIndentation")
     public void onBackPressed() {
         // do something on back.

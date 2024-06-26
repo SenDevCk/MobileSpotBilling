@@ -58,9 +58,8 @@ public class AsyncBluetoothReading extends AsyncTask<String, Void, String[]> {
 
             if((glbVar.equalsIgnoreCase("Network Issue / Not Reachable") || glbVar.equalsIgnoreCase("No Output Data")) && strRetry.equals(""))
             {
-                //UtilAppCommon.strHostName =	/*"http://125.16.220.4/"*/"https://www.bihardiscom.co.in/";		//Production
-                //UtilAppCommon.strHostName =	"http://220.225.3.133/";		//Development
-                UtilAppCommon.strHostName =	"http://112.133.239.225/";		//Development New
+                UtilAppCommon.strHostName ="https://www.bihardiscom.co.in/";		//Production
+                //UtilAppCommon.strHostName =	"http://125.16.220.10/";		//Development New
                 //param[11] = "2";
                 glbVar = sv.updateBluetoothReading(params);
                 strRetry = "1";

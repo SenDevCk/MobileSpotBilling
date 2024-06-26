@@ -1,7 +1,7 @@
 <component name="libraryTable">
   <library name="Gradle: E (5)" external-system-id="GRADLE">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/app/libs/commons-net-3.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/app/libs/btsdk.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

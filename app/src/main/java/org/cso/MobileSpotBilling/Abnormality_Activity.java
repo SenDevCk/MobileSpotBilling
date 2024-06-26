@@ -175,4 +175,9 @@ public class Abnormality_Activity extends AppCompatActivity implements OnClickLi
 			break;
 		}		
 	}
+	@Override
+	protected void onResume() {
+		super.onResume();
+		Log.e("onResume","Abnormality_Activity");
+	}
 }

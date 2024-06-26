@@ -1,133 +1,63 @@
 package org.cso.MobileSpotBilling;
 
-import org.apache.commons.io.FileSystemUtils;
-import org.apache.commons.io.FileUtils;
-import org.cso.MSBAsync.AsyncBluetoothReading;
-import org.cso.MSBAsync.AsyncGetOutputData;
-import org.cso.MSBAsync.AsyncGetUserInfo;
-import org.cso.MSBAsync.AsyncImage;
-import org.cso.MSBAsync.AsyncUnuploadedImage;
-import org.cso.MSBAsync.AsyncUpdatePoleMobile;
-import org.cso.MSBModel.StructOutput;
-import org.cso.MSBModel.StructSAPInput;
-import org.cso.MSBUtil.AppUtil;
-import org.cso.MSBUtil.GPSLocation;
-import org.cso.MSBUtil.GPSTracker;
-import org.cso.MSBUtil.NetworkUtil;
-import org.cso.MSBUtil.UtilAppCommon;
-import org.cso.MSBUtil.UtilDB;
-
-import java.io.BufferedReader;
-
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.nio.channels.AlreadyConnectedException;
-import java.sql.Timestamp;
-import java.text.DateFormat;
-import java.text.FieldPosition;
-import java.text.ParseException;
-import java.text.ParsePosition;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.List;
-import java.util.Locale;
-import java.util.TimeZone;
-
-import org.cso.MobileSpotBilling.R;
-
-import com.itextpdf.text.Chunk;
-import com.itextpdf.text.Document;
-import com.itextpdf.text.DocumentException;
-import com.itextpdf.text.Element;
-import com.itextpdf.text.Paragraph;
-import com.itextpdf.text.Phrase;
-import com.itextpdf.text.pdf.PdfPCell;
-import com.itextpdf.text.pdf.PdfPTable;
-import com.itextpdf.text.pdf.PdfWriter;
-import com.itextpdf.text.pdf.SpotColor;
-
-import android.R.integer;
-import android.R.string;
-import android.app.Activity;
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
-import android.app.Dialog;
-import android.app.ProgressDialog;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
-import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
 import android.database.Cursor;
-import android.graphics.drawable.GradientDrawable;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
-import android.net.Uri;
-import android.os.Build;
-import android.os.Bundle;
-import android.os.Environment;
-import android.os.Parcel;
-import android.os.Parcelable;
-import android.os.StrictMode;
-import android.text.Layout;
-import android.text.method.DateTimeKeyListener;
-import android.util.Log;
-import android.view.Display;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.view.View.OnClickListener;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
-
-// import for android printer
-import android.os.Bundle;
-import android.app.Activity;
-
-import java.io.*;
-
-import android.view.Menu;
-
-import java.lang.reflect.Method;
-import java.util.UUID;
-
-import android.app.Activity;
-import android.bluetooth.BluetoothAdapter;
-import android.bluetooth.BluetoothDevice;
-import android.bluetooth.BluetoothSocket;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.CompressFormat;
 import android.graphics.BitmapFactory;
-import android.hardware.Camera;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.os.StrictMode;
 import android.provider.MediaStore;
+import android.util.Log;
+import android.view.Display;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+
+import com.itextpdf.text.Chunk;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
+
+import org.apache.commons.io.FileUtils;
+import org.cso.MSBAsync.AsyncBluetoothReading;
+import org.cso.MSBAsync.AsyncGetOutputData;
+import org.cso.MSBAsync.AsyncImage;
+import org.cso.MSBAsync.AsyncUnuploadedImage;
+import org.cso.MSBModel.StructSAPInput;
+import org.cso.MSBUtil.AppUtil;
+import org.cso.MSBUtil.GPSTracker;
+import org.cso.MSBUtil.UtilAppCommon;
+import org.cso.MSBUtil.UtilDB;
+
+import java.io.BufferedOutputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.TimeZone;
 
 public class ActvBilling extends AppCompatActivity implements OnClickListener, TaskCallback {
 
@@ -279,7 +209,7 @@ public class ActvBilling extends AppCompatActivity implements OnClickListener, T
             } else if (!validateDoubleBilling()) {
 
                 AsyncUnuploadedImage asyncUnuploadedImage = new AsyncUnuploadedImage(this);
-                asyncUnuploadedImage.execute(AppUtil.unUploadedFilePath(this));
+                asyncUnuploadedImage.execute(AppUtil.unUploadedFilePath2(ActvBilling.this));
 
                 showLayout(); // displays consumer details n allow users to
                 // proceed
@@ -304,6 +234,12 @@ public class ActvBilling extends AppCompatActivity implements OnClickListener, T
             finish();
         }
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.e("onResume","ActvBilling");
     }
 
     @Override
@@ -885,6 +821,7 @@ public class ActvBilling extends AppCompatActivity implements OnClickListener, T
 
     //This one checks if billo/p is not having value but SAPinput and SAPBlue input has value, then it resends
     // the data to middleware accordingly follow whole process
+    @SuppressLint("Range")
     private boolean validateDoubleBilling() {
 
         Log.e("validateDoubleBilling", "Start");
@@ -1043,6 +980,7 @@ public class ActvBilling extends AppCompatActivity implements OnClickListener, T
                         // TODO Auto-generated catch block
                         e1.printStackTrace();
                         Log.e("validateDoubleBill Copy", e1.getMessage());
+                        System.err.println(e1.getMessage());
                     }
 
                     //UtilDB utilDB = new UtilDB(getApplicationContext());
@@ -1055,14 +993,9 @@ public class ActvBilling extends AppCompatActivity implements OnClickListener, T
                         {
 
                             // 20.11.15
-                            AsyncGetOutputData asyncGetOutputData = new AsyncGetOutputData(this, new OnBillGenerate() {
-
-                                @Override
-                                public void onFinish() {
-                                    // TODO Auto-generated method stub
-                                    printdlg();
-
-                                }
+                            AsyncGetOutputData asyncGetOutputData = new AsyncGetOutputData(this, () -> {
+                                // TODO Auto-generated method stub
+                                printdlg();
                             });
 
                             asyncGetOutputData.execute(copySAPInputData);
@@ -1103,15 +1036,11 @@ public class ActvBilling extends AppCompatActivity implements OnClickListener, T
                         ad.setTitle("Confirm");
                         ad.setMessage("Confirm to print");
                         ad.setButton(DialogInterface.BUTTON_POSITIVE, "Yes",
-                                new DialogInterface.OnClickListener() {
-
-                                    public void onClick(DialogInterface dialog,
-                                                        int which) {
-                                        // TODO Auto-generated method stub
-                                        ad.dismiss();
-                                        Write2SbmOut();
-                                        //startActivity(new Intent(ctx, ActvBillPrinting.class));
-                                    }
+                                (dialog, which) -> {
+                                    // TODO Auto-generated method stub
+                                    ad.dismiss();
+                                    Write2SbmOut();
+                                    //startActivity(new Intent(ctx, ActvBillPrinting.class));
                                 });
                         ad.setButton(DialogInterface.BUTTON_NEGATIVE, "No",
                                 (dialog, which) -> {
@@ -1165,11 +1094,12 @@ public class ActvBilling extends AppCompatActivity implements OnClickListener, T
 
     public void onBackPressed() {
         try {
-            file.delete();
+            //file.delete();
         } catch (Exception ex) {
+
         }
-        super.onBackPressed();
-        //finish();
+        //super.onBackPressed();
+        finish();
 
         //startActivity(new Intent(this, ActvBillingOption.class));
         return;
@@ -1242,10 +1172,9 @@ public class ActvBilling extends AppCompatActivity implements OnClickListener, T
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         // TODO Auto-generated method stub
         super.onActivityResult(requestCode, resultCode, data);
-        Log.d("result data", data.getExtras().toString());
+        //Log.d("result data", data.getExtras().toString());
         if (resultCode == RESULT_OK) {
             switch (requestCode) {
-
                 case 1:
                     currentStatus = data.getExtras().getString("meterStatus");
                     Log.e("currentStatus", currentStatus);
@@ -1262,40 +1191,32 @@ public class ActvBilling extends AppCompatActivity implements OnClickListener, T
                         ad.setTitle("Confirm");
                         ad.setMessage("Confirm to print");
                         ad.setButton(DialogInterface.BUTTON_POSITIVE, "Yes",
-                                new DialogInterface.OnClickListener() {
-
-                                    public void onClick(DialogInterface dialog,
-                                                        int which) {
-                                        // TODO Auto-generated method stub
-                                        ad.dismiss();
-                                        Write2SbmOut();
-                                        //startActivity(new Intent(ctx, ActvBillPrinting.class));
-                                    }
+                                (dialog, which) -> {
+                                    // TODO Auto-generated method stub
+                                    ad.dismiss();
+                                    Write2SbmOut();
+                                    //startActivity(new Intent(ctx, ActvBillPrinting.class));
                                 });
                         ad.setButton(DialogInterface.BUTTON_NEGATIVE, "No",
-                                new DialogInterface.OnClickListener() {
-
-                                    public void onClick(DialogInterface dialog,
-                                                        int which) {
-                                        // TODO Auto-generated method stub
-                                        ad.dismiss();
-                                        // startActivity(getIntent());
-                                        //startActivity(new Intent(getApplicationContext(), ActvBillingOption.class));
-                                        //startActivity(new Intent(getBaseContext(), SyncMobPoleActivity.class));
-                                        //if(UtilAppCommon.inSAPSendMsg.equalsIgnoreCase("1"))
-                                        //	startActivity(new Intent(getBaseContext(), PoleMobileActivity.class));
-                                        //else
-                                        if (UtilAppCommon.billType.equalsIgnoreCase("A"))
-                                            startActivity(new Intent(getBaseContext(), ActvConsumerNbrInput.class));
-                                        else if (UtilAppCommon.billType.equalsIgnoreCase("L"))
-                                            startActivity(new Intent(getBaseContext(), ActvLegacyNbrInput.class));
-                                        else if (UtilAppCommon.billType.equalsIgnoreCase("S"))
-                                            startActivity(new Intent(getBaseContext(), ActvSequenceData.class));
-                                        else if (UtilAppCommon.billType.equalsIgnoreCase("M"))
-                                            startActivity(new Intent(getBaseContext(), MeterNbrInput.class));
-                                        else
-                                            startActivity(new Intent(getBaseContext(), ActvBillingOption.class));
-                                    }
+                                (dialog, which) -> {
+                                    // TODO Auto-generated method stub
+                                    ad.dismiss();
+                                    // startActivity(getIntent());
+                                    //startActivity(new Intent(getApplicationContext(), ActvBillingOption.class));
+                                    //startActivity(new Intent(getBaseContext(), SyncMobPoleActivity.class));
+                                    //if(UtilAppCommon.inSAPSendMsg.equalsIgnoreCase("1"))
+                                    //	startActivity(new Intent(getBaseContext(), PoleMobileActivity.class));
+                                    //else
+                                    if (UtilAppCommon.billType.equalsIgnoreCase("A"))
+                                        startActivity(new Intent(getBaseContext(), ActvConsumerNbrInput.class));
+                                    else if (UtilAppCommon.billType.equalsIgnoreCase("L"))
+                                        startActivity(new Intent(getBaseContext(), ActvLegacyNbrInput.class));
+                                    else if (UtilAppCommon.billType.equalsIgnoreCase("S"))
+                                        startActivity(new Intent(getBaseContext(), ActvSequenceData.class));
+                                    else if (UtilAppCommon.billType.equalsIgnoreCase("M"))
+                                        startActivity(new Intent(getBaseContext(), MeterNbrInput.class));
+                                    else
+                                        startActivity(new Intent(getBaseContext(), ActvBillingOption.class));
                                 });
                         ad.show();
                         //printbill();
@@ -1424,37 +1345,42 @@ public class ActvBilling extends AppCompatActivity implements OnClickListener, T
                         // imgMtrReadingPic.setImageBitmap(bitmap);
 
                     }
-                    if (resultCode == RESULT_CANCELED) {
-                        // user cancelled Image capture
-                        Toast.makeText(getApplicationContext(),
-                                        "User cancelled image capture", Toast.LENGTH_SHORT)
-                                .show();
-                        file.delete();
-                        finish();
-                    }
                     break;
                 case PIC_CROP:
-                    //Log.e("PIC_CROP", "Inside ==>> " + resultCode);
-                    if (resultCode == RESULT_OK) {
-                        //getImageByCANo(UtilAppCommon.acctNbr);
+                    Toast.makeText(ActvBilling.this, "Uri : "+data.getData(), Toast.LENGTH_SHORT).show();
                         Log.i("ActvBilling", " ************Result After Cropping 1********");
-                        String AppDir = Environment.getExternalStorageDirectory().getPath()
-                                + "/SBDocs/Photos_Crop" + "/" + UtilAppCommon.in.SUB_DIVISION_CODE + "/"
-                                + UtilAppCommon.in.MRU;
+                         //String AppDir=getExternalFilesDir(Environment.DIRECTORY_PICTURES+ "/SBDocs/Photos" + "/" + UtilAppCommon.in.SUB_DIVISION_CODE + "/" + UtilAppCommon.in.MRU).getPath();
+                         File binderfile=getExternalFilesDir(Environment.DIRECTORY_PICTURES+ "/SBDocs/Photos" + "/" + UtilAppCommon.in.SUB_DIVISION_CODE + "/" + UtilAppCommon.in.MRU);
+                          String AppDir=binderfile.getPath();
                         Log.i("ActvBilling", " ************Result After Cropping 2********");
-                        String AppUnuploadedDir = Environment.getExternalStorageDirectory().getPath()
+                        for (File mfile:binderfile.listFiles()){
+                            String name=mfile.getName();
+                            System.err.println(name+" : "+mfile.length());
+                            if (!name.equals(photoId+".jpg")){
+                                mfile.delete();
+                                System.err.println("File Deleated : "+name);
+                            }
+                        }
+                        String AppUnuploadedDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES).getPath()
                                 + "/SBDocs/.PhotosUnuploaded/";
                         Log.i("ActvBilling", " ************Result After Cropping 3********");
                         File dir = new File(new File(AppUnuploadedDir).getAbsolutePath());
                         if (!dir.exists()) {
                             dir.mkdirs();
                         }
-                        Log.i("ActvBilling", " ************Result After Cropping 4********");
+                       String AppDirCroped = getExternalFilesDir(Environment.DIRECTORY_PICTURES).getPath()
+                            + "/SBDocs/Photos_Crop" + "/" + UtilAppCommon.in.SUB_DIVISION_CODE + "/"
+                            + UtilAppCommon.in.MRU;
+                        File dirCrop = new File(new File(AppDirCroped).getAbsolutePath());
+                        if (!dirCrop.exists()) {
+                            dirCrop.mkdirs();
+                        }
+                       // Log.i("ActvBilling", " ************Result After Cropping 4********");
                         String Unuploaded_photoId = UtilAppCommon.in.SUB_DIVISION_CODE + "_"
                                 + UtilAppCommon.in.MRU + "_" + UtilAppCommon.in.SCHEDULED_BILLING_DATE.substring(0, 4) +
                                 UtilAppCommon.in.SCHEDULED_BILLING_DATE.substring(5, 7) +
                                 "_" + UtilAppCommon.in.CONTRACT_AC_NO;
-                        Log.i("ActvBilling", " ************Result After Cropping 5********");
+                       Log.i("ActvBilling", " ************Result After Cropping 5********");
                         File croppedImage = new File(new File(AppDir).getAbsolutePath(), photoId + ".jpg");
                         Log.i("ActvBilling", " ************Result After Cropping 6********");
                         unUploadedFile = new File(new File(AppUnuploadedDir).getAbsolutePath(), Unuploaded_photoId + ".jpg");
@@ -1462,14 +1388,19 @@ public class ActvBilling extends AppCompatActivity implements OnClickListener, T
                         try {
                             Log.i("ActvBilling", " ************Result After Cropping 8********");
                             FileUtils.copyFile(croppedImage, unUploadedFile);
-                            Log.i("ActvBilling", " ************Result After Cropping 9********");
+                            File filecroped=new File(dirCrop.getAbsolutePath(),photoId + ".jpg");
+                            FileUtils.copyFile(croppedImage, filecroped);
+                            //Log.i("ActvBilling", " ************Result After Cropping 9********");
+
                         } catch (IOException e) {
                             e.printStackTrace();
+                            Log.e("exception copy file",e.getMessage());
+                            Toast.makeText(ActvBilling.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                        catch (Exception e){
+                            Log.e("exception copy file",e.getMessage());
                         }
                         billing();
-                    } else {
-                        cropfile.delete();
-                    }
                     break;
 
                 case 6:
@@ -1479,9 +1410,22 @@ public class ActvBilling extends AppCompatActivity implements OnClickListener, T
             }
 
 
+        } else if (resultCode == RESULT_CANCELED) {
+            switch (requestCode){
+                case CAMERA_CAPTURE_IMAGE_REQUEST_CODE:
+                    Toast.makeText(getApplicationContext(),
+                                    "User cancelled image capture", Toast.LENGTH_SHORT)
+                            .show();
+                    file.delete();
+                    finish();
+                    break;
+                case PIC_CROP:
+                    cropfile.delete();
+                    Toast.makeText(ActvBilling.this, "croped file deleted !", Toast.LENGTH_SHORT).show();
+                    break;
+            }
         }
 
-        super.onActivityResult(requestCode, resultCode, data);
     }
 
     public void showSettingsAlert() {
@@ -1513,7 +1457,6 @@ public class ActvBilling extends AppCompatActivity implements OnClickListener, T
     private int billing() {
         // TODO Auto-generated method stub
         long lMul = 0, i, Digits = 0;
-
         String ch;
         char meterstat;
         long nbd;
@@ -1809,8 +1752,9 @@ public class ActvBilling extends AppCompatActivity implements OnClickListener, T
                     billing();
                 }
             }
-        } catch (Exception e)
+        }
         //Log.e("StartBilling", "Completed");
+        catch (Exception e)
         {
             e.printStackTrace();
             Toast.makeText(ActvBilling.this, "Step17 Completed", Toast.LENGTH_SHORT).show();
@@ -1972,52 +1916,66 @@ public class ActvBilling extends AppCompatActivity implements OnClickListener, T
 
     @SuppressWarnings("deprecation")
     private void captureImage() {
-        // billing();
-        //new Intent(this, )
         Toast.makeText(ActvBilling.this, "Step17 Completed", Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        Intent  takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         //intent.putExtra(MediaStore.EXTRA_SCREEN_ORIENTATION, Ori)
         try {
-            String appDir = Environment.getExternalStorageDirectory().getPath()
-                    + "/SBDocs/Photos";
+            //String appDir =  getExternalFilesDir(Environment.DIRECTORY_PICTURES).getPath()
+                    //+ "/SBDocs/Photos";
 
-            String sdocdfilepath = appDir + "/" + UtilAppCommon.in.SUB_DIVISION_CODE;
-            File sdofile = new File(sdocdfilepath);
-            if (!sdofile.exists()) {
-                Toast.makeText(ActvBilling.this, "Step18 Completed", Toast.LENGTH_SHORT).show();
-                sdofile.mkdir();
-            }
-            String binderfilepath = appDir + "/" + UtilAppCommon.in.SUB_DIVISION_CODE
-                    + "/" + UtilAppCommon.in.MRU;
-            File binderfile = new File(binderfilepath);
+            //String sdocdfilepath = appDir + "/" + UtilAppCommon.in.SUB_DIVISION_CODE;
+            //new code
+            //File sdofile=getExternalFilesDir(Environment.DIRECTORY_PICTURES+"/SBDocs/Photos/"+UtilAppCommon.in.SUB_DIVISION_CODE);
+            //File sdofile = new File(sdocdfilepath);
+           // if (!sdofile.exists()) {
+                //Toast.makeText(ActvBilling.this, "Step18 Completed", Toast.LENGTH_SHORT).show();
+               // boolean isCreated1=sdofile.mkdirs();
+                //System.err.println("isCreated : "+isCreated1);
+           // }
+            //String binderfilepath = appDir + "/" + UtilAppCommon.in.SUB_DIVISION_CODE
+                    //+ "/" + UtilAppCommon.in.MRU;
+            //File binderfile = new File(binderfilepath);
+            //new code
+            File binderfile=getExternalFilesDir(Environment.DIRECTORY_PICTURES+"/SBDocs/Photos/"+UtilAppCommon.in.SUB_DIVISION_CODE+"/"+ UtilAppCommon.in.MRU);
+
             if (!binderfile.exists()) {
                 Toast.makeText(ActvBilling.this, "Step19 Completed", Toast.LENGTH_SHORT).show();
-                binderfile.mkdir();
+                boolean isCreated=binderfile.mkdirs();
+                System.err.println("isCreated : "+isCreated);
+                Log.d("isCreated", String.valueOf(isCreated));
             }
 /*			photoId = "BSB" + "_" + UtilAppCommon.in.SUB_DIVISION_CODE + UtilAppCommon.in.MRU
 					+ UtilAppCommon.in.CONTRACT_AC_NO;
 			*/
+
             photoId = UtilAppCommon.in.SCHEDULED_BILLING_DATE.substring(0, 4) +
                     UtilAppCommon.in.SCHEDULED_BILLING_DATE.substring(5, 7) +
                     "_" + UtilAppCommon.in.CONTRACT_AC_NO;
-
-            Log.v("ActvBilling", "Taking Photo Image Address1 " + sdocdfilepath + " " + sdofile.exists());
-            Log.v("ActvBilling", "Taking Photo Image Address2 " + binderfilepath + " " + binderfile.exists());
+            //Log.v("ActvBilling", "Taking Photo Image Address1 " + sdocdfilepath + " " + sdofile.exists());
+            //Log.v("ActvBilling", "Taking Photo Image Address2 " + binderfilepath + " " + binderfile.exists());
             UtilAppCommon.out.PHOTO_ID = photoId;
             //UtilAppCommon.out.Company = UtilAppCommon.ui.CO;
             System.out.println("photo id ::::::: " + photoId);
             file = new File(binderfile, photoId + ".jpg");
+            if(!file.exists())file.createNewFile();
+            /*file = File.createTempFile(
+                    photoId,  *//* prefix *//*
+                    ".jpg",         *//* suffix *//*
+                    binderfile      *//* directory *//*
+            );*/
+
+
             photoFolderSaved = binderfile.getAbsolutePath();
             photoAddressSaved = file.getAbsolutePath();
             Toast.makeText(ActvBilling.this, "Step20 Completed", Toast.LENGTH_SHORT).show();
-            List<ResolveInfo> resInfoList = this.getPackageManager().
+            /*List<ResolveInfo> resInfoList = this.getPackageManager().
                     queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY);
             for (ResolveInfo resolveInfo : resInfoList) {
                 String packageName = resolveInfo.activityInfo.packageName;
                 this.grantUriPermission(packageName, AppUtil.getFileUri(this, file),
                         Intent.FLAG_GRANT_WRITE_URI_PERMISSION | Intent.FLAG_GRANT_READ_URI_PERMISSION);
-            }
-            intent.putExtra(MediaStore.EXTRA_OUTPUT, AppUtil.getFileUri(this, file));
+            }*/
+            takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, AppUtil.getFileUri(ActvBilling.this, file));
             //intent.putExtra(MediaStore.EXTRA_OUTPUT, file);
 
 
@@ -2041,11 +1999,11 @@ public class ActvBilling extends AppCompatActivity implements OnClickListener, T
 			*/
             UtilAppCommon.blImageCapture = true;
             Log.i("ActvBilling Capt", " B isFinishing ==>> " + isFinishing());
-            startActivityForResult(intent, CAMERA_CAPTURE_IMAGE_REQUEST_CODE);
+            startActivityForResult( takePictureIntent, CAMERA_CAPTURE_IMAGE_REQUEST_CODE);
             Log.i("ActvBilling Capt", "A isFinishing ==>> " + isFinishing());
         } catch (Exception e) {
             e.printStackTrace();
-            System.out.println(e.toString());
+            System.err.println(e.getMessage()+"\n"+e.getCause().toString());
         }
     }
 
@@ -2116,9 +2074,9 @@ public class ActvBilling extends AppCompatActivity implements OnClickListener, T
         try {
             Log.v("ActvBilling", "**************************" + photoFolderSaved);
             Log.v("ActvBilling", "**************************" + photoAddressSaved);
-            File file = new File(photoFolderSaved);
+          /*  File file_n = new File(photoFolderSaved);
             //Log.v("ActvBilling","**************************1");
-            File[] fileList = file.listFiles();
+            File[] fileList = file_n.listFiles();
             Log.v("ActvBilling", "*************************2");
             File file2 = new File(photoAddressSaved);
             Log.v("ActvBilling", "**************************" + file.getAbsolutePath());
@@ -2130,17 +2088,15 @@ public class ActvBilling extends AppCompatActivity implements OnClickListener, T
                     Log.v("ActvBilling", "*****************File Name Not Matched*********" + fileName.getAbsolutePath());
                     fileName.delete();
                 }
-            }
+            }*/
             UtilAppCommon.blImageCapture = false;
             UtilDB utildb = new UtilDB(context);
             photoId = UtilAppCommon.in.SCHEDULED_BILLING_DATE.substring(0, 4) +
                     UtilAppCommon.in.SCHEDULED_BILLING_DATE.substring(5, 7) +
                     "_" + UtilAppCommon.in.CONTRACT_AC_NO;
 
-
-            String AppDir = Environment.getExternalStorageDirectory().getPath()
-                    + "/SBDocs/Photos_Crop" + "/" + UtilAppCommon.in.SUB_DIVISION_CODE + "/"
-                    + UtilAppCommon.in.MRU;
+            String AppDir =  getExternalFilesDir(Environment.DIRECTORY_PICTURES + "/SBDocs/Photos_Crop" + "/" + UtilAppCommon.in.SUB_DIVISION_CODE + "/"
+                    + UtilAppCommon.in.MRU).getPath();
 
 
             File f = new File(AppDir);
@@ -2157,83 +2113,75 @@ public class ActvBilling extends AppCompatActivity implements OnClickListener, T
 
             Log.i("ActvBilling", " Crop Image Full Path ==>> " + fullPath);
             cropfile = new File(fullPath, photoId + ".jpg");
+            //if(!cropfile.exists()) cropfile.createNewFile();
             //
 
-            String binderfile = Environment.getExternalStorageDirectory().getPath()
+            String binderfile =  getExternalFilesDir(Environment.DIRECTORY_PICTURES).getPath()
                     + "/SBDocs/Photos" + "/" + UtilAppCommon.in.SUB_DIVISION_CODE + "/" + UtilAppCommon.in.MRU;
             if (!new File(binderfile).exists()) {
                 Log.i("ActvBilling", "************************Not finding*** " + binderfile);
             }
-            if (!new File(Environment.getExternalStorageDirectory().getPath()).exists()) {
+            if (!new File(getExternalFilesDir(Environment.DIRECTORY_PICTURES).getPath()).exists()) {
                 Log.i("ActvBilling", "************************Not finding*** 1");
             }
-            if (!new File(Environment.getExternalStorageDirectory().getPath() + "/SBDocs").exists()) {
+            if (!new File(getExternalFilesDir(Environment.DIRECTORY_PICTURES).getPath() + "/SBDocs").exists()) {
                 Log.i("ActvBilling", "************************Not finding*** 2");
             }
-            if (!new File(Environment.getExternalStorageDirectory().getPath() + "/SBDocs/Photos").exists()) {
+            if (!new File(getExternalFilesDir(Environment.DIRECTORY_PICTURES).getPath() + "/SBDocs/Photos").exists()) {
                 Log.i("ActvBilling", "************************Not finding*** 3");
             }
-            if (!new File(Environment.getExternalStorageDirectory().getPath() + "/SBDocs/Photos" + "/" + UtilAppCommon.in.SUB_DIVISION_CODE).exists()) {
+            if (!new File(getExternalFilesDir(Environment.DIRECTORY_PICTURES).getPath() + "/SBDocs/Photos" + "/" + UtilAppCommon.in.SUB_DIVISION_CODE).exists()) {
                 Log.i("ActvBilling", "************************Not finding*** 4");
             }
-            if (!new File(Environment.getExternalStorageDirectory().getPath() + "/SBDocs/Photos" + "/" + UtilAppCommon.in.SUB_DIVISION_CODE + "/" + UtilAppCommon.in.MRU).exists()) {
+            if (!new File(getExternalFilesDir(Environment.DIRECTORY_PICTURES).getPath() + "/SBDocs/Photos" + "/" + UtilAppCommon.in.SUB_DIVISION_CODE + "/" + UtilAppCommon.in.MRU).exists()) {
                 Log.i("ActvBilling", "************************Not finding*** 5");
             }
-            String secondaryFile = Environment.getExternalStorageDirectory().getPath() + "/SBDocs/PHOTOs" + "/" + UtilAppCommon.in.SUB_DIVISION_CODE + "/" + UtilAppCommon.in.MRU;
+            String secondaryFile = getExternalFilesDir(Environment.DIRECTORY_PICTURES).getPath() + "/SBDocs/PHOTOs" + "/" + UtilAppCommon.in.SUB_DIVISION_CODE + "/" + UtilAppCommon.in.MRU;
 
-            if (!new File(binderfile, photoId + ".jpg").exists()) {
+           if (!new File(binderfile, photoId + ".jpg").exists()) {
                 if (!new File(secondaryFile, photoId + ".jpg").exists()) {
                     Log.i("ActvBilling", "After crop Not finding image hence exiting " + binderfile);
                     Log.i("ActvBilling", "After crop Not finding image hence exiting " + secondaryFile);
                     //showLayout();
+                    Toast.makeText(ActvBilling.this,"Please Enable All Permissions , then Check !",Toast.LENGTH_LONG).show();
                     finish();
                 }
             } else {
 
-
-                file = new File(binderfile, photoId + ".jpg");
-                Log.i("ActvBilling", " ************Going for Cropping********" + file.getAbsolutePath());
-                Intent cropIntent = new Intent("com.android.camera.action.CROP");
-                // indicate image type and Uri
-                cropIntent.setDataAndType(AppUtil.getFileUri(this, file), "image/*");
-                cropIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-                cropIntent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
-                List<ResolveInfo> resInfoList = this.getPackageManager().
-                        queryIntentActivities(cropIntent, PackageManager.MATCH_DEFAULT_ONLY);
-                for (ResolveInfo resolveInfo : resInfoList) {
-                    String packageName = resolveInfo.activityInfo.packageName;
-                    this.grantUriPermission(packageName, AppUtil.getFileUri(this, cropfile),
-                            Intent.FLAG_GRANT_WRITE_URI_PERMISSION | Intent.FLAG_GRANT_READ_URI_PERMISSION);
-                }
-
-                // set crop properties
-                cropIntent.putExtra("crop", "true");
-                // indicate aspect of desired crop
-                cropIntent.putExtra("aspectX", 400);
-                cropIntent.putExtra("aspectY", 225);
-                cropIntent.putExtra("outputX", 400);
-                cropIntent.putExtra("outputY", 225);
-                cropIntent.putExtra("scale", true);
-                // retrieve data on return
-                cropIntent.putExtra("return-data", true);
-                // start the activity - we handle returning in onActivityResult
-                cropIntent.putExtra(MediaStore.EXTRA_OUTPUT, AppUtil.getFileUri(this, cropfile));
-                //cropIntent.setDataAndType(AppUtil.getFileUri(this, cropfile), "image/*");
-                if (Build.VERSION.SDK_INT >= 24) {
-                    try {
-                        Method m1 = StrictMode.class.getMethod("disableDeathOnFileUriExposure");
-                        m1.invoke(null);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
+                   file = new File(binderfile, photoId + ".jpg");
+               if (file.exists()) {
+                   Log.i("ActvBilling", " ************Going for Cropping********" + file.getAbsolutePath());
+                   Intent cropIntent = new Intent("com.android.camera.action.CROP");
+                   // indicate image type and Uri
+                   cropIntent.setDataAndType(AppUtil.getFileUri(ActvBilling.this, file), "image/*");
+                   // set crop properties here
+                   cropIntent.putExtra("crop", true);
+                   // indicate aspect of desired crop
+                   cropIntent.putExtra("aspectX", 1);
+                   cropIntent.putExtra("aspectY", 1);
+                   // indicate output X and Y
+                   cropIntent.putExtra("outputX", 128);
+                   cropIntent.putExtra("outputY", 128);
+                   // retrieve data on return
+                   cropIntent.putExtra("return-data", true);
+                   cropIntent.putExtra(MediaStore.EXTRA_OUTPUT, AppUtil.getFileUri(ActvBilling.this, file));
+                   cropIntent.addFlags(
+                           Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
                 Log.i("ActvBilling", " ************Going for Cropping********" + cropfile.getAbsolutePath());
-                //Log.e("Activity", "cropIntent");
                 startActivityForResult(cropIntent, PIC_CROP);
+               }else{
+                   Toast.makeText(ActvBilling.this, "File Not Found For Crop", Toast.LENGTH_SHORT).show();
+               }
+
             }
-        } catch (Exception e) {
+        }
+        catch (ActivityNotFoundException e) {
+            Toast.makeText(context, "Your device doesn't support the crop action!", Toast.LENGTH_SHORT).show();
+        }
+        catch (Exception e) {
             e.printStackTrace();
             Log.e("ActvBilling", " CropImage ==>>" + e.getMessage());
+            Toast.makeText(context, "CropImage : "+e.getMessage(), Toast.LENGTH_SHORT).show();
         }
 
     }
@@ -2533,36 +2481,28 @@ public class ActvBilling extends AppCompatActivity implements OnClickListener, T
             ad.setTitle("Confirm");
             ad.setMessage("Confirm to print");
             ad.setButton(DialogInterface.BUTTON_POSITIVE, "Yes",
-                    new DialogInterface.OnClickListener() {
-
-                        public void onClick(DialogInterface dialog,
-                                            int which) {
-                            // TODO Auto-generated method stub
-                            ad.dismiss();
-                            Write2SbmOut();
-                            //startActivity(new Intent(ctx, ActvBillPrinting.class));
-                        }
+                    (dialog, which) -> {
+                        // TODO Auto-generated method stub
+                        ad.dismiss();
+                        Write2SbmOut();
+                        //startActivity(new Intent(ctx, ActvBillPrinting.class));
                     });
             ad.setButton(DialogInterface.BUTTON_NEGATIVE, "No",
-                    new DialogInterface.OnClickListener() {
-
-                        public void onClick(DialogInterface dialog,
-                                            int which) {
-                            // TODO Auto-generated method stub
-                            ad.dismiss();
-                            // startActivity(getIntent());
-                            //startActivity(new Intent(getApplicationContext(), ActvBillingOption.class));
-                            if (UtilAppCommon.billType.equalsIgnoreCase("A"))
-                                startActivity(new Intent(getBaseContext(), ActvConsumerNbrInput.class));
-                            else if (UtilAppCommon.billType.equalsIgnoreCase("L"))
-                                startActivity(new Intent(getBaseContext(), ActvLegacyNbrInput.class));
-                            else if (UtilAppCommon.billType.equalsIgnoreCase("S"))
-                                startActivity(new Intent(getBaseContext(), ActvSequenceData.class));
-                            else if (UtilAppCommon.billType.equalsIgnoreCase("M"))
-                                startActivity(new Intent(getBaseContext(), MeterNbrInput.class));
-                            else
-                                startActivity(new Intent(getBaseContext(), ActvBillingOption.class));
-                        }
+                    (dialog, which) -> {
+                        // TODO Auto-generated method stub
+                        ad.dismiss();
+                        // startActivity(getIntent());
+                        //startActivity(new Intent(getApplicationContext(), ActvBillingOption.class));
+                        if (UtilAppCommon.billType.equalsIgnoreCase("A"))
+                            startActivity(new Intent(getBaseContext(), ActvConsumerNbrInput.class));
+                        else if (UtilAppCommon.billType.equalsIgnoreCase("L"))
+                            startActivity(new Intent(getBaseContext(), ActvLegacyNbrInput.class));
+                        else if (UtilAppCommon.billType.equalsIgnoreCase("S"))
+                            startActivity(new Intent(getBaseContext(), ActvSequenceData.class));
+                        else if (UtilAppCommon.billType.equalsIgnoreCase("M"))
+                            startActivity(new Intent(getBaseContext(), MeterNbrInput.class));
+                        else
+                            startActivity(new Intent(getBaseContext(), ActvBillingOption.class));
                     });
             ad.show();
         }
@@ -2590,9 +2530,11 @@ public class ActvBilling extends AppCompatActivity implements OnClickListener, T
         try {
             Log.e("getImageByCANo", "Started");
             UtilDB utildb = new UtilDB(getApplicationContext());
-            AppDir = Environment.getExternalStorageDirectory().getPath()
+            /*AppDir = Environment.getExternalStorageDirectory().getPath()
                     + "/SBDocs/Photos_Crop" + "/" + utildb.getSdoCode() + "/"
-                    + utildb.getActiveMRU();
+                    + utildb.getActiveMRU();*/
+            AppDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES + "/SBDocs/Photos_Crop" + "/" + utildb.getSdoCode() + "/"
+                    + utildb.getActiveMRU()).getPath();
             Cursor cursorImage = utildb.getUnCompressedImage(CANo);
             File file = null;
             //getUnCompressedImage
@@ -2602,11 +2544,8 @@ public class ActvBilling extends AppCompatActivity implements OnClickListener, T
             }
             //ImageProcessing imageProcessing = new ImageProcessing();
 
-            AsyncImage asyncImage = new AsyncImage(this, new OnBillGenerate() {
-                @Override
-                public void onFinish() {
-                    // TODO Auto-generated method stub
-                }
+            AsyncImage asyncImage = new AsyncImage(this, () -> {
+                // TODO Auto-generated method stub
             });
 
             //String strArray[] = imageProcessing.processImage(AppDir, file, this, cursorImage.getString(1), CANo);
@@ -2632,7 +2571,6 @@ public class ActvBilling extends AppCompatActivity implements OnClickListener, T
     @Override
     protected void onDestroy() {
         super.onDestroy();
-
     }
 
     private void postCaptureImage() {
@@ -2663,11 +2601,13 @@ public class ActvBilling extends AppCompatActivity implements OnClickListener, T
                 CropImage();
             }
         } else {
-
-            Toast.makeText(getApplicationContext(), "Please configure printer", Toast.LENGTH_LONG)
-                    .show();
+            Toast.makeText(getApplicationContext(), "Please configure printer", Toast.LENGTH_LONG).show();
             finish();
         }
 
     }
+
+
+
+
 }

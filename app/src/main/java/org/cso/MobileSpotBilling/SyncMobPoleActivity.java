@@ -8,6 +8,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -30,7 +31,17 @@ public class SyncMobPoleActivity extends AppCompatActivity implements TaskCallba
 		getSupportActionBar().setDisplayShowHomeEnabled(true);
 		performOperation();
 	}
+	@Override
+	protected void onResume() {
+		super.onResume();
+		Log.e("onResume", "SyncMobPoleActivity");
+	}
 
+	@Override
+	protected void onRestart() {
+		super.onRestart();
+		Log.e("onRestart", "SyncMobPoleActivity");
+	}
 	@Override
 	public boolean onSupportNavigateUp() {
 		//  closePrinter();

@@ -14,6 +14,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -68,6 +69,18 @@ public class BilledUnbilled extends AppCompatActivity {
             intentConsumerListTest.putExtra("View", "UnbilledList");
             startActivity(intentConsumerListTest);
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.e("onResume", "BilledUnbilled");
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        Log.e("onRestart", "BilledUnbilled");
     }
 
 	@Override

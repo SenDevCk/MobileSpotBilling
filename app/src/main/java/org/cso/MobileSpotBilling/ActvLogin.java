@@ -285,28 +285,24 @@ public class ActvLogin extends AppCompatActivity implements OnClickListener,Task
         alertDialog
                 .setMessage("Billing application will be closed...Are you sure to continue?");
         alertDialog.setButton(DialogInterface.BUTTON_POSITIVE, "Yes",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        ActvLogin.this.finish();
-                        alertDialog.dismiss();
-                        UtilAppCommon.intIsLoggedIn = 0;
-                        UtilAppCommon.gIntAvailableInputDataCount = 0;
-                        UtilAppCommon.intAppInvoked = 0;
-                        UtilAppCommon.strBulkDataResponse = null;
-                        ActvivityMain xyz = new ActvivityMain();
-                        xyz.moveTaskToBack(true);
-                        /*
-                         * int pid = android.os.Process.myPid();
-                         * android.os.Process.killProcess(pid);
-                         */
-                    }
+                (dialog, which) -> {
+                    ActvLogin.this.finish();
+                    alertDialog.dismiss();
+                    UtilAppCommon.intIsLoggedIn = 0;
+                    UtilAppCommon.gIntAvailableInputDataCount = 0;
+                    UtilAppCommon.intAppInvoked = 0;
+                    UtilAppCommon.strBulkDataResponse = null;
+                    ActvivityMain xyz = new ActvivityMain();
+                    xyz.moveTaskToBack(true);
+                    /*
+                     * int pid = android.os.Process.myPid();
+                     * android.os.Process.killProcess(pid);
+                     */
                 });
         alertDialog.setButton(DialogInterface.BUTTON_NEGATIVE, "No",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        // TODO Auto-generated method stub
-                        alertDialog.dismiss();
-                    }
+                (dialog, which) -> {
+                    // TODO Auto-generated method stub
+                    alertDialog.dismiss();
                 });
         alertDialog.show();
     }

@@ -65,6 +65,7 @@ public class ActvConsumerNbrInput extends AppCompatActivity implements OnClickLi
 	@Override
 	protected void onResume() {
 		super.onResume();
+		Log.e("onResume", "ActvConsumerNbrInput");
 		Log.i("Image Capture", "" + UtilAppCommon.blImageCapture);
 		UtilAppCommon.bBtnGenerateClicked = true;
 		if(UtilAppCommon.blImageCapture)	{

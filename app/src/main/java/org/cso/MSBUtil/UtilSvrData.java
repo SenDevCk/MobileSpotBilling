@@ -6,8 +6,6 @@ import java.net.SocketTimeoutException;
 import org.ksoap2.SoapEnvelope;
 import org.ksoap2.serialization.*;
 import org.ksoap2.transport.HttpTransportSE;
-import org.cso.MSBUtil.UtilAppCommon;
-
 import android.annotation.SuppressLint;
 import android.util.Log;
 
@@ -17,36 +15,26 @@ public class UtilSvrData {
 	private String SOAPMethod ;
 	private String SOAPNamespace;
 	private String SOAPAddress;
-	
-	//private String DevHostName = "http://220.225.3.133/";
-	//private String DevHostName = "http://112.133.239.225/";   //Dev New
-	//private String ProHostName = "http://220.225.3.132/";		//DC IP Address Old
-	private String ProHostName = /*"http://220.225.3.149/"*/"https://www.bihardiscom.co.in/";		//DC IP Address New
-	//private String ProHostName = "http://220.227.230.133/";		//DR IP Address
-	
-	//Old Airtel Down IP
-	//private String strDevAlternateHost = "http://125.16.220.2/";
-	//private String strProAlternateHost = "http://125.16.220.2/"; 125.16.220.4
-	
-	//New Airtel IP
-	//private String strDevAlternateHost = "http://125.16.220.4/";
-	private String strProAlternateHost = /*"http://125.16.220.4/"*/"https://www.bihardiscom.co.in/";
-	
-	//private String strHostNameConstant = "http://220.225.3.133/";		//Development
-	//private String strHostNameConstant = "http://112.133.239.225/";		//Development  New
-	//private String strHostNameConstant = /*"http://220.225.3.149/"*/"https://www.bihardiscom.co.in/";		//Production	//DC IP Address
-	private String strHostNameConstant = "http://220.227.230.133/";		//Production	//DR IP Address
+
+	//testing //Development
+	/*private String HostName = "http://125.16.220.10/";
+	private String AlternateHost = "http://125.16.220.10/";
+	private String strHostNameConstant = "http://125.16.220.10/";*/
+
+	//Production
+	private String HostName = "https://www.bihardiscom.co.in/";
+	private String AlternateHost = "https://www.bihardiscom.co.in/";
+	private String strHostNameConstant = "https://www.bihardiscom.co.in/";
 	
 	private SoapObject request=null;
-	private SoapObject response=null;
 	private Object ObjectResponse=null;
 	private SoapSerializationEnvelope envelope=null;
 	private HttpTransportSE httpTransport=null;
 	
 	public UtilSvrData(){
 		if(UtilAppCommon.strHostName.equals(""))
-			//UtilAppCommon.strHostName = DevHostName;
-			UtilAppCommon.strHostName = ProHostName;
+			UtilAppCommon.strHostName = HostName;
+			//UtilAppCommon.strHostName = ProHostName;
 	}
 		
 	public String getJsonInputData(String strParam)
@@ -60,8 +48,7 @@ public class UtilSvrData {
 		SOAPAction = "http://tempuri.org/Return_MWtoMobile";	
 		SOAPMethod =  "Return_MWtoMobile";
 		SOAPNamespace = "http://tempuri.org/";
-		SOAPAddress =  UtilAppCommon.strHostName + "biharsbmservice/mw2sbm.asmx?WSDL";		
-		//SOAPAddress =  "http://220.225.3.133/biharsbmservice/mw2sbm.asmx?WSDL";
+		SOAPAddress =  UtilAppCommon.strHostName + "biharsbmservice/mw2sbm.asmx?WSDL";
 		Log.v("UtilServData", "*******************UtilAppCommon.strHostName**** "+UtilAppCommon.strHostName);
 		Log.v("", "**********getJsonInputData*****SOAP Addrsss  "+SOAPAddress);
 		try
@@ -99,8 +86,7 @@ public class UtilSvrData {
 		SOAPAction = "http://tempuri.org/GetMobileMeterReaderDetail";	
 		SOAPMethod =  "GetMobileMeterReaderDetail";
 		SOAPNamespace = "http://tempuri.org/";
-		SOAPAddress =  UtilAppCommon.strHostName + "biharsbmservice/ReturnSBMMeterReaderDetail.asmx?WSDL";	
-		//SOAPAddress =  "http://220.225.3.133/biharsbmservice/ReturnSBMMeterReaderDetail.asmx?WSDL";		//Devep
+		SOAPAddress =  UtilAppCommon.strHostName + "biharsbmservice/ReturnSBMMeterReaderDetail.asmx?WSDL";
 		Log.v("UtilServData", "*******************UtilAppCommon.strHostName**** "+UtilAppCommon.strHostName);
 		Log.v("", "**********getUserInfo*****SOAP Addrsss  "+SOAPAddress);
 		try
@@ -143,8 +129,7 @@ public class UtilSvrData {
 		SOAPAction = "http://tempuri.org/ValidateIMEI";	
 		SOAPMethod =  "ValidateIMEI";
 		SOAPNamespace = "http://tempuri.org/";
-		SOAPAddress =  UtilAppCommon.strHostName + "biharsbmservice/ValidateIMEINo.asmx?WSDL"; //Prod
-		//SOAPAddress =  "http://220.225.3.133/biharsbmservice/ValidateIMEINo.asmx?WSDL"; //Devp
+		SOAPAddress =  UtilAppCommon.strHostName + "biharsbmservice/ValidateIMEINo.asmx?WSDL";
 		Log.v("UtilServData", "*******************UtilAppCommon.strHostName**** "+UtilAppCommon.strHostName);
 		Log.v("", "*********getValidDevice******SOAP Addrsss  "+SOAPAddress);
 		try
@@ -176,8 +161,8 @@ public class UtilSvrData {
 			if(UtilAppCommon.strHostName.equals(strHostNameConstant))
 			{
 				Log.e("getValDev STE", ste.toString());
-				//UtilAppCommon.strHostName = DevHostName;
-				UtilAppCommon.strHostName = strProAlternateHost;
+				UtilAppCommon.strHostName = HostName;
+				//UtilAppCommon.strHostName = strProAlternateHost;
 				//Log.e("getValidDevice E strProAlternateHost", strProAlternateHost);
 				return "Timeout";
 			}			
@@ -194,8 +179,8 @@ public class UtilSvrData {
 			Log.e("getValidDevice SE", se.toString());
 			if(UtilAppCommon.strHostName.equals(strHostNameConstant))
 			{
-				//UtilAppCommon.strHostName = DevHostName;
-				UtilAppCommon.strHostName = strProAlternateHost;
+				UtilAppCommon.strHostName = HostName;
+				//UtilAppCommon.strHostName = strProAlternateHost;
 			}
 			return "Network Issue";
 		}
@@ -216,8 +201,7 @@ public class UtilSvrData {
 		SOAPAction = "http://tempuri.org/Get_MobileData";	
 		SOAPMethod =  "Get_MobileData";
 		SOAPNamespace = "http://tempuri.org/";
-		SOAPAddress =  UtilAppCommon.strHostName + "BiharSBMService/MobiletoMW.asmx?WSDL";	//Prod
-		//SOAPAddress =  "http://220.225.3.133/BiharSBMService/MobiletoMW.asmx?WSDL";	//Devp
+		SOAPAddress =  UtilAppCommon.strHostName + "BiharSBMService/MobiletoMW.asmx?WSDL";
 		Log.v("UtilServData", "*******************UtilAppCommon.strHostName**** "+UtilAppCommon.strHostName);
 		Log.v("UtilServData", "********getOutputData*******SOAP Addrsss  "+SOAPAddress);
 		try
@@ -225,7 +209,8 @@ public class UtilSvrData {
 			//Log.e("Util getOutputData", "Started");
 			Log.e("UtilServData", SOAPAddress);
 			request = new SoapObject(SOAPNamespace,SOAPMethod);
-			//5000365114|15.07.2017|100270701|MD||0.0|0.00|19.1181586|72.8661005|2|1000||6566886666
+			//
+			// |15.07.2017|100270701|MD||0.0|0.00|19.1181586|72.8661005|2|1000||6566886666
 			//5000019952|28.03.2017|10044180|OK|15228|0.87|0.00|19.1181586|72.8661005|1|1000||6566886666
 			//Installation|SCHEDULED_BILLING_DATE|SAP_DEVICE|Meter_Status|Reading|Demand|PowerFactor|Lat|Long|Bill_Flag|KVAH|MobileNo|PoleNo
 			
@@ -252,16 +237,16 @@ public class UtilSvrData {
 		{
 			//System.out.println("getOutputData E ==>> " + ex.getMessage());
 			Log.e("getOutputData STE", ste.getMessage());
-			//UtilAppCommon.strHostName = strDevAlternateHost;
-			UtilAppCommon.strHostName = strProAlternateHost;
+			UtilAppCommon.strHostName = AlternateHost;
+			//UtilAppCommon.strHostName = strProAlternateHost;
 			return "Network Issue / Not Reachable";
 		}
 		catch (SocketException se)
 		{
 			//System.out.println("getOutputData E ==>> " + ex.getMessage());
 			Log.e("getOutputData SE", se.getMessage());
-			//UtilAppCommon.strHostName = strDevAlternateHost;
-			UtilAppCommon.strHostName = strProAlternateHost;
+			UtilAppCommon.strHostName = AlternateHost;
+			//UtilAppCommon.strHostName = strProAlternateHost;
 			return "Network Issue / Not Reachable";
 		}
 		catch (Exception ex)
@@ -284,8 +269,7 @@ public class UtilSvrData {
 		SOAPAction = "http://tempuri.org/UpdateMobPoleNumber";	
 		SOAPMethod =  "UpdateMobPoleNumber";
 		SOAPNamespace = "http://tempuri.org/";
-		SOAPAddress =  UtilAppCommon.strHostName + "BiharSBMService/UpdateMobile_Pole_No.asmx?WSDL";	//Prod
-		//SOAPAddress =  "http://220.225.3.133/BiharSBMService/UpdateMobile_Pole_No.asmx?WSDL";	//Devp
+		SOAPAddress =  UtilAppCommon.strHostName + "BiharSBMService/UpdateMobile_Pole_No.asmx?WSDL";
 		Log.v("UtilServData", "*******************UtilAppCommon.strHostName**** "+UtilAppCommon.strHostName);
 		Log.v("UtilServData", "*********updatePoleMobile******SOAP Addrsss  "+SOAPAddress);
 		try
@@ -341,8 +325,7 @@ public class UtilSvrData {
 		SOAPAction = "http://tempuri.org/UpdateMissingConsumerDetail";	
 		SOAPMethod =  "UpdateMissingConsumerDetail";
 		SOAPNamespace = "http://tempuri.org/";
-		SOAPAddress =  UtilAppCommon.strHostName + "biharsbmservice/UpdateMissingConsumer.asmx?WSDL";	//Prod
-		//SOAPAddress =  "http://220.225.3.133/biharsbmservice/UpdateMissingConsumer.asmx?WSDL";	//Devp
+		SOAPAddress =  UtilAppCommon.strHostName + "biharsbmservice/UpdateMissingConsumer.asmx?WSDL";
 		Log.v("UtilServData", "*******************UtilAppCommon.strHostName**** "+UtilAppCommon.strHostName);
 		Log.v("UtilServData", "********updateMissingCons*******SOAP Addrsss  "+SOAPAddress);
 		try
@@ -399,10 +382,7 @@ public class UtilSvrData {
 		SOAPAction = "http://tempuri.org/UploadDatewiseCAImage";	
 		SOAPMethod =  "UploadDatewiseCAImage";
 		SOAPNamespace = "http://tempuri.org/";
-		//220.225.3.132
-		//SOAPAddress =  "http://220.225.3.132/biharsbmservice/UploadImage.asmx?WSDL";	//Prod
-		SOAPAddress =  UtilAppCommon.strHostName + "biharsbmservice/UploadImage.asmx?WSDL";	//Prod
-		//SOAPAddress =  "http://220.225.3.133/biharsbmservice/UploadImage.asmx?WSDL";	//Devp
+		SOAPAddress =  UtilAppCommon.strHostName + "biharsbmservice/UploadImage.asmx?WSDL";
 		Log.v("UtilServData", "*******************UtilAppCommon.strHostName**** "+UtilAppCommon.strHostName);
 		Log.v("UtilServData", "**********updateImage*****SOAP Addrsss  "+SOAPAddress);
 		
@@ -420,7 +400,9 @@ public class UtilSvrData {
 			
 			request.addProperty("IMEINo", UtilAppCommon.IMEI_Number);
 			//strParamValue = strParamValue + "|" + UtilAppCommon.IMEI_Number;
-						
+			Log.e("strSDOCode", strSDOCode+" MRU= "+strMRUCode);
+			Log.e("strCANo", strCANo);
+			Log.e("imageArray", byteImage);
 			envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
 			envelope.dotNet = true;
 			envelope.setOutputSoapObject(request);
@@ -463,8 +445,7 @@ public class UtilSvrData {
 		SOAPAction = "http://tempuri.org/ReturnMeterAbnormality";	
 		SOAPMethod =  "ReturnMeterAbnormality";
 		SOAPNamespace = "http://tempuri.org/";
-		SOAPAddress =  UtilAppCommon.strHostName + "biharsbmservice/CaptureMeterAbnormality.asmx?WSDL";	//Prod
-		//SOAPAddress =  "http://220.225.3.133/biharsbmservice/UpdateMissingConsumer.asmx?WSDL";	//Devp
+		SOAPAddress =  UtilAppCommon.strHostName + "biharsbmservice/CaptureMeterAbnormality.asmx?WSDL";
 		Log.v("UtilServData", "*******************UtilAppCommon.strHostName**** "+UtilAppCommon.strHostName);
 		Log.v("UtilServData", "*********updateAbnormality******SOAP Addrsss  "+SOAPAddress);
 		try
@@ -523,8 +504,7 @@ public class UtilSvrData {
 		SOAPAction = "http://tempuri.org/GetUDMFlag";
 		SOAPMethod =  "GetUDMFlag";
 		SOAPNamespace = "http://tempuri.org/";
-		SOAPAddress =  UtilAppCommon.strHostName + "biharsbmservice/udmsvc.asmx?WSDL";	//Prod
-		//SOAPAddress =  "http://220.225.3.133/BiharSBMService/MobiletoMW.asmx?WSDL";	//Devp
+		SOAPAddress =  UtilAppCommon.strHostName + "biharsbmservice/udmsvc.asmx?WSDL";
 		Log.v("UtilServData", "*******************UtilAppCommon.strHostName**** "+UtilAppCommon.strHostName);
 		Log.v("UtilServData", "**********updateBluetoothReading*****SOAP Addrsss  "+SOAPAddress);
 		try
@@ -559,16 +539,16 @@ public class UtilSvrData {
 		{
 			//System.out.println("getOutputData E ==>> " + ex.getMessage());
 			Log.e("getBlueData STE", ste.getMessage());
-			UtilAppCommon.strHostName = strProAlternateHost;
-			//UtilAppCommon.strHostName = DevHostName;
+			//UtilAppCommon.strHostName = strProAlternateHost;
+			UtilAppCommon.strHostName = HostName;
 			return "Network Issue / Not Reachable";
 		}
 		catch (SocketException se)
 		{
 			//System.out.println("getOutputData E ==>> " + ex.getMessage());
 			Log.e("getBlueData SE", se.getMessage());
-			UtilAppCommon.strHostName = strProAlternateHost;
-			//UtilAppCommon.strHostName = DevHostName;
+			//UtilAppCommon.strHostName = strProAlternateHost;
+			UtilAppCommon.strHostName = HostName;
 			return "Network Issue / Not Reachable";
 		}
 		catch (Exception ex)

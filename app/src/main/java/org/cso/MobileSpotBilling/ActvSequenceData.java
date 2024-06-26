@@ -103,8 +103,14 @@ public class ActvSequenceData extends AppCompatActivity implements OnClickListen
 	}
 
 	@Override
+	protected void onRestart() {
+		super.onRestart();
+		Log.e("onRestart", "ActvSequenceData");
+	}
+	@Override
 	protected void onResume() {
 		super.onResume();
+		Log.e("onRestart", "ActvSequenceData");
 		Log.i("Image Capture", "" + UtilAppCommon.blImageCapture);
 		UtilAppCommon.bBtnGenerateClicked = true;
 		if(UtilAppCommon.blImageCapture)	{

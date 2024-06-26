@@ -157,6 +157,18 @@ public class ActvSummaryPrinting extends AppCompatActivity {
 
 	}
 
+	@Override
+	protected void onResume() {
+		super.onResume();
+		Log.e("onResume", "ActvSummaryPrinting");
+	}
+
+	@Override
+	protected void onRestart() {
+		super.onRestart();
+		Log.e("onRestart", "ActvSummaryPrinting");
+	}
+
 	public void onBackPressed() {
 		// do something on back.
 		super.onBackPressed();

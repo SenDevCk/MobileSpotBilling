@@ -13,6 +13,7 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.net.MailTo;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -94,12 +95,22 @@ public class ActvSrcByConName extends AppCompatActivity {
             Toast.makeText(getBaseContext(), "Please Enter Valid Account Number", Toast.LENGTH_LONG).show();
         } else {
             //finish();
-            System.out.println("Going to ActvBilling");
+            System.err.println("Going to ActvBilling");
             startActivity(new Intent(this, ActvBilling.class));
 
         }
     }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.e("onResume", "ActvSrcByConName");
+    }
 
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        Log.e("onRestart", "ActvSrcByConName");
+    }
     void search() {
         UtilDB util = new UtilDB(getBaseContext());
         list = (ListView) findViewById(R.id.lvSrcByConName);

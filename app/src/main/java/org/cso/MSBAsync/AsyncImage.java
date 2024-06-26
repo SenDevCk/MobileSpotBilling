@@ -1,15 +1,13 @@
 package org.cso.MSBAsync;
 
-import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
 
 import org.cso.MSBUtil.UtilAppCommon;
 import org.cso.MSBUtil.UtilDB;
 import org.cso.MSBUtil.UtilSvrData;
+import org.cso.MSBUtil.Utilities;
 import org.cso.MobileSpotBilling.OnBillGenerate;
-import org.cso.MobileSpotBilling.TaskCallback;
 import org.json.JSONObject;
 
 import android.app.ProgressDialog;
@@ -56,12 +54,16 @@ public class AsyncImage extends  AsyncTask<String, Void, String> {
 		String jsonTxt = "";
 		try
 		{
-			File file = new File(params[4]);
+			String path_img=params[4];
+			Log.e("path_img58",path_img);
+			File file = new File(path_img);
 			Bitmap bitmap = BitmapFactory.decodeFile(file.getAbsolutePath());
+			//Bitmap bitmap =Utilities.getBitmapForAllVersions(context,file);
 			ByteArrayOutputStream stream = new ByteArrayOutputStream();
 			bitmap.compress(Bitmap.CompressFormat.JPEG, 90, stream);
 			byte[] image = stream.toByteArray();
 			img_str = Base64.encodeToString(image, 0);
+			Log.e("imagedata",img_str);
 			glbVar = "0";
 			jsonTxt=sv.updateImage(params[0], params[1], params[2], params[3], img_str, params[5]);			
 			if(jsonTxt.equalsIgnoreCase("Network Issue / Not Reachable"))
@@ -91,8 +93,6 @@ public class AsyncImage extends  AsyncTask<String, Void, String> {
 		{
 			Log.e("AsyncImage => ", "doInBackground ==>> IO " + e.getMessage());
 		}
-			
-		
 		return jsonTxt;
 	}
 	
@@ -120,7 +120,7 @@ public class AsyncImage extends  AsyncTask<String, Void, String> {
 	@Override
 	protected void onCancelled() {
 		// TODO Auto-generated method stub
-		//super.onCancelled();
+		super.onCancelled();
 		return;
 	}
 	

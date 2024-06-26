@@ -1,7 +1,7 @@
 <component name="libraryTable">
   <library name="Gradle: E (10)" external-system-id="GRADLE">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/app/libs/opencv_library-2.4.3.jar!/" />
+      <root url="jar://$PROJECT_DIR$/app/libs/ksoap2-android-assembly-3.0.0-jar-with-dependencies.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

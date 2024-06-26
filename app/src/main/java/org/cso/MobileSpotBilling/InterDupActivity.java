@@ -216,15 +216,11 @@ public class InterDupActivity extends AppCompatActivity {
 			ad.setTitle("Confirm");
 			ad.setMessage("Confirm to print");
 			ad.setButton(DialogInterface.BUTTON_POSITIVE, "Yes",
-					new DialogInterface.OnClickListener() {
-
-						public void onClick(DialogInterface dialog,
-								int which) {
-							// TODO Auto-generated method stub
-							ad.dismiss();
-							Write2SbmOut();
-							//startActivity(new Intent(ctx, ActvBillPrinting.class));
-						}
+					(dialog, which) -> {
+						// TODO Auto-generated method stub
+						ad.dismiss();
+						Write2SbmOut();
+						//startActivity(new Intent(ctx, ActvBillPrinting.class));
 					});
 			ad.setButton(DialogInterface.BUTTON_NEGATIVE, "No",
 					new DialogInterface.OnClickListener() {
@@ -573,9 +569,10 @@ public class InterDupActivity extends AppCompatActivity {
 		
 		Log.e("getImageByCANo", "Started");
 		UtilDB utildb = new UtilDB(getApplicationContext());
-		AppDir = Environment.getExternalStorageDirectory().getPath()
+		/*AppDir = Environment.getExternalStorageDirectory().getPath()
 				+ "/SBDocs/Photos_Crop" + "/" + utildb.getSdoCode() + "/"
-				+ utildb.getActiveMRU();
+				+ utildb.getActiveMRU();*/
+		AppDir=getExternalFilesDir(Environment.DIRECTORY_PICTURES+"/SBDocs/Photos_Crop/"+utildb.getSdoCode()+"/"+ utildb.getActiveMRU()).getPath();
 		Cursor cursorImage = utildb.getUnCompressedImage(CANo);
 		File file = null;
 		//getUnCompressedImage
@@ -586,11 +583,8 @@ public class InterDupActivity extends AppCompatActivity {
 		}
 		//ImageProcessing imageProcessing = new ImageProcessing();
 		
-		AsyncImage asyncImage = new AsyncImage(this ,new OnBillGenerate() {
-			@Override
-			public void onFinish() {
-				// TODO Auto-generated method stub
-			}
+		AsyncImage asyncImage = new AsyncImage(this , () -> {
+			// TODO Auto-generated method stub
 		});
 		
 		//String strArray[] = imageProcessing.processImage(AppDir, file, this, cursorImage.getString(1), CANo);

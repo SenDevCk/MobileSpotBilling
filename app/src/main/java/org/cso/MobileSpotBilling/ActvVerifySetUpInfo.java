@@ -10,6 +10,7 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.net.MailTo;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -41,6 +42,18 @@ public class ActvVerifySetUpInfo extends AppCompatActivity implements OnClickLis
 		getSupportActionBar().setDisplayShowHomeEnabled(true);
         showVerifySetupInfo();       
     }
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		Log.e("onResume", "ActvVerifySetUpInfo");
+	}
+
+	@Override
+	protected void onRestart() {
+		super.onRestart();
+		Log.e("onRestart", "ActvVerifySetUpInfo");
+	}
 	@Override
 	public boolean onSupportNavigateUp() {
 		//  closePrinter();

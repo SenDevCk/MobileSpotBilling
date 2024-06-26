@@ -13,6 +13,7 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.net.MailTo;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -81,7 +82,17 @@ public class ActvSrcByMtrNo extends AppCompatActivity {
         });
 
     }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.e("onResume", "ActvSrcByMtrNo");
+    }
 
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        Log.e("onRestart", "ActvSrcByMtrNo");
+    }
 	@Override
 	public boolean onSupportNavigateUp() {
 		//  closePrinter();
@@ -90,7 +101,6 @@ public class ActvSrcByMtrNo extends AppCompatActivity {
 	}
 
     void gotoBilling() {
-
         UtilDB util = new UtilDB(getBaseContext());
         UtilAppCommon.binder = util.getActiveBinder();
         UtilAppCommon.sdoCode = util.getSdocd();

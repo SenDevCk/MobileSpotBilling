@@ -10,6 +10,7 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.net.MailTo;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -38,6 +39,7 @@ public class ActvModifySetUpInfo extends AppCompatActivity implements OnClickLis
 
     @Override
     protected void onResume() {
+        Log.e("onResume", "ActvModifySetUpInfo");
         super.onResume();
     }
 
@@ -63,6 +65,11 @@ public class ActvModifySetUpInfo extends AppCompatActivity implements OnClickLis
         return true;
     }
 
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        Log.e("onRestart", "ActvModifySetUpInfo");
+    }
     public void onClick(View view) {
         //startActivity(new Intent(this, ActvSetupInfo.class));
         //finish();

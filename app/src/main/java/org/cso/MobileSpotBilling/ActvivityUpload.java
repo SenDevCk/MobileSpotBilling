@@ -4,6 +4,7 @@ package org.cso.MobileSpotBilling;
 import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -94,7 +95,17 @@ public class ActvivityUpload extends AppCompatActivity {
        
 	 }
 
+	@Override
+	protected void onResume() {
+		super.onResume();
+		Log.e("onResume", "ActvivityUpload");
+	}
 
+	@Override
+	protected void onRestart() {
+		super.onRestart();
+		Log.e("onRestart", "ActvivityUpload");
+	}
 
 	@Override
 	public boolean onSupportNavigateUp() {

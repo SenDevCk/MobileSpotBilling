@@ -12,6 +12,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -21,6 +22,7 @@ import android.os.Bundle;
 import android.app.Activity;
 import java.io.*;
 
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.Menu;
 import java.lang.reflect.Method;
@@ -32,10 +34,12 @@ import java.util.Scanner;
 import java.util.Set;
 import java.util.UUID;
 
+import org.cso.MSBUtil.AppUtil;
 import org.cso.MSBUtil.NetworkUtil;
 import org.cso.MSBUtil.PrintUtilZebra;
 import org.cso.MSBUtil.UtilAppCommon;
 import org.cso.MSBUtil.UtilDB;
+import org.cso.MSBUtil.Utilities;
 
 import com.analogics.*;
 import com.epson.eposprint.Builder;
@@ -62,6 +66,7 @@ import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.res.ResourcesCompat;
 
 public class ActvDuplicateBillPrinting extends AppCompatActivity {
 	/** Called when the activity is first created. */
@@ -135,6 +140,17 @@ public class ActvDuplicateBillPrinting extends AppCompatActivity {
 
 		// End Added on 1.3.2014
 
+	}
+	@Override
+	protected void onResume() {
+		super.onResume();
+		Log.e("onResume", "ActvDuplicateBillPrinting");
+	}
+
+	@Override
+	protected void onRestart() {
+		super.onRestart();
+		Log.e("onRestart", "ActvDuplicateBillPrinting");
 	}
 
 	public void onBackPressed() {
@@ -939,13 +955,13 @@ public class ActvDuplicateBillPrinting extends AppCompatActivity {
 				PrintUtilZebra.LineNo = 0;
 				// Print Reading Image
 				try {
-					String PhotoDir = Environment.getExternalStorageDirectory()
-							.getPath()
-							+ "/SBDocs/Photos_Crop"
+					String PhotoDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES+ "/SBDocs/Photos_Crop"
 							+ "/"
 							+ UtilAppCommon.sdoCode
 							+ "/"
-							+ UtilAppCommon.out.MRU;
+							+ UtilAppCommon.out.MRU)
+							.getAbsolutePath();
+					//getExternalFilesDir(Environment.DIRECTORY_PICTURES+"/SBDocs/Photos/"+UtilAppCommon.in.SUB_DIVISION_CODE+"/"+ UtilAppCommon.in.MRU)
 					//String PhotoPath = PhotoDir + "/"+ UtilAppCommon.out.CANumber + ".jpg";
 					/*String PhotoPath = PhotoDir + "/BSB" + "_" + 
 							UtilAppCommon.sdoCode + UtilAppCommon.out.MRU + 
@@ -954,17 +970,18 @@ public class ActvDuplicateBillPrinting extends AppCompatActivity {
 					//String PhotoPath = PhotoDir + "/" + UtilAppCommon.in.SCHEDULED_BILLING_DATE.substring(0, 4) + 
 					//		UtilAppCommon.in.SCHEDULED_BILLING_DATE.substring(5, 7) + 
 					//		"_" + UtilAppCommon.out.CANumber  + ".jpg";
-					String PhotoPath = PhotoDir + 
-							  "/201510_" + UtilAppCommon.out.CANumber  + ".jpg";
-					
-					Log.e("Photo Path", PhotoPath);
+					//String PhotoPath = PhotoDir +
+							 // "/201510_" + UtilAppCommon.out.CANumber  + ".jpg";
+					File filenow=new File(PhotoDir,"/201510_" + UtilAppCommon.out.CANumber  + ".jpg");
+					Log.e("Photo Path", filenow.getAbsolutePath());
 					
 					thePrinterConn.write("! U1 JOURNAL\r\n! U1 SETFF 50 2\r\n".getBytes());
 					
 					
 					//printer.getGraphicsUtil().printImage("/storage/sdcard0/img_tick.png",0,0,-1,-1,false);
-					printer.getGraphicsUtil().printImage(PhotoPath, 100, 0, -1,-1, false);
-
+					//printer.getGraphicsUtil().printImage(PhotoPath, 100, 0, -1,-1, false);
+					Bitmap img_btm=Utilities.getBitmapForAllVersions(getApplicationContext(),filenow);
+					printer.getGraphicsUtil().printImage(img_btm,100, 0, -1,-1, false);
 				} catch (Exception ex) {
 
 					System.out
@@ -1197,8 +1214,19 @@ public class ActvDuplicateBillPrinting extends AppCompatActivity {
 				Toast.makeText(getApplicationContext(), "Sending Data",
 						Toast.LENGTH_LONG).show();
 				Builder builder = new Builder("TM-P60", Builder.MODEL_ANK);
+				builder.addCommand(new byte[] {0x1C, 0x28, 0x43, 0x02, 0x00, 0x30, 0x02});
+				/*try {
+					//Bitmap azadi = BitmapFactory.decodeResource(getResources(), R.drawable.chunav);
+					Bitmap azadi = Utilities.getBitmapFromDrawable(getApplicationContext(),R.drawable.chunav);
+					azadi = Bitmap.createScaledBitmap(azadi, 350, 220, true);
+					builder.addImage(azadi, 0, 0, azadi.getWidth(), azadi.getHeight(), Builder.PARAM_DEFAULT);
+					Log.v("Azadi Photo Print Added", "Azadi Photo Print Added");
+				} catch (Exception ex) {
+					Log.v("Azadi Photo Print", ex.getMessage());
+					System.out
+							.println("Error In Azadi Photo Print: " + ex.toString());
+				}*/
 				builder.addTextFont(Builder.FONT_A);
-
 				builder.addTextAlign(Builder.ALIGN_CENTER);
 				builder.addTextSize(2, 2);
 				builder.addTextStyle(Builder.FALSE, Builder.FALSE,
@@ -1316,31 +1344,36 @@ public class ActvDuplicateBillPrinting extends AppCompatActivity {
 
 				// Print Reading Image
 				try {
-					String PhotoDir = Environment.getExternalStorageDirectory()
+					/*String PhotoDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES)
 							.getPath()
 							+ "/SBDocs/Photos_Crop"
 							+ "/"
 							+ UtilAppCommon.bill.BILL_ACC_NO.substring(0, 4)
 							+ "/"
-							+ UtilAppCommon.bill.BILL_ACC_NO.substring(4, 8);
+							+ UtilAppCommon.bill.BILL_ACC_NO.substring(4, 8);*/
 					/*String PhotoPath = PhotoDir + "/" + "MSB"
 							+ UtilAppCommon.bill.BILL_ACC_NO + ".jpg";*/
-					
-					strmonth = String.valueOf(Arrays.asList(strMonths).indexOf(UtilAppCommon.out.BillMonth) + 1);
-					String PhotoPath = PhotoDir + "/" + UtilAppCommon.in.SCHEDULED_BILLING_DATE.substring(0, 4) + 
-							UtilAppCommon.in.SCHEDULED_BILLING_DATE.substring(5, 7) + 
-							"_" + UtilAppCommon.in.CONTRACT_AC_NO;
-					
-					System.out.println("Photo: " + PhotoPath);
-					BitmapFactory bf = new BitmapFactory();
-					builder.addImage(bf.decodeFile(PhotoPath), 0, 0, bf
-							.decodeFile(PhotoPath).getWidth(),
-							bf.decodeFile(PhotoPath).getHeight(),
-							Builder.PARAM_DEFAULT);
-				} catch (Exception ex) {
+					String PhotoDir=getExternalFilesDir(Environment.DIRECTORY_PICTURES+"/SBDocs/Photos/"+UtilAppCommon.in.SUB_DIVISION_CODE+"/"+ UtilAppCommon.in.MRU).getAbsolutePath();
 
-					System.out
-							.println("Error In Photo Print: " + ex.toString());
+					strmonth = String.valueOf(Arrays.asList(strMonths).indexOf(UtilAppCommon.out.BillMonth) + 1);
+//					String PhotoPath = PhotoDir + "/" + UtilAppCommon.in.SCHEDULED_BILLING_DATE.substring(0, 4) +
+//							UtilAppCommon.in.SCHEDULED_BILLING_DATE.substring(5, 7) +
+//							"_" + UtilAppCommon.in.CONTRACT_AC_NO;
+
+
+//						File file_crop = new File(PhotoDir, UtilAppCommon.in.SCHEDULED_BILLING_DATE.substring(0, 4) +
+//								UtilAppCommon.in.SCHEDULED_BILLING_DATE.substring(5, 7) +
+//								"_" + UtilAppCommon.in.CONTRACT_AC_NO + ".jpg");
+						//Uri uri = AppUtil.getFileUri(ActvDuplicateBillPrinting.this, file_crop);
+						//Bitmap bitmap_crop = MediaStore.Images.Media.getBitmap(ActvDuplicateBillPrinting.this.getContentResolver(), uri);
+//						Bitmap bitmap_crop= Utilities.getBitmapForAllVersions(ActvDuplicateBillPrinting.this,file_crop);
+//						System.out.println("Photo: " + PhotoPath);
+//						builder.addImage(bitmap_crop, 0, 0, bitmap_crop.getWidth(),
+//								bitmap_crop.getHeight(),
+//								Builder.PARAM_DEFAULT);
+
+				} catch (Exception ex) {
+					System.err.println("Error In Photo Print: " + ex.getMessage());
 				}
 				// Print Reading Image End
 
@@ -1601,7 +1634,7 @@ public class ActvDuplicateBillPrinting extends AppCompatActivity {
 			
 			try
 			{
-				txtBill=new File(Environment.getExternalStorageDirectory()+"/SBDocs/BillText.txt");
+				txtBill=new File(getExternalFilesDir(Environment.DIRECTORY_PICTURES+"/SBDocs/BillText.txt").getAbsolutePath());
 				if(txtBill.exists())
 				{
 					txtBill.delete();

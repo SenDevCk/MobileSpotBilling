@@ -44,6 +44,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import HPRTAndroidSDK.HPRTPrinterHelper;
 
+
 public class ActvMsgPrinting extends AppCompatActivity {
 
 	public ActvMsgPrinting(){
@@ -711,7 +712,7 @@ public class ActvMsgPrinting extends AppCompatActivity {
 				printerdata1.append(printer.font_Courier_24_VIP(String.format(
 						".   \n")));
 
-				conn.printData(printerdata1.toString().getBytes());				
+				conn.printData(printerdata1.toString().getBytes());
 
 				Thread.sleep(3000);
 				conn.closeBT();
@@ -805,8 +806,9 @@ public class ActvMsgPrinting extends AppCompatActivity {
 				return;
 			}
 
-			hprtPrinterHelper = new HPRTPrinterHelper();
+
 			try {
+				hprtPrinterHelper = new HPRTPrinterHelper();
 				int portOpen = hprtPrinterHelper.PortOpen("Bluetooth," + address);
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -958,7 +960,10 @@ public class ActvMsgPrinting extends AppCompatActivity {
 		
 		Log.e("getImageByCANo", "Started");
 		UtilDB utildb = new UtilDB(getApplicationContext());
-		AppDir = Environment.getExternalStorageDirectory().getPath()
+		/*AppDir = Environment.getExternalStorageDirectory().getPath()
+				+ "/SBDocs/Photos_Crop" + "/" + utildb.getSdoCode() + "/"
+				+ utildb.getActiveMRU();*/
+		AppDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES).getPath()
 				+ "/SBDocs/Photos_Crop" + "/" + utildb.getSdoCode() + "/"
 				+ utildb.getActiveMRU();
 		Cursor cursorImage = utildb.getUnCompressedImage(CANo);
@@ -971,11 +976,8 @@ public class ActvMsgPrinting extends AppCompatActivity {
 		}
 		//ImageProcessing imageProcessing = new ImageProcessing();
 		
-		AsyncImage asyncImage = new AsyncImage(this ,new OnBillGenerate() {
-			@Override
-			public void onFinish() {
-				// TODO Auto-generated method stub
-			}
+		AsyncImage asyncImage = new AsyncImage(this , () -> {
+			// TODO Auto-generated method stub
 		});
 		
 		//String strArray[] = imageProcessing.processImage(AppDir, file, this, cursorImage.getString(1), CANo);

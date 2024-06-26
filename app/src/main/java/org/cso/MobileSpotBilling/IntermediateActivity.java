@@ -593,9 +593,11 @@ public class IntermediateActivity extends AppCompatActivity {
 			
 			Log.e("getImageByCANo", "Started");
 			UtilDB utildb = new UtilDB(getApplicationContext());
-			AppDir = Environment.getExternalStorageDirectory().getPath()
+			/*AppDir = Environment.getExternalStorageDirectory().getPath()
 					+ "/SBDocs/Photos_Crop" + "/" + utildb.getSdoCode() + "/"
-					+ utildb.getActiveMRU();
+					+ utildb.getActiveMRU();*/
+			AppDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES+ "/SBDocs/Photos_Crop" + "/" + utildb.getSdoCode() + "/"
+					+ utildb.getActiveMRU()).getPath();
 			Cursor cursorImage = utildb.getUnCompressedImage(CANo);
 			File file = null;
 			//getUnCompressedImage
@@ -606,11 +608,8 @@ public class IntermediateActivity extends AppCompatActivity {
 			}
 			//ImageProcessing imageProcessing = new ImageProcessing();
 			
-			AsyncImage asyncImage = new AsyncImage(this ,new OnBillGenerate() {
-				@Override
-				public void onFinish() {
-					// TODO Auto-generated method stub
-				}
+			AsyncImage asyncImage = new AsyncImage(this , () -> {
+				// TODO Auto-generated method stub
 			});
 			
 			//String strArray[] = imageProcessing.processImage(AppDir, file, this, cursorImage.getString(1), CANo);

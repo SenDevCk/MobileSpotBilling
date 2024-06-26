@@ -67,8 +67,15 @@ public class ActvLegacyNbrInput extends AppCompatActivity implements OnClickList
 	}
 
 	@Override
+	protected void onRestart() {
+		super.onRestart();
+		Log.e("onRestart", "ActvLegacyNbrInput");
+	}
+
+	@Override
 	protected void onResume() {
 		super.onResume();
+		Log.e("onResume", "ActvLegacyNbrInput");
 		Log.i("Image Capture", "" + UtilAppCommon.blImageCapture);
 		UtilAppCommon.bBtnGenerateClicked = true;
 		if(UtilAppCommon.blImageCapture)	{

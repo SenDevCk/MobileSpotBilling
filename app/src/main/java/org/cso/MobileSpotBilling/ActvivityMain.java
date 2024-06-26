@@ -87,14 +87,15 @@ public class ActvivityMain extends AppCompatActivity implements OnClickListener 
 		//toolbar.setLogo(getResources().getDrawable(R.drawable.sbpscl_logo));
 		toolbar.setTitle(getResources().getString(R.string.app_name));
 		File file = null;
-		String AppDir = Environment.getExternalStorageDirectory().getPath()
+		String AppDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES).getPath()
 				+ "/SBDocs";
 		String billDir = AppDir + "/Pdf";
 		String uploadDir = AppDir + "/InputFiles";
 		String downloadDir = AppDir + "/Download";
 		String outDir = AppDir + "/OutFiles";
 		String photoDir = AppDir + "/Photos";
-		String photoUnuploadDir = AppDir + "/.PhotosUnuploaded";
+		//String photoUnuploadDir = AppDir + "/.PhotosUnuploaded";
+		String photoUnuploadDir = AppDir + "/Photos";
 
 		file = new File(AppDir);
 		if (!file.exists()) {

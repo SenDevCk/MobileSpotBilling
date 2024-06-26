@@ -24,6 +24,7 @@ import com.zebra.android.printer.ZebraPrinterFactory;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -93,7 +94,7 @@ public class ActvUnbilledListPrinting extends AppCompatActivity {
             Thread t = new Thread(sendDataAnaloginThermal);
             t.run();
         }
-        else if (printer[1].compareToIgnoreCase("TVS-ENGLISH") == 0) {
+       /* else if (printer[1].compareToIgnoreCase("TVS-ENGLISH") == 0) {
             ActvMsgPrinting.TVSPrinter tvsPrinter = new ActvMsgPrinting().new TVSPrinter(printer[0]);
             Thread t = new Thread(tvsPrinter);
             t.run();
@@ -102,7 +103,7 @@ public class ActvUnbilledListPrinting extends AppCompatActivity {
             ActvMsgPrinting.TVSPrinter tvsPrinter = new ActvMsgPrinting().new TVSPrinter(printer[0]);
             Thread t = new Thread(tvsPrinter);
             t.run();
-        }
+        }*/
         else {
             Toast.makeText(this, "No Printer Configured", Toast.LENGTH_LONG)
                     .show();
@@ -128,7 +129,17 @@ public class ActvUnbilledListPrinting extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.e("onResume", "ActvUnbilledListPrinting");
+    }
 
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        Log.e("onRestart", "ActvUnbilledListPrinting");
+    }
     class ZebraThermal extends Thread {
 
         private BluetoothDevice device = null;

@@ -8,6 +8,7 @@ import android.preference.PreferenceManager;
 
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -72,104 +73,113 @@ public class DcMeterReading extends AppCompatActivity {
             }
         });*/
 
-        btn_read_meter.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final String strBluetoothInput[] = new String[13];
-                Calendar c = Calendar.getInstance();
+        btn_read_meter.setOnClickListener(v -> {
+            final String strBluetoothInput[] = new String[13];
+            Calendar c = Calendar.getInstance();
 
-                SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy HH:mm:ss");
-                String timestamp_ac = df.format(c.getTime());
+            SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy HH:mm:ss");
+            String timestamp_ac = df.format(c.getTime());
 
 
-                Calendar nxtcal = new GregorianCalendar(
-                        Integer.parseInt(UtilAppCommon.in.SCH_MTR_READING_DT.substring(0, 4)),
-                        Integer.parseInt(UtilAppCommon.in.SCH_MTR_READING_DT.substring(5, 7)),
-                        Integer.parseInt(UtilAppCommon.in.SCH_MTR_READING_DT.substring(8, 10)) - 1);
+            Calendar nxtcal = new GregorianCalendar(
+                    Integer.parseInt(UtilAppCommon.in.SCH_MTR_READING_DT.substring(0, 4)),
+                    Integer.parseInt(UtilAppCommon.in.SCH_MTR_READING_DT.substring(5, 7)),
+                    Integer.parseInt(UtilAppCommon.in.SCH_MTR_READING_DT.substring(8, 10)) - 1);
 
-                //UtilAppCommon.in.SCHEDULED_BILLING_DATE = "2017.07.31";
-                int temp = Integer.parseInt(UtilAppCommon.in.SCH_MTR_READING_DT.substring(5, 7));
-                String strtemp = "";
-                if(temp <= 9)
-                    strtemp = "0" + Integer.parseInt(UtilAppCommon.in.SCH_MTR_READING_DT.substring(5, 7));
-                else
-                    strtemp = ""  + Integer.parseInt(UtilAppCommon.in.SCH_MTR_READING_DT.substring(5, 7));
+            //UtilAppCommon.in.SCHEDULED_BILLING_DATE = "2017.07.31";
+            int temp = Integer.parseInt(UtilAppCommon.in.SCH_MTR_READING_DT.substring(5, 7));
+            String strtemp = "";
+            if(temp <= 9)
+                strtemp = "0" + Integer.parseInt(UtilAppCommon.in.SCH_MTR_READING_DT.substring(5, 7));
+            else
+                strtemp = ""  + Integer.parseInt(UtilAppCommon.in.SCH_MTR_READING_DT.substring(5, 7));
 
-                String strtemp1 = "";
+            String strtemp1 = "";
 
-                int temp1 = Integer.parseInt(UtilAppCommon.in.SCH_MTR_READING_DT.substring(8, 10));
-                if(temp1 <= 9)
-                    strtemp1 = "0" + Integer.parseInt(UtilAppCommon.in.SCH_MTR_READING_DT.substring(8, 10));
-                else
-                    strtemp1 = ""  + Integer.parseInt(UtilAppCommon.in.SCH_MTR_READING_DT.substring(8, 10));
+            int temp1 = Integer.parseInt(UtilAppCommon.in.SCH_MTR_READING_DT.substring(8, 10));
+            if(temp1 <= 9)
+                strtemp1 = "0" + Integer.parseInt(UtilAppCommon.in.SCH_MTR_READING_DT.substring(8, 10));
+            else
+                strtemp1 = ""  + Integer.parseInt(UtilAppCommon.in.SCH_MTR_READING_DT.substring(8, 10));
 
-                String nxtDate = strtemp1 + "." + strtemp
-                        + "." + Integer.parseInt(UtilAppCommon.in.SCH_MTR_READING_DT.substring(0, 4));
+            String nxtDate = strtemp1 + "." + strtemp
+                    + "." + Integer.parseInt(UtilAppCommon.in.SCH_MTR_READING_DT.substring(0, 4));
 
-                String strlocation = showSettingsAlert();
-                SimpleDateFormat SAPInformat = new SimpleDateFormat("dd.MM.yyyy");
-                strBluetoothInput[0] = UtilAppCommon.in.INSTALLATION;
-                strBluetoothInput[1] = nxtDate;
-                strBluetoothInput[2] = UtilAppCommon.in.MONTH_SEASONAL;
-                strBluetoothInput[3] = "OK";      //MR Note
-                strBluetoothInput[4] = ((TextView) findViewById(R.id.dc_meter_reading)).getText().toString();
-                strBluetoothInput[5] = "0";                         //Recorded Demand
-                strBluetoothInput[6] = "";                         //Power Factor
-                strBluetoothInput[7] = strlocation.split("¥")[0];   //Latitude
-                strBluetoothInput[8] = strlocation.split("¥")[1];   //Longitude
-                strBluetoothInput[9] = "1";                         //Flag
-                strBluetoothInput[10] = "0";                        //KVAH
-                strBluetoothInput[11] = UtilAppCommon.in.CONTRACT_AC_NO;    //CA Number
-                strBluetoothInput[12] = "0";
+            String strlocation = showSettingsAlert();
+            SimpleDateFormat SAPInformat = new SimpleDateFormat("dd.MM.yyyy");
+            strBluetoothInput[0] = UtilAppCommon.in.INSTALLATION;
+            strBluetoothInput[1] = nxtDate;
+            strBluetoothInput[2] = UtilAppCommon.in.MONTH_SEASONAL;
+            strBluetoothInput[3] = "OK";      //MR Note
+            strBluetoothInput[4] = ((TextView) findViewById(R.id.dc_meter_reading)).getText().toString();
+            strBluetoothInput[5] = "0";                         //Recorded Demand
+            strBluetoothInput[6] = "";                         //Power Factor
+            strBluetoothInput[7] = strlocation.split("¥")[0];   //Latitude
+            strBluetoothInput[8] = strlocation.split("¥")[1];   //Longitude
+            strBluetoothInput[9] = "1";                         //Flag
+            strBluetoothInput[10] = "0";                        //KVAH
+            strBluetoothInput[11] = UtilAppCommon.in.CONTRACT_AC_NO;    //CA Number
+            strBluetoothInput[12] = "0";
 
-                //HardCoded Value For Testing
+            //HardCoded Value For Testing
 
-                /*strBluetoothInput[0] = "5001603503";
-                strBluetoothInput[1] = "31.07.2017";
-                strBluetoothInput[2] = "000000000102486228";
-                strBluetoothInput[3] = "OK";      //MR Note
-                strBluetoothInput[4] = ((TextView) findViewById(R.id.dc_meter_reading)).getText().toString();
-                strBluetoothInput[5] = "0";                         //Recorded Demand
-                strBluetoothInput[6] = "";                         //Power Factor
-                strBluetoothInput[7] = strlocation.split("¥")[0];   //Latitude
-                strBluetoothInput[8] = strlocation.split("¥")[1];   //Longitude
-                strBluetoothInput[9] = "1";                         //Flag
-                strBluetoothInput[10] = "0";                        //KVAH
-                strBluetoothInput[11] = "100742011";    //CA Number*/
+            /*strBluetoothInput[0] = "5001603503";
+            strBluetoothInput[1] = "31.07.2017";
+            strBluetoothInput[2] = "000000000102486228";
+            strBluetoothInput[3] = "OK";      //MR Note
+            strBluetoothInput[4] = ((TextView) findViewById(R.id.dc_meter_reading)).getText().toString();
+            strBluetoothInput[5] = "0";                         //Recorded Demand
+            strBluetoothInput[6] = "";                         //Power Factor
+            strBluetoothInput[7] = strlocation.split("¥")[0];   //Latitude
+            strBluetoothInput[8] = strlocation.split("¥")[1];   //Longitude
+            strBluetoothInput[9] = "1";                         //Flag
+            strBluetoothInput[10] = "0";                        //KVAH
+            strBluetoothInput[11] = "100742011";    //CA Number*/
 
-                //
+            //
 
-                 if(strBluetoothInput[4] != null){
-                    try {
-                        double reading = Double.parseDouble(strBluetoothInput[4]);
-                        reading/=100;
-                        strBluetoothInput[4]=Double.toString(reading);
-                        Toast.makeText(DcMeterReading.this, "The reading send to server "+strBluetoothInput[4], Toast.LENGTH_SHORT).show();
-                    }
-                    catch (NumberFormatException e){
-                        Toast.makeText(DcMeterReading.this, "Cant convert the reading "+strBluetoothInput[4]+" Number Format Exception ", Toast.LENGTH_SHORT).show();
-                    }
+             if(strBluetoothInput[4] != null){
+                try {
+                    double reading = Double.parseDouble(strBluetoothInput[4]);
+                    reading/=100;
+                    strBluetoothInput[4]=Double.toString(reading);
+                    Toast.makeText(DcMeterReading.this, "The reading send to server "+strBluetoothInput[4], Toast.LENGTH_SHORT).show();
                 }
-                else{
-                    Toast.makeText(DcMeterReading.this, "Reading from DC Meter is null.", Toast.LENGTH_SHORT).show();
+                catch (NumberFormatException e){
+                    Toast.makeText(DcMeterReading.this, "Cant convert the reading "+strBluetoothInput[4]+" Number Format Exception ", Toast.LENGTH_SHORT).show();
                 }
-
-                UtilDB utilDB = new UtilDB(getApplicationContext());
-                utilDB.insertIntoSAPBlueInput(strBluetoothInput);
-                utilDB.getSAPBlueInput(UtilAppCommon.in.CONTRACT_AC_NO);
-
-                AsyncBluetoothReading asyncBluetoothReading = new AsyncBluetoothReading(DcMeterReading.this);
-                asyncBluetoothReading.execute(strBluetoothInput);
-
-                UtilAppCommon.bBtnGenerateClicked = true;
-                Intent in = new Intent(getApplicationContext(), ActvBilling.class);
-                in.putExtra("flblue", true);
-                //Intent in = getIntent();
-                //setResult(RESULT_OK, in);
-                startActivity(in);
-                finish();
             }
+            else{
+                Toast.makeText(DcMeterReading.this, "Reading from DC Meter is null.", Toast.LENGTH_SHORT).show();
+            }
+
+            UtilDB utilDB = new UtilDB(getApplicationContext());
+            utilDB.insertIntoSAPBlueInput(strBluetoothInput);
+            utilDB.getSAPBlueInput(UtilAppCommon.in.CONTRACT_AC_NO);
+
+            AsyncBluetoothReading asyncBluetoothReading = new AsyncBluetoothReading(DcMeterReading.this);
+            asyncBluetoothReading.execute(strBluetoothInput);
+
+            UtilAppCommon.bBtnGenerateClicked = true;
+            Intent in = new Intent(getApplicationContext(), ActvBilling.class);
+            in.putExtra("flblue", true);
+            //Intent in = getIntent();
+            //setResult(RESULT_OK, in);
+            startActivity(in);
+            finish();
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.e("onResume", "DcMeterReading");
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        Log.e("onRestart", "DcMeterReading");
     }
 
     public void dialog() {
@@ -188,111 +198,102 @@ public class DcMeterReading extends AppCompatActivity {
         inputName.addTextChangedListener(new MyTextWatcher(inputName));
         /*InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.showSoftInput(inputName, InputMethodManager.SHOW_IMPLICIT);*/
-        btn_cancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        btn_cancel.setOnClickListener(v -> dialog.dismiss());
 
-                dialog.dismiss();
+        btn_ok.setOnClickListener(v -> {
+            if (!validateName()) {
+                return;
             }
-        });
+            else {
+                Calendar c = Calendar.getInstance();
 
-        btn_ok.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!validateName()) {
-                    return;
-                }
-                else {
-                    Calendar c = Calendar.getInstance();
+                SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy HH:mm:ss");
+                String timestamp_ac = df.format(c.getTime());
 
-                    SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy HH:mm:ss");
-                    String timestamp_ac = df.format(c.getTime());
+                SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                SharedPreferences.Editor editor = preferences.edit();
+                editor.putString("ac_meter_reading",inputName.getText().toString());
+                editor.putString("timestamp_ac", timestamp_ac);
+                editor.apply();
 
-                    SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-                    SharedPreferences.Editor editor = preferences.edit();
-                    editor.putString("ac_meter_reading",inputName.getText().toString());
-                    editor.putString("timestamp_ac", timestamp_ac);
-                    editor.apply();
+                Calendar nxtcal = new GregorianCalendar(
+                        Integer.parseInt(UtilAppCommon.in.SCHEDULED_BILLING_DATE.substring(0, 4)),
+                        Integer.parseInt(UtilAppCommon.in.SCHEDULED_BILLING_DATE.substring(5, 7)),
+                        Integer.parseInt(UtilAppCommon.in.SCHEDULED_BILLING_DATE.substring(8, 10)) - 1);
 
-                    Calendar nxtcal = new GregorianCalendar(
-                            Integer.parseInt(UtilAppCommon.in.SCHEDULED_BILLING_DATE.substring(0, 4)),
-                            Integer.parseInt(UtilAppCommon.in.SCHEDULED_BILLING_DATE.substring(5, 7)),
-                            Integer.parseInt(UtilAppCommon.in.SCHEDULED_BILLING_DATE.substring(8, 10)) - 1);
+                int temp = Integer.parseInt(UtilAppCommon.in.SCHEDULED_BILLING_DATE.substring(5, 7));
+                String strtemp = "";
+                if(temp <= 9)
+                    strtemp = "0" + Integer.parseInt(UtilAppCommon.in.SCHEDULED_BILLING_DATE.substring(5, 7));
+                else
+                    strtemp = ""  + Integer.parseInt(UtilAppCommon.in.SCHEDULED_BILLING_DATE.substring(5, 7));
 
-                    int temp = Integer.parseInt(UtilAppCommon.in.SCHEDULED_BILLING_DATE.substring(5, 7));
-                    String strtemp = "";
-                    if(temp <= 9)
-                        strtemp = "0" + Integer.parseInt(UtilAppCommon.in.SCHEDULED_BILLING_DATE.substring(5, 7));
-                    else
-                        strtemp = ""  + Integer.parseInt(UtilAppCommon.in.SCHEDULED_BILLING_DATE.substring(5, 7));
+                String strtemp1 = "";
 
-                    String strtemp1 = "";
+                int temp1 = Integer.parseInt(UtilAppCommon.in.SCHEDULED_BILLING_DATE.substring(8, 10));
+                if(temp1 <= 9)
+                    strtemp1 = "0" + Integer.parseInt(UtilAppCommon.in.SCHEDULED_BILLING_DATE.substring(8, 10));
+                else
+                    strtemp1 = ""  + Integer.parseInt(UtilAppCommon.in.SCHEDULED_BILLING_DATE.substring(8, 10));
 
-                    int temp1 = Integer.parseInt(UtilAppCommon.in.SCHEDULED_BILLING_DATE.substring(8, 10));
-                    if(temp1 <= 9)
-                        strtemp1 = "0" + Integer.parseInt(UtilAppCommon.in.SCHEDULED_BILLING_DATE.substring(8, 10));
-                    else
-                        strtemp1 = ""  + Integer.parseInt(UtilAppCommon.in.SCHEDULED_BILLING_DATE.substring(8, 10));
+                String nxtDate = strtemp1 + "." + strtemp
+                        + "." + Integer.parseInt(UtilAppCommon.in.SCHEDULED_BILLING_DATE.substring(0, 4));
 
-                    String nxtDate = strtemp1 + "." + strtemp
-                            + "." + Integer.parseInt(UtilAppCommon.in.SCHEDULED_BILLING_DATE.substring(0, 4));
+                String strlocation = showSettingsAlert();
+                SimpleDateFormat SAPInformat = new SimpleDateFormat("dd.MM.yyyy");
+                strBluetoothInput[0] = UtilAppCommon.in.INSTALLATION;
+                strBluetoothInput[1] = nxtDate;
+                strBluetoothInput[2] = UtilAppCommon.in.SAP_DEVICE_NO;
+                strBluetoothInput[3] = "OK";      //MR Note
+                strBluetoothInput[4] = ((TextView) findViewById(R.id.dc_meter_reading)).getText().toString();
+                strBluetoothInput[5] = "0";                         //Recorded Demand
+                strBluetoothInput[6] = "0";                         //Power Factor
+                strBluetoothInput[7] = strlocation.split("¥")[0];   //Latitude
+                strBluetoothInput[8] = strlocation.split("¥")[1];   //Longitude
+                strBluetoothInput[9] = "1";                         //Flag
+                strBluetoothInput[10] = "0";                        //KVAH
+                strBluetoothInput[11] = UtilAppCommon.in.CONTRACT_AC_NO;    //CA Number
+                strBluetoothInput[12] = "0";
 
-                    String strlocation = showSettingsAlert();
-                    SimpleDateFormat SAPInformat = new SimpleDateFormat("dd.MM.yyyy");
-                    strBluetoothInput[0] = UtilAppCommon.in.INSTALLATION;
-                    strBluetoothInput[1] = nxtDate;
-                    strBluetoothInput[2] = UtilAppCommon.in.SAP_DEVICE_NO;
-                    strBluetoothInput[3] = "OK";      //MR Note
-                    strBluetoothInput[4] = ((TextView) findViewById(R.id.dc_meter_reading)).getText().toString();
-                    strBluetoothInput[5] = "0";                         //Recorded Demand
-                    strBluetoothInput[6] = "0";                         //Power Factor
-                    strBluetoothInput[7] = strlocation.split("¥")[0];   //Latitude
-                    strBluetoothInput[8] = strlocation.split("¥")[1];   //Longitude
-                    strBluetoothInput[9] = "1";                         //Flag
-                    strBluetoothInput[10] = "0";                        //KVAH
-                    strBluetoothInput[11] = UtilAppCommon.in.CONTRACT_AC_NO;    //CA Number
-                    strBluetoothInput[12] = "0";
-
-                    //HardCoded Value For Testing
-                    /*strBluetoothInput[0] = "5001603503";
-                    strBluetoothInput[1] = "31.07.2017";
-                    strBluetoothInput[2] = "102486228";
-                    strBluetoothInput[3] = "OK";      //MR Note
-                    strBluetoothInput[4] = ((TextView) findViewById(R.id.dc_meter_reading)).getText().toString();
-                    strBluetoothInput[5] = "0";                         //Recorded Demand
-                    strBluetoothInput[6] = "0";                         //Power Factor
-                    strBluetoothInput[7] = strlocation.split("¥")[0];   //Latitude
-                    strBluetoothInput[8] = strlocation.split("¥")[1];   //Longitude
-                    strBluetoothInput[9] = "1";                         //Flag
-                    strBluetoothInput[10] = "0";                        //KVAH
-                    strBluetoothInput[11] = "100742011";    //CA Number*/
+                //HardCoded Value For Testing
+                /*strBluetoothInput[0] = "5001603503";
+                strBluetoothInput[1] = "31.07.2017";
+                strBluetoothInput[2] = "102486228";
+                strBluetoothInput[3] = "OK";      //MR Note
+                strBluetoothInput[4] = ((TextView) findViewById(R.id.dc_meter_reading)).getText().toString();
+                strBluetoothInput[5] = "0";                         //Recorded Demand
+                strBluetoothInput[6] = "0";                         //Power Factor
+                strBluetoothInput[7] = strlocation.split("¥")[0];   //Latitude
+                strBluetoothInput[8] = strlocation.split("¥")[1];   //Longitude
+                strBluetoothInput[9] = "1";                         //Flag
+                strBluetoothInput[10] = "0";                        //KVAH
+                strBluetoothInput[11] = "100742011";    //CA Number*/
 
 
-                    if(strBluetoothInput[4] != null){
-                        try {
-                            double reading = Double.parseDouble(strBluetoothInput[4]);
-                            reading/=100;
-                            strBluetoothInput[4]=Double.toString(reading);
-                            Toast.makeText(DcMeterReading.this, "The reading send to server "+strBluetoothInput[4], Toast.LENGTH_SHORT).show();
-                        }
-                        catch (NumberFormatException e){
-                            Toast.makeText(DcMeterReading.this, "Cant convert the reading "+strBluetoothInput[4]+" Number Format Exception ", Toast.LENGTH_SHORT).show();
-                        }
+                if(strBluetoothInput[4] != null){
+                    try {
+                        double reading = Double.parseDouble(strBluetoothInput[4]);
+                        reading/=100;
+                        strBluetoothInput[4]=Double.toString(reading);
+                        Toast.makeText(DcMeterReading.this, "The reading send to server "+strBluetoothInput[4], Toast.LENGTH_SHORT).show();
                     }
-                    else{
-                        Toast.makeText(DcMeterReading.this, "Reading from DC Meter is null.", Toast.LENGTH_SHORT).show();
+                    catch (NumberFormatException e){
+                        Toast.makeText(DcMeterReading.this, "Cant convert the reading "+strBluetoothInput[4]+" Number Format Exception ", Toast.LENGTH_SHORT).show();
                     }
-                    UtilDB utilDB = new UtilDB(getApplicationContext());
-                    utilDB.insertIntoSAPBlueInput(strBluetoothInput);
-
-                    AsyncBluetoothReading asyncBluetoothReading = new AsyncBluetoothReading(DcMeterReading.this);
-                    asyncBluetoothReading.execute(strBluetoothInput);
-
-                    Intent in = new Intent(getApplicationContext(), ActvBilling.class);
-                    startActivity(in);
                 }
+                else{
+                    Toast.makeText(DcMeterReading.this, "Reading from DC Meter is null.", Toast.LENGTH_SHORT).show();
+                }
+                UtilDB utilDB = new UtilDB(getApplicationContext());
+                utilDB.insertIntoSAPBlueInput(strBluetoothInput);
 
+                AsyncBluetoothReading asyncBluetoothReading = new AsyncBluetoothReading(DcMeterReading.this);
+                asyncBluetoothReading.execute(strBluetoothInput);
+
+                Intent in = new Intent(getApplicationContext(), ActvBilling.class);
+                startActivity(in);
             }
+
         });
 
         dialog.show();

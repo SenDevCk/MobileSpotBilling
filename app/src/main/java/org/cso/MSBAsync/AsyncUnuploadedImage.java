@@ -8,18 +8,16 @@ import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.util.Base64;
 import android.util.Log;
-import android.widget.Toast;
 
-import org.cso.MSBUtil.ImageFileFilter;
-import org.cso.MSBUtil.UtilAppCommon;
 import org.cso.MSBUtil.UtilDB;
 import org.cso.MSBUtil.UtilSvrData;
+import org.cso.MSBUtil.Utilities;
 import org.cso.MobileSpotBilling.OnBillGenerate;
 import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileFilter;
+
 
 /**
  * Created by 41008931 on 09/10/2017.
@@ -69,12 +67,14 @@ public class AsyncUnuploadedImage extends AsyncTask<String, Void, String>  {
                 File[] imageFiles = file.listFiles();
                 for(int jcntr = 0; jcntr < imageFiles.length; jcntr++) {
                     Bitmap bitmap = BitmapFactory.decodeFile(imageFiles[jcntr].getAbsolutePath());
+                    //Bitmap bitmap=Utilities.getBitmapForAllVersions(context,imageFiles[jcntr]);
                     ByteArrayOutputStream stream = new ByteArrayOutputStream();
                     bitmap.compress(Bitmap.CompressFormat.JPEG, 90, stream);
                     byte[] image = stream.toByteArray();
-                    img_str = Base64.encodeToString(image, 0);
+                    img_str = Base64.encodeToString(image, Base64.DEFAULT);
+                    Log.e("AsyncUploadImage",img_str);
                     glbVar = "0";
-                    String fileName = imageFiles[jcntr].getName();
+                    //String fileName = imageFiles[jcntr].getName();
                     //Log.i("Unuploaded Img", "Image File Name ==>> " + fileName);
                     String[] strParams = imageFiles[jcntr].getName().split("_");
                     //Log.i("Unuploaded Img", "CA Image File Name ==>> " + strParams[3]);
@@ -112,6 +112,7 @@ public class AsyncUnuploadedImage extends AsyncTask<String, Void, String>  {
         }
         catch(Exception e)
         {
+            e.printStackTrace();
             Log.e("AsyncUnUploadImage => ", "doInBackground ==>> IO " + e.getMessage());
         }
 
@@ -135,7 +136,7 @@ public class AsyncUnuploadedImage extends AsyncTask<String, Void, String>  {
         //Log.i("TAG", "onPostExecute()");
         //pDialog.dismiss();
         //if(glbVar.equalsIgnoreCase("1"))
-        //	Toast.makeText(context, "Image Uploaded." , Toast.LENGTH_LONG).show();
+        //Toast.makeText(context, "Image Uploaded." , Toast.LENGTH_LONG).show();
         //taskCallback.done();
         //mCallback.onFinish();
     }
@@ -149,6 +150,3 @@ public class AsyncUnuploadedImage extends AsyncTask<String, Void, String>  {
 
 
 }
-
-
-

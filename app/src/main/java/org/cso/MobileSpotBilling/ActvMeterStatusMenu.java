@@ -1,19 +1,21 @@
 package org.cso.MobileSpotBilling;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-import java.util.HashMap;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Bundle;
+import android.os.Environment;
+import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.TextView;
 
-import org.cso.MSBAsync.AsyncGetOutputData;
-import org.cso.MSBModel.StructSAPInput;
-import org.cso.MSBUtil.GPSTracker;
-import org.cso.MSBUtil.UtilAppCommon;
-import org.cso.MSBUtil.UtilDB;
-import org.cso.MobileSpotBilling.R;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.itextpdf.text.Chunk;
 import com.itextpdf.text.Document;
@@ -22,28 +24,19 @@ import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.net.Uri;
-import android.os.Bundle;
-import android.os.Environment;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ArrayAdapter;
-import android.widget.ListAdapter;
-import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
+import org.cso.MSBAsync.AsyncGetOutputData;
+import org.cso.MSBModel.StructSAPInput;
+import org.cso.MSBUtil.GPSTracker;
+import org.cso.MSBUtil.UtilAppCommon;
+import org.cso.MSBUtil.UtilDB;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.HashMap;
 
 public class ActvMeterStatusMenu extends AppCompatActivity implements OnItemClickListener, TaskCallback{
 	String value1 ;
@@ -150,6 +143,18 @@ public class ActvMeterStatusMenu extends AppCompatActivity implements OnItemClic
     }
 
 	@Override
+	protected void onResume() {
+		super.onResume();
+		Log.e("onResume", "ActvMeterStatusMenu");
+	}
+
+	@Override
+	protected void onRestart() {
+		super.onRestart();
+		Log.e("onRestart", "ActvMeterStatusMenu");
+	}
+
+	@Override
 	public boolean onSupportNavigateUp() {
 		//  closePrinter();
 		onBackPressed();
@@ -173,60 +178,51 @@ public class ActvMeterStatusMenu extends AppCompatActivity implements OnItemClic
              ad1.setTitle("Confirm");
              ad1.setMessage("Confirm MtrSts : "+value1);
              ad1.setButton(DialogInterface.BUTTON_POSITIVE, "Yes",
-            		 new DialogInterface.OnClickListener() {
-
-            	 public void onClick(DialogInterface dialog,
-            			 int which) {
-            		 // TODO Auto-generated method stub
-					 UtilDB db=new UtilDB(ActvMeterStatusMenu.this);
-					 // TODO Auto-generated method stub
-					 if(position == 2){
-						 Log.e("ActvMeterStatusMenu", position+" Position Value left and send=>"+(plLeft-1));
-						 db.updatePLMDCountCommonBillingInfo(true, false);
-					 }
-					 else if(position == 1){
-						 if(canMD && canPL){
-							 Log.e("ActvMeterStatusMenu", position+" Position Value left and send=>"+(mdLeft-1));
-							 db.updatePLMDCountCommonBillingInfo(false, true);
-						 }
-						 else if(canMD){
-							 Log.e("ActvMeterStatusMenu", position+" Position Value left and send=>"+(mdLeft-1));
-							 db.updatePLMDCountCommonBillingInfo(false, true);
-						 }
-						 else if(canPL){
+					 (dialog, which) -> {
+						 // TODO Auto-generated method stub
+						 UtilDB db=new UtilDB(ActvMeterStatusMenu.this);
+						 // TODO Auto-generated method stub
+						 if(position == 2){
 							 Log.e("ActvMeterStatusMenu", position+" Position Value left and send=>"+(plLeft-1));
 							 db.updatePLMDCountCommonBillingInfo(true, false);
 						 }
-					 }
-            		 	ad1.dismiss();
-                        billdlg();
-    
-                        
-            	 	}
-             	});
-             	ad1.setButton(DialogInterface.BUTTON_NEGATIVE, "No",
-             				new DialogInterface.OnClickListener() {
+						 else if(position == 1){
+							 if(canMD && canPL){
+								 Log.e("ActvMeterStatusMenu", position+" Position Value left and send=>"+(mdLeft-1));
+								 db.updatePLMDCountCommonBillingInfo(false, true);
+							 }
+							 else if(canMD){
+								 Log.e("ActvMeterStatusMenu", position+" Position Value left and send=>"+(mdLeft-1));
+								 db.updatePLMDCountCommonBillingInfo(false, true);
+							 }
+							 else if(canPL){
+								 Log.e("ActvMeterStatusMenu", position+" Position Value left and send=>"+(plLeft-1));
+								 db.updatePLMDCountCommonBillingInfo(true, false);
+							 }
+						 }
+							 ad1.dismiss();
+							billdlg();
 
-             			//private AdapterView<ListAdapter> meterStatusListView;
 
-						public void onClick(DialogInterface dialog,
-             					int which) {
-             				// TODO Auto-generated method stub
-             	
-             				ad1.dismiss();
-             				//finish();
-             				//startActivity(getIntent());
-             				//Intent intent = new Intent(Intent.ACTION_VIEW);
-             				
-             		       // return;
-             		        
-             		       //Intent intent1= new Intent(this, ActvMeterStatusMenu.class); 
-             		       //startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT));
-             		        
-             		       // meterStatusListView.
-             		       //startActivity(new Intent(this,	ActvMeterStatusMenu.class));
-			}
-		});
+						 });
+		//private AdapterView<ListAdapter> meterStatusListView;
+		ad1.setButton(DialogInterface.BUTTON_NEGATIVE, "No",
+				(dialog, which) -> {
+					 // TODO Auto-generated method stub
+
+					 ad1.dismiss();
+					 //finish();
+					 //startActivity(getIntent());
+					 //Intent intent = new Intent(Intent.ACTION_VIEW);
+
+					// return;
+
+					//Intent intent1= new Intent(this, ActvMeterStatusMenu.class);
+					//startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT));
+
+					// meterStatusListView.
+					//startActivity(new Intent(this,	ActvMeterStatusMenu.class));
+	});
     ad1.show();
 
 	//intent.putExtra("meterStatus", item);
@@ -295,37 +291,29 @@ public class ActvMeterStatusMenu extends AppCompatActivity implements OnItemClic
 			ad.setTitle("Confirm");
 			ad.setMessage("Confirm to print");
 			ad.setButton(DialogInterface.BUTTON_POSITIVE, "Yes",
-					new DialogInterface.OnClickListener() {
-
-						public void onClick(DialogInterface dialog,
-								int which) {
-							// TODO Auto-generated method stub
-							ad.dismiss();
-							Write2SbmOut();
-							//startActivity(new Intent(ctx, ActvBillPrinting.class));
-						}
+					(dialog, which) -> {
+						// TODO Auto-generated method stub
+						ad.dismiss();
+						Write2SbmOut();
+						//startActivity(new Intent(ctx, ActvBillPrinting.class));
 					});
 			ad.setButton(DialogInterface.BUTTON_NEGATIVE, "No",
-					new DialogInterface.OnClickListener() {
-
-						public void onClick(DialogInterface dialog,
-								int which) {
-							// TODO Auto-generated method stub
-							ad.dismiss();
-							// startActivity(getIntent());
-							//startActivity(new Intent(getApplicationContext(), ActvBillingOption.class));
-							if(UtilAppCommon.billType.equalsIgnoreCase("A"))
-								startActivity(new Intent(getBaseContext(), ActvConsumerNbrInput.class));
-							else if(UtilAppCommon.billType.equalsIgnoreCase("L"))
-								startActivity(new Intent(getBaseContext(), ActvLegacyNbrInput.class));
-							else if(UtilAppCommon.billType.equalsIgnoreCase("S"))
-								startActivity(new Intent(getBaseContext(), ActvSequenceData.class));
-							else if(UtilAppCommon.billType.equalsIgnoreCase("M"))
-								startActivity(new Intent(getBaseContext(), MeterNbrInput.class));
-							else
-								startActivity(new Intent(getBaseContext(), ActvBillingOption.class));
-							finish();
-						}
+					(dialog, which) -> {
+						// TODO Auto-generated method stub
+						ad.dismiss();
+						// startActivity(getIntent());
+						//startActivity(new Intent(getApplicationContext(), ActvBillingOption.class));
+						if(UtilAppCommon.billType.equalsIgnoreCase("A"))
+							startActivity(new Intent(getBaseContext(), ActvConsumerNbrInput.class));
+						else if(UtilAppCommon.billType.equalsIgnoreCase("L"))
+							startActivity(new Intent(getBaseContext(), ActvLegacyNbrInput.class));
+						else if(UtilAppCommon.billType.equalsIgnoreCase("S"))
+							startActivity(new Intent(getBaseContext(), ActvSequenceData.class));
+						else if(UtilAppCommon.billType.equalsIgnoreCase("M"))
+							startActivity(new Intent(getBaseContext(), MeterNbrInput.class));
+						else
+							startActivity(new Intent(getBaseContext(), ActvBillingOption.class));
+						finish();
 					});
 
 			ad.show();

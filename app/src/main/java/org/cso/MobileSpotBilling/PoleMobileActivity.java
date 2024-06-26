@@ -60,6 +60,19 @@ public class PoleMobileActivity extends AppCompatActivity implements OnClickList
         
         getImageByCANo(UtilAppCommon.acctNbr);
 	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		Log.e("onResume", "PoleMobileActivity");
+	}
+
+	@Override
+	protected void onRestart() {
+		super.onRestart();
+		Log.e("onRestart", "PoleMobileActivity");
+	}
+
 	@Override
 	public boolean onSupportNavigateUp() {
 		//  closePrinter();
@@ -192,9 +205,11 @@ public class PoleMobileActivity extends AppCompatActivity implements OnClickList
 	{
 		Log.e("getImageByCANo", "Started");
 		UtilDB utildb = new UtilDB(getApplicationContext());
-		AppDir = Environment.getExternalStorageDirectory().getPath()
+		/*AppDir = Environment.getExternalStorageDirectory().getPath()
 				+ "/SBDocs/Photos_Crop" + "/" + utildb.getSdoCode() + "/"
-				+ utildb.getActiveMRU();
+				+ utildb.getActiveMRU();*/
+		AppDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES+ "/SBDocs/Photos_Crop" + "/" + utildb.getSdoCode() + "/"
+				+ utildb.getActiveMRU()).getPath();
 		Cursor cursorImage = utildb.getUnCompressedImage(CANo);
 		File file = null;
 		//getUnCompressedImage

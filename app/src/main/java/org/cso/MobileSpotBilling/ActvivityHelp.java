@@ -211,9 +211,9 @@ public class ActvivityHelp extends AppCompatActivity {
 		@Override
         protected Void doInBackground(Void... arg0) {
         	//status=NetworkUtil.isConnectedToServer("http://220.225.3.133/BiharSBMService/MobiletoMW.asmx", 10000);	//Devp
-        	status=NetworkUtil.isConnectedToServer("http://220.225.3.149/BiharSBMService/MobiletoMW.asmx", 5000);		//Prod
+        		status=NetworkUtil.isConnectedToServer("http://220.225.3.149/BiharSBMService/MobiletoMW.asmx", 5000);		//Prod
         	if(!status)
-        		status=NetworkUtil.isConnectedToServer("http://125.16.220.4/BiharSBMService/MobiletoMW.asmx", 30000);		//Prod
+        		status=NetworkUtil.isConnectedToServer("http://125.16.220.10/BiharSBMService/MobiletoMW.asmx", 30000);		//Prod
             return null;
         }
  

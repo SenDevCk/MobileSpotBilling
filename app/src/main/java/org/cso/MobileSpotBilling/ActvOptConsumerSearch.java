@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -45,6 +46,18 @@ public class ActvOptConsumerSearch extends AppCompatActivity implements OnClickL
         //  closePrinter();
         onBackPressed();
         return true;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.e("onRestart", "ActvOptConsumerSearch");
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        Log.e("onRestart", "ActvOptConsumerSearch");
     }
 
     public void onClick(View v) {

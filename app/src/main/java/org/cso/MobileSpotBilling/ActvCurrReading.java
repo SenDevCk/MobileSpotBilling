@@ -572,15 +572,10 @@ public class ActvCurrReading extends AppCompatActivity implements OnClickListene
 
                 //AsyncGetOutputData asyncGetOutputData = new AsyncGetOutputData(this);
                 // 20.11.15
-                AsyncGetOutputData asyncGetOutputData = new AsyncGetOutputData(this, new OnBillGenerate() {
+                AsyncGetOutputData asyncGetOutputData = new AsyncGetOutputData(this, () -> {
+                    // TODO Auto-generated method stub
+                    printdlg();
 
-                    @Override
-                    public void onFinish() {
-                        // TODO Auto-generated method stub
-
-                        printdlg();
-
-                    }
                 });
 
                 asyncGetOutputData.execute(copySAPInputData);
@@ -730,8 +725,9 @@ public class ActvCurrReading extends AppCompatActivity implements OnClickListene
         // TODO Auto-generated method stub
         Log.e("printBill -- MSG ID", UtilAppCommon.SAPIn.MsgId);
         Document document = new Document();
-        String dirpath = Environment.getExternalStorageDirectory().getPath()
-                + "/SBDocs/Pdf";
+        //String dirpath = Environment.getExternalStorageDirectory().getPath()
+                //+ "/SBDocs/Pdf";
+        String dirpath=getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS+"/SBDocs/Pdf").getAbsolutePath();
         File dir = new File(dirpath);
         if (!dir.exists()) {
             dir.mkdirs();
@@ -1043,9 +1039,11 @@ public class ActvCurrReading extends AppCompatActivity implements OnClickListene
 
         Log.e("getImageByCANo", "Started");
         UtilDB utildb = new UtilDB(getApplicationContext());
-        AppDir = Environment.getExternalStorageDirectory().getPath()
-                + "/SBDocs/Photos_Crop" + "/" + utildb.getSdoCode() + "/"
-                + utildb.getActiveMRU();
+       // AppDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+                //+ "/SBDocs/Photos_Crop" + "/" + utildb.getSdoCode() + "/"
+               // + utildb.getActiveMRU();
+        AppDir=getExternalFilesDir(Environment.DIRECTORY_PICTURES+"/SBDocs/Photos_Crop/"+utildb.getSdoCode()+"/"+ utildb.getActiveMRU())
+                .getPath();
         Cursor cursorImage = utildb.getUnCompressedImage(CANo);
         File file = null;
         //getUnCompressedImage
@@ -1055,11 +1053,8 @@ public class ActvCurrReading extends AppCompatActivity implements OnClickListene
         }
         //ImageProcessing imageProcessing = new ImageProcessing();
 
-        AsyncImage asyncImage = new AsyncImage(this, new OnBillGenerate() {
-            @Override
-            public void onFinish() {
-                // TODO Auto-generated method stub
-            }
+        AsyncImage asyncImage = new AsyncImage(this, () -> {
+            // TODO Auto-generated method stub
         });
 
         //String strArray[] = imageProcessing.processImage(AppDir, file, this, cursorImage.getString(1), CANo);

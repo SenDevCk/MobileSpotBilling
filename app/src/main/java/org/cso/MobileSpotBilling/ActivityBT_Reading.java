@@ -21,6 +21,7 @@ import android.text.SpannableString;
 import android.text.TextWatcher;
 import android.text.style.StyleSpan;
 import android.text.style.UnderlineSpan;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -398,6 +399,7 @@ public class ActivityBT_Reading extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        Log.e("onResume","ActivityBT_Reading");
         AppController.changeLocale();
         // on every Resume check if BT is enabled (user could turn it off while app was in background etc.)
         if (mBleWrapper.isBtEnabled() == false) {
@@ -666,6 +668,8 @@ public class ActivityBT_Reading extends AppCompatActivity {
             return String.valueOf(gps.getLatitude()) + "¥" + String.valueOf(gps.getLongitude());
         }
     }
+
+
 
 }
 

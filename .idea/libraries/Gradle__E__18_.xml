@@ -1,7 +1,7 @@
 <component name="libraryTable">
   <library name="Gradle: E (18)" external-system-id="GRADLE">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/app/libs/sun.misc.BASE64Decoder.jar!/" />
+      <root url="jar://$PROJECT_DIR$/app/libs/ZSDK_ANDROID_API.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

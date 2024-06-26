@@ -11,6 +11,7 @@ import org.cso.MobileSpotBilling.R;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -89,10 +90,22 @@ public class ActvSrcByConNo extends AppCompatActivity {
             Toast.makeText(getBaseContext(), "Please Enter Valid Account Number", Toast.LENGTH_LONG).show();
         } else {
             //finish();
-            System.out.println("Going to ActvBilling");
+            System.err.println("Going to ActvBilling");
             startActivity(new Intent(this, ActvBilling.class));
 
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.e("onResume", "ActvSrcByConNo");
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        Log.e("onRestart", "ActvSrcByConNo");
     }
 
     void search() {

@@ -92,6 +92,18 @@ public class SeqSyncActivity extends AppCompatActivity implements OnClickListene
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        Log.e("onResume", "SeqSyncActivity");
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        Log.e("onRestart", "SeqSyncActivity");
+    }
+
+    @Override
     public boolean onSupportNavigateUp() {
         //  closePrinter();
         onBackPressed();

@@ -1,22 +1,30 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 34
-    //buildToolsVersion '34.0.0'
+    compileSdk 34
+    buildToolsVersion '34.0.0'
 
     defaultConfig {
         applicationId "org.cso.MobileSpotBilling"
-        minSdkVersion 21
-        targetSdkVersion 34
+        minSdk 21
+        targetSdk 34
         //versionCode 1
         //versionName "3.1"
         multiDexEnabled true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+      /* ndk {
+           abiFilters "armeabi", "armeabi-v7a", "x86", "mips"
+        }*/
         ndk {
-            abiFilters "armeabi", "armeabi-v7a", "x86", "mips"
+            abiFilters "armeabi","armeabi-v7a", "arm64-v8a" , "x86", "x86_64"
         }
     }
-
+    //sourceSets.main.jniLibs.srcDirs = ['src/main/jniLibs']
+//    sourceSets {
+//        main {
+//            jniLibs.srcDirs = ['src/main/jniLibs']
+//        }
+//    }
     dexOptions {
         jumboMode true
     }
@@ -28,23 +36,35 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        coreLibraryDesugaringEnabled true
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+    externalNativeBuild {
+        cmake {
+            version "3.10.2"
+        }
     }
     productFlavors {
     }
     namespace 'org.cso.MobileSpotBilling'
-
 }
-
+configurations {
+    all { // You should exclude one of them not both of them
+        exclude group: "jpos.JposConst", module: "jetified-AndroidLib_1070"
+        exclude group: "jpos.JposException", module: "jetified-AndroidLib_1070"
+        exclude group: "jpos.POSPrinterConst", module: "jetified-AndroidLib_1070"
+    }
+}
 dependencies {
+    api fileTree( include: ['*.jar', '*.aar'], dir: 'libs')
     implementation files('libs/Analogics2inchBTPrinterAPI.jar')
     implementation files('libs/AnalogicsDecrypter.jar')
     implementation files('libs/AnalogicsMultilingual_BT_Printer_2T_API_1_7.jar')
     implementation files('libs/btsdk.jar')
     implementation files('libs/commons-io-2.2.jar')
     implementation files('libs/commons-net-3.1.jar')
-    implementation files('libs/ePOS-Print.jar')
+    implementation files('libs/ePOS2.jar')
     implementation files('libs/iText-5.0.1.jar')
     implementation files('libs/ksoap2-android-assembly-3.0.0-jar-with-dependencies.jar')
     implementation files('libs/opencsv-2.2.jar')

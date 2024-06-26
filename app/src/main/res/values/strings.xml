@@ -1,10 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="home">Main</string>
+
+    <!--Production-->
     <string name="app_name">BMB (B4.1.8)</string>
     <string name="app_version">B4.1.8</string>
     <string name="appcode_version">C4.1.8</string>
     <string name="app_fileversion">VP4.1.8.apk</string>
+    <!--Testing-->
+   <!--<string name="app_name">BMB (B4.0.1)</string>
+    <string name="app_version">B4.0.1</string>
+    <string name="appcode_version">C4.0.1</string>
+    <string name="app_fileversion">VP4.0.1.apk</string>-->
+
     <string name="consumer_details">Consumer Details</string>
     <string name="billing_by_account_no">Billing By Account Number</string>
     <string name="meter_status">Meter Status</string>

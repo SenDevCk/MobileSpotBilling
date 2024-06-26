@@ -67,7 +67,13 @@ public class ActvDownloadInputData extends AppCompatActivity implements OnClickL
 		onBackPressed();
 		return true;
 	}
-       
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		Log.e("onResume", "ActvDownloadInputData");
+	}
+
 	public void onClick(View view) {
 		int id = view.getId();
 		switch(id){

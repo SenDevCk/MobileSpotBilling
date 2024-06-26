@@ -6,6 +6,7 @@ import org.cso.MobileSpotBilling.R;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -61,7 +62,17 @@ public class ActvRemarks extends AppCompatActivity implements OnItemClickListene
         onBackPressed();
         return true;
     }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.e("onRestart", "ActvRemarks");
+    }
 
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        Log.e("onRestart", "ActvRemarks");
+    }
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         // TODO Auto-generated method stub
         ClsListData data = (ClsListData) parent.getItemAtPosition(position);

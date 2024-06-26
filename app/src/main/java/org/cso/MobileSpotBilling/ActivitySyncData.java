@@ -373,11 +373,13 @@ public class ActivitySyncData extends AppCompatActivity implements OnClickListen
 							+ utildb.getActiveMRU();*/
 					
 					//Temporary Change Added
-					String AppDir = Environment.getExternalStorageDirectory().getPath()
+					/*String AppDir = Environment.getExternalStorageDirectory().getPath()
 							+ "/SBDocs/Photos_Crop" + "/" + utildb.getSdoCode() + "/"
-							+ utildb.getActiveMRU();
-					file = new File(AppDir , cursorImage.getString(1));
-					File f = new File(AppDir);
+							+ utildb.getActiveMRU();*/
+					File binderfile=getExternalFilesDir(Environment.DIRECTORY_PICTURES+"/SBDocs/Photos_Crop/"+UtilAppCommon.in.SUB_DIVISION_CODE+"/"+ UtilAppCommon.in.MRU);
+
+					file = new File(binderfile.getAbsolutePath() , cursorImage.getString(1));
+					File f = new File(binderfile.getAbsolutePath());
 					String fullPath = f.getAbsolutePath();
 					String credentials[] = new String[6];
 					credentials[0] = cursorImage.getString(0);
@@ -389,13 +391,9 @@ public class ActivitySyncData extends AppCompatActivity implements OnClickListen
 					
 					//Log.e("AsyncImage Call"," Month ==>> " + cursorImage.getString(1).substring(4, 6));
 					//Log.e("AsyncImage Call"," Year ==>> " + cursorImage.getString(1).substring(0, 4));
-					AsyncImage asyncImage = new AsyncImage(this,new OnBillGenerate() {
-						
-						@Override
-						public void onFinish() {
-							// TODO Auto-generated method stub
-							
-						}
+					AsyncImage asyncImage = new AsyncImage(this, () -> {
+						// TODO Auto-generated method stub
+
 					});
 					asyncImage.execute(credentials);
 				}while(cursorImage.moveToNext());

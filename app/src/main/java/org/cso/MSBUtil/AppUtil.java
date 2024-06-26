@@ -1,32 +1,21 @@
 package org.cso.MSBUtil;
 
 import android.Manifest;
-import android.net.Uri;
-import android.os.Build;
-import android.os.Environment;
-import android.provider.Settings;
-
-import android.telephony.TelephonyManager;
-
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.InetAddress;
-import java.net.URL;
-import java.net.URLConnection;
-
-
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
-import android.widget.Toast;
+import android.net.Uri;
+import android.os.Build;
+import android.os.Environment;
+import android.provider.Settings;
+import android.telephony.TelephonyManager;
+import android.util.Log;
 
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
+
+import java.io.File;
 
 public class AppUtil {
 
@@ -87,7 +76,7 @@ public class AppUtil {
 
      public static String unUploadedFilePath(Context context)
 	 {
-		 String AppDir = Environment.getExternalStorageDirectory().getPath()
+		 String AppDir = context.getExternalFilesDir(Environment.DIRECTORY_PICTURES).getPath()
 				 + "/SBDocs";
 		 String photoUnuploadDir = AppDir + "/.PhotosUnuploaded";
 
@@ -100,4 +89,14 @@ public class AppUtil {
 
 		 return file.getAbsolutePath();
 	 }
+	public static String unUploadedFilePath2(Context context)
+	{
+		File binderfile=context.getExternalFilesDir(Environment.DIRECTORY_PICTURES+"/SBDocs/.PhotosUnuploaded");
+		Log.e("binderfile",binderfile.getAbsolutePath());
+		if (!binderfile.exists()) {
+			binderfile.mkdirs();
+		}
+		return binderfile.getAbsolutePath();
+	}
+
 }
