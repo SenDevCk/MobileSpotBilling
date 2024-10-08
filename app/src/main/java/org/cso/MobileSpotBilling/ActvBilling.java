@@ -8,9 +8,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.Bitmap.CompressFormat;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -45,9 +42,6 @@ import org.cso.MSBUtil.AppUtil;
 import org.cso.MSBUtil.GPSTracker;
 import org.cso.MSBUtil.UtilAppCommon;
 import org.cso.MSBUtil.UtilDB;
-
-import java.io.BufferedOutputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -60,28 +54,13 @@ import java.util.GregorianCalendar;
 import java.util.TimeZone;
 
 public class ActvBilling extends AppCompatActivity implements OnClickListener, TaskCallback {
-
     Toolbar toolbar;
     Context context = this;
     String currentStatus;
-    double currentReading;
-    private String mobileno = "";
     public static String taid;
-    private static String gLine;
-    private static String gLine1;
-    private static String gLine2;
-    private String gLine3;
-    private String gLine4;
-    private static int BillMonth;
-
     public String strMobileNo = "", strPoleNo = "";
-
     static String photoAddressSaved = null;
     static String photoFolderSaved = null;
-
-    private int BillYear, consadd, billprint;
-
-    private static int BillYear2;
     private static int gDays[] = {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31,
             30, 31};
     public static String unimonth[] = {" ", "Jan", "Feb", "Mar", "Apr", "May",
@@ -90,98 +69,17 @@ public class ActvBilling extends AppCompatActivity implements OnClickListener, T
             "Mar-Apr", "Apr-May", "May-Jun", "Jun-Jul", "Jul-Aug", "Aug-Sep",
             "Sep-Oct", "Oct-Nov", "Nov-Dec"};
 
-    private static String date1;
-    private String date2;
-    private long gUTBB;
-    private long gNBM;
-    private float gNBM_FC;
-    private long gNBD;
-    private long gLoad;
-    private double gMaxDem;
-    private int UBSrNo;
     public static double prvrdg;
-    public static String prvrdgdt, prvrdgdt_fc;
+
     public static String prvmtrsts;
-    private int FC4nxt60dys;
-    private long OLD_MTR_CSPT;
-    private long CUR_MTR_CSPT = 0;
-    private int MulbyNBM;
-    private static int RC;
-    private static int SC;
-    private int Cycle;
-
     private int gCheckProvisionalToDefective;
-    private int nxtbilprcs;
-
-    private int gch = 0;
-    private int check = 0;
-    private int gDCSTS;
-    public static int gMD;
-
-    public static String uploadStatus;
-
-    public static String pSlab1 = "";
-    public static String pSlab2 = "";
-    public static String pSlab3 = "";
-    public static String pSlab4 = "";
-
-    int alreadyBilled = 0;
-    boolean chkpdc = false;
-    //private static Creator
-
-    // ////////////////New Tariff and Slab Introduced in April 2012
-    // ////////////////////////
-
-    // ////////Old tariff on RST10-11 /////////////////
-    private double gTariffRate_1011[][][] = {
-            // fixed charge energy charge//
-            /* DOM */{{20.00, 15.00, 0, 30.00}, {1.40, 3.10, 4.10, 0}},
-            /* COM */{{30.00, 25.00, 0, 0}, {4.20, 5.30, 5.90, 0}},
-            /* PI */{{50.00, 0, 0, 0}, {4.20, 0, 0, 0}},};
-
-    // ////////Old tariff on RST11-12 /////////////////
-    private double gTariffRate_1112[][][] = {
-            // fixed charge energy charge//
-            /* DOM */{{20.00, 15.00, 0, 30.00}, {1.40, 3.50, 4.30, 4.80}},
-            /* COM */{{30.00, 25.00, 0, 0}, {4.80, 5.90, 6.60, 0}},
-            /* PI */{{50.00, 0, 0, 0}, {4.80, 0, 0, 0}},};
-    private int gSlablim_1112[][] = {{50, 200, 400}, {100, 300, 10000000}};
-
-    // ///////// New tariff on RST12-13 ////////////////
-    private double gTariffRate_1213[][][] = {
-            // fixed charge energy charge//
-            /* DOM */{{20.00, 15.00, 0, 60.00}, {2.20, 3.90, 4.90, 5.30}},
-            /* COM */{{30.00, 25.00, 0, 0}, {5.00, 6.10, 6.80, 0}},
-            /* PI */{{50.00, 0, 0, 0}, {5.30, 0, 0, 0}},};
-    private int gSlablim_1213[][] = {{50, 200, 400}, {100, 300, 10000000}};
-
-    private double gTariffRate_1314[][][] = {
-            // fixed charge energy charge//
-            /* DOM */{{20.00, 20.00, 0, 65.00}, {2.30, 4.00, 5.00, 5.40}},
-            /* COM */{{30.00, 30.00, 0, 0}, {5.10, 6.20, 6.90, 0}},
-            /* PI */{{50.00, 0, 0, 0}, {5.40, 0, 0, 0}},};
-    private int gSlablim_1314[][] = {{50, 200, 400}, {100, 300, 10000000}};
-
-    private double gTariffRate_1516[][][] = {
-            // fixed charge energy charge//
-            /* DOM */{{25.00, 25.00, 0, 75.00}, {2.50, 4.50, 5.50, 5.90}},
-            /* COM */{{40.00, 40.00, 0, 0}, {5.50, 6.70, 7.40, 0}},
-            /* PI */{{50.00, 0, 0, 0}, {5.40, 0, 0, 0}},};
-    private int gSlablim_1516[][] = {{50, 200, 400}, {100, 300, 10000000}};
-
-
-    private static String gSoftwareVersion;
-    private int val;
-    int Round = 0;
-    long RoundRdg = 0;
-    String billby = null;
     String photoId = null;
     String photoTakenTime = null;
     // Camera Variables
     File file, cropfile, unUploadedFile;
     private static final int PIC_CROP = 200;
     private static final int CAMERA_CAPTURE_IMAGE_REQUEST_CODE = 100;
-    public static final int MEDIA_TYPE_IMAGE = 1;
+    private String gSoftwareVersion="";
 
 
     @Override
@@ -216,10 +114,6 @@ public class ActvBilling extends AppCompatActivity implements OnClickListener, T
                 UtilAppCommon.bBtnGenerateClicked = false;
             }
         } else {
-            //startActivity(new Intent(this, ActvivityMain.class));
-            //if(UtilAppCommon.inSAPSendMsg.equalsIgnoreCase("1"))
-            //	startActivity(new Intent(getBaseContext(), PoleMobileActivity.class));
-            //else
             if (UtilAppCommon.billType.equalsIgnoreCase("A"))
                 startActivity(new Intent(getBaseContext(), ActvConsumerNbrInput.class));
             else if (UtilAppCommon.billType.equalsIgnoreCase("L"))
@@ -253,572 +147,6 @@ public class ActvBilling extends AppCompatActivity implements OnClickListener, T
         return true;
     }
 
-	/*private boolean validateDoubleBilling() {
-
-		Log.e("validateDoubleBilling", "Start");
-		boolean bIsDblBilled = false;
-		boolean bIsBlueDblBilled = false;
-		
-		UtilDB utilsTochkDb = new UtilDB(getBaseContext());
-
-		final Intent intentdupill = new Intent(this,
-				ActvBillPrinting.class);
-		String lsAccountNo = "";
-		
-		//if(UtilAppCommon.billType.equals("L"))
-		//	lsAccountNo = UtilAppCommon.legNbr;
-		//else
-			lsAccountNo = UtilAppCommon.acctNbr;
-		
-		Log.e("AccountNo", lsAccountNo);
-		try {
-			if (utilsTochkDb.checkDoubleBilling(lsAccountNo)) {
-				UtilDB util1 = new UtilDB(getBaseContext());
-				util1.getBillInputDetails(UtilAppCommon.acctNbr, "CA Number");
-				util1.close();
-					
-				bIsDblBilled = true;
-				AlertDialog.Builder altDialog = new AlertDialog.Builder(
-						ActvBilling.this);
-				altDialog.setTitle(" Consumer Already Billed");
-				altDialog.setMessage("Do You Want Duplicate Bill "); // here
-																	 // add
-																	 // your
-																	 // message
-				altDialog.setPositiveButton("Ok",
-						new DialogInterface.OnClickListener() {
-							public void onClick(DialogInterface dialog, int which) {
-								//
-								UtilAppCommon.acctNbr = String.format("%s", UtilAppCommon.acctNbr);
-								UtilAppCommon.bprintdupl = true;
-								
-								// 23.12.13 for duplicate bill printing
-								UtilDB utilDupBillPrint = new UtilDB(getBaseContext());
-								utilDupBillPrint.getOutputBillRecord(UtilAppCommon.acctNbr);
-								utilDupBillPrint.getSAPBlueInput(UtilAppCommon.acctNbr);
-								startActivity(intentdupill);
-
-							}
-						});
-
-				altDialog.setNegativeButton("Cancel",
-						new DialogInterface.OnClickListener() {
-							public void onClick(DialogInterface dialog, int which) {
-								// altDialog.
-								startActivity(new Intent(getBaseContext(),
-										ActvConsumerNbrInput.class));
-								finish();
-							}
-						});
-				altDialog.show();
-				utilsTochkDb.close();
-			}
-			else
-			{
-				UtilDB util = new UtilDB(getBaseContext());
-				util.getBillInputDetails(UtilAppCommon.acctNbr, "CA Number");
-				util.close();
-				//getImageByCANo(lsAccountNo);
-				//Bluetooth Meter Reading
-				Cursor cursorBlue = utilsTochkDb.checkDoubleinSAPBlueInput(lsAccountNo);
-				if (cursorBlue != null)
-				{
-					bIsBlueDblBilled = true;
-					String strMsgId = "";
-					//Log.e("MESSAGE", cursor.getString(cursor.getColumnIndex("MSGID")));
-					if(cursorBlue.getString(cursorBlue.getColumnIndex("MSGID")) != null)
-					{
-						strMsgId = cursorBlue.getString(cursorBlue.getColumnIndex("MSGID"));
-					}
-					String[] copySAPInputData = new String[12];
-					String nxtDate;
-					try {
-						copySAPInputData[0] = cursorBlue.getString(1);
-						copySAPInputData[1] = cursorBlue.getString(2);
-						copySAPInputData[2] = UtilAppCommon.in.MONTH_SEASONAL; // cursorBlue.getString(3);
-						copySAPInputData[3] = cursorBlue.getString(4);
-						copySAPInputData[4] = cursorBlue.getString(5);
-						copySAPInputData[5] = cursorBlue.getString(6);
-						copySAPInputData[6] = cursorBlue.getString(7);
-						copySAPInputData[7] = cursorBlue.getString(8);
-						copySAPInputData[8] = cursorBlue.getString(9);
-						copySAPInputData[9] = cursorBlue.getString(10);
-                        copySAPInputData[11] = cursorBlue.getString(0);
-						if(strMsgId.equalsIgnoreCase("0") || strMsgId.equalsIgnoreCase("2"))
-						{
-                            copySAPInputData[10] = "2";
-							UtilAppCommon.inSAPSendMsg = "2";
-						}
-						else
-						{
-                            copySAPInputData[10] = "2";
-							UtilAppCommon.inSAPSendMsg = "1";
-						}
-
-						//Log.e("SCHEDULED_BILLING_DATE", UtilAppCommon.in.SCHEDULED_BILLING_DATE.substring(0, 4) + "-" + UtilAppCommon.in.SCHEDULED_BILLING_DATE.substring(5, 7) + "-" + UtilAppCommon.in.SCHEDULED_BILLING_DATE.substring(8, 10));
-					} catch (Exception e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-						Log.e("validateDoubleBill Copy", e1.getMessage());
-					}
-
-					UtilDB utilDB = new UtilDB(getApplicationContext());
-					try {
-
-						utilDB.getSAPBlueInput(UtilAppCommon.acctNbr);
-						//UtilAppCommon.SAPBlueIn = new StructSAPInput();
-						//UtilAppCommon.cop(copySAPInputData);
-						//if(NetworkUtil.isOnline(ActvBilling.this,null))
-						{
-
-							// 20.11.15
-							AsyncBluetoothReading asyncBluetoothReading = new AsyncBluetoothReading(this);
-							asyncBluetoothReading.execute(copySAPInputData);
-						}
-					} catch (Exception e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-						Log.e("AsyncOut ActBill", e.getMessage());
-					}
-				}
-
-				//Normal Meter Reading
-				Cursor cursor = utilsTochkDb.checkDoubleinSAPInput(lsAccountNo);
-				if (cursor != null)
-				{
-					bIsDblBilled = true;
-					String strMsgId = "";
-					//Log.e("MESSAGE", cursor.getString(cursor.getColumnIndex("MSGID")));
-					if(cursor.getString(cursor.getColumnIndex("MSGID")) != null)
-					{
-						strMsgId = cursor.getString(cursor.getColumnIndex("MSGID"));
-					}
-					String[] copySAPInputData = new String[14];
-					String nxtDate;
-					try {
-						copySAPInputData[0] = cursor.getString(0);
-						copySAPInputData[1] = cursor.getString(1);
-						copySAPInputData[2] = cursor.getString(9);
-						copySAPInputData[3] = cursor.getString(10);	
-						copySAPInputData[4] = cursor.getString(5);
-						copySAPInputData[5] = cursor.getString(7);
-						copySAPInputData[6] = cursor.getString(8);
-						copySAPInputData[7] = cursor.getString(4);
-						copySAPInputData[8] = cursor.getString(3);
-						copySAPInputData[9] = cursor.getString(2);
-						copySAPInputData[10] = cursor.getString(12);
-						copySAPInputData[12] = "0";
-						copySAPInputData[13] = cursor.getString(6);
-						if(strMsgId.equalsIgnoreCase("1") || strMsgId.equalsIgnoreCase("2") || strMsgId.equalsIgnoreCase("7") || strMsgId.equalsIgnoreCase("3"))
-						{
-							copySAPInputData[11] = "2";
-							UtilAppCommon.inSAPSendMsg = "2";
-						}
-						else
-						{
-							copySAPInputData[11] = "1";
-							UtilAppCommon.inSAPSendMsg = "1";
-						}
-						
-						Log.e("SCHEDULED_BILLING_DATE", UtilAppCommon.in.SCHEDULED_BILLING_DATE.substring(0, 4) + "-" + UtilAppCommon.in.SCHEDULED_BILLING_DATE.substring(5, 7) + "-" + UtilAppCommon.in.SCHEDULED_BILLING_DATE.substring(8, 10));
-					} catch (Exception e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-						Log.e("validateDoubleBill Copy", e1.getMessage());
-					}
-	
-					//UtilDB utilDB = new UtilDB(getApplicationContext());
-					try {					
-						
-						//utilDB.insertIntoSAPInput(copySAPInputData);
-						UtilAppCommon.SAPIn = new StructSAPInput();
-						UtilAppCommon.copySAPInputData(copySAPInputData);
-							//if(NetworkUtil.isOnline(ActvBilling.this,null))
-							{
-						
-								 // 20.11.15
-									AsyncGetOutputData asyncGetOutputData = new AsyncGetOutputData(this,new OnBillGenerate() {
-									
-									@Override
-									public void onFinish() {
-										// TODO Auto-generated method stub
-										
-										printdlg();
-										
-									}
-								});
-								
-								asyncGetOutputData.execute(copySAPInputData);
-							}
-					} catch (Exception e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-						Log.e("AsyncOut ActBill", e.getMessage());
-					}
-				}
-				if(bIsDblBilled && bIsBlueDblBilled)
-				{
-					try {
-						//if(NetworkUtil.isOnline(ActvBilling.this,null))
-						{
-							util.copyToOutputStruct(UtilAppCommon.SAPIn.CANumber);
-						}
-						//printbill();
-					} catch (Exception e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-						Log.e("ActBill copyOut E", e.getMessage());
-					}
-
-					try {
-						Thread.sleep(15000);
-					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-						Log.e("InterruptedException E", e.getMessage());
-					}
-
-					//if(UtilAppCommon.SAPIn.ProcessedFlag.equals("1"))
-					{
-						// need to be change for photo
-						getImageByCANo(UtilAppCommon.acctNbr);
-						final AlertDialog ad = new AlertDialog.Builder(this)
-								.create();
-						ad.setTitle("Confirm");
-						ad.setMessage("Confirm to print");
-						ad.setButton(DialogInterface.BUTTON_POSITIVE, "Yes",
-								new DialogInterface.OnClickListener() {
-
-									public void onClick(DialogInterface dialog,
-														int which) {
-										// TODO Auto-generated method stub
-										ad.dismiss();
-										Write2SbmOut();
-										//startActivity(new Intent(ctx, ActvBillPrinting.class));
-									}
-								});
-						ad.setButton(DialogInterface.BUTTON_NEGATIVE, "No",
-								new DialogInterface.OnClickListener() {
-
-									public void onClick(DialogInterface dialog,
-														int which) {
-										// TODO Auto-generated method stub
-										ad.dismiss();
-										// startActivity(getIntent());
-										//startActivity(new Intent(getApplicationContext(), ActvBillingOption.class));
-										//startActivity(new Intent(getBaseContext(), SyncMobPoleActivity.class));
-										if(UtilAppCommon.billType.equalsIgnoreCase("A"))
-											startActivity(new Intent(getBaseContext(), ActvConsumerNbrInput.class));
-										else if(UtilAppCommon.billType.equalsIgnoreCase("L"))
-											startActivity(new Intent(getBaseContext(), ActvLegacyNbrInput.class));
-										else if(UtilAppCommon.billType.equalsIgnoreCase("S"))
-											startActivity(new Intent(getBaseContext(), ActvSequenceData.class));
-										else if(UtilAppCommon.billType.equalsIgnoreCase("M"))
-											startActivity(new Intent(getBaseContext(), MeterNbrInput.class));
-										else
-											startActivity(new Intent(getBaseContext(), ActvBillingOption.class));
-									}
-								});
-						ad.show();
-					}
-					//printbill();
-				}
-				//bIsDblBilled = false;
-			}
-			
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			Log.e("validateDoubleBilling E", e.getMessage());
-		}
-		//Log.e("validateDoubleBilling", "End");
-		return bIsDblBilled;
-	}*/
-
-
-	/*private boolean validateDoubleBilling() {
-		Log.e("*********"+this.getClass().getSimpleName()+"==>>", "****==>"+Thread.currentThread().getStackTrace()[2].getMethodName());
-		Log.e("validateDoubleBilling", "Start");
-		boolean bIsDblBilled = false;
-
-		UtilDB utilsTochkDb = new UtilDB(getBaseContext());
-
-		final Intent intentdupill = new Intent(this,
-				ActvBillPrinting.class);
-		String lsAccountNo = "";
-
-		//if(UtilAppCommon.billType.equals("L"))
-		//	lsAccountNo = UtilAppCommon.legNbr;
-		//else
-			lsAccountNo = UtilAppCommon.acctNbr;
-
-		Log.e("AccountNo", lsAccountNo);
-		try {
-			if (utilsTochkDb.checkDoubleBilling(lsAccountNo)) {
-				UtilDB util1 = new UtilDB(getBaseContext());
-				util1.getBillInputDetails(UtilAppCommon.acctNbr, "CA Number");
-				util1.close();
-
-				bIsDblBilled = true;
-				AlertDialog.Builder altDialog = new AlertDialog.Builder(
-						ActvBilling.this);
-				altDialog.setTitle(" Consumer Already Billed");
-				altDialog.setMessage("Do You Want Duplicate Bill "); // here
-																	 // add
-																	 // your
-																	 // message
-				altDialog.setPositiveButton("Ok",
-						new DialogInterface.OnClickListener() {
-							public void onClick(DialogInterface dialog, int which) {
-								//
-								UtilAppCommon.acctNbr = String.format("%s", UtilAppCommon.acctNbr);
-								UtilAppCommon.bprintdupl = true;
-
-								// 23.12.13 for duplicate bill printing
-								UtilDB utilDupBillPrint = new UtilDB(getBaseContext());
-								utilDupBillPrint.getOutputBillRecord(UtilAppCommon.acctNbr);
-								utilDupBillPrint.getSAPBlueInput(UtilAppCommon.acctNbr);
-								startActivity(intentdupill);
-
-							}
-						});
-
-				altDialog.setNegativeButton("Cancel",
-						new DialogInterface.OnClickListener() {
-							public void onClick(DialogInterface dialog, int which) {
-								// altDialog.
-								startActivity(new Intent(getBaseContext(),
-										ActvConsumerNbrInput.class));
-								finish();
-							}
-						});
-				altDialog.show();
-				utilsTochkDb.close();
-			}
-			else
-			{
-				UtilDB util = new UtilDB(getBaseContext());
-				util.getBillInputDetails(UtilAppCommon.acctNbr, "CA Number");
-				util.close();
-				//getImageByCANo(lsAccountNo);
-				//Bluetooth Meter Reading
-				Cursor cursorBlue = utilsTochkDb.checkDoubleinSAPBlueInput(lsAccountNo);
-				if (cursorBlue != null)
-				{
-					Log.e("validateDoubleBilling", " cursor Blue Not Null");
-					bIsDblBilled = true;
-					String strMsgId = "";
-					//Log.e("MESSAGE", cursor.getString(cursor.getColumnIndex("MSGID")));
-					if(cursorBlue.getString(cursorBlue.getColumnIndex("MSGID")) != null)
-					{
-						strMsgId = cursorBlue.getString(cursorBlue.getColumnIndex("MSGID"));
-					}
-					String[] copySAPInputData = new String[12];
-					String nxtDate;
-					try {
-						copySAPInputData[0] = cursorBlue.getString(1);
-						copySAPInputData[1] = cursorBlue.getString(2);
-						copySAPInputData[2] = UtilAppCommon.in.MONTH_SEASONAL; // cursorBlue.getString(3);
-						copySAPInputData[3] = cursorBlue.getString(4);
-						copySAPInputData[4] = cursorBlue.getString(5);
-						copySAPInputData[5] = cursorBlue.getString(6);
-						copySAPInputData[6] = cursorBlue.getString(7);
-						copySAPInputData[7] = cursorBlue.getString(8);
-						copySAPInputData[8] = cursorBlue.getString(9);
-						copySAPInputData[9] = cursorBlue.getString(10);
-                        copySAPInputData[11] = cursorBlue.getString(0);
-						if(strMsgId.equalsIgnoreCase("0") || strMsgId.equalsIgnoreCase("2"))
-						{
-                            copySAPInputData[10] = "2";
-							UtilAppCommon.inSAPSendMsg = "2";
-						}
-						else
-						{
-                            copySAPInputData[10] = "2";
-							UtilAppCommon.inSAPSendMsg = "1";
-						}
-
-						//Log.e("SCHEDULED_BILLING_DATE", UtilAppCommon.in.SCHEDULED_BILLING_DATE.substring(0, 4) + "-" + UtilAppCommon.in.SCHEDULED_BILLING_DATE.substring(5, 7) + "-" + UtilAppCommon.in.SCHEDULED_BILLING_DATE.substring(8, 10));
-					} catch (Exception e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-						Log.e("validateDoubleBill Copy", e1.getMessage());
-					}
-
-					UtilDB utilDB = new UtilDB(getApplicationContext());
-					try {
-
-						utilDB.getSAPBlueInput(UtilAppCommon.acctNbr);
-						//UtilAppCommon.SAPBlueIn = new StructSAPInput();
-						//UtilAppCommon.cop(copySAPInputData);
-						//if(NetworkUtil.isOnline(ActvBilling.this,null))
-						{
-
-							// 20.11.15
-							AsyncBluetoothReading asyncBluetoothReading = new AsyncBluetoothReading(this);
-							asyncBluetoothReading.execute(copySAPInputData);
-						}
-					} catch (Exception e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-						Log.e("AsyncOut ActBill", e.getMessage());
-					}
-				}
-
-				//Normal Meter Reading
-				Cursor cursor = utilsTochkDb.checkDoubleinSAPInput(lsAccountNo);
-				if (cursor != null)
-				{
-					bIsDblBilled = true;
-					String strMsgId = "";
-					//Log.e("MESSAGE", cursor.getString(cursor.getColumnIndex("MSGID")));
-					if(cursor.getString(cursor.getColumnIndex("MSGID")) != null)
-					{
-						strMsgId = cursor.getString(cursor.getColumnIndex("MSGID"));
-					}
-					String[] copySAPInputData = new String[14];
-					String nxtDate;
-					try {
-						copySAPInputData[0] = cursor.getString(0);
-						copySAPInputData[1] = cursor.getString(1);
-						copySAPInputData[2] = cursor.getString(9);
-						copySAPInputData[3] = cursor.getString(10);
-						copySAPInputData[4] = cursor.getString(5);
-						copySAPInputData[5] = cursor.getString(7);
-						copySAPInputData[6] = cursor.getString(8);
-						copySAPInputData[7] = cursor.getString(4);
-						copySAPInputData[8] = cursor.getString(3);
-						copySAPInputData[9] = cursor.getString(2);
-						copySAPInputData[10] = cursor.getString(12);
-						copySAPInputData[12] = "0";
-						copySAPInputData[13] = cursor.getString(6);
-						if(strMsgId.equalsIgnoreCase("1") || strMsgId.equalsIgnoreCase("2") || strMsgId.equalsIgnoreCase("7") || strMsgId.equalsIgnoreCase("3"))
-						{
-							copySAPInputData[11] = "2";
-							UtilAppCommon.inSAPSendMsg = "2";
-						}
-						else
-						{
-							copySAPInputData[11] = "1";
-							UtilAppCommon.inSAPSendMsg = "1";
-						}
-
-						Log.e("SCHEDULED_BILLING_DATE", UtilAppCommon.in.SCHEDULED_BILLING_DATE.substring(0, 4) + "-" + UtilAppCommon.in.SCHEDULED_BILLING_DATE.substring(5, 7) + "-" + UtilAppCommon.in.SCHEDULED_BILLING_DATE.substring(8, 10));
-					} catch (Exception e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-						Log.e("validateDoubleBill Copy", e1.getMessage());
-					}
-
-					//UtilDB utilDB = new UtilDB(getApplicationContext());
-					try {
-
-						//utilDB.insertIntoSAPInput(copySAPInputData);
-						UtilAppCommon.SAPIn = new StructSAPInput();
-						UtilAppCommon.copySAPInputData(copySAPInputData);
-							//if(NetworkUtil.isOnline(ActvBilling.this,null))
-							{
-
-								 // 20.11.15
-									AsyncGetOutputData asyncGetOutputData = new AsyncGetOutputData(this,new OnBillGenerate() {
-
-									@Override
-									public void onFinish() {
-										// TODO Auto-generated method stub
-
-										printdlg();
-
-									}
-								});
-
-								asyncGetOutputData.execute(copySAPInputData);
-							}
-					} catch (Exception e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-						Log.e("AsyncOut ActBill", e.getMessage());
-					}
-				}
-				if(bIsDblBilled)
-				{
-					try {
-						//if(NetworkUtil.isOnline(ActvBilling.this,null))
-						{
-							util.copyToOutputStruct(UtilAppCommon.SAPIn.CANumber);
-						}
-						//printbill();
-					} catch (Exception e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-						Log.e("ActBill copyOut E", e.getMessage());
-					}
-
-					try {
-						Thread.sleep(15000);
-					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-						Log.e("InterruptedException E", e.getMessage());
-					}
-
-					//if(UtilAppCommon.SAPIn.ProcessedFlag.equals("1"))
-					{
-						// need to be change for photo
-						getImageByCANo(UtilAppCommon.acctNbr);
-						final AlertDialog ad = new AlertDialog.Builder(this)
-								.create();
-						ad.setTitle("Confirm");
-						ad.setMessage("Confirm to print");
-						ad.setButton(DialogInterface.BUTTON_POSITIVE, "Yes",
-								new DialogInterface.OnClickListener() {
-
-									public void onClick(DialogInterface dialog,
-														int which) {
-										// TODO Auto-generated method stub
-										ad.dismiss();
-										Write2SbmOut();
-										//startActivity(new Intent(ctx, ActvBillPrinting.class));
-									}
-								});
-						ad.setButton(DialogInterface.BUTTON_NEGATIVE, "No",
-								new DialogInterface.OnClickListener() {
-
-									public void onClick(DialogInterface dialog,
-														int which) {
-										// TODO Auto-generated method stub
-										ad.dismiss();
-										// startActivity(getIntent());
-										//startActivity(new Intent(getApplicationContext(), ActvBillingOption.class));
-										//startActivity(new Intent(getBaseContext(), SyncMobPoleActivity.class));
-										if(UtilAppCommon.billType.equalsIgnoreCase("A"))
-											startActivity(new Intent(getBaseContext(), ActvConsumerNbrInput.class));
-										else if(UtilAppCommon.billType.equalsIgnoreCase("L"))
-											startActivity(new Intent(getBaseContext(), ActvLegacyNbrInput.class));
-										else if(UtilAppCommon.billType.equalsIgnoreCase("S"))
-											startActivity(new Intent(getBaseContext(), ActvSequenceData.class));
-										else if(UtilAppCommon.billType.equalsIgnoreCase("M"))
-											startActivity(new Intent(getBaseContext(), MeterNbrInput.class));
-										else
-											startActivity(new Intent(getBaseContext(), ActvBillingOption.class));
-									}
-								});
-						ad.show();
-					}
-					//printbill();
-				}
-				//bIsDblBilled = false;
-			}
-
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			Log.e("validateDoubleBilling E", e.getMessage());
-		}
-		//Log.e("validateDoubleBilling", "End");
-		return bIsDblBilled;
-	}
-*/
-
     //This one checks if billo/p is not having value but SAPinput and SAPBlue input has value, then it resends
     // the data to middleware accordingly follow whole process
     @SuppressLint("Range")
@@ -833,10 +161,6 @@ public class ActvBilling extends AppCompatActivity implements OnClickListener, T
         final Intent intentdupill = new Intent(this,
                 ActvBillPrinting.class);
         String lsAccountNo = "";
-
-        //if(UtilAppCommon.billType.equals("L"))
-        //	lsAccountNo = UtilAppCommon.legNbr;
-        //else
         lsAccountNo = UtilAppCommon.acctNbr;
 
         Log.e("AccountNo", lsAccountNo);
@@ -926,9 +250,6 @@ public class ActvBilling extends AppCompatActivity implements OnClickListener, T
                     try {
 
                         utilDB.getSAPBlueInput(UtilAppCommon.acctNbr);
-                        //UtilAppCommon.SAPBlueIn = new StructSAPInput();
-                        //UtilAppCommon.cop(copySAPInputData);
-                        //if(NetworkUtil.isOnline(ActvBilling.this,null))
                         {
 
                             // 20.11.15
@@ -983,13 +304,10 @@ public class ActvBilling extends AppCompatActivity implements OnClickListener, T
                         System.err.println(e1.getMessage());
                     }
 
-                    //UtilDB utilDB = new UtilDB(getApplicationContext());
                     try {
 
-                        //utilDB.insertIntoSAPInput(copySAPInputData);
                         UtilAppCommon.SAPIn = new StructSAPInput();
                         UtilAppCommon.copySAPInputData(copySAPInputData);
-                        //if(NetworkUtil.isOnline(ActvBilling.this,null))
                         {
 
                             // 20.11.15
@@ -1027,7 +345,6 @@ public class ActvBilling extends AppCompatActivity implements OnClickListener, T
                         Log.e("InterruptedException E", e.getMessage());
                     }
 
-                    //if(UtilAppCommon.SAPIn.ProcessedFlag.equals("1"))
                     {
                         // need to be change for photo
                         getImageByCANo(UtilAppCommon.acctNbr);
@@ -1046,10 +363,7 @@ public class ActvBilling extends AppCompatActivity implements OnClickListener, T
                                 (dialog, which) -> {
                                     // TODO Auto-generated method stub
                                     ad.dismiss();
-                                    // startActivity(getIntent());
-                                    //startActivity(new Intent(getApplicationContext(), ActvBillingOption.class));
-                                    //startActivity(new Intent(getBaseContext(), SyncMobPoleActivity.class));
-                                    if (UtilAppCommon.billType.equalsIgnoreCase("A"))
+                                     if (UtilAppCommon.billType.equalsIgnoreCase("A"))
                                         startActivity(new Intent(getBaseContext(), ActvConsumerNbrInput.class));
                                     else if (UtilAppCommon.billType.equalsIgnoreCase("L"))
                                         startActivity(new Intent(getBaseContext(), ActvLegacyNbrInput.class));
@@ -1201,12 +515,6 @@ public class ActvBilling extends AppCompatActivity implements OnClickListener, T
                                 (dialog, which) -> {
                                     // TODO Auto-generated method stub
                                     ad.dismiss();
-                                    // startActivity(getIntent());
-                                    //startActivity(new Intent(getApplicationContext(), ActvBillingOption.class));
-                                    //startActivity(new Intent(getBaseContext(), SyncMobPoleActivity.class));
-                                    //if(UtilAppCommon.inSAPSendMsg.equalsIgnoreCase("1"))
-                                    //	startActivity(new Intent(getBaseContext(), PoleMobileActivity.class));
-                                    //else
                                     if (UtilAppCommon.billType.equalsIgnoreCase("A"))
                                         startActivity(new Intent(getBaseContext(), ActvConsumerNbrInput.class));
                                     else if (UtilAppCommon.billType.equalsIgnoreCase("L"))
@@ -1229,9 +537,6 @@ public class ActvBilling extends AppCompatActivity implements OnClickListener, T
                     //}
                     break;
                 case 4:
-				/*intent = new Intent(this, ActvCurrReading.class);
-				intent.putExtra("MeterStatus", data.getExtras().getString("meterStatusId"));
-				startActivityForResult(intent, 5);*/
                     break;
                 case 5:
                     final Context ctx = this;
@@ -1255,9 +560,6 @@ public class ActvBilling extends AppCompatActivity implements OnClickListener, T
                                 // TODO Auto-generated method stub
                                 ad1.dismiss();
                                 Write2SbmOut();
-                                //if(UtilAppCommon.inSAPSendMsg.equalsIgnoreCase("1"))
-                                //	startActivity(new Intent(getBaseContext(), PoleMobileActivity.class));
-                                //else
                                 if (UtilAppCommon.billType.equalsIgnoreCase("A"))
                                     startActivity(new Intent(getBaseContext(), ActvConsumerNbrInput.class));
                                 else if (UtilAppCommon.billType.equalsIgnoreCase("L"))
@@ -1273,11 +575,6 @@ public class ActvBilling extends AppCompatActivity implements OnClickListener, T
                             (dialog, which) -> {
                                 // TODO Auto-generated method stub
                                 ad1.dismiss();
-                                // startActivity(getIntent());
-                                //startActivity(new Intent(ctx, ActvBillingOption.class));
-                                //if(UtilAppCommon.inSAPSendMsg.equalsIgnoreCase("1"))
-                                //	startActivity(new Intent(getBaseContext(), PoleMobileActivity.class));
-                                //else
                                 if (UtilAppCommon.billType.equalsIgnoreCase("A"))
                                     startActivity(new Intent(getBaseContext(), ActvConsumerNbrInput.class));
                                 else if (UtilAppCommon.billType.equalsIgnoreCase("L"))
@@ -1291,14 +588,7 @@ public class ActvBilling extends AppCompatActivity implements OnClickListener, T
                                 finish();
                             });
                     ad1.show();
-                    //printbill();
                 }
-                //else
-                //{
-                //Toast.makeText(context, "Output data not available for CA - "+ UtilAppCommon.in.CONTRACT_AC_NO , Toast.LENGTH_LONG).show();
-                //startActivity(new Intent(ctx, ActvBillingOption.class));
-                //}
-                //
                 finish();
                 break;
 
@@ -1321,13 +611,7 @@ public class ActvBilling extends AppCompatActivity implements OnClickListener, T
                             if (printer[1].compareToIgnoreCase("Analogic Impact") == 0) {
                                 Log.v("ActvBilling", "After image Capture confirmation billing");
                                 billing();
-                                // 11.02.16
-                                //} else if (printer[1]
-                                //		.compareToIgnoreCase("Analogic Thermal") == 0) {
-                                //	billing();
                             } else {
-                                //StoreByteImage();
-                                //billing();
                                 Log.v("ActvBilling", "After image Capture confirmation");
                                 CropImage();
                             }
@@ -1337,12 +621,6 @@ public class ActvBilling extends AppCompatActivity implements OnClickListener, T
                                     .show();
                             finish();
                         }
-
-                        // Preview image
-                        // String imageInSD = file.getAbsolutePath();
-                        // //ImageView imgMtrReadingPic =
-                        // (ImageView)findViewById(R.id.imgMtrReadingPic);
-                        // imgMtrReadingPic.setImageBitmap(bitmap);
 
                     }
                     break;
@@ -1428,32 +706,6 @@ public class ActvBilling extends AppCompatActivity implements OnClickListener, T
 
     }
 
-    public void showSettingsAlert() {
-        GPSTracker gps = new GPSTracker(ActvBilling.this);
-
-        if (gps.canGetLocation()) {
-
-            //UtilAppCommon.strLat = String.valueOf(gps.getLatitude()).substring(0, 5);
-            //UtilAppCommon.strLong = String.valueOf(gps.getLongitude()).substring(0, 5);
-
-            UtilAppCommon.strLat = String.valueOf(gps.getLatitude());
-            UtilAppCommon.strLong = String.valueOf(gps.getLongitude());
-
-            // \n is for new line
-            //Toast.makeText(getApplicationContext(), "Your Location is - \nLat: " + latitude + "\nLong: " + longitude, Toast.LENGTH_LONG).show();
-        } else {
-            // can't get location
-            // GPS or Network is not enabled
-            // Ask user to enable GPS/network in settings
-            gps.showSettingsAlert();
-
-            //UtilAppCommon.strLat = String.valueOf(gps.getLatitude()).substring(0, 5);
-            //UtilAppCommon.strLong = String.valueOf(gps.getLongitude()).substring(0, 5);
-            UtilAppCommon.strLat = String.valueOf(gps.getLatitude());
-            UtilAppCommon.strLong = String.valueOf(gps.getLongitude());
-        }
-    }
-
     private int billing() {
         // TODO Auto-generated method stub
         long lMul = 0, i, Digits = 0;
@@ -1486,13 +738,6 @@ public class ActvBilling extends AppCompatActivity implements OnClickListener, T
             startActivityForResult(intent, 1);
             //System.out.println("Enter Current Meter Status: ");
         }
-		/*else if()
-		{
-			Intent intent = new Intent(this, IntermediateActivity.class);
-			//intent.putExtra("strMobileNo",strMobileNo);
-			//intent.putExtra("strPoleNo",strPoleNo);
-			startActivityForResult(intent, 5);
-		}*/
         else {
             Toast.makeText(ActvBilling.this, "Step11 Completed", Toast.LENGTH_SHORT).show();
             UtilAppCommon.out.CurrentMtrReadingNote = UtilAppCommon.in.PRV_MTR_READING_NOTE;
@@ -1505,7 +750,6 @@ public class ActvBilling extends AppCompatActivity implements OnClickListener, T
                                     prvmtrsts));
             System.out.println("Prev Mtr Sts Assigned as current mtr sts");
             alertDialog.setButton(DialogInterface.BUTTON_POSITIVE, "OK", (dialog, which) -> {
-                // TODO Auto-generated method stub
                 alertDialog.dismiss();
             });
             alertDialog.show();
@@ -1537,22 +781,6 @@ public class ActvBilling extends AppCompatActivity implements OnClickListener, T
                 finish();
             } else {
                 startActivity(new Intent(this, ActvMsgPrinting.class));
-				/*if(UtilAppCommon.inSAPMsgID.toString().equals("4") || UtilAppCommon.inSAPMsgID.toString().equals("5"))
-					startActivity(new Intent(this, ActvMsgPrinting.class)); // used to print bill through printer
-				else
-				{
-					String strMsg = "";
-					if(UtilAppCommon.inActualSAPMsgID.toString().equals("1"))
-						strMsg = "MRO Not Found";
-					if(UtilAppCommon.inActualSAPMsgID.toString().equals("2"))
-						strMsg = "Reading not uploaded";
-					if(UtilAppCommon.inActualSAPMsgID.toString().equals("3"))
-						strMsg = "Bill not created";
-					else
-						strMsg = "Request being process";
-					Toast.makeText(getBaseContext(), strMsg + ", please try again after sometime.", Toast.LENGTH_LONG).show();
-					startActivity(new Intent(this, ActvBillingOption.class));
-				}	*/
                 finish();
             }
             // printbill();
@@ -1684,12 +912,7 @@ public class ActvBilling extends AppCompatActivity implements OnClickListener, T
         String preMtrStatus = UtilAppCommon.in.PRV_MTR_READING_NOTE;
         try { // show meter status list for valid tariff code
 
-            // Modified on 25-8-2014
-
-            //System.out.println(UtilAppCommon.ui.BILL_MONTH.substring(0, 4)	+ "-" + UtilAppCommon.ui.BILL_MONTH.substring(4, 6));
-            //Log.e("NXT_SCH_MTR_RDR_DATE", UtilAppCommon.in.NXT_SCH_MTR_RDR_DATE.substring(0, 4) + "-" + UtilAppCommon.in.NXT_SCH_MTR_RDR_DATE.substring(5, 7) + "-" + UtilAppCommon.in.NXT_SCH_MTR_RDR_DATE.substring(8, 10));
-            //Log.e("SCH_MTR_RDR_DATE", UtilAppCommon.in.SCHEDULED_BILLING_DATE.substring(0, 4) + "-" + UtilAppCommon.in.SCHEDULED_BILLING_DATE.substring(5, 7) + "-" + UtilAppCommon.in.SCHEDULED_BILLING_DATE.substring(8, 10));
-            Calendar nxtcal = null, schcal = null;
+             Calendar nxtcal = null, schcal = null;
             Boolean before = false, equal = false, equalbillmth = false;
             Log.e("StartBilling", "Reading Nxt Date");
             Toast.makeText(ActvBilling.this, "Step4 Completed", Toast.LENGTH_SHORT).show();
@@ -1918,23 +1141,7 @@ public class ActvBilling extends AppCompatActivity implements OnClickListener, T
     private void captureImage() {
         Toast.makeText(ActvBilling.this, "Step17 Completed", Toast.LENGTH_SHORT).show();
         Intent  takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        //intent.putExtra(MediaStore.EXTRA_SCREEN_ORIENTATION, Ori)
         try {
-            //String appDir =  getExternalFilesDir(Environment.DIRECTORY_PICTURES).getPath()
-                    //+ "/SBDocs/Photos";
-
-            //String sdocdfilepath = appDir + "/" + UtilAppCommon.in.SUB_DIVISION_CODE;
-            //new code
-            //File sdofile=getExternalFilesDir(Environment.DIRECTORY_PICTURES+"/SBDocs/Photos/"+UtilAppCommon.in.SUB_DIVISION_CODE);
-            //File sdofile = new File(sdocdfilepath);
-           // if (!sdofile.exists()) {
-                //Toast.makeText(ActvBilling.this, "Step18 Completed", Toast.LENGTH_SHORT).show();
-               // boolean isCreated1=sdofile.mkdirs();
-                //System.err.println("isCreated : "+isCreated1);
-           // }
-            //String binderfilepath = appDir + "/" + UtilAppCommon.in.SUB_DIVISION_CODE
-                    //+ "/" + UtilAppCommon.in.MRU;
-            //File binderfile = new File(binderfilepath);
             //new code
             File binderfile=getExternalFilesDir(Environment.DIRECTORY_PICTURES+"/SBDocs/Photos/"+UtilAppCommon.in.SUB_DIVISION_CODE+"/"+ UtilAppCommon.in.MRU);
 
@@ -1944,59 +1151,19 @@ public class ActvBilling extends AppCompatActivity implements OnClickListener, T
                 System.err.println("isCreated : "+isCreated);
                 Log.d("isCreated", String.valueOf(isCreated));
             }
-/*			photoId = "BSB" + "_" + UtilAppCommon.in.SUB_DIVISION_CODE + UtilAppCommon.in.MRU
-					+ UtilAppCommon.in.CONTRACT_AC_NO;
-			*/
 
             photoId = UtilAppCommon.in.SCHEDULED_BILLING_DATE.substring(0, 4) +
                     UtilAppCommon.in.SCHEDULED_BILLING_DATE.substring(5, 7) +
                     "_" + UtilAppCommon.in.CONTRACT_AC_NO;
-            //Log.v("ActvBilling", "Taking Photo Image Address1 " + sdocdfilepath + " " + sdofile.exists());
-            //Log.v("ActvBilling", "Taking Photo Image Address2 " + binderfilepath + " " + binderfile.exists());
             UtilAppCommon.out.PHOTO_ID = photoId;
             //UtilAppCommon.out.Company = UtilAppCommon.ui.CO;
             System.out.println("photo id ::::::: " + photoId);
             file = new File(binderfile, photoId + ".jpg");
             if(!file.exists())file.createNewFile();
-            /*file = File.createTempFile(
-                    photoId,  *//* prefix *//*
-                    ".jpg",         *//* suffix *//*
-                    binderfile      *//* directory *//*
-            );*/
-
-
             photoFolderSaved = binderfile.getAbsolutePath();
             photoAddressSaved = file.getAbsolutePath();
             Toast.makeText(ActvBilling.this, "Step20 Completed", Toast.LENGTH_SHORT).show();
-            /*List<ResolveInfo> resInfoList = this.getPackageManager().
-                    queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY);
-            for (ResolveInfo resolveInfo : resInfoList) {
-                String packageName = resolveInfo.activityInfo.packageName;
-                this.grantUriPermission(packageName, AppUtil.getFileUri(this, file),
-                        Intent.FLAG_GRANT_WRITE_URI_PERMISSION | Intent.FLAG_GRANT_READ_URI_PERMISSION);
-            }*/
-            takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, AppUtil.getFileUri(ActvBilling.this, file));
-            //intent.putExtra(MediaStore.EXTRA_OUTPUT, file);
-
-
-            //Code Added for Image Compression
-			/*Uri imgUri = Uri.fromFile(file);
-			if (imgUri.toString().startsWith("file://")) {
-	               //ten = ten.substring(11);
-	            }
-	            Bitmap mBitmap = BitmapFactory.decodeFile(imgUri.toString());                 
-                Display display = getWindowManager().getDefaultDisplay();
-                int newHeight = display.getHeight();
-                int newWidth = display.getWidth(); 
-                Bitmap resized = Bitmap.createScaledBitmap(mBitmap, newHeight, newWidth, false);                   
-
-                ByteArrayOutputStream bos = new ByteArrayOutputStream();
-                resized.compress(CompressFormat.JPEG, 0, bos);
-                byte[] bitmapdata = bos.toByteArray();
-
-                StoreByteImage(bitmapdata, 100);
-			//End of Code
-			*/
+           takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, AppUtil.getFileUri(ActvBilling.this, file));
             UtilAppCommon.blImageCapture = true;
             Log.i("ActvBilling Capt", " B isFinishing ==>> " + isFinishing());
             startActivityForResult( takePictureIntent, CAMERA_CAPTURE_IMAGE_REQUEST_CODE);
@@ -2007,88 +1174,11 @@ public class ActvBilling extends AppCompatActivity implements OnClickListener, T
         }
     }
 
-    public boolean StoreByteImage() {
-        try {
-
-            Log.e("Photo file", file.getPath());
-            Log.e("APhoto file", file.getAbsolutePath());
-            Uri imgUri = Uri.fromFile(file);
-
-            if (imgUri.toString().startsWith("file://")) {
-                //ten = ten.substring(11);
-            }
-
-            Bitmap mBitmap = BitmapFactory.decodeFile(file.getPath());
-            Display display = getWindowManager().getDefaultDisplay();
-            int newHeight = 96; //display.getHeight();
-            int newWidth = 96; //display.getWidth(); 
-            Bitmap resized = Bitmap.createScaledBitmap(mBitmap, newHeight, newWidth, false);
-
-            ByteArrayOutputStream bos = new ByteArrayOutputStream();
-            resized.compress(CompressFormat.JPEG, 0, bos);
-            byte[] bitmapdata = bos.toByteArray();
-
-            String AppDir = Environment.getExternalStorageDirectory().getPath()
-                    + "/SBDocs/Photos_Crop" + "/" + UtilAppCommon.in.SUB_DIVISION_CODE + "/"
-                    + UtilAppCommon.in.MRU;
-
-            Log.e("AppDir file", AppDir);
-            File f = new File(AppDir);
-            String fullPath = f.getAbsolutePath();
-
-            File dir = new File(fullPath);
-            if (!dir.exists()) {
-                dir.mkdirs();
-            }
-            Log.e("AppDir fullPath", fullPath);
-            cropfile = new File(fullPath, photoId + ".jpg");
-
-
-            FileOutputStream fileOutputStream = null;
-            BitmapFactory.Options options = new BitmapFactory.Options();
-            options.inSampleSize = 1;
-            Bitmap myImage = BitmapFactory.decodeByteArray(bitmapdata, 0,
-                    bitmapdata.length, options);
-            fileOutputStream = new FileOutputStream(fullPath + "/" + photoId + ".jpg");
-            BufferedOutputStream bos1 = new BufferedOutputStream(
-                    fileOutputStream);
-            myImage.compress(CompressFormat.JPEG, 0, bos1);
-            bos1.flush();
-            bos1.close();
-        }//create data file
-        catch (FileNotFoundException e) {
-            Log.e("DATAFILE", "File Not Found Error = " + e.getMessage());
-            e.printStackTrace();
-            return false;
-        }//data file error
-        catch (IOException e) {
-            Log.e("DATAFILE", "IOException Error" + e.getMessage());
-            e.printStackTrace();
-            return false;
-        }//data file error
-        return true;
-    }//storebyteimage
-
 
     void CropImage() {
         try {
             Log.v("ActvBilling", "**************************" + photoFolderSaved);
             Log.v("ActvBilling", "**************************" + photoAddressSaved);
-          /*  File file_n = new File(photoFolderSaved);
-            //Log.v("ActvBilling","**************************1");
-            File[] fileList = file_n.listFiles();
-            Log.v("ActvBilling", "*************************2");
-            File file2 = new File(photoAddressSaved);
-            Log.v("ActvBilling", "**************************" + file.getAbsolutePath());
-            Log.v("ActvBilling", "**************************" + file2.getAbsolutePath());
-            //Log.v("ActvBilling","**************************"+file2.getAbsolutePath());
-            for (File fileName : fileList) {
-                Log.v("ActvBilling", "**************************" + fileName.getAbsolutePath());
-                if (!fileName.getAbsolutePath().equalsIgnoreCase(file2.getAbsolutePath())) {
-                    Log.v("ActvBilling", "*****************File Name Not Matched*********" + fileName.getAbsolutePath());
-                    fileName.delete();
-                }
-            }*/
             UtilAppCommon.blImageCapture = false;
             UtilDB utildb = new UtilDB(context);
             photoId = UtilAppCommon.in.SCHEDULED_BILLING_DATE.substring(0, 4) +
@@ -2110,12 +1200,8 @@ public class ActvBilling extends AppCompatActivity implements OnClickListener, T
             String inputData = "";
             inputData = UtilAppCommon.acctNbr + "~" + photoId + ".jpg" + "~" + AppDir + "~0~0";
             utildb.insertIntoImageData(inputData);
-
             Log.i("ActvBilling", " Crop Image Full Path ==>> " + fullPath);
             cropfile = new File(fullPath, photoId + ".jpg");
-            //if(!cropfile.exists()) cropfile.createNewFile();
-            //
-
             String binderfile =  getExternalFilesDir(Environment.DIRECTORY_PICTURES).getPath()
                     + "/SBDocs/Photos" + "/" + UtilAppCommon.in.SUB_DIVISION_CODE + "/" + UtilAppCommon.in.MRU;
             if (!new File(binderfile).exists()) {
@@ -2147,7 +1233,6 @@ public class ActvBilling extends AppCompatActivity implements OnClickListener, T
                     finish();
                 }
             } else {
-
                    file = new File(binderfile, photoId + ".jpg");
                if (file.exists()) {
                    Log.i("ActvBilling", " ************Going for Cropping********" + file.getAbsolutePath());
@@ -2157,11 +1242,11 @@ public class ActvBilling extends AppCompatActivity implements OnClickListener, T
                    // set crop properties here
                    cropIntent.putExtra("crop", true);
                    // indicate aspect of desired crop
-                   cropIntent.putExtra("aspectX", 1);
-                   cropIntent.putExtra("aspectY", 1);
+                   cropIntent.putExtra("aspectX", 3);
+                   cropIntent.putExtra("aspectY", 2);
                    // indicate output X and Y
-                   cropIntent.putExtra("outputX", 128);
-                   cropIntent.putExtra("outputY", 128);
+                   cropIntent.putExtra("outputX", 300);
+                   cropIntent.putExtra("outputY", 300);
                    // retrieve data on return
                    cropIntent.putExtra("return-data", true);
                    cropIntent.putExtra(MediaStore.EXTRA_OUTPUT, AppUtil.getFileUri(ActvBilling.this, file));
@@ -2199,8 +1284,6 @@ public class ActvBilling extends AppCompatActivity implements OnClickListener, T
 
     private static String getDate(String reqformate) {
         Calendar currentDate = Calendar.getInstance();
-        // SimpleDateFormat formatter = new
-        // SimpleDateFormat("yyyy/MMM/dd HH:mm:ss");
         SimpleDateFormat formatter = new SimpleDateFormat(reqformate);
         formatter.setTimeZone(TimeZone.getTimeZone("GMT+5:30"));
         String dateNow = formatter.format(currentDate.getTime());
@@ -2485,14 +1568,11 @@ public class ActvBilling extends AppCompatActivity implements OnClickListener, T
                         // TODO Auto-generated method stub
                         ad.dismiss();
                         Write2SbmOut();
-                        //startActivity(new Intent(ctx, ActvBillPrinting.class));
                     });
             ad.setButton(DialogInterface.BUTTON_NEGATIVE, "No",
                     (dialog, which) -> {
                         // TODO Auto-generated method stub
                         ad.dismiss();
-                        // startActivity(getIntent());
-                        //startActivity(new Intent(getApplicationContext(), ActvBillingOption.class));
                         if (UtilAppCommon.billType.equalsIgnoreCase("A"))
                             startActivity(new Intent(getBaseContext(), ActvConsumerNbrInput.class));
                         else if (UtilAppCommon.billType.equalsIgnoreCase("L"))
@@ -2524,15 +1604,10 @@ public class ActvBilling extends AppCompatActivity implements OnClickListener, T
 
 
     public void getImageByCANo(String CANo) {
-
-
         String AppDir = null;
         try {
             Log.e("getImageByCANo", "Started");
             UtilDB utildb = new UtilDB(getApplicationContext());
-            /*AppDir = Environment.getExternalStorageDirectory().getPath()
-                    + "/SBDocs/Photos_Crop" + "/" + utildb.getSdoCode() + "/"
-                    + utildb.getActiveMRU();*/
             AppDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES + "/SBDocs/Photos_Crop" + "/" + utildb.getSdoCode() + "/"
                     + utildb.getActiveMRU()).getPath();
             Cursor cursorImage = utildb.getUnCompressedImage(CANo);
@@ -2579,10 +1654,6 @@ public class ActvBilling extends AppCompatActivity implements OnClickListener, T
         Timestamp timestamp = new Timestamp(
                 System.currentTimeMillis());
         photoTakenTime = String.valueOf(timestamp);
-		/*Toast.makeText(getApplicationContext(),
-				"Photo Saved Successfully", Toast.LENGTH_LONG)
-				.show();*/
-
         UtilDB dbObj = new UtilDB(context);
         String[] printer = dbObj.GetPrinterInfo();
         dbObj.close();
@@ -2590,24 +1661,13 @@ public class ActvBilling extends AppCompatActivity implements OnClickListener, T
             if (printer[1].compareToIgnoreCase("Analogic Impact") == 0) {
                 Log.v("ActvBolling", "PostCapture Image when printer[1].compareToIgnoreCase(Analogic Impact)");
                 billing();
-                // 11.02.16
-                //} else if (printer[1]
-                //		.compareToIgnoreCase("Analogic Thermal") == 0) {
-                //	billing();
             } else {
                 Log.v("ActvBolling", "PostCapture Image when NOT NOT printer[1].compareToIgnoreCase(Analogic Impact)");
-                //StoreByteImage();
-                //billing();
                 CropImage();
             }
         } else {
             Toast.makeText(getApplicationContext(), "Please configure printer", Toast.LENGTH_LONG).show();
             finish();
         }
-
     }
-
-
-
-
 }

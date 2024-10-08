@@ -63,7 +63,6 @@ public class ActvBillPrinting extends AppCompatActivity {
 	//AnalogicImpact sendData = null;
 	EpsonThermal sendDataEpson = null;
 	EpsonThermalHindi sendDataEpsonHindi = null;
-	Date dNow = new Date();
 	SimpleDateFormat ft = new SimpleDateFormat ("hh:mm:ss");
 	String strDateTime = null;
 	String strBarcodeData = ""; //UtilAppCommon.out.BillNo + UtilAppCommon.out.AmtPayableUptoDt + UtilAppCommon.out.CurrentMtrReadingNote;
@@ -954,20 +953,7 @@ public class ActvBillPrinting extends AppCompatActivity {
 				builder.addText(".\n");
 
 			try {    Drawable photoPathlogo=null;
-//					if(android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.TIRAMISU) {
-//						photoPathlogo = ContextCompat.getDrawable(context, R.drawable.azadi);
-//					}else{
-//						photoPathlogo=getResources().getDrawable(R.drawable.chunav);
-//					}
-					//System.out.println("Photo: " + photoPathlogo.toString());
-//					BitmapFactory bf = new BitmapFactory();
-//					Bitmap bitmap_logo=BitmapFactory.decodeFile(photoPathlogo.get);
-//					builder.addImage(bitmap_logo, 0, 0, bitmap_logo.getWidth(), bitmap_logo.getHeight(), Builder.PARAM_DEFAULT);
-//					//builder.addImage(bf.decodeFile(photoPathlogo), 0, 0, bf
-									//.decodeFile(photoPathlogo).getWidth(),
-							//bf.decodeFile(photoPathlogo).getHeight(),
-							//Builder.PARAM_DEFAULT);
-					Bitmap azadi = Utilities.getBitmapFromDrawable(ActvBillPrinting.this,R.drawable.chunav);
+					Bitmap azadi = Utilities.getBitmapFromDrawable(ActvBillPrinting.this,R.drawable.solar);
 					//Bitmap azadi = BitmapFactory.decodeResource(getResources(), R.drawable.chunav);
 					azadi = Bitmap.createScaledBitmap(azadi, 350, 220, true);
 					builder.addImage(azadi, 0, 0, azadi.getWidth(), azadi.getHeight(), Builder.PARAM_DEFAULT);
@@ -1531,6 +1517,14 @@ public class ActvBillPrinting extends AppCompatActivity {
 					builder.addText(String.format("Consumer Helpline- 1912"));
 
 					builder.addText("\n");
+
+					builder.addTextAlign(Builder.ALIGN_CENTER);
+					builder.addText("*************************************** \n");
+				    builder.addText("Solar lagaen bijali bill bachaen "+ "\n");
+					builder.addText("*************************************** \n");
+					/*builder.addTextAlign(Builder.ALIGN_LEFT);
+					builder.addText("For application go to \n https://www.pmsuryaghar.gov.in \n");
+					builder.addText("*************************************** \n");*/
 
 					float flIntDisc = 0;
 					if (!(UtilAppCommon.out.INT_DISC.equalsIgnoreCase("") || UtilAppCommon.out.INT_DISC.equalsIgnoreCase("null"))) {
@@ -2209,6 +2203,7 @@ public class ActvBillPrinting extends AppCompatActivity {
 
 		SimpleDateFormat ft = new SimpleDateFormat ("dd-MM-yy' TIME:'hh:mm");
 
+		@SuppressLint("SuspiciousIndentation")
 		public void run() {
 			Print printer = new Print();
 			int[] status = new int[1];
@@ -2241,7 +2236,7 @@ public class ActvBillPrinting extends AppCompatActivity {
 									.decodeFile(PhotoPath).getWidth(),
 							bf.decodeFile(PhotoPath).getHeight(),
 							Builder.PARAM_DEFAULT);*/
-					Bitmap bt_logo=Utilities.getBitmapFromDrawable(getApplicationContext(),R.drawable.chunav);
+					Bitmap bt_logo=Utilities.getBitmapFromDrawable(getApplicationContext(),R.drawable.solar);
 					builder.addImage(bt_logo,0,0,bt_logo.getWidth(),bt_logo.getHeight(),Builder.PARAM_DEFAULT);
 					Log.v("Azadi Photo Print Added", "Azadi Photo Print Added");
 				} catch (Exception ex) {
@@ -2659,10 +2654,8 @@ public class ActvBillPrinting extends AppCompatActivity {
 
 				builder.addCommand(String.format(
 						"ऊर्जा शुल्क          :%.2f\n", engchg).getBytes("UTF-8"));
-
 				builder.addCommand(String.format(
 						"वर्तमान विलंब अधिभार:%.2f\n", curdps).getBytes("UTF-8"));
-
 				builder.addCommand(String.format(
 						"फीक्सड/डिमांड प्रभार :%.2f\n", fixchg).getBytes("UTF-8"));
 
@@ -2671,23 +2664,18 @@ public class ActvBillPrinting extends AppCompatActivity {
 
 				builder.addCommand(String.format(
 						"विदयुत  शुल्क      :%.2f\n", ed).getBytes("UTF-8"));
-
 				builder.addCommand(String.format(
 						"मीटर किराया       :%.2f\n", mr).getBytes("UTF-8"));
-
 				/**
 				 * Adding New lines for tariff change 2018-19
 				 */
-
 				builder.addCommand(String.format(
 						"सीजीएसटी @ 9%%    : %.2f\n",  cgst).getBytes("UTF-8"));
 				builder.addCommand(String.format(
 						"एसजीएसटी @ 9%%    : %.2f\n",  sgst).getBytes("UTF-8"));
-
 				/**
 				 * End adding lines for tariff change 2018-19
 				 */
-
 				builder.addCommand(String.format(
 						"कैपिसिटर प्रभार     :%.2f\n", shuntcapchg).getBytes("UTF-8"));
 
@@ -2696,81 +2684,56 @@ public class ActvBillPrinting extends AppCompatActivity {
 
 				builder.addCommand(String.format(
 						"अन्य शुल्क        :%.2f\n", othrchg).getBytes("UTF-8"));
-
 				builder.addTextSize(1, 2);
 				builder.addTextFont(Builder.FONT_A);
-
 				builder.addCommand(String.format(
 						"राज्य सरकार अनुदान:%.2f\n", govsubsidy).getBytes("UTF-8"));
-
 				builder.addTextFont(Builder.FONT_A);
 				builder.addTextSize(1, 1);
-
-
 				builder.addCommand(String.format(
 						"कुल अभिनिर्धारण (बी):%.2f\n",subtotb).getBytes("UTF-8"));
-
 				builder.addText(" ****************************\n");
-
 				builder.addCommand(String.format(
 						"जमानत राशि पर सूद(सी):%.2f\n", intonsd).getBytes("UTF-8"));
-
 				builder.addCommand(String.format(
 						"इन्सेंटिव्स          :%.2f\n", incentive).getBytes("UTF-8"));
-
 				builder.addCommand(String.format(
 						"रीमिशन           :%.2f\n", rebonmmc).getBytes("UTF-8"));
-
 				builder.addCommand(String.format(
 						"उप-जोड(ए+बी+सी) :%.2f\n", grosstot).getBytes("UTF-8"));
-
 				builder.addText(" ***********************\n");
-
 				builder.addCommand(String.format(
 						"छूट की राशि    :%s\n", UtilAppCommon.out.Rebate).getBytes("UTF-8"));
-
 				builder.addText(" ***********************\n");
 				builder.addTextAlign(Builder.ALIGN_CENTER);
 				builder.addCommand("कूल मांग    \n".getBytes("UTF-8"));
 				builder.addText("----------------------------\n");
 				builder.addTextAlign(Builder.ALIGN_LEFT);
-
 				builder.addCommand(String.format(
 						"%s तक रूo  : %s\n", UtilAppCommon.out.AmtPayableUptoDt, UtilAppCommon.out.AmtPayableUptoAmt).getBytes("UTF-8"));
-
 				builder.addCommand(String.format(
 						"%s तक रूo  : %s\n", UtilAppCommon.out.AmtPayablePYDt, UtilAppCommon.out.AmtPayablePYAmt).getBytes("UTF-8"));
-
 				builder.addCommand(String.format(
 						"%s पश्चात रूo : %s\n", UtilAppCommon.out.AmtPayableAfterDt, UtilAppCommon.out.AmtPayableAfterAmt).getBytes("UTF-8"));
 
 				builder.addText("****************************\n");
-
 				builder.addTextAlign(Builder.ALIGN_CENTER);
 				builder.addCommand("पिछले भुगतान का  विवरण     \n".getBytes("UTF-8"));
 				builder.addText(" ----------------------------\n");
 				builder.addTextAlign(Builder.ALIGN_LEFT);
-
 				builder.addCommand(String.format(
 						"भुगतान की राशि  :%s\n", UtilAppCommon.out.LastPaymentAmt).getBytes("UTF-8"));
-
 				builder.addCommand(String.format(
 						"भुगतान दिनांक    :%s\n", UtilAppCommon.out.LastPaidDate).getBytes("UTF-8"));
-
 				builder.addCommand(String.format(
 						"रसीद  संख्या  :%s\n", UtilAppCommon.out.ReceiptNumber).getBytes("UTF-8"));
-
 				builder.addCommand(String.format(
 						"मीटर रीडर आईडी :%s\n",  UtilAppCommon.out.MTR_READER_ID).getBytes("UTF-8"));
-
-
 				//dNow = new Date();
 				//strDateTime = ft.format(dNow);
 				//builder.addCommand(String.format("DATE: %s\n", strDateTime));
 				builder.addText(String.format("Ver: %s", UtilAppCommon.strAppVersion.replace(".apk", "")));
-
 				builder.addText("\n");
-
 				strBarcodeData = UtilAppCommon.acctNbr;
 				//builder.addBarcode(strBarcodeData, Builder.BARCODE_JAN13 , Builder.HRI_NONE, Builder.FONT_A, 50, 100);
 				//builder.addBarcode(strBarcodeData, Builder.BARCODE_CODE128 , Builder.HRI_NONE, Builder.FONT_A, 50, 100);
@@ -2780,12 +2743,17 @@ public class ActvBillPrinting extends AppCompatActivity {
 				//builder.addBarcode(strBarcodeData, Builder.BARCODE_CODE93 , Builder.HRI_NONE, Builder.FONT_A, 50, 100);
 				//builder.addBarcode(strBarcodeData, Builder.BARCODE_EAN8 , Builder.HRI_NONE, Builder.FONT_A, 50, 100);
 				//builder.addBarcode(strBarcodeData, Builder.BARCODE_GS1_128 , Builder.HRI_NONE, Builder.FONT_A, 50, 100);
-
 				builder.addText("\n");
-
 				builder.addText(String.format("Consumer Helpline- 1912"));
-
 				builder.addText("\n");
+				builder.addText("\n");
+				builder.addTextAlign(Builder.ALIGN_CENTER);
+				builder.addText("*****************************\n");
+				builder.addText("सोलर लगाए बिजली बिल बचाए ! \n");
+				builder.addText("*****************************\n");
+//					builder.addTextAlign(Builder.ALIGN_LEFT);
+//					builder.addText("आवेदन हेतु https://www.pmsuryaghar.gov.in \n");
+//					builder.addText("*****************************\n");
 
 				float flIntDisc= 0;
 				if(!(UtilAppCommon.out.INT_DISC.equalsIgnoreCase("") || UtilAppCommon.out.INT_DISC.equalsIgnoreCase("null")))
@@ -2795,24 +2763,16 @@ public class ActvBillPrinting extends AppCompatActivity {
 						builder.addCommand(String.format("देय तिथि %s तक विपत्र राशि रू %s का ऑनलाईन भुगतान करेँ एव पाये रू"
 								+ " %.2f अतिरिक्त छुट।",UtilAppCommon.out.AmtPayableUptoDt, UtilAppCommon.out.AmtPayableUptoAmt, Math.abs(flIntDisc)).getBytes("UTF-8"));
 				}
-
-
 				builder.addText("\n");
 				builder.addText("\n");
-
 				builder.addCut(Builder.CUT_FEED);
 				// <Send print data>
-
 				//builder.
-
 				printer.openPrinter(Print.DEVTYPE_BLUETOOTH, address, Print.TRUE, Print.PARAM_DEFAULT);
-
 				printer.sendData(builder, 21000, status, battery);
 				//startActivity(new Intent(getBaseContext(), PoleMobileActivity.class));
-
 				printer.closePrinter();
 				//
-
 			} catch (Exception e) {
 				e.printStackTrace();
 				// Handle communications error here.
@@ -3730,6 +3690,12 @@ public class ActvBillPrinting extends AppCompatActivity {
                 //printerdata4.append(String.format("Consumer Helpline- 1912"));
                 // image
                 printerdata6.append(String.format("Consumer Helpline- 1912 \n\n"));
+				if(UtilAppCommon.out.Company.equalsIgnoreCase("NBPD")) {
+					printerdata6.append(String.format("********************************* \n"));
+					printerdata6.append(String.format("Solar lagaen bijali bill bachaen "+ "\n"));
+					printerdata6.append(String.format("****************************** \n"));
+					//printerdata6.append(String.format("For application go to https://www.pmsuryaghar.gov.in \n"));
+				}
                 float flIntDisc= 0;
                 if(!(UtilAppCommon.out.INT_DISC.equalsIgnoreCase("") || UtilAppCommon.out.INT_DISC.equalsIgnoreCase("null")))
                 {
