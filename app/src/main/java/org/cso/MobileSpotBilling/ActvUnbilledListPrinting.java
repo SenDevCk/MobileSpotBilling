@@ -4,14 +4,19 @@ package org.cso.MobileSpotBilling;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 
+import android.Manifest;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 
 import android.os.Bundle;
+
 import java.text.SimpleDateFormat;
 import java.util.UUID;
+
 import org.cso.MSBUtil.PrintUtilZebra;
 import org.cso.MSBUtil.UtilDB;
+
 import com.analogics.thermalAPI.Bluetooth_Printer_2inch_prof_ThermalAPI;
 import com.analogics.thermalprinter.AnalogicsThermalPrinter;
 import com.epson.eposprint.Builder;
@@ -21,6 +26,7 @@ import com.zebra.android.comm.ZebraPrinterConnection;
 import com.zebra.android.printer.PrinterLanguage;
 import com.zebra.android.printer.ZebraPrinter;
 import com.zebra.android.printer.ZebraPrinterFactory;
+
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
@@ -28,6 +34,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
 public class ActvUnbilledListPrinting extends AppCompatActivity {
     /**
@@ -62,6 +69,16 @@ public class ActvUnbilledListPrinting extends AppCompatActivity {
                     this,
                     "Bluetooth feature is turned off now...Please turned it on! ",
                     Toast.LENGTH_LONG).show();
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
+                // TODO: Consider calling
+                //    ActivityCompat#requestPermissions
+                // here to request the missing permissions, and then overriding
+                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                //                                          int[] grantResults)
+                // to handle the case where the user grants the permission. See the documentation
+                // for ActivityCompat#requestPermissions for more details.
+                return;
+            }
             mBluetoothAdapter.enable();
             try {
                 Thread.sleep(1000);
@@ -78,6 +95,7 @@ public class ActvUnbilledListPrinting extends AppCompatActivity {
             finish();
         }
         else if (printer[1].compareToIgnoreCase("Zebra Thermal") == 0) {
+            System.out.println("Zebra Thermal "+printer[0]+" "+printer[1]);
             sendDatazebra = new ZebraThermal(printer[0]);
             Thread t = new Thread(sendDatazebra);
             t.run();
@@ -86,6 +104,7 @@ public class ActvUnbilledListPrinting extends AppCompatActivity {
             //	Thread t = new Thread(sendData);
             //	t.run();
         } else if (printer[1].compareToIgnoreCase("EPSON Thermal") == 0) {
+            System.out.println("EPSON Thermal "+printer[0]+" "+printer[1]);
             sendDataEpson = new EpsonThermal(printer[0]);
             Thread t = new Thread(sendDataEpson);
             t.run();
@@ -151,7 +170,11 @@ public class ActvUnbilledListPrinting extends AppCompatActivity {
 
         public ZebraThermal(String address) {
             this.address = address;
-            device = mBluetoothAdapter.getRemoteDevice(address);
+            try {
+                device = mBluetoothAdapter.getRemoteDevice(address);
+            }catch (Exception ex){
+                ex.printStackTrace();
+            }
             Toast.makeText(getApplicationContext(), "Connected To:" + address,
                     Toast.LENGTH_LONG).show();
         }
@@ -288,12 +311,14 @@ public class ActvUnbilledListPrinting extends AppCompatActivity {
                 printer.openPrinter(Print.DEVTYPE_BLUETOOTH, address,
                         Print.TRUE, Print.PARAM_DEFAULT);
                 printer.sendData(builder, 10000, status, battery);
+
                 printer.closePrinter();
 				/*startActivity(new Intent(getBaseContext(),
 						ActvBillingOption.class));
 */
             } catch (Exception e) {
                 // Handle communications error here.
+                e.printStackTrace();
                 Toast.makeText(getApplicationContext(), e.toString(),
                         Toast.LENGTH_LONG).show();
 

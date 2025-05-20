@@ -69,9 +69,13 @@ public class AsyncUnuploadedImage extends AsyncTask<String, Void, String>  {
                     Bitmap bitmap = BitmapFactory.decodeFile(imageFiles[jcntr].getAbsolutePath());
                     //Bitmap bitmap=Utilities.getBitmapForAllVersions(context,imageFiles[jcntr]);
                     ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                    bitmap.compress(Bitmap.CompressFormat.JPEG, 90, stream);
-                    byte[] image = stream.toByteArray();
-                    img_str = Base64.encodeToString(image, Base64.DEFAULT);
+                    if(bitmap==null) {
+                        bitmap.compress(Bitmap.CompressFormat.JPEG, 90, stream);
+                        byte[] image = stream.toByteArray();
+                        img_str = Base64.encodeToString(image, Base64.DEFAULT);
+                    }else{
+                        img_str="";
+                    }
                     Log.e("AsyncUploadImage",img_str);
                     glbVar = "0";
                     //String fileName = imageFiles[jcntr].getName();

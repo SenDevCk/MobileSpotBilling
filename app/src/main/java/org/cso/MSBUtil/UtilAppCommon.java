@@ -30,7 +30,7 @@ import org.cso.MSBModel.StructSAPBlueInput;
 import org.cso.MSBModel.StructSAPInput;
 import org.cso.MSBModel.StructUserInfo;
 import org.cso.MSBModel.StructSlabInfo;
-import org.cso.MobileSpotBilling.BuildConfig;
+//import org.cso.MobileSpotBilling.BuildConfig;
 import org.cso.MobileSpotBilling.R;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -43,6 +43,8 @@ import android.os.Environment;
 import android.os.StrictMode;
 import android.util.Log;
 import android.widget.Toast;
+
+import de.hdodenhof.circleimageview.BuildConfig;
 
 public class UtilAppCommon {
 	// public static Session mySessionObject = null;

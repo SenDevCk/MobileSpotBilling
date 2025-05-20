@@ -7,8 +7,11 @@ import java.io.FileOutputStream;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.Locale;
 
 import org.cso.MSBAsync.AsyncGetOutputData;
 import org.cso.MSBAsync.AsyncImage;
@@ -32,6 +35,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.text.Html;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -54,6 +58,7 @@ public class ActvCurrReading extends AppCompatActivity implements OnClickListene
     boolean blFlag = true, blDialFlag = false;
     LinearLayout linelayPowFact = null, linelayKVAH = null, linelayMaxDemandKVA = null, linelayKWH = null, linelayMaxDemand = null;
     Toolbar toolbar;
+    String PRV_BILL_DATE="";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -61,14 +66,15 @@ public class ActvCurrReading extends AppCompatActivity implements OnClickListene
         super.onCreate(savedInstanceState);
         System.out.println("**********Inside ActvCurrReading*********** ");
         setContentView(R.layout.currreadinginput);
-
+        PRV_BILL_DATE=getIntent().getStringExtra("PRV_BILL_DATE");
         toolbar = findViewById(R.id.toolbar_currentred_inpt);
         //toolbar.setLogo(getResources().getDrawable(R.drawable.sbpscl_logo));
         toolbar.setTitle("Current Reading Input");
+
+        toolbar.setSubtitle(Html.fromHtml("<b style=\"color:White;\">" +"PRV_BILL_DATE"+ (PRV_BILL_DATE) + "</b> "));
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-
         linelayPowFact = (LinearLayout) findViewById(R.id.PowFactorLineLayout);
         linelayKVAH = (LinearLayout) findViewById(R.id.CurrentReadingKVAHLineLayout);
         linelayMaxDemandKVA = (LinearLayout) findViewById(R.id.maxDemandKVALayout);
@@ -90,15 +96,14 @@ public class ActvCurrReading extends AppCompatActivity implements OnClickListene
             }
         } else {
             ((EditText) findViewById(R.id.PowFactorEdit)).setText("0.00");
-            if (UtilAppCommon.in.RATE_CATEGORY.equalsIgnoreCase("NDS-IID(B)") ||
-                    UtilAppCommon.in.RATE_CATEGORY.equalsIgnoreCase("SS-I")
+            if (UtilAppCommon.in.RATE_CATEGORY.equalsIgnoreCase("SS-I")
                     || UtilAppCommon.in.RATE_CATEGORY.equalsIgnoreCase("IAS-IM")) {
 
                 ((EditText) findViewById(R.id.CurrentReadingEditKVAH)).setEnabled(false);
                 ((EditText) findViewById(R.id.CurrentReadingEditKVAH)).setText("0");
                 ((EditText) findViewById(R.id.PowFactorEdit)).setEnabled(true);
                 ((EditText) findViewById(R.id.PowFactorEdit)).setText("0.00");
-                linelayKVAH.setVisibility(View.INVISIBLE);
+                linelayKVAH.setVisibility(View.GONE);
             } else if (UtilAppCommon.in.RATE_CATEGORY.equalsIgnoreCase("HGN") /*||
                     UtilAppCommon.in.RATE_CATEGORY.equalsIgnoreCase("LTEV")*/) {
                 linelayMaxDemand.setVisibility(View.GONE);
@@ -108,7 +113,7 @@ public class ActvCurrReading extends AppCompatActivity implements OnClickListene
                 ((EditText) findViewById(R.id.PowFactorEdit)).setText("0.00");
                 ((EditText) findViewById(R.id.CurrentReadingEditKVAH)).setEnabled(false);
                 ((EditText) findViewById(R.id.CurrentReadingEditKVAH)).setText("0");
-                linelayKVAH.setVisibility(View.INVISIBLE);
+                linelayKVAH.setVisibility(View.GONE);
 
             } else if (UtilAppCommon.in.RATE_CATEGORY.equalsIgnoreCase("DS-III(D)")) {
                 ((EditText) findViewById(R.id.CurrentReadingEdit)).setText("0");
@@ -116,10 +121,10 @@ public class ActvCurrReading extends AppCompatActivity implements OnClickListene
                 ((EditText) findViewById(R.id.CurrentReadingEditKVAH)).setText("0");
                 ((EditText) findViewById(R.id.PowFactorEdit)).setEnabled(false);
                 ((EditText) findViewById(R.id.PowFactorEdit)).setText("0.00");
-                linelayKVAH.setVisibility(View.INVISIBLE);
-                linelayPowFact.setVisibility(View.INVISIBLE);
+                linelayKVAH.setVisibility(View.GONE);
+                linelayPowFact.setVisibility(View.GONE);
 
-            } else if (!(UtilAppCommon.in.RATE_CATEGORY.equalsIgnoreCase("LTIS-ID") ||
+            } else if (!(UtilAppCommon.in.RATE_CATEGORY.equalsIgnoreCase("NDS-IID(B)")||UtilAppCommon.in.RATE_CATEGORY.equalsIgnoreCase("LTIS-ID") ||
                     UtilAppCommon.in.RATE_CATEGORY.equalsIgnoreCase("LTIS-IID") ||
                     UtilAppCommon.in.RATE_CATEGORY.equalsIgnoreCase("PUBWW") ||
                     UtilAppCommon.in.RATE_CATEGORY.equalsIgnoreCase("IAS-IIM") ||
@@ -132,19 +137,19 @@ public class ActvCurrReading extends AppCompatActivity implements OnClickListene
                 ((EditText) findViewById(R.id.CurrentReadingEdit)).setText("0");
                 ((EditText) findViewById(R.id.CurrentReadingEditKVAH)).setEnabled(false);
                 ((EditText) findViewById(R.id.CurrentReadingEditKVAH)).setText("0");
-                ((EditText) findViewById(R.id.PowFactorEdit)).setEnabled(false);
                 ((EditText) findViewById(R.id.PowFactorEdit)).setText("0.00");
-
-                linelayKVAH.setVisibility(View.INVISIBLE);
-                linelayPowFact.setVisibility(View.INVISIBLE);
+                ((EditText) findViewById(R.id.PowFactorEdit)).setEnabled(false);
+                linelayKVAH.setVisibility(View.GONE);
+                linelayPowFact.setVisibility(View.GONE);
 
 
                 /**
                  * Setting Visibility of KVAH to visible hence commenting code below and adding visibility to KVAH*/
-                //linelayKVAH.setVisibility(View.INVISIBLE);
+                //linelayKVAH.setVisibility(View.GONE);
 
 
-            } else if (UtilAppCommon.in.RATE_CATEGORY.equalsIgnoreCase("LTIS-ID") ||
+            } else if (UtilAppCommon.in.RATE_CATEGORY.equalsIgnoreCase("NDS-IID(B)") ||
+                    UtilAppCommon.in.RATE_CATEGORY.equalsIgnoreCase("LTIS-ID") ||
                     UtilAppCommon.in.RATE_CATEGORY.equalsIgnoreCase("LTIS-IID") ||
                     UtilAppCommon.in.RATE_CATEGORY.equalsIgnoreCase("PUBWW") ||
                     UtilAppCommon.in.RATE_CATEGORY.equalsIgnoreCase("IAS-IIM") ||
@@ -158,15 +163,47 @@ public class ActvCurrReading extends AppCompatActivity implements OnClickListene
                 ((EditText) findViewById(R.id.MaxDemandKVAEdit)).setText("0.00");
                 linelayMaxDemandKVA.setVisibility(View.VISIBLE);
                 ((EditText) findViewById(R.id.CurrentReadingEdit)).setText("0");
-                ((EditText) findViewById(R.id.PowFactorEdit)).setEnabled(false);
+                //condition will be here for past reading date
                 ((EditText) findViewById(R.id.PowFactorEdit)).setText("0.00");
+                Date pre_read_date = null;
+                Date comparisonDate = null;
+                try {
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+                    String[] tokens=PRV_BILL_DATE.split("\\.");
+                    pre_read_date = sdf.parse(tokens[0]+"-"+tokens[1]+"-"+tokens[2]);
+                    comparisonDate = sdf.parse("2025-04-01");
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                    Toast.makeText(this, ""+ex.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+                if (pre_read_date==null){
+                    linelayPowFact.setVisibility(View.VISIBLE);
+                    ((EditText) findViewById(R.id.PowFactorEdit)).setEnabled(true);
+                }
+                else if (pre_read_date != null && comparisonDate != null &&
+                        pre_read_date.before(comparisonDate) &&
+                        UtilAppCommon.in.RATE_CATEGORY.equalsIgnoreCase("NDS-IID(B)")) {
+                    ((EditText) findViewById(R.id.PowFactorEdit)).setEnabled(true);
+                    linelayPowFact.setVisibility(View.VISIBLE);
+                } else {
+                    linelayPowFact.setVisibility(View.GONE);
+                    ((EditText) findViewById(R.id.PowFactorEdit)).setEnabled(false);
+                }
                 linelayKVAH.setVisibility(View.VISIBLE);
-                linelayPowFact.setVisibility(View.INVISIBLE);
+                //linelayPowFact.setVisibility(View.GONE);
                 //((EditText) findViewById(R.id.CurrentReadingEditKVAH)).setText("0");
-            } else {
+            }
+            else if (UtilAppCommon.in.RATE_CATEGORY.equalsIgnoreCase("NDS-IID(A)")){
+                ((EditText) findViewById(R.id.CurrentReadingEditKVAH)).setEnabled(false);
+                ((EditText) findViewById(R.id.CurrentReadingEditKVAH)).setText("0");
+                ((EditText) findViewById(R.id.PowFactorEdit)).setEnabled(true);
+                ((EditText) findViewById(R.id.PowFactorEdit)).setText("0.00");
+                linelayKVAH.setVisibility(View.GONE);
+            }
+            else {
                 ((EditText) findViewById(R.id.PowFactorEdit)).setEnabled(false);
                 ((EditText) findViewById(R.id.PowFactorEdit)).setText("0.00");
-                linelayPowFact.setVisibility(View.INVISIBLE);
+                linelayPowFact.setVisibility(View.GONE);
             }
 		   /*else if(UtilAppCommon.in.RATE_CATEGORY.equalsIgnoreCase("LTIS-ID") || UtilAppCommon.in.RATE_CATEGORY.equalsIgnoreCase("LTIS-IID") || UtilAppCommon.in.RATE_CATEGORY.equalsIgnoreCase("PUBWW"))
 		   {
@@ -252,7 +289,9 @@ public class ActvCurrReading extends AppCompatActivity implements OnClickListene
 
                         }
                     }
-
+                    if(iPowFactor<=0.0 || iPowFactor>=1){
+                        iPowFactor=0.9;
+                    }
                     if (reading.trim().equalsIgnoreCase("") && readingKVAH.trim().equalsIgnoreCase("")) {
                         Toast.makeText(getApplicationContext(),
                                 "Please enter value for reading",
@@ -262,7 +301,7 @@ public class ActvCurrReading extends AppCompatActivity implements OnClickListene
                     } else {
 
 
-                        if (UtilAppCommon.in.RATE_CATEGORY.equalsIgnoreCase("LTIS-ID")
+                        if (UtilAppCommon.in.RATE_CATEGORY.equalsIgnoreCase("NDS-IID(B)") || UtilAppCommon.in.RATE_CATEGORY.equalsIgnoreCase("LTIS-ID")
                                 || UtilAppCommon.in.RATE_CATEGORY.equalsIgnoreCase("LTIS-IID")
                                 || UtilAppCommon.in.RATE_CATEGORY.equalsIgnoreCase("PUBWW")
                                 || UtilAppCommon.in.RATE_CATEGORY.equalsIgnoreCase("IAS-IIM") ||
@@ -354,15 +393,16 @@ public class ActvCurrReading extends AppCompatActivity implements OnClickListene
 				}				
 				
 				else */
-                    if ((UtilAppCommon.in.RATE_CATEGORY.equalsIgnoreCase("NDS-IID(B)") ||
-                            UtilAppCommon.in.RATE_CATEGORY.equalsIgnoreCase("SS-I")
+                    //(UtilAppCommon.in.RATE_CATEGORY.equalsIgnoreCase("NDS-IID(B)") ||
+                    if ((UtilAppCommon.in.RATE_CATEGORY.equalsIgnoreCase("NDS-IID(A)") ||UtilAppCommon.in.RATE_CATEGORY.equalsIgnoreCase("SS-I")
                             /* || UtilAppCommon.in.RATE_CATEGORY.equalsIgnoreCase("IAS-IIM")*/ ||
                             UtilAppCommon.in.RATE_CATEGORY.equalsIgnoreCase("IAS-IM")
                             || UtilAppCommon.in.RATE_CATEGORY.equalsIgnoreCase("HGN")
                             /* || UtilAppCommon.in.RATE_CATEGORY.equalsIgnoreCase("LTEV")*/)
                             && ((iPowFactor = powerFactorValue(powFactor)) == -1.0)) {
                         blFlag = false;
-                    } else if ((UtilAppCommon.in.RATE_CATEGORY.equalsIgnoreCase("NDS-IID(B)") ||
+                        //UtilAppCommon.in.RATE_CATEGORY.equalsIgnoreCase("NDS-IID(B)") ||
+                    } else if ((
                             UtilAppCommon.in.RATE_CATEGORY.equalsIgnoreCase("SS-I")
                             /*|| UtilAppCommon.in.RATE_CATEGORY.equalsIgnoreCase("IAS-IIM")*/ ||
                             UtilAppCommon.in.RATE_CATEGORY.equalsIgnoreCase("IAS-IM"))
@@ -373,7 +413,7 @@ public class ActvCurrReading extends AppCompatActivity implements OnClickListene
                         //break;
                         blFlag = false;
                     } else if ((iMaxDemand <= 0 || iMaxDemand > 200) &&
-                            !UtilAppCommon.in.RATE_CATEGORY.equalsIgnoreCase("HGN") /*&&
+                            !(UtilAppCommon.in.RATE_CATEGORY.equalsIgnoreCase("HGN") || UtilAppCommon.in.RATE_CATEGORY.equalsIgnoreCase("NDS-IID(A)"))/*&&
                             !UtilAppCommon.in.RATE_CATEGORY.equalsIgnoreCase("LTEV")*/) {
                         Toast.makeText(getApplicationContext(),
                                 "Please enter Max Demand value more than 0 and less than or equal to 200.",
@@ -393,36 +433,27 @@ public class ActvCurrReading extends AppCompatActivity implements OnClickListene
                         ad1.setTitle("Confirm");
                         ad1.setMessage("Current reading entered is less than previous reading. Want to proceed?");
                         ad1.setButton(DialogInterface.BUTTON_POSITIVE, "Yes",
-                                new DialogInterface.OnClickListener() {
+                                (dialog, which) -> {
+                                    // TODO Auto-generated method stub
 
-                                    public void onClick(DialogInterface dialog,
-                                                        int which) {
-                                        // TODO Auto-generated method stub
+                                    ad1.dismiss();
+                                    if (blFlag)
+                                        billing();
+                                    //blDialFlag = true;
+                                    //billdlg();
 
-                                        ad1.dismiss();
-                                        if (blFlag)
-                                            billing();
-                                        //blDialFlag = true;
-                                        //billdlg();
-
-                                    }
                                 });
+                        //private AdapterView<ListAdapter> meterStatusListView;
                         ad1.setButton(DialogInterface.BUTTON_NEGATIVE, "No",
-                                new DialogInterface.OnClickListener() {
+                                (dialog, which) -> {
+                                    // TODO Auto-generated method stub
 
-                                    //private AdapterView<ListAdapter> meterStatusListView;
+                                    ad1.dismiss();
+                                    //finish();
+                                    //blFlag = false;
+                                    //blDialFlag = true;
+                                    return;
 
-                                    public void onClick(DialogInterface dialog,
-                                                        int which) {
-                                        // TODO Auto-generated method stub
-
-                                        ad1.dismiss();
-                                        //finish();
-                                        //blFlag = false;
-                                        //blDialFlag = true;
-                                        return;
-
-                                    }
                                 });
                         ad1.show();
                     } else {
@@ -493,7 +524,8 @@ public class ActvCurrReading extends AppCompatActivity implements OnClickListene
             String demandKVA = ((EditText) findViewById(R.id.MaxDemandKVAEdit)).getText().toString();
             final String powFactor = ((EditText) findViewById(R.id.PowFactorEdit)).getText().toString();
 
-            if (UtilAppCommon.in.RATE_CATEGORY.equalsIgnoreCase("LTIS-ID")
+            if (UtilAppCommon.in.RATE_CATEGORY.equalsIgnoreCase("NDS-IID(B)")||
+                    UtilAppCommon.in.RATE_CATEGORY.equalsIgnoreCase("LTIS-ID")
                     || UtilAppCommon.in.RATE_CATEGORY.equalsIgnoreCase("LTIS-IID")
                     || UtilAppCommon.in.RATE_CATEGORY.equalsIgnoreCase("PUBWW")
                     || UtilAppCommon.in.RATE_CATEGORY.equalsIgnoreCase("IAS-IIM") ||
@@ -550,7 +582,8 @@ public class ActvCurrReading extends AppCompatActivity implements OnClickListene
                 copySAPInputData[8] = SAPInformat.format(today.getTime());            //cursor.getString(3);	MtrReadingDate
                 copySAPInputData[9] = nxtDate;                                        //cursor.getString(2);	SCHEDULED_BILLING_DATE
                 copySAPInputData[10] = UtilAppCommon.in.SAP_DEVICE_NO;                //cursor.getString(12);	SAP_DEVICE_NO
-                copySAPInputData[11] = "1";                                            //"2"					ProcessedFlag
+                copySAPInputData[11] = (UtilAppCommon.in.RATE_CATEGORY.equalsIgnoreCase("NDS-IID(B)") && iPowFactor>0.0)?"2":"1";                                            //"2"					ProcessedFlag
+                //copySAPInputData[11] = "1";                                            //"2"					ProcessedFlag
                 copySAPInputData[12] = "0";                                            //"0"
                 copySAPInputData[13] = readingKVAH;                                    //cursor.getString(6);	CurrentReadingKVAH
 

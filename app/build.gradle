@@ -1,24 +1,18 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdk 35
-    buildToolsVersion '35.0.0'
-
+    compileSdk 34
     defaultConfig {
         applicationId "org.cso.MobileSpotBilling"
-        minSdk 21
-        targetSdk 35
-        //versionCode 1
-        //versionName "3.1"
+        minSdkVersion 21
+        targetSdk 34
         multiDexEnabled true
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         ndk {
-            abiFilters "armeabi","armeabi-v7a", "arm64-v8a" , "x86", "x86_64"
+            abiFilters "armeabi","armeabi-v7a","arm64-v8a" //, "x86", "x86_64"
         }
     }
-    dexOptions {
-        jumboMode true
-    }
+
     buildTypes {
         release {
             minifyEnabled true
@@ -26,36 +20,50 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
         }
     }
-    /*compileOptions {
-        coreLibraryDesugaringEnabled true
-        sourceCompatibility JavaVersion.VERSION_17
-        targetCompatibility JavaVersion.VERSION_17
-    }*/
+
+    compileOptions {
+        //coreLibraryDesugaringEnabled true
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+
     externalNativeBuild {
         cmake {
             version "3.10.2"
         }
     }
-    productFlavors {
-    }
+
+    /*dexOptions {
+        jumboMode true
+    }*/
+
     namespace 'org.cso.MobileSpotBilling'
 }
+
 configurations {
-    all { // You should exclude one of them not both of them
+    all {
         exclude group: "jpos.JposConst", module: "jetified-AndroidLib_1070"
         exclude group: "jpos.JposException", module: "jetified-AndroidLib_1070"
         exclude group: "jpos.POSPrinterConst", module: "jetified-AndroidLib_1070"
     }
 }
+
 dependencies {
-    api fileTree( include: ['*.jar', '*.aar'], dir: 'libs')
+    api fileTree(include: ['*.jar', '*.aar'], dir: 'libs')
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.2.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.6.1'
     implementation files('libs/Analogics2inchBTPrinterAPI.jar')
     implementation files('libs/AnalogicsDecrypter.jar')
     implementation files('libs/AnalogicsMultilingual_BT_Printer_2T_API_1_7.jar')
+
     implementation files('libs/btsdk.jar')
     implementation files('libs/commons-io-2.2.jar')
     implementation files('libs/commons-net-3.1.jar')
+    //epson start
     implementation files('libs/ePOS2.jar')
+    implementation files('libs/ePOSEasySelect.jar')
+    //epson end
     implementation files('libs/iText-5.0.1.jar')
     implementation files('libs/ksoap2-android-assembly-3.0.0-jar-with-dependencies.jar')
     implementation files('libs/opencsv-2.2.jar')
@@ -65,22 +73,22 @@ dependencies {
     implementation files('libs/ZSDK_ANDROID_API.jar')
     implementation files('libs/volley.jar')
     implementation files('libs/log4j-1.2.17.jar')
-    implementation 'com.android.support.constraint:constraint-layout:2.0.4'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation files('libs/Android_SDK_ESC_V1.01.17.01PRO.jar')
     implementation files('libs/AndroidLib_1070.jar')
     implementation files('libs/sun.misc.BASE64Decoder.jar')
     implementation 'com.google.android.gms:play-services-appindexing:9.8.0'
-    /*implementation 'com.google.firebase:firebase-appindexing:11.4.2'*/
-    implementation 'androidx.appcompat:appcompat:1.6.1'
-    implementation 'com.google.android.material:material:1.11.0'
+    implementation 'androidx.appcompat:appcompat:1.5.0'
+    implementation 'com.google.android.material:material:1.6.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'com.google.code.gson:gson:2.10'
     implementation 'com.google.zxing:core:3.3.0'
     implementation 'de.hdodenhof:circleimageview:3.1.0'
+    //implementation 'com.android.tools:desugar_jdk_libs:1.2.0' // Add core desugaring dependency
 }
 
 repositories {
-    jcenter()
+    mavenCentral() // Use MavenCentral instead of JCenter
     maven {
         url 'https://maven.google.com'
     }

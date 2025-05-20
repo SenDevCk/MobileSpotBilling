@@ -25,63 +25,69 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="10dp"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/appbar_currentred_inpt"
         android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:background="@android:color/darker_gray"
+            android:padding="10dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".3"
+                    android:text="Name :"
+                    android:textColor="@color/colorPrimaryDark" />
+
+                <TextView
+                    android:id="@+id/NameTxt1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".6"
+                    android:text="N/A"
+                    android:textColor="@android:color/black"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".3"
+                    android:text="Status"
+                    android:textColor="@color/colorPrimaryDark" />
+
+                <TextView
+                    android:id="@+id/CurrentStatusTxt"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".6"
+                    android:text="N/A"
+                    android:textColor="@android:color/black"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp">
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight=".3"
-                android:text="Name :"
-                android:textColor="@color/colorPrimaryDark"
-                 />
-
-            <TextView
-                android:id="@+id/NameTxt1"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight=".6"
-                android:textColor="@android:color/black"
-                android:textSize="18sp"
-                android:text="N/A"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-           >
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight=".3"
-                android:text="Status"
-                android:textColor="@color/colorPrimaryDark"/>
-
-            <TextView
-                android:id="@+id/CurrentStatusTxt"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight=".6"
-                android:textColor="@android:color/black"
-                android:textSize="18sp"
-                android:text="N/A"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            >
 
             <TextView
                 android:layout_width="0dp"
@@ -111,20 +117,20 @@
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight=".3"
                 android:layout_gravity="center_vertical"
+                android:layout_weight=".3"
                 android:text="Curr. Read (KWH)"
-                android:textColor="@color/colorPrimaryDark"
-                 />
+                android:textColor="@color/colorPrimaryDark" />
 
             <EditText
                 android:id="@+id/CurrentReadingEdit"
+                style="@style/StyleEditText"
                 android:layout_width="0dp"
                 android:layout_height="40dp"
                 android:layout_weight=".6"
-                android:paddingLeft="10dp"
                 android:hint="CUR.RDG KWH"
-                android:inputType="number" />
+                android:inputType="number"
+                android:paddingLeft="10dp" />
         </LinearLayout>
 
         <LinearLayout
@@ -136,20 +142,20 @@
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight=".3"
                 android:layout_gravity="center_vertical"
+                android:layout_weight=".3"
                 android:text="Curr. Read (KVAH)"
-                android:textColor="@color/colorPrimaryDark"
-                />
+                android:textColor="@color/colorPrimaryDark" />
 
             <EditText
                 android:id="@+id/CurrentReadingEditKVAH"
+                style="@style/StyleEditText"
                 android:layout_width="0dp"
                 android:layout_height="40dp"
                 android:layout_weight=".6"
-                android:paddingLeft="10dp"
                 android:hint="CUR.RDG KVAH"
-                android:inputType="number" />
+                android:inputType="number"
+                android:paddingLeft="10dp" />
         </LinearLayout>
 
         <LinearLayout
@@ -161,46 +167,45 @@
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight=".3"
                 android:layout_gravity="center_vertical"
-                android:textColor="@color/colorPrimaryDark"
-                android:text="Max. Demand (KW)" />
+                android:layout_weight=".3"
+                android:text="Max. Demand (KW)"
+                android:textColor="@color/colorPrimaryDark" />
 
             <EditText
                 android:id="@+id/MaxDemandEdit"
+                style="@style/StyleEditText"
                 android:layout_width="0dp"
                 android:layout_height="40dp"
                 android:layout_weight=".6"
-                android:paddingLeft="10dp"
                 android:hint="Max Demand"
-                android:inputType="numberDecimal" />
+                android:inputType="numberDecimal"
+                android:paddingLeft="10dp" />
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/maxDemandKVALayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
             android:layout_marginRight="5dp"
             android:visibility="gone">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="12dp"
-                android:paddingLeft="8dp"
+                android:layout_gravity="center_vertical"
+                android:layout_weight=".3"
                 android:text="Max. Demand (KVA)"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
+                android:textColor="@color/colorPrimaryDark" />
 
             <EditText
                 android:id="@+id/MaxDemandKVAEdit"
                 style="@style/StyleEditText"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="10dp"
+                android:layout_gravity="center_vertical"
+                android:layout_weight=".6"
                 android:hint="Max Demand"
                 android:inputType="numberDecimal" />
         </LinearLayout>
@@ -209,35 +214,35 @@
             android:id="@+id/PowFactorLineLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-           >
+            android:layout_marginTop="10dp">
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight=".3"
-                android:textColor="@color/colorPrimaryDark"
                 android:text="Pow. Factor"
-                />
+                android:textColor="@color/colorPrimaryDark" />
 
             <EditText
                 android:id="@+id/PowFactorEdit"
+                style="@style/StyleEditText"
                 android:layout_width="0dp"
                 android:layout_height="40dp"
                 android:layout_weight=".6"
-                android:textColor="@android:color/darker_gray"
                 android:hint="Power Factor"
+                android:inputType="numberDecimal"
                 android:paddingLeft="10dp"
-                android:inputType="numberDecimal" />
+                android:textColor="@android:color/darker_gray" />
         </LinearLayout>
 
 
     </LinearLayout>
+
     <Button
         android:id="@+id/CalculateBtn"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_alignParentBottom="true"
         style="@style/btnStyleBeige"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_alignParentBottom="true"
         android:text="Confirm" />
 </RelativeLayout>

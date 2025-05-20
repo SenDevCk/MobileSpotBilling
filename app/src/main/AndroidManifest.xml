@@ -4,12 +4,12 @@
     android:versionCode="1"
     android:versionName="@string/app_version">
 
-    <uses-sdk android:minSdkVersion="21" />
+    <uses-sdk android:minSdkVersion="24" />
     <!-- android:installLocation="internalOnly"-->
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.BLUETOOTH" />
-    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.BLUETOOTH" android:maxSdkVersion="30"/>
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" android:maxSdkVersion="30"/>
     <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
     <uses-permission android:name="android.permission.BLUETOOTH_SCAN" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADVERTISE" />
@@ -76,11 +76,12 @@
         android:usesCleartextTraffic="true"
         android:allowTaskReparenting="true"
         android:largeHeap="true"
-        android:allowBackup="true"
+        android:allowBackup="false"
         android:supportsRtl="true"
         android:requestLegacyExternalStorage="true"
         tools:replace="android:allowBackup"
-        android:name="org.cso.config.AppController">
+        android:name="org.cso.config.AppController"
+        android:networkSecurityConfig="@xml/network_security_config">
         <activity
             android:name=".ActivityPreLaunch"
             android:exported="true">
@@ -101,22 +102,26 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".ActvBilling"
-            android:configChanges="orientation|keyboardHidden|screenSize" />
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            />
         <activity
             android:name=".ActvConsumerNbrInput"
             android:clearTaskOnLaunch="true"
             android:configChanges="orientation"
             android:finishOnTaskLaunch="true"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            />
         <activity
             android:name=".ActvConsumerNbrInputRecheck"
             android:clearTaskOnLaunch="true"
             android:configChanges="orientation"
             android:finishOnTaskLaunch="true"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+           />
         <activity
             android:name=".ActvMeterStatusMenu"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            />
         <activity
             android:name=".ActvCurrReading"
             android:screenOrientation="portrait" />
@@ -125,7 +130,8 @@
             android:name=".ActvBillPrinting"
             android:description="@string/print_bill"
             android:label="@string/print_bill"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:noHistory="true"/>
         <activity
             android:name=".ActvRemarks"
             android:description="@string/remarks"
@@ -173,7 +179,8 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".ActvDuplicateBillPrinting"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:noHistory="true"/>
         <activity
             android:name=".ActvConsumerNbrInputForDuplicateBill"
             android:screenOrientation="portrait" />
@@ -206,7 +213,8 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".ActvMsgPrinting"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:noHistory="true"/>
         <activity
             android:name=".ActvUnbilledListPrinting"
             android:screenOrientation="portrait" />
@@ -221,7 +229,8 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".MeterNbrInput"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:noHistory="true"/>
         <activity
             android:name=".ActivitySyncData"
             android:screenOrientation="portrait" />
@@ -242,7 +251,8 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".Abnormality_Activity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:noHistory="true"/>
         <activity
             android:name=".ActivityBT_Reading"
             android:clearTaskOnLaunch="true"

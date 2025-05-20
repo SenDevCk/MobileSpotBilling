@@ -61,13 +61,9 @@ public class ActvBilling extends AppCompatActivity implements OnClickListener, T
     public String strMobileNo = "", strPoleNo = "";
     static String photoAddressSaved = null;
     static String photoFolderSaved = null;
-    private static int gDays[] = {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31,
-            30, 31};
-    public static String unimonth[] = {" ", "Jan", "Feb", "Mar", "Apr", "May",
-            "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
-    public static String bimonth[] = {" ", "Dec-Jan", "Jan-Feb", "Feb-Mar",
-            "Mar-Apr", "Apr-May", "May-Jun", "Jun-Jul", "Jul-Aug", "Aug-Sep",
-            "Sep-Oct", "Oct-Nov", "Nov-Dec"};
+    private static int gDays[] = {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+    public static String unimonth[] = {" ", "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
+    public static String bimonth[] = {" ", "Dec-Jan", "Jan-Feb", "Feb-Mar","Mar-Apr", "Apr-May", "May-Jun", "Jun-Jul", "Jul-Aug", "Aug-Sep","Sep-Oct", "Oct-Nov", "Nov-Dec"};
 
     public static double prvrdg;
 
@@ -165,33 +161,30 @@ public class ActvBilling extends AppCompatActivity implements OnClickListener, T
 
         Log.e("AccountNo", lsAccountNo);
         try {
-            if (utilsTochkDb.checkDoubleBilling(lsAccountNo)) {
+             if (utilsTochkDb.checkDoubleBilling(lsAccountNo)) {
                 UtilDB util1 = new UtilDB(getBaseContext());
                 util1.getBillInputDetails(UtilAppCommon.acctNbr, "CA Number");
                 util1.close();
 
                 bIsDblBilled = true;
-                AlertDialog.Builder altDialog = new AlertDialog.Builder(
-                        ActvBilling.this);
+                AlertDialog.Builder altDialog = new AlertDialog.Builder(ActvBilling.this);
                 altDialog.setTitle(" Consumer Already Billed");
                 altDialog.setMessage("Do You Want Duplicate Bill "); // here
                 // add
                 // your
                 // message
                 altDialog.setPositiveButton("Ok",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-                                //
-                                UtilAppCommon.acctNbr = String.format("%s", UtilAppCommon.acctNbr);
-                                UtilAppCommon.bprintdupl = true;
+                        (dialog, which) -> {
+                            //
+                            UtilAppCommon.acctNbr = String.format("%s", UtilAppCommon.acctNbr);
+                            UtilAppCommon.bprintdupl = true;
 
-                                // 23.12.13 for duplicate bill printing
-                                UtilDB utilDupBillPrint = new UtilDB(getBaseContext());
-                                utilDupBillPrint.getOutputBillRecord(UtilAppCommon.acctNbr);
-                                utilDupBillPrint.getSAPBlueInput(UtilAppCommon.acctNbr);
-                                startActivity(intentdupill);
+                            // 23.12.13 for duplicate bill printing
+                            UtilDB utilDupBillPrint = new UtilDB(getBaseContext());
+                            utilDupBillPrint.getOutputBillRecord(UtilAppCommon.acctNbr);
+                            utilDupBillPrint.getSAPBlueInput(UtilAppCommon.acctNbr);
+                            startActivity(intentdupill);
 
-                            }
                         });
 
                 altDialog.setNegativeButton("Cancel",
@@ -437,9 +430,9 @@ public class ActvBilling extends AppCompatActivity implements OnClickListener, T
                 } else if (!strMobile.equalsIgnoreCase("") && !(strMobile.startsWith("6") || strMobile.startsWith("7") || strMobile.startsWith("8") || strMobile.startsWith("9"))) {
                     Toast.makeText(getBaseContext(), "Please enter mobile number starting with 6 / 7 / 8 / 9.", Toast.LENGTH_LONG).show();
                     return;
-                } else if (!strMobile.equalsIgnoreCase("") && (utilDB.MobileNumberCheck(strMobile.trim()))) {
-                    Toast.makeText(getBaseContext(), "Mobile number already exist.", Toast.LENGTH_LONG).show();
-                    return;
+//                } else if (!strMobile.equalsIgnoreCase("") && (utilDB.MobileNumberCheck(strMobile.trim()))) {
+//                    Toast.makeText(getBaseContext(), "Mobile number already exist.", Toast.LENGTH_LONG).show();
+//                    return;
                 } else if (!strPole.equalsIgnoreCase("") && (!isNumeric(strPole) || strPole.length() != 10)) {
                     Toast.makeText(getBaseContext(), "Please enter valid 10 digit pole number.", Toast.LENGTH_LONG).show();
                     return;
@@ -452,6 +445,7 @@ public class ActvBilling extends AppCompatActivity implements OnClickListener, T
                     strPoleNo = strPole;
                     Toast.makeText(ActvBilling.this, "Step1 Completed", Toast.LENGTH_SHORT).show();
                     GPSTracker gps = new GPSTracker(ActvBilling.this);
+
                     if (gps.canGetLocation()) {
                         Toast.makeText(ActvBilling.this, "Step2 Completed", Toast.LENGTH_SHORT).show();
                         StartBilling();
@@ -532,6 +526,9 @@ public class ActvBilling extends AppCompatActivity implements OnClickListener, T
                         //End Of New Code
                         Intent intent = new Intent(this, ActvCurrReading.class);
                         intent.putExtra("MeterStatus", data.getExtras().getString("meterStatusId"));
+                        intent.putExtra("PRV_BILL_DATE", UtilAppCommon.in.PRV_BILL_DATE);
+                        Log.d("PRV_BILL_DATE",""+UtilAppCommon.in.PRV_BILL_DATE);
+                        Toast.makeText(context, ""+UtilAppCommon.in.PRV_BILL_DATE, Toast.LENGTH_SHORT).show();
                         startActivityForResult(intent, 5);
                     }
                     //}
@@ -735,6 +732,7 @@ public class ActvBilling extends AppCompatActivity implements OnClickListener, T
             Intent intent = new Intent(this, ActvMeterStatusMenu.class);
             //intent.putExtra("strMobileNo",strMobileNo);
             //intent.putExtra("strPoleNo",strPoleNo);
+            intent.putExtra("category",UtilAppCommon.in.RATE_CATEGORY);
             startActivityForResult(intent, 1);
             //System.out.println("Enter Current Meter Status: ");
         }
@@ -997,7 +995,17 @@ public class ActvBilling extends AppCompatActivity implements OnClickListener, T
         customerLayout.setVisibility(View.VISIBLE);
 
         Button continueBtn = (Button) findViewById(R.id.ContinueBtn);
-        continueBtn.setOnClickListener(this);
+        TextView text_error = (TextView) findViewById(R.id.text_error);
+
+        String data_nds=(UtilAppCommon.in.RATE_CATEGORY.length()>7)?UtilAppCommon.in.RATE_CATEGORY.substring(0,7):UtilAppCommon.in.RATE_CATEGORY;
+//        if (data_nds.trim().equals("NDS-IID") && UtilAppCommon.in.){
+//            text_error.setVisibility(View.VISIBLE);
+//            Toast.makeText(context, "NDS-IID billing not allowed !", Toast.LENGTH_SHORT).show();
+//            text_error.setText("NDS-IID billing not allowed for now !");
+//            continueBtn.setVisibility(View.GONE);
+//        }else {
+            continueBtn.setOnClickListener(this);
+        //}
 
         // String consumerId = UtilAppCommon.in.CONS_REF;
         String meterNo = UtilAppCommon.in.METER_MANUFACTURER_SR_NO;
@@ -1010,7 +1018,7 @@ public class ActvBilling extends AppCompatActivity implements OnClickListener, T
         String prevMeterStatus = UtilAppCommon.in.PRV_MTR_READING_NOTE + "  (Seq:" + UtilAppCommon.in.ROUTE_SEQUENCE_NO + ")";
         String strBlueMeter = UtilAppCommon.in.MONTH_SEASONAL.equalsIgnoreCase("") ? "" : String.valueOf(Integer.parseInt(UtilAppCommon.in.MONTH_SEASONAL));
         strBlueMeter = ", " + strBlueMeter;
-
+        Log.d("prevMeterStatus : ",prevMeterStatus);
         ((TextView) findViewById(R.id.AccNoTxt)).setText(accNo);
         ((TextView) findViewById(R.id.NameTxt)).setText(name);
         ((TextView) findViewById(R.id.AddressTxt)).setText(address);

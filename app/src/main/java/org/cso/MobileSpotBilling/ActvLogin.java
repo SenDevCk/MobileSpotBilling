@@ -88,7 +88,7 @@ public class ActvLogin extends AppCompatActivity implements OnClickListener,Task
                 final AlertDialog.Builder alert = new AlertDialog.Builder(this);
                 alert.setCancelable(false);
                 alert.setTitle("Invalid Device");
-                alert.setMessage("This the not an authorised device to run this application. Device Id : " + UtilAppCommon.IMEI_Number);
+                alert.setMessage("This the not an authorised device to run this application. Device Id : " + UtilAppCommon.IMEI_Number.toUpperCase());
                 alert.setPositiveButton("OK", (dialog, which) -> {
                     dialog.dismiss();
                     finish();

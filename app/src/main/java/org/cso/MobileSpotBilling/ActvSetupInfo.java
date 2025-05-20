@@ -30,6 +30,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Bitmap.CompressFormat;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 
@@ -52,65 +53,65 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
-public class ActvSetupInfo  extends AppCompatActivity implements OnClickListener
-{
+public class ActvSetupInfo extends AppCompatActivity implements OnClickListener {
 	Activity activity = null;
 	private SpinnerData binderItems[];
-	
-	
+
+
 	//Bluetooth
 	private BluetoothAdapter mBluetoothAdapter = null;
 	private Set<BluetoothDevice> devices;
-	private Context context=this;
+	private Context context = this;
 	SimpleAdapter adapter;
-	HashMap<String, String> devicemap=null;
+	HashMap<String, String> devicemap = null;
 	ArrayList<HashMap<String, String>> devicesadapter;
 	private static final int PERMISSION_BLUETOOTH = 12;
+	private static final int REQUEST_CODE_LOCATION_PERMISSION = 13;
 	Toolbar toolbar;
+
 	@Override
-    public void onCreate(Bundle savedInstanceState) {
+	public void onCreate(Bundle savedInstanceState) {
 		UtilAppCommon.strImageCount = "";
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.setupinfo);
-		toolbar= findViewById(R.id.toolbar_setupinfo);
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.setupinfo);
+		toolbar = findViewById(R.id.toolbar_setupinfo);
 		//toolbar.setLogo(getResources().getDrawable(R.drawable.sbpscl_logo));
 		toolbar.setTitle("Setup");
 		setSupportActionBar(toolbar);
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 		getSupportActionBar().setDisplayShowHomeEnabled(true);
-        activity = this;
-        
-        mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-        devicesadapter = new ArrayList<HashMap<String,String>>();
+		activity = this;
 
-		if (ContextCompat.checkSelfPermission(ActvSetupInfo.this, Manifest.permission.BLUETOOTH)
+		mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+		devicesadapter = new ArrayList<HashMap<String, String>>();
+
+		/*if (ContextCompat.checkSelfPermission(ActvSetupInfo.this, Manifest.permission.BLUETOOTH)
 				!= PackageManager.PERMISSION_GRANTED) {
 			ActivityCompat.requestPermissions(ActvSetupInfo.this, new String[]{Manifest.permission.BLUETOOTH}, PERMISSION_BLUETOOTH);
-		}
+		}*/
 
 
-        Button verifysetupbtn = (Button)findViewById(R.id.btnVerifySetup);
-        verifysetupbtn.setOnClickListener(this);
-        
-        Button downloadDataBtn=  (Button)findViewById(R.id.btnDownloadInputData);
-        downloadDataBtn.setOnClickListener(this);		
-		
-        Button editsetupbtn = (Button) findViewById(R.id.btnModifySetup);
-        editsetupbtn.setOnClickListener(this);
-        
-        Button btnSetupSDD = (Button) findViewById(R.id.btnSetupSDD);
-        btnSetupSDD.setOnClickListener(this);
-        
-        Button btnSetupPrinter = (Button) findViewById(R.id.btnSetupPrinter);
-        btnSetupPrinter.setOnClickListener(this);
-        
-        Button btnTestPrinter = (Button) findViewById(R.id.btnPrinterTest);
-        btnTestPrinter.setOnClickListener(this);
-        
-        Button btnUpdateUserInfo = (Button) findViewById(R.id.btnClearData);
-        btnUpdateUserInfo.setOnClickListener(this);
+		Button verifysetupbtn = (Button) findViewById(R.id.btnVerifySetup);
+		verifysetupbtn.setOnClickListener(this);
+
+		Button downloadDataBtn = (Button) findViewById(R.id.btnDownloadInputData);
+		downloadDataBtn.setOnClickListener(this);
+
+		Button editsetupbtn = (Button) findViewById(R.id.btnModifySetup);
+		editsetupbtn.setOnClickListener(this);
+
+		Button btnSetupSDD = (Button) findViewById(R.id.btnSetupSDD);
+		btnSetupSDD.setOnClickListener(this);
+
+		Button btnSetupPrinter = (Button) findViewById(R.id.btnSetupPrinter);
+		btnSetupPrinter.setOnClickListener(this);
+
+		Button btnTestPrinter = (Button) findViewById(R.id.btnPrinterTest);
+		btnTestPrinter.setOnClickListener(this);
+
+		Button btnUpdateUserInfo = (Button) findViewById(R.id.btnClearData);
+		btnUpdateUserInfo.setOnClickListener(this);
 	}
-
 
 
 	@Override
@@ -120,7 +121,7 @@ public class ActvSetupInfo  extends AppCompatActivity implements OnClickListener
 		return true;
 	}
 
-
+/*
 	@Override
 	public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
 		super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -143,29 +144,27 @@ public class ActvSetupInfo  extends AppCompatActivity implements OnClickListener
 				return;
 			}
 		}
-	}
+	}*/
 
 
 
-   public void onClick(View v) 
-	{
+	public void onClick(View v) {
 		// TODO Auto-generated method stub
-	   final UtilDB util = new UtilDB(getBaseContext());
-	   
+		final UtilDB util = new UtilDB(getBaseContext());
+
 		int id = v.getId();
-		switch(id)
-		{
-		case R.id.btnModifySetup:
-			//showModifySetup();
-			startActivity(new Intent(this, ActvModifySetUpInfo.class));
-			break;
-			
-			
-		case R.id.btnVerifySetup:				
-			//showVerifySetup();
-			startActivity(new Intent(this, ActvVerifySetUpInfo.class));
-			break;
-		case R.id.btnSetupSDD:				
+		switch (id) {
+			case R.id.btnModifySetup:
+				//showModifySetup();
+				startActivity(new Intent(this, ActvModifySetUpInfo.class));
+				break;
+
+
+			case R.id.btnVerifySetup:
+				//showVerifySetup();
+				startActivity(new Intent(this, ActvVerifySetUpInfo.class));
+				break;
+			case R.id.btnSetupSDD:
 			/*
 			final String[] Binders = UtilAppCommon.ui.MRUs.split("\\$");
 		
@@ -204,118 +203,146 @@ public class ActvSetupInfo  extends AppCompatActivity implements OnClickListener
 	        AlertDialog alert = builder.create();
 	        alert.show();
 			*/
-			
-			break;
-		case R.id.btnClearData:	
 
-			 final Intent intent = new Intent(this, ActvivityMain.class);  
-			 		 
+				break;
+			case R.id.btnClearData:
+
+				final Intent intent = new Intent(this, ActvivityMain.class);
+
 				AlertDialog.Builder altDialog = new AlertDialog.Builder(ActvSetupInfo.this);
 				altDialog.setTitle(" Please Confirm");
 				altDialog.setMessage("Are you sure to clear Userinfo along with data ?\nClick OK to clear all user data"); // here																				// add
 				altDialog.setPositiveButton("Ok",
-						new DialogInterface.OnClickListener() {
-							public void onClick(DialogInterface dialog, int which) {
-								String result=util.ClearUserInfo();
-								util.truncateTable("BillInput");
-								util.truncateTable("BillOutput");
-								util.truncateTable("SAPInput");
-								Toast.makeText(getApplicationContext(), result,Toast.LENGTH_LONG).show();
-								intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);	 
-								startActivity(intent);
-							}
-						});
-				
-				altDialog.setNegativeButton("Cancel",
-						new DialogInterface.OnClickListener() {
-							public void onClick(DialogInterface dialog, int which) {
-								dialog.dismiss();
-							}
-						});
-				altDialog.show();
-			break;	
-		case R.id.btnDownloadInputData:
-			//showDownLoadDataWin();
-			UtilDB utildb = new UtilDB(getBaseContext());
-			Cursor cursorImage = utildb.getNonUploadedImage();
-			if(cursorImage != null)
-			{
-				StoreByteImage();
-			}
-			else
-			{
-				final AlertDialog ad = new AlertDialog.Builder(this)
-						.create();
-				ad.setTitle("Confirm");
-				ad.setMessage("Existing data will be deleted before downloading new data?");
-				ad.setButton(DialogInterface.BUTTON_POSITIVE, "Yes",
 						(dialog, which) -> {
+							String result = util.ClearUserInfo();
+							util.truncateTable("BillInput");
+							util.truncateTable("BillOutput");
+							util.truncateTable("SAPInput");
+							Toast.makeText(getApplicationContext(), result, Toast.LENGTH_LONG).show();
+							intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+							startActivity(intent);
+						});
+
+				altDialog.setNegativeButton("Cancel",
+						(dialog, which) -> dialog.dismiss());
+				altDialog.show();
+				break;
+			//showDownLoadDataWin();
+			case R.id.btnDownloadInputData:
+				// showDownLoadDataWin();
+				UtilDB utildb = new UtilDB(getApplicationContext());
+				Cursor cursorImage = utildb.getNonUploadedImage();
+				if (cursorImage != null) {
+					StoreByteImage();
+				} else {
+					// Check if the activity is still in a valid state before showing the dialog
+					if (!isFinishing() && !isDestroyed()) {
+						final AlertDialog ad = new AlertDialog.Builder(ActvSetupInfo.this)
+								.create();
+						ad.setTitle("Confirm");
+						ad.setMessage("Existing data will be deleted before downloading new data?");
+						ad.setButton(DialogInterface.BUTTON_POSITIVE, "Yes", (dialog, which) -> {
 							// TODO Auto-generated method stub
 							ad.dismiss();
 							showDownLoadDataWin();
 						});
-				ad.setButton(DialogInterface.BUTTON_NEGATIVE, "No",
-						(dialog, which) -> {
+						ad.setButton(DialogInterface.BUTTON_NEGATIVE, "No", (dialog, which) -> {
 							// TODO Auto-generated method stub
 							ad.dismiss();
 						});
-				ad.show();
-			}
-			
-			break;
-		case R.id.btnSetupPrinter:
-			SetupPrinter();
-			break;
-			
-		case R.id.btnPrinterTest:
-			
-			break;
+						ad.show();
+					} else {
+						Log.w("DownloadData", "Activity is not in a valid state to show the dialog.");
+					}
+				}
+				break;
+
+			case R.id.btnSetupPrinter:
+				if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+					// Android 12 (API 31) and later: Check for Bluetooth permissions
+					if (ContextCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED ||
+							ContextCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_SCAN) != PackageManager.PERMISSION_GRANTED) {
+
+						// Request Bluetooth permissions
+						ActivityCompat.requestPermissions(this,
+								new String[]{Manifest.permission.BLUETOOTH_CONNECT, Manifest.permission.BLUETOOTH_SCAN},
+								PERMISSION_BLUETOOTH);
+					} else {
+						// Permissions are granted, proceed with Bluetooth operations
+						SetupPrinter();
+					}
+				} else {
+					// For older Android versions, handle Bluetooth permission (especially location for scanning)
+					if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+						ActivityCompat.requestPermissions(this,
+								new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+								PERMISSION_BLUETOOTH);
+					} else {
+						// Permissions granted, proceed with Bluetooth operations
+						SetupPrinter();
+					}
+				}
+
+				break;
+
+			case R.id.btnPrinterTest:
+
+				break;
 		}
-		
-		
+
+
 	}
-   
-   public void showDownLoadDataWin() 
-   {
-	   	UtilDB util = new UtilDB(getBaseContext());
+
+	public void showDownLoadDataWin() {
+		UtilDB util = new UtilDB(getBaseContext());
 		String result = util.ClearUserInfo();
 		util.truncateTable("BillInput");
 		util.truncateTable("BillOutput");
 		util.truncateTable("SAPInput");
 		UtilAppCommon.strRedirectTo = "Setup";
 		DeleteFolders();
-		startActivity(new Intent(this,ActvLogin.class));
+		startActivity(new Intent(this, ActvLogin.class));
 		//startActivity(new Intent(getBaseContext(), ActvDownloadInputData.class));
-   }
-   
-   public void onBackPressed() {
-	   super.onBackPressed();
-	   //startActivity(new Intent(this, ActvivityMain.class));
-	   //finish();
-	   return;
-   }
-  /* @Override
-	public void onBackPressed() {
-	 Intent setIntent = new Intent(Intent.ACTION_MAIN);
-	 setIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-	 finish();
-	 startActivity(setIntent);
+	}
 
-	}*/
-   void SetupPrinter()
-   {
-	   try {
-		   devicesadapter.clear();
-		   mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-		   adapter = new InteractiveArrayAdapter(this, R.layout.rowlayout, devicesadapter,
-				   new String[]{"Name"},
-				   new int[]{R.id.tvLvRowName});
-		   if (mBluetoothAdapter == null) {
-			   Toast.makeText(this, "Bluetooth not available.", Toast.LENGTH_LONG).show();
-			   return;
-		   }
-		   if (!mBluetoothAdapter.isEnabled()) {
-			   mBluetoothAdapter.enable();
+	public void onBackPressed() {
+		super.onBackPressed();
+		//startActivity(new Intent(this, ActvivityMain.class));
+		//finish();
+		return;
+	}
+
+	/* @Override
+	  public void onBackPressed() {
+	   Intent setIntent = new Intent(Intent.ACTION_MAIN);
+	   setIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+	   finish();
+	   startActivity(setIntent);
+
+	  }*/
+	void SetupPrinter() {
+		try {
+			devicesadapter.clear();
+			mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+			adapter = new InteractiveArrayAdapter(this, R.layout.rowlayout, devicesadapter,
+					new String[]{"Name"},
+					new int[]{R.id.tvLvRowName});
+			if (mBluetoothAdapter == null) {
+				Toast.makeText(this, "Bluetooth not available.", Toast.LENGTH_LONG).show();
+				return;
+			}
+			if (!mBluetoothAdapter.isEnabled()) {
+				if (ActivityCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
+					// TODO: Consider calling
+					//    ActivityCompat#requestPermissions
+					// here to request the missing permissions, and then overriding
+					//   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+					//                                          int[] grantResults)
+					// to handle the case where the user grants the permission. See the documentation
+					// for ActivityCompat#requestPermissions for more details.
+					return;
+				}
+				mBluetoothAdapter.enable();
 			   return;
 		   }
 
@@ -565,7 +592,35 @@ public class ActvSetupInfo  extends AppCompatActivity implements OnClickListener
 		    return true;
 	}//storebyteimage  
 
+	@Override
+	public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+		super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
+		switch (requestCode) {
+			case PERMISSION_BLUETOOTH:
+				if (grantResults.length > 0 &&
+						grantResults[0] == PackageManager.PERMISSION_GRANTED &&
+						grantResults[1] == PackageManager.PERMISSION_GRANTED) {
+					// Bluetooth permissions granted
+					SetupPrinter();
+				} else {
+					// Bluetooth permissions denied
+					Toast.makeText(this, "Bluetooth permissions are required for this feature", Toast.LENGTH_SHORT).show();
+				}
+				break;
+
+			case REQUEST_CODE_LOCATION_PERMISSION:
+				if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+					// Location permission granted for scanning
+					SetupPrinter();
+				} else {
+					// Location permission denied
+					Toast.makeText(this, "Location permission is required to scan Bluetooth devices", Toast.LENGTH_SHORT).show();
+				}
+				break;
+			default:
+		}
+	}
    
 }
 

@@ -73,8 +73,6 @@ public class AsyncGetOutputData extends  AsyncTask<String, Void, String[]> {
 			glbVar = getOutputData(param);
 			if((glbVar.equalsIgnoreCase("Network Issue / Not Reachable") || glbVar.equalsIgnoreCase("No Output Data")) && strRetry.equals(""))
 			{
-				//UtilAppCommon.strHostName =	"http://125.16.220.10/"; //Testing
-				UtilAppCommon.strHostName =	"https://www.bihardiscom.co.in/";		//Production
 				if(param[11].equalsIgnoreCase("1") || param[11].equalsIgnoreCase("2"))
 					param[11] = "2";
 				glbVar = getOutputData(param);

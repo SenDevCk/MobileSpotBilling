@@ -996,12 +996,12 @@ public class ActvDuplicateBillPrinting extends AppCompatActivity {
 				float mf=0,consump=0;
 				mf=Float.parseFloat(UtilAppCommon.out.MF);
 				consump=Float.parseFloat(UtilAppCommon.out.Consumption);
-				cpclData += PrintUtilZebra.PrintNext(String.format(
-						"MF:  %.2f CONSUMPTION:  %.0f", mf,consump));
-				
-				cpclData += PrintUtilZebra.PrintNext(String.format(
-						"RECORDED DEMD: %s   PF:%s", UtilAppCommon.out.RecordedDemd, UtilAppCommon.out.PowerFactor));
-				
+				cpclData += PrintUtilZebra.PrintNext(String.format("MULTIPLYING FACTOR:  %.2f", mf));
+				cpclData += PrintUtilZebra.PrintNext(String.format("CONSUMPTION:  %.0f",consump));
+
+				cpclData += PrintUtilZebra.PrintNext(String.format("RECORDED DEMD: %s", UtilAppCommon.out.RecordedDemd));
+				cpclData += PrintUtilZebra.PrintNext(String.format("POWER FACTOR:%s",  UtilAppCommon.out.PowerFactor));
+
 				float mmcunits=0,avg=0;
 				if (UtilAppCommon.out.Category.equals("DS-II")||UtilAppCommon.out.Category.equals("NDS-IM"))
 				{
@@ -1295,8 +1295,8 @@ public class ActvDuplicateBillPrinting extends AppCompatActivity {
 				builder.addText(String.format("  Consumer Status   : %s\n",
 						UtilAppCommon.bill.CONS_STATUS));
 
-				builder.addText(String.format("  Category : %s   MF : %s \n",
-						UtilAppCommon.bill.CATEGORY, UtilAppCommon.bill.MF));//
+				builder.addText(String.format("  Category : %s\n", UtilAppCommon.bill.CATEGORY));//
+				builder.addText(String.format("  MULTIPLYING FACTOR : %s\n", UtilAppCommon.bill.MF));//
 
 				builder.addText(String.format("  Load: %s    PH: %s\n",
 						UtilAppCommon.bill.LOAD, UtilAppCommon.bill.PHASE));
@@ -1784,9 +1784,8 @@ public class ActvDuplicateBillPrinting extends AppCompatActivity {
 				writer.write(cr);
 				writer.flush();
 
-				writer.write(printer.font_Courier_24(String.format(
-						"Category: %s  MF: %s \n  \n",
-						UtilAppCommon.bill.CATEGORY, UtilAppCommon.bill.MF)));//
+				writer.write(printer.font_Courier_24(String.format("Category:  \n", UtilAppCommon.bill.CATEGORY)));//
+				writer.write(printer.font_Courier_24(String.format("MULTIPLYING FACTOR: %s  \n", UtilAppCommon.bill.MF)));//
 				writer.write(cr);
 				writer.flush();
 

@@ -34,9 +34,13 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
 
 public class ActvMeterStatusMenu extends AppCompatActivity implements OnItemClickListener, TaskCallback{
 	String value1 ;
@@ -44,6 +48,7 @@ public class ActvMeterStatusMenu extends AppCompatActivity implements OnItemClic
 	boolean canMD=true, canPL=true;
 	int mdLeft=0, plLeft=0;
 	Toolbar toolbar;
+	String category="";
 	@Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,7 +64,7 @@ public class ActvMeterStatusMenu extends AppCompatActivity implements OnItemClic
 			Intent inAbnormality = new Intent(this, Abnormality_Activity.class);
 			startActivity(inAbnormality);
 		}
-
+        category=getIntent().getStringExtra("category");
         ListView meterStatusListView = (ListView) findViewById(R.id.MeterStatusList);
 		TextView plMdLimitView=(TextView)findViewById(R.id.pl_md_message) ;
 		TextView plMdStats=(TextView)findViewById(R.id.pl_md_stats) ;
@@ -135,8 +140,20 @@ public class ActvMeterStatusMenu extends AppCompatActivity implements OnItemClic
 
 
 		//meterStatus[3] =  new ClsListData("Reading Not Avlb(RN)", "RN");
+		List<ClsListData> statuslist = new ArrayList<>(Arrays.asList(meterStatus));
+//		Log.e("ActvMeterStatusMenu", "Removing menu from statuslist  "+statuslist);
+//		Iterator<ClsListData> iterator = statuslist.iterator();
+//		while (iterator.hasNext()) {
+//			ClsListData item = iterator.next();
+//			Log.d("data",item.toString());
+//			if (category.equals("NDS-IID(B)") && item.getValue().equals("PL")) {
+//				// Add your actual condition here
+//					iterator.remove();  // safe way to remove during iteration
+//			}
+//		}
+
 		Log.e("ActvMeterStatusMenu", "Creating array adapter with arraySize "+meterStatus.length);
-        ArrayAdapter<ClsListData> listAdapter = new ArrayAdapter<ClsListData>(this, android.R.layout.simple_list_item_1, meterStatus);
+        ArrayAdapter<ClsListData> listAdapter = new ArrayAdapter<ClsListData>(this, android.R.layout.simple_list_item_1, statuslist);
         meterStatusListView.setAdapter(listAdapter);
         meterStatusListView.setOnItemClickListener(this);
 

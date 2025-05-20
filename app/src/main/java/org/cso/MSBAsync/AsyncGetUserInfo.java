@@ -30,8 +30,10 @@ import org.xml.sax.SAXException;
 
 import com.google.gson.JsonParser;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
@@ -108,7 +110,7 @@ public class AsyncGetUserInfo extends  AsyncTask<String, Void, String[]>
 		    		}
 		    		else
 		    		{
-		    			glbVar = "Please enter valid user name and password!";
+		    			glbVar = "Please enter valid user name and password ! DeviceId : "+UtilAppCommon.IMEI_Number.toUpperCase();
 		    			blVar = true;
 		    			Log.e("Record Details:", "Invalid User/Password");
 		    			return glbVar;
@@ -151,8 +153,17 @@ public class AsyncGetUserInfo extends  AsyncTask<String, Void, String[]>
 		System.out.println("UserInput Result::"+glbVar.length());
 		Log.e("strRedirectTo", UtilAppCommon.strRedirectTo);
 		
-		if(blVar && glbVar.length()>0)
-			Toast.makeText(context, glbVar, Toast.LENGTH_LONG).show();		
+		if(blVar && glbVar.length()>0) {
+			//Toast.makeText(context, glbVar, Toast.LENGTH_LONG).show();
+			AlertDialog.Builder builder1 = new AlertDialog.Builder(context);
+			builder1.setMessage(""+glbVar);
+			builder1.setCancelable(true);
+			builder1.setPositiveButton(
+					"OK",
+					(dialog, id) -> dialog.cancel());
+			AlertDialog alert11 = builder1.create();
+			alert11.show();
+		}
 		else if(glbVar.length()>0 && !blVar)
 		{
 			taskCallback.done();

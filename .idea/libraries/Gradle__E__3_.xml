@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="Gradle: E (3)" external-system-id="GRADLE">
-    <CLASSES>
-      <root url="jar://$PROJECT_DIR$/app/libs/AndroidLib_1070.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>

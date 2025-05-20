@@ -173,19 +173,16 @@ public class ConsumerListTest extends AppCompatActivity {
         list.setAdapter(adapter);
 
 
-        list.setOnItemClickListener(new OnItemClickListener() {
+        list.setOnItemClickListener((parent, view, position, id) -> {
 
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            // HashMap<String, String> map=listToShow.get(position-1);
+            HashMap<String, String> map = listToShow.get(position);
 
-                // HashMap<String, String> map=listToShow.get(position-1);
-                HashMap<String, String> map = listToShow.get(position);
-
-                Toast.makeText(getApplicationContext(), map.get("ACC_NO").toString(), Toast.LENGTH_SHORT).show();
-                //UtilAppCommon.acctNbr= map.get("ACC_NO").toString();
-                UtilAppCommon.acctNbr = map.get("ACC_NO").trim();
-                gotoBilling();
-                // billing();
-            }
+            Toast.makeText(getApplicationContext(), map.get("ACC_NO").toString(), Toast.LENGTH_SHORT).show();
+            //UtilAppCommon.acctNbr= map.get("ACC_NO").toString();
+            UtilAppCommon.acctNbr = map.get("ACC_NO").trim();
+            gotoBilling();
+            // billing();
         });
     }
 

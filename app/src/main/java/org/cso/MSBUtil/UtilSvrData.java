@@ -16,7 +16,7 @@ public class UtilSvrData {
 	private String SOAPNamespace;
 	private String SOAPAddress;
 
-	//testing //Development
+	//Staging
 	/*private String HostName = "http://125.16.220.10/";
 	private String AlternateHost = "http://125.16.220.10/";
 	private String strHostNameConstant = "http://125.16.220.10/";*/
@@ -32,7 +32,7 @@ public class UtilSvrData {
 	private HttpTransportSE httpTransport=null;
 	
 	public UtilSvrData(){
-		if(UtilAppCommon.strHostName.equals(""))
+		//if(UtilAppCommon.strHostName.equals(""))
 			UtilAppCommon.strHostName = HostName;
 			//UtilAppCommon.strHostName = ProHostName;
 	}
@@ -44,7 +44,6 @@ public class UtilSvrData {
 		SOAPMethod =  "GetJson";
 		SOAPNamespace = "http://odishadiscoms.com/";
 		SOAPAddress =  "http://odishadiscoms.com/webservices/sbaService.asmx?WSDL";*/
-
 		SOAPAction = "http://tempuri.org/Return_MWtoMobile";	
 		SOAPMethod =  "Return_MWtoMobile";
 		SOAPNamespace = "http://tempuri.org/";
@@ -62,6 +61,7 @@ public class UtilSvrData {
 			
 			envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
 			envelope.dotNet = true;
+			System.out.println(request);
 			envelope.setOutputSoapObject(request);
 			httpTransport = new HttpTransportSE(SOAPAddress, 1000 * 90);
 			httpTransport.call(SOAPAction, envelope);

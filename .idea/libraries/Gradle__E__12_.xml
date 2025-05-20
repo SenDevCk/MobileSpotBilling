@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="Gradle: E (12)" external-system-id="GRADLE">
-    <CLASSES>
-      <root url="jar://$PROJECT_DIR$/app/libs/opencsv-2.2.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>
