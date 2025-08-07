@@ -40,6 +40,7 @@ import org.cso.MSBUtil.PrintUtilZebra;
 import org.cso.MSBUtil.UtilAppCommon;
 import org.cso.MSBUtil.UtilDB;
 import org.cso.MSBUtil.Utilities;
+import org.cso.config.PrinterManager;
 
 import com.analogics.*;
 import com.epson.eposprint.Builder;
@@ -1204,17 +1205,18 @@ public class ActvDuplicateBillPrinting extends AppCompatActivity {
 		}
 
 		public void run() {
-
-			Print printer = new Print();
-			int[] status = new int[1];
-			int[] battery = new int[1];
-			status[0] = 0;
-			battery[0] = 0;
-			try {
-				Toast.makeText(getApplicationContext(), "Sending Data",
-						Toast.LENGTH_LONG).show();
-				Builder builder = new Builder("TM-P60", Builder.MODEL_ANK);
-				builder.addCommand(new byte[] {0x1C, 0x28, 0x43, 0x02, 0x00, 0x30, 0x02});
+			//if (PrinterManager.connectPrinter(address)) {
+				//Print printer = PrinterManager.getPrinter();
+				Print printer = new Print();
+				int[] status = new int[1];
+				int[] battery = new int[1];
+				status[0] = 0;
+				battery[0] = 0;
+				try {
+					Toast.makeText(getApplicationContext(), "Sending Data",
+							Toast.LENGTH_LONG).show();
+					Builder builder = new Builder("TM-P60", Builder.MODEL_ANK);
+					builder.addCommand(new byte[]{0x1C, 0x28, 0x43, 0x02, 0x00, 0x30, 0x02});
 				/*try {
 					//Bitmap azadi = BitmapFactory.decodeResource(getResources(), R.drawable.chunav);
 					Bitmap azadi = Utilities.getBitmapFromDrawable(getApplicationContext(),R.drawable.chunav);
@@ -1226,124 +1228,124 @@ public class ActvDuplicateBillPrinting extends AppCompatActivity {
 					System.out
 							.println("Error In Azadi Photo Print: " + ex.toString());
 				}*/
-				builder.addTextFont(Builder.FONT_A);
-				builder.addTextAlign(Builder.ALIGN_CENTER);
-				builder.addTextSize(2, 2);
-				builder.addTextStyle(Builder.FALSE, Builder.FALSE,
-						Builder.TRUE, Builder.PARAM_UNSPECIFIED);
-				if (UtilAppCommon.ui.METER_READER_ID == "1")
-					builder.addText("NESCO\n");
-				else if (UtilAppCommon.ui.METER_READER_ID == "2")
-					builder.addText("WESCO\n");
-				else
-					builder.addText("SOUTHCO\n");
+					builder.addTextFont(Builder.FONT_A);
+					builder.addTextAlign(Builder.ALIGN_CENTER);
+					builder.addTextSize(2, 2);
+					builder.addTextStyle(Builder.FALSE, Builder.FALSE,
+							Builder.TRUE, Builder.PARAM_UNSPECIFIED);
+					if (UtilAppCommon.ui.METER_READER_ID == "1")
+						builder.addText("NESCO\n");
+					else if (UtilAppCommon.ui.METER_READER_ID == "2")
+						builder.addText("WESCO\n");
+					else
+						builder.addText("SOUTHCO\n");
 
-				builder.addTextSize(1, 1);
-				builder.addText("DUPLICATE BILL\n------------------------\n");
-				builder.addTextStyle(Builder.FALSE, Builder.FALSE,
-						Builder.FALSE, Builder.PARAM_UNSPECIFIED);
+					builder.addTextSize(1, 1);
+					builder.addText("DUPLICATE BILL\n------------------------\n");
+					builder.addTextStyle(Builder.FALSE, Builder.FALSE,
+							Builder.FALSE, Builder.PARAM_UNSPECIFIED);
 
-				builder.addTextAlign(Builder.ALIGN_LEFT);
+					builder.addTextAlign(Builder.ALIGN_LEFT);
 
-				builder.addText(String.format("  Division   : %s\n",
-						UtilAppCommon.bill.DIV));
+					builder.addText(String.format("  Division   : %s\n",
+							UtilAppCommon.bill.DIV));
 
-				builder.addText(String.format("  Sub Divn   : %s\n",
-						UtilAppCommon.bill.SUB_DIV));
+					builder.addText(String.format("  Sub Divn   : %s\n",
+							UtilAppCommon.bill.SUB_DIV));
 
-				builder.addText(String.format("  Section    : %s\n",
-						UtilAppCommon.bill.SECTION));
+					builder.addText(String.format("  Section    : %s\n",
+							UtilAppCommon.bill.SECTION));
 
-				builder.addText(String.format("  New A/C No  : %s\n",
-						UtilAppCommon.bill.BILL_ACC_NO));
+					builder.addText(String.format("  New A/C No  : %s\n",
+							UtilAppCommon.bill.BILL_ACC_NO));
 
-				builder.addText(String.format("  Old A/C No  : %s\n",
-						UtilAppCommon.bill.OLD_ACC_NO));
+					builder.addText(String.format("  Old A/C No  : %s\n",
+							UtilAppCommon.bill.OLD_ACC_NO));
 
-				builder.addText(String.format("  Pole No       :  %s\n",
-						UtilAppCommon.bill.POLL_NO));
+					builder.addText(String.format("  Pole No       :  %s\n",
+							UtilAppCommon.bill.POLL_NO));
 
-				builder.addText(String.format("  Bill Period  : %s\n",
-						UtilAppCommon.bill.BILL_PERIOD));
+					builder.addText(String.format("  Bill Period  : %s\n",
+							UtilAppCommon.bill.BILL_PERIOD));
 
-				builder.addText(String.format("  No of Mths   : %s\n",
-						UtilAppCommon.bill.NO_OF_MONTHS));
+					builder.addText(String.format("  No of Mths   : %s\n",
+							UtilAppCommon.bill.NO_OF_MONTHS));
 
-				builder.addText(String.format("  Bill Dt      : %s\n",
-						UtilAppCommon.bill.BILLDATE));
+					builder.addText(String.format("  Bill Dt      : %s\n",
+							UtilAppCommon.bill.BILLDATE));
 
-				builder.addText(String.format("  Name & Address   :   \n"));
+					builder.addText(String.format("  Name & Address   :   \n"));
 
-				builder.addText(String
-						.format("  %s\n", UtilAppCommon.bill.NAME));
+					builder.addText(String
+							.format("  %s\n", UtilAppCommon.bill.NAME));
 
-				builder.addText(String.format("  %s\n",
-						UtilAppCommon.bill.ADDR1));
+					builder.addText(String.format("  %s\n",
+							UtilAppCommon.bill.ADDR1));
 
-				builder.addText(String.format("  %s\n",
-						UtilAppCommon.bill.ADDR2));
+					builder.addText(String.format("  %s\n",
+							UtilAppCommon.bill.ADDR2));
 
-				builder.addText(String.format("  %s\n",
-						UtilAppCommon.bill.ADDR3));
+					builder.addText(String.format("  %s\n",
+							UtilAppCommon.bill.ADDR3));
 
-				// builder.addText(String.format("           "));
-				//
+					// builder.addText(String.format("           "));
+					//
 
-				builder.addText(String.format("  Security Deposit  : %s\n",
-						UtilAppCommon.bill.SEC_DEPOSIT));
+					builder.addText(String.format("  Security Deposit  : %s\n",
+							UtilAppCommon.bill.SEC_DEPOSIT));
 
-				builder.addText(String.format("  Consumer Status   : %s\n",
-						UtilAppCommon.bill.CONS_STATUS));
+					builder.addText(String.format("  Consumer Status   : %s\n",
+							UtilAppCommon.bill.CONS_STATUS));
 
-				builder.addText(String.format("  Category : %s\n", UtilAppCommon.bill.CATEGORY));//
-				builder.addText(String.format("  MULTIPLYING FACTOR : %s\n", UtilAppCommon.bill.MF));//
+					builder.addText(String.format("  Category : %s\n", UtilAppCommon.bill.CATEGORY));//
+					builder.addText(String.format("  MULTIPLYING FACTOR : %s\n", UtilAppCommon.bill.MF));//
 
-				builder.addText(String.format("  Load: %s    PH: %s\n",
-						UtilAppCommon.bill.LOAD, UtilAppCommon.bill.PHASE));
+					builder.addText(String.format("  Load: %s    PH: %s\n",
+							UtilAppCommon.bill.LOAD, UtilAppCommon.bill.PHASE));
 
-				builder.addText(String
-						.format("    Reading      Month    Status \n"));
+					builder.addText(String
+							.format("    Reading      Month    Status \n"));
 
-				builder.addText(String.format("      %s      %s    %s\n",
-						UtilAppCommon.bill.PREVIOUS_READING,
-						UtilAppCommon.bill.PREVIOUS_MONTH,
-						UtilAppCommon.bill.PREVIOUS_STATUS));
+					builder.addText(String.format("      %s      %s    %s\n",
+							UtilAppCommon.bill.PREVIOUS_READING,
+							UtilAppCommon.bill.PREVIOUS_MONTH,
+							UtilAppCommon.bill.PREVIOUS_STATUS));
 
-				builder.addText(String.format("              %s\n",
-						UtilAppCommon.bill.OLD_MTR_FLRDG));
+					builder.addText(String.format("              %s\n",
+							UtilAppCommon.bill.OLD_MTR_FLRDG));
 
-				builder.addText(String.format("              %s\n",
-						UtilAppCommon.bill.NEW_MTR_ILRDG));
+					builder.addText(String.format("              %s\n",
+							UtilAppCommon.bill.NEW_MTR_ILRDG));
 
-				{
+					{
 
-					// int
-					// mon=Integer.parseInt(UtilAppCommon.out.CUR_RED_DT.substring(3,5));
-					// int
-					// year=Integer.parseInt(UtilAppCommon.out.CUR_RED_DT.substring(6,8));
+						// int
+						// mon=Integer.parseInt(UtilAppCommon.out.CUR_RED_DT.substring(3,5));
+						// int
+						// year=Integer.parseInt(UtilAppCommon.out.CUR_RED_DT.substring(6,8));
 
-					if (UtilAppCommon.bill.CUR_MTR_STATUS.equals("L")
-							|| UtilAppCommon.bill.CUR_MTR_STATUS.equals("N")
-							|| UtilAppCommon.bill.CUR_MTR_STATUS.equals("O")) {
+						if (UtilAppCommon.bill.CUR_MTR_STATUS.equals("L")
+								|| UtilAppCommon.bill.CUR_MTR_STATUS.equals("N")
+								|| UtilAppCommon.bill.CUR_MTR_STATUS.equals("O")) {
 
-						builder.addText(String.format(
-								"             %s      %s\n",
-								UtilAppCommon.bill.CURMTH,
-								UtilAppCommon.bill.CUR_MTR_STATUS));
+							builder.addText(String.format(
+									"             %s      %s\n",
+									UtilAppCommon.bill.CURMTH,
+									UtilAppCommon.bill.CUR_MTR_STATUS));
 
-					} else {
+						} else {
 
-						builder.addText(String.format(
-								"       %s        %s    %s\n",
-								UtilAppCommon.bill.CURRRDG,
-								UtilAppCommon.bill.CURMTH,
-								UtilAppCommon.bill.CUR_MTR_STATUS));
+							builder.addText(String.format(
+									"       %s        %s    %s\n",
+									UtilAppCommon.bill.CURRRDG,
+									UtilAppCommon.bill.CURMTH,
+									UtilAppCommon.bill.CUR_MTR_STATUS));
 
+						}
 					}
-				}
 
-				// Print Reading Image
-				try {
+					// Print Reading Image
+					try {
 					/*String PhotoDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES)
 							.getPath()
 							+ "/SBDocs/Photos_Crop"
@@ -1353,9 +1355,9 @@ public class ActvDuplicateBillPrinting extends AppCompatActivity {
 							+ UtilAppCommon.bill.BILL_ACC_NO.substring(4, 8);*/
 					/*String PhotoPath = PhotoDir + "/" + "MSB"
 							+ UtilAppCommon.bill.BILL_ACC_NO + ".jpg";*/
-					String PhotoDir=getExternalFilesDir(Environment.DIRECTORY_PICTURES+"/SBDocs/Photos/"+UtilAppCommon.in.SUB_DIVISION_CODE+"/"+ UtilAppCommon.in.MRU).getAbsolutePath();
+						String PhotoDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES + "/SBDocs/Photos/" + UtilAppCommon.in.SUB_DIVISION_CODE + "/" + UtilAppCommon.in.MRU).getAbsolutePath();
 
-					strmonth = String.valueOf(Arrays.asList(strMonths).indexOf(UtilAppCommon.out.BillMonth) + 1);
+						strmonth = String.valueOf(Arrays.asList(strMonths).indexOf(UtilAppCommon.out.BillMonth) + 1);
 //					String PhotoPath = PhotoDir + "/" + UtilAppCommon.in.SCHEDULED_BILLING_DATE.substring(0, 4) +
 //							UtilAppCommon.in.SCHEDULED_BILLING_DATE.substring(5, 7) +
 //							"_" + UtilAppCommon.in.CONTRACT_AC_NO;
@@ -1372,227 +1374,227 @@ public class ActvDuplicateBillPrinting extends AppCompatActivity {
 //								bitmap_crop.getHeight(),
 //								Builder.PARAM_DEFAULT);
 
-				} catch (Exception ex) {
-					System.err.println("Error In Photo Print: " + ex.getMessage());
+					} catch (Exception ex) {
+						System.err.println("Error In Photo Print: " + ex.getMessage());
+					}
+					// Print Reading Image End
+
+					builder.addText(String.format("  Mtr No      :%12s\n",
+							UtilAppCommon.bill.METER_NO));
+
+					builder.addText(String.format("  Mtr Owner   :%s\n",
+							UtilAppCommon.bill.MTR_OWNER));
+
+					builder.addText(String.format("  Bill Basis  : %s\n",
+							UtilAppCommon.bill.BILLBASIS));
+
+					builder.addText(String.format("  Bill Units  : %s\n",
+							UtilAppCommon.bill.BILL_UNITS));
+
+					builder.addText(String.format("  Bill Slabs :\n"));
+
+					builder.addText(String.format("   1:  %s\n",
+							UtilAppCommon.bill.SLAB1));
+
+					builder.addText(String.format("    2:  %s\n",
+							UtilAppCommon.bill.SLAB2));
+
+					builder.addText(String.format("    3:  %s\n",
+							UtilAppCommon.bill.SLAB3));
+
+					builder.addText(String.format("    4:  %s\n",
+							UtilAppCommon.bill.SLAB4));
+
+					builder.addText(String.format("   Energy Chg    :%12s\n",
+							UtilAppCommon.bill.EC));
+
+					builder.addText(String.format("   Fix/Dem Chg   :%12s\n",
+							UtilAppCommon.bill.FIXCHG));
+
+					builder.addText(String.format("   Meter Rent    :%12s\n",
+							UtilAppCommon.bill.METERRENT));
+
+					builder.addText(String.format("   Elec.Duty     :%12s\n",
+							UtilAppCommon.bill.ED));
+
+					builder.addText(String.format("   DPS           :%12s\n",
+							UtilAppCommon.bill.DPS));
+
+					builder.addText(String.format("   Pres Bill Amt :%12s\n",
+							UtilAppCommon.bill.PRE_BILL_AMT));
+
+					// float arr_amt =
+					// Float.parseFloat(UtilAppCommon.bill.ARREAR_AMT);
+					builder.addText(String.format("   Arrears        :%12s\n",
+							UtilAppCommon.bill.ARREAR_AMT));
+
+					builder.addText(String.format("   Sundry Adj     :%12s\n",
+							UtilAppCommon.bill.ADJ_AMT));
+
+					builder.addText(String.format("   Adj.Amount     :%12s\n",
+							UtilAppCommon.bill.SUNDRY_AMT));
+
+					builder.addText(String.format("   After Due Date\n"));
+
+					builder.addText(String.format("   #Net Amt        :%12s\n",
+							UtilAppCommon.bill.NET_AFT_DUEDT));
+
+					builder.addText(String.format("    By Due Date\n"));
+
+					builder.addText(String.format("    Rebate       :%12s\n",
+							UtilAppCommon.bill.REBOFF));
+
+					builder.addText(String.format("   #Net Amt       :%12s\n",
+							UtilAppCommon.bill.NET_BEF_DUEDT));
+
+					builder.addText(String.format("    Rebate Date      :%s\n",
+							UtilAppCommon.bill.REB_DT));
+
+					builder.addText(String.format("    Due Date         :%s\n",
+							UtilAppCommon.bill.DUE_DT));
+
+					builder.addText(String.format("    Last Payment Details \n"));
+
+					if ((UtilAppCommon.bill.BOOKNO1.equals("9999"))
+							&& (UtilAppCommon.bill.RECEPT_NO1.equals("1"))) {
+						builder.addText(String.format("   BKNO:%8s    Rcpt:%8s\n",
+								UtilAppCommon.bill.BOOKNO2,
+								UtilAppCommon.bill.RECEPT_NO2));
+
+						builder.addText(String.format("   DT:  %8s    Amt: %6s\n",
+								UtilAppCommon.bill.PMT_DT2,
+								UtilAppCommon.bill.PMT_AMT2));
+
+						builder.addText(String.format("    %8s    %8s\n",
+								UtilAppCommon.bill.BOOKNO3,
+								UtilAppCommon.bill.RECEPT_NO3));
+
+						builder.addText(String.format("    %8s    %6s\n",
+								UtilAppCommon.bill.PMT_DT3,
+								UtilAppCommon.bill.PMT_AMT3));
+
+						builder.addText(String.format("ISD @6%% Rs.%0.2f/-\n",
+								UtilAppCommon.bill.PMT_AMT1));
+
+					} else if ((UtilAppCommon.bill.BOOKNO2.equals("9999"))
+							&& (UtilAppCommon.bill.RECEPT_NO2.equals("1"))) {
+
+						builder.addText(String.format("      %8s      %8s\n",
+								UtilAppCommon.bill.BOOKNO1,
+								UtilAppCommon.bill.RECEPT_NO1));
+
+						builder.addText(String.format("    %8s    %6s\n",
+								UtilAppCommon.bill.PMT_DT1,
+								UtilAppCommon.bill.PMT_AMT1));
+
+						builder.addText(String.format("    %8s    %8s\n",
+								UtilAppCommon.bill.BOOKNO3,
+								UtilAppCommon.bill.RECEPT_NO3));
+
+						builder.addText(String.format("    %8s    %6sf\n",
+								UtilAppCommon.bill.PMT_DT3,
+								UtilAppCommon.bill.PMT_AMT3));
+
+						builder.addText(String.format("ISD @6%% Rs.%0.2f/-\n",
+								UtilAppCommon.bill.PMT_AMT2));
+
+					} else if ((UtilAppCommon.bill.BOOKNO3.equals("9999"))
+							&& (UtilAppCommon.bill.RECEPT_NO3.equals("1"))) {
+						builder.addText(String.format("    %8s    %8s\n",
+								UtilAppCommon.bill.BOOKNO1,
+								UtilAppCommon.bill.RECEPT_NO1));
+
+						builder.addText(String.format("    %8s    %6sf\n",
+								UtilAppCommon.bill.PMT_DT1,
+								UtilAppCommon.bill.PMT_AMT1));
+
+						builder.addText(String.format("    %8s    %8s\n",
+								UtilAppCommon.bill.BOOKNO2,
+								UtilAppCommon.bill.RECEPT_NO2));
+
+						builder.addText(String.format("    %8s    %6sf\n",
+								UtilAppCommon.bill.PMT_DT2,
+								UtilAppCommon.bill.PMT_AMT2));
+
+						builder.addText(String.format("ISD @6%% Rs.%0.2f/-\n",
+								UtilAppCommon.bill.PMT_AMT3));
+
+					} else {
+
+						builder.addText(String.format(
+								"    BKNO: %8s     RCPT: %8s\n",
+								UtilAppCommon.bill.BOOKNO1,
+								UtilAppCommon.bill.RECEPT_NO1));
+
+						builder.addText(String.format(
+								"    DT:  %8s      Amt:%6s\n",
+								UtilAppCommon.bill.PMT_DT1,
+								UtilAppCommon.bill.PMT_AMT1));
+
+						builder.addText(String.format("    %8s    %8s\n",
+								UtilAppCommon.bill.BOOKNO2,
+								UtilAppCommon.bill.RECEPT_NO2));
+
+						builder.addText(String.format("    %8s    %6s\n",
+								UtilAppCommon.bill.PMT_DT2,
+								UtilAppCommon.bill.PMT_AMT2));
+
+						builder.addText(String.format("    %8s    %8s\n",
+								UtilAppCommon.bill.BOOKNO3,
+								UtilAppCommon.bill.RECEPT_NO3));
+
+						builder.addText(String.format("    %8s    %6s\n",
+								UtilAppCommon.bill.PMT_DT3,
+								UtilAppCommon.bill.PMT_AMT3));
+
+					}
+
+					builder.addText(String.format("  Arrear Sundry Details"));
+
+					builder.addText(String.format("          %s          %s\n",
+							UtilAppCommon.bill.SUND_CODE,
+							UtilAppCommon.bill.ARR_SUND_AMT));
+
+					builder.addText("");
+
+					builder.addText(String.format("    Deferred Amt    :%12s\n",
+							UtilAppCommon.bill.DEFERRED_AMT));
+
+					builder.addText(String.format("    Arrear Details\n"));
+
+					builder.addText(String.format("    Arr EC      :%12s\n",
+							UtilAppCommon.bill.ARR_EC));
+
+					builder.addText(String.format("    Arr ED      :%12s\n",
+							UtilAppCommon.bill.ARR_ED));
+
+					builder.addText(String.format("    Arr DPS     :%12s\n",
+							UtilAppCommon.bill.ARR_DPS));
+
+					if (UtilAppCommon.bill.SUNDRY_AMT_FLAG == "Q") {
+						builder.addText(String.format("Sundry Code 'Q'=RC FEES\n"));
+
+					}
+
+					builder.addCut(Builder.CUT_FEED);
+
+					// <Send print data>
+
+//					printer.openPrinter(Print.DEVTYPE_BLUETOOTH, address,
+//							Print.TRUE, Print.PARAM_DEFAULT);
+					printer.sendData(builder, 10000, status, battery);
+
+					startActivity(new Intent(getBaseContext(),
+							ActvBillingOption.class));
+
+				} catch (Exception e) {
+					// Handle communications error here.
+					Toast.makeText(getApplicationContext(), e.toString(),
+							Toast.LENGTH_LONG).show();
+
 				}
-				// Print Reading Image End
-
-				builder.addText(String.format("  Mtr No      :%12s\n",
-						UtilAppCommon.bill.METER_NO));
-
-				builder.addText(String.format("  Mtr Owner   :%s\n",
-						UtilAppCommon.bill.MTR_OWNER));
-
-				builder.addText(String.format("  Bill Basis  : %s\n",
-						UtilAppCommon.bill.BILLBASIS));
-
-				builder.addText(String.format("  Bill Units  : %s\n",
-						UtilAppCommon.bill.BILL_UNITS));
-
-				builder.addText(String.format("  Bill Slabs :\n"));
-
-				builder.addText(String.format("   1:  %s\n",
-						UtilAppCommon.bill.SLAB1));
-
-				builder.addText(String.format("    2:  %s\n",
-						UtilAppCommon.bill.SLAB2));
-
-				builder.addText(String.format("    3:  %s\n",
-						UtilAppCommon.bill.SLAB3));
-
-				builder.addText(String.format("    4:  %s\n",
-						UtilAppCommon.bill.SLAB4));
-
-				builder.addText(String.format("   Energy Chg    :%12s\n",
-						UtilAppCommon.bill.EC));
-
-				builder.addText(String.format("   Fix/Dem Chg   :%12s\n",
-						UtilAppCommon.bill.FIXCHG));
-
-				builder.addText(String.format("   Meter Rent    :%12s\n",
-						UtilAppCommon.bill.METERRENT));
-
-				builder.addText(String.format("   Elec.Duty     :%12s\n",
-						UtilAppCommon.bill.ED));
-
-				builder.addText(String.format("   DPS           :%12s\n",
-						UtilAppCommon.bill.DPS));
-
-				builder.addText(String.format("   Pres Bill Amt :%12s\n",
-						UtilAppCommon.bill.PRE_BILL_AMT));
-
-				// float arr_amt =
-				// Float.parseFloat(UtilAppCommon.bill.ARREAR_AMT);
-				builder.addText(String.format("   Arrears        :%12s\n",
-						UtilAppCommon.bill.ARREAR_AMT));
-
-				builder.addText(String.format("   Sundry Adj     :%12s\n",
-						UtilAppCommon.bill.ADJ_AMT));
-
-				builder.addText(String.format("   Adj.Amount     :%12s\n",
-						UtilAppCommon.bill.SUNDRY_AMT));
-
-				builder.addText(String.format("   After Due Date\n"));
-
-				builder.addText(String.format("   #Net Amt        :%12s\n",
-						UtilAppCommon.bill.NET_AFT_DUEDT));
-
-				builder.addText(String.format("    By Due Date\n"));
-
-				builder.addText(String.format("    Rebate       :%12s\n",
-						UtilAppCommon.bill.REBOFF));
-
-				builder.addText(String.format("   #Net Amt       :%12s\n",
-						UtilAppCommon.bill.NET_BEF_DUEDT));
-
-				builder.addText(String.format("    Rebate Date      :%s\n",
-						UtilAppCommon.bill.REB_DT));
-
-				builder.addText(String.format("    Due Date         :%s\n",
-						UtilAppCommon.bill.DUE_DT));
-
-				builder.addText(String.format("    Last Payment Details \n"));
-
-				if ((UtilAppCommon.bill.BOOKNO1.equals("9999"))
-						&& (UtilAppCommon.bill.RECEPT_NO1.equals("1"))) {
-					builder.addText(String.format("   BKNO:%8s    Rcpt:%8s\n",
-							UtilAppCommon.bill.BOOKNO2,
-							UtilAppCommon.bill.RECEPT_NO2));
-
-					builder.addText(String.format("   DT:  %8s    Amt: %6s\n",
-							UtilAppCommon.bill.PMT_DT2,
-							UtilAppCommon.bill.PMT_AMT2));
-
-					builder.addText(String.format("    %8s    %8s\n",
-							UtilAppCommon.bill.BOOKNO3,
-							UtilAppCommon.bill.RECEPT_NO3));
-
-					builder.addText(String.format("    %8s    %6s\n",
-							UtilAppCommon.bill.PMT_DT3,
-							UtilAppCommon.bill.PMT_AMT3));
-
-					builder.addText(String.format("ISD @6%% Rs.%0.2f/-\n",
-							UtilAppCommon.bill.PMT_AMT1));
-
-				} else if ((UtilAppCommon.bill.BOOKNO2.equals("9999"))
-						&& (UtilAppCommon.bill.RECEPT_NO2.equals("1"))) {
-
-					builder.addText(String.format("      %8s      %8s\n",
-							UtilAppCommon.bill.BOOKNO1,
-							UtilAppCommon.bill.RECEPT_NO1));
-
-					builder.addText(String.format("    %8s    %6s\n",
-							UtilAppCommon.bill.PMT_DT1,
-							UtilAppCommon.bill.PMT_AMT1));
-
-					builder.addText(String.format("    %8s    %8s\n",
-							UtilAppCommon.bill.BOOKNO3,
-							UtilAppCommon.bill.RECEPT_NO3));
-
-					builder.addText(String.format("    %8s    %6sf\n",
-							UtilAppCommon.bill.PMT_DT3,
-							UtilAppCommon.bill.PMT_AMT3));
-
-					builder.addText(String.format("ISD @6%% Rs.%0.2f/-\n",
-							UtilAppCommon.bill.PMT_AMT2));
-
-				} else if ((UtilAppCommon.bill.BOOKNO3.equals("9999"))
-						&& (UtilAppCommon.bill.RECEPT_NO3.equals("1"))) {
-					builder.addText(String.format("    %8s    %8s\n",
-							UtilAppCommon.bill.BOOKNO1,
-							UtilAppCommon.bill.RECEPT_NO1));
-
-					builder.addText(String.format("    %8s    %6sf\n",
-							UtilAppCommon.bill.PMT_DT1,
-							UtilAppCommon.bill.PMT_AMT1));
-
-					builder.addText(String.format("    %8s    %8s\n",
-							UtilAppCommon.bill.BOOKNO2,
-							UtilAppCommon.bill.RECEPT_NO2));
-
-					builder.addText(String.format("    %8s    %6sf\n",
-							UtilAppCommon.bill.PMT_DT2,
-							UtilAppCommon.bill.PMT_AMT2));
-
-					builder.addText(String.format("ISD @6%% Rs.%0.2f/-\n",
-							UtilAppCommon.bill.PMT_AMT3));
-
-				} else {
-
-					builder.addText(String.format(
-							"    BKNO: %8s     RCPT: %8s\n",
-							UtilAppCommon.bill.BOOKNO1,
-							UtilAppCommon.bill.RECEPT_NO1));
-
-					builder.addText(String.format(
-							"    DT:  %8s      Amt:%6s\n",
-							UtilAppCommon.bill.PMT_DT1,
-							UtilAppCommon.bill.PMT_AMT1));
-
-					builder.addText(String.format("    %8s    %8s\n",
-							UtilAppCommon.bill.BOOKNO2,
-							UtilAppCommon.bill.RECEPT_NO2));
-
-					builder.addText(String.format("    %8s    %6s\n",
-							UtilAppCommon.bill.PMT_DT2,
-							UtilAppCommon.bill.PMT_AMT2));
-
-					builder.addText(String.format("    %8s    %8s\n",
-							UtilAppCommon.bill.BOOKNO3,
-							UtilAppCommon.bill.RECEPT_NO3));
-
-					builder.addText(String.format("    %8s    %6s\n",
-							UtilAppCommon.bill.PMT_DT3,
-							UtilAppCommon.bill.PMT_AMT3));
-
-				}
-
-				builder.addText(String.format("  Arrear Sundry Details"));
-
-				builder.addText(String.format("          %s          %s\n",
-						UtilAppCommon.bill.SUND_CODE,
-						UtilAppCommon.bill.ARR_SUND_AMT));
-
-				builder.addText("");
-
-				builder.addText(String.format("    Deferred Amt    :%12s\n",
-						UtilAppCommon.bill.DEFERRED_AMT));
-
-				builder.addText(String.format("    Arrear Details\n"));
-
-				builder.addText(String.format("    Arr EC      :%12s\n",
-						UtilAppCommon.bill.ARR_EC));
-
-				builder.addText(String.format("    Arr ED      :%12s\n",
-						UtilAppCommon.bill.ARR_ED));
-
-				builder.addText(String.format("    Arr DPS     :%12s\n",
-						UtilAppCommon.bill.ARR_DPS));
-
-				if (UtilAppCommon.bill.SUNDRY_AMT_FLAG == "Q") {
-					builder.addText(String.format("Sundry Code 'Q'=RC FEES\n"));
-
-				}
-
-				builder.addCut(Builder.CUT_FEED);
-
-				// <Send print data>
-
-				printer.openPrinter(Print.DEVTYPE_BLUETOOTH, address,
-						Print.TRUE, Print.PARAM_DEFAULT);
-				printer.sendData(builder, 10000, status, battery);
-
-				startActivity(new Intent(getBaseContext(),
-						ActvBillingOption.class));
-
-			} catch (Exception e) {
-				// Handle communications error here.
-				Toast.makeText(getApplicationContext(), e.toString(),
-						Toast.LENGTH_LONG).show();
 
 			}
-
-		}
 	}
 
 	class AnalogicThermal extends Thread {

@@ -124,7 +124,9 @@ public class ActvCurrReading extends AppCompatActivity implements OnClickListene
                 linelayKVAH.setVisibility(View.GONE);
                 linelayPowFact.setVisibility(View.GONE);
 
-            } else if (!(UtilAppCommon.in.RATE_CATEGORY.equalsIgnoreCase("NDS-IID(B)")||UtilAppCommon.in.RATE_CATEGORY.equalsIgnoreCase("LTIS-ID") ||
+            } else if (!(UtilAppCommon.in.RATE_CATEGORY.equalsIgnoreCase("NDS-IID(A)") ||
+                    UtilAppCommon.in.RATE_CATEGORY.equalsIgnoreCase("NDS-IID(B)")||
+                    UtilAppCommon.in.RATE_CATEGORY.equalsIgnoreCase("LTIS-ID") ||
                     UtilAppCommon.in.RATE_CATEGORY.equalsIgnoreCase("LTIS-IID") ||
                     UtilAppCommon.in.RATE_CATEGORY.equalsIgnoreCase("PUBWW") ||
                     UtilAppCommon.in.RATE_CATEGORY.equalsIgnoreCase("IAS-IIM") ||
@@ -571,21 +573,21 @@ public class ActvCurrReading extends AppCompatActivity implements OnClickListene
                         + "." + Integer.parseInt(UtilAppCommon.in.SCHEDULED_BILLING_DATE.substring(0, 4));
 
 
-                copySAPInputData[0] = UtilAppCommon.in.CONTRACT_AC_NO;                //cursor.getString(0);	CANumber
-                copySAPInputData[1] = UtilAppCommon.in.INSTALLATION;                //cursor.getString(1); 	Installation
-                copySAPInputData[2] = strlocation.split("¥")[0];                    //cursor.getString(8);	Latitude
-                copySAPInputData[3] = strlocation.split("¥")[1];                    //cursor.getString(9);	Longitude
-                copySAPInputData[4] = reading;                                        //cursor.getString(5);	CurrentReadingKwh
-                copySAPInputData[5] = demand;                                        //cursor.getString(7);	MaxDemd
-                copySAPInputData[6] = formatter.format(iPowFactor);                    //cursor.getString(8);	PowerFactor
-                copySAPInputData[7] = strMtrStatus;                                    //cursor.getString(4);	MtrReadingNote
-                copySAPInputData[8] = SAPInformat.format(today.getTime());            //cursor.getString(3);	MtrReadingDate
-                copySAPInputData[9] = nxtDate;                                        //cursor.getString(2);	SCHEDULED_BILLING_DATE
-                copySAPInputData[10] = UtilAppCommon.in.SAP_DEVICE_NO;                //cursor.getString(12);	SAP_DEVICE_NO
-                copySAPInputData[11] = (UtilAppCommon.in.RATE_CATEGORY.equalsIgnoreCase("NDS-IID(B)") && iPowFactor>0.0)?"2":"1";                                            //"2"					ProcessedFlag
-                //copySAPInputData[11] = "1";                                            //"2"					ProcessedFlag
-                copySAPInputData[12] = "0";                                            //"0"
-                copySAPInputData[13] = readingKVAH;                                    //cursor.getString(6);	CurrentReadingKVAH
+                copySAPInputData[0] = UtilAppCommon.in.CONTRACT_AC_NO;                       //cursor.getString(0);	CANumber
+                copySAPInputData[1] = UtilAppCommon.in.INSTALLATION;                        //cursor.getString(1);  Installation
+                copySAPInputData[2] = strlocation.split("¥")[0];                    //cursor.getString(8);    Latitude
+                copySAPInputData[3] = strlocation.split("¥")[1];                  //cursor.getString(9);	        Longitude
+                copySAPInputData[4] = reading;                                        //cursor.getString(5);	        CurrentReadingKwh
+                copySAPInputData[5] = demand;                                        //cursor.getString(7);	            MaxDemd
+                copySAPInputData[6] = formatter.format(iPowFactor);                 //cursor.getString(8);	            PowerFactor
+                copySAPInputData[7] = strMtrStatus;                                //cursor.getString(4);	            MtrReadingNote
+                copySAPInputData[8] = SAPInformat.format(today.getTime());         //cursor.getString(3);	            MtrReadingDate
+                copySAPInputData[9] = nxtDate;                                    //cursor.getString(2);	            SCHEDULED_BILLING_DATE
+                copySAPInputData[10] = UtilAppCommon.in.SAP_DEVICE_NO;           //cursor.getString(12);	            SAP_DEVICE_NO
+                copySAPInputData[11] = (UtilAppCommon.in.RATE_CATEGORY.equalsIgnoreCase("NDS-IID(B)") && iPowFactor>0.0)?"2":"1"; //ProcessedFlag                                           //"2"					ProcessedFlag
+                //copySAPInputData[11] = "1";                                   //"2"					ProcessedFlag
+                copySAPInputData[12] = "0";                                    //"0"
+                copySAPInputData[13] = readingKVAH;                           //cursor.getString(6);	CurrentReadingKVAH
 
                 Log.e("SCHEDULED_BILLING_DATE", UtilAppCommon.in.SCHEDULED_BILLING_DATE.substring(0, 4) + "-" + UtilAppCommon.in.SCHEDULED_BILLING_DATE.substring(5, 7) + "-" + UtilAppCommon.in.SCHEDULED_BILLING_DATE.substring(8, 10));
                 Log.e("SCHEDULED_BILLING_DATE", UtilAppCommon.in.SCHEDULED_BILLING_DATE + " <==> " + nxtDate);
@@ -676,15 +678,11 @@ public class ActvCurrReading extends AppCompatActivity implements OnClickListene
             ad.setTitle("Confirm");
             ad.setMessage("Confirm to print");
             ad.setButton(DialogInterface.BUTTON_POSITIVE, "Yes",
-                    new DialogInterface.OnClickListener() {
-
-                        public void onClick(DialogInterface dialog,
-                                            int which) {
-                            // TODO Auto-generated method stub
-                            ad.dismiss();
-                            Write2SbmOut();
-                            //startActivity(new Intent(ctx, ActvBillPrinting.class));
-                        }
+                    (dialog, which) -> {
+                        // TODO Auto-generated method stub
+                        ad.dismiss();
+                        Write2SbmOut();
+                        //startActivity(new Intent(ctx, ActvBillPrinting.class));
                     });
             ad.setButton(DialogInterface.BUTTON_NEGATIVE, "No",
                     (dialog, which) -> {
@@ -797,7 +795,6 @@ public class ActvCurrReading extends AppCompatActivity implements OnClickListene
         Intent intent = new Intent(Intent.ACTION_VIEW);
         intent.setDataAndType(Uri.fromFile(file), "application/pdf");
         startActivity(intent);
-
         // startActivity(getIntent());
     }
 

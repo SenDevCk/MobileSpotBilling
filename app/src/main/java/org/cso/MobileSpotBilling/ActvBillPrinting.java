@@ -28,6 +28,7 @@ import androidx.core.content.ContextCompat;
 
 import com.analogics.thermalAPI.Bluetooth_Printer_2inch_prof_ThermalAPI;
 import com.analogics.thermalprinter.AnalogicsThermalPrinter;
+import com.epson.epos2.printer.Printer;
 import com.epson.eposprint.Builder;
 import com.epson.eposprint.Print;
 import com.zebra.android.comm.BluetoothPrinterConnection;
@@ -49,6 +50,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
@@ -785,122 +788,6 @@ public class ActvBillPrinting extends AppCompatActivity {
 
 		}
 	}
-
-	/*class EpsonThermal extends Thread {
-
-		private BluetoothDevice device = null;
-		private String address = null;
-
-		final int barcodeWidth = 2;
-		final int barcodeHeight = 100;
-
-		public EpsonThermal(String address) {
-			this.address = address;
-			device = mBluetoothAdapter.getRemoteDevice(address);
-			Toast.makeText(getApplicationContext(), "Connected To:" + address,
-					Toast.LENGTH_LONG).show();
-		}
-
-		public void run() {
-			Print printer = new Print();
-			int[] status = new int[1];
-			int[] battery = new int[1];
-			status[0] = 0;
-			battery[0] = 0;
-
-			SimpleDateFormat ft = new SimpleDateFormat ("dd-MM-yy'  TIME:'hh:mm");
-
-			try {
-				//UtilAppCommon.bprintdupl = false;
-				Toast.makeText(getApplicationContext(), "Sending Data",
-						Toast.LENGTH_LONG).show();
-				Builder builder = new Builder("TM-P60", Builder.MODEL_ANK);
-				builder.addCommand(new byte[] {0x1C, 0x28, 0x43, 0x02, 0x00, 0x30, 0x02});
-
-
-
-
-				*//*Builder builder = new Builder("TM-P60", Builder.MODEL_ANK);
-
-				builder.addCommand(new byte[] {0x1C, 0x28, 0x43, 0x02, 0x00, 0x30, 0x02});
-
-				builder.addTextFont(Builder.FONT_A);
-				*//*
-				builder.addText(".\n");
-				try {
-
-					Drawable PhotoPath = getResources().getDrawable(R.drawable.chunav);
-
-					System.out.println("Photo: " + PhotoPath);
-					BitmapFactory bf = new BitmapFactory();
-					builder.addImage(bf.decodeResource(getResources(), R.drawable.chunav), 0, 0, bf
-									.decodeResource(getResources(), R.drawable.chunav).getWidth(),
-							bf.decodeResource(getResources(), R.drawable.chunav).getHeight(),
-							Builder.PARAM_DEFAULT);
-					*//*builder.addImage(bf.decodeFile(PhotoPath), 0, 0, bf
-									.decodeFile(PhotoPath).getWidth(),
-							bf.decodeFile(PhotoPath).getHeight(),
-							Builder.PARAM_DEFAULT);*//*
-					Log.v("Azadi Photo Print Added", "Azadi Photo Print Added");
-				} catch (Exception ex) {
-
-					Log.v("Azadi Photo Print", ex.getMessage());
-					System.out
-							.println("Error In Azadi Photo Print: " + ex.toString());
-				}
-				builder.addTextFont(Builder.FONT_A);
-				builder.addText(String.format("\n"));
-				builder.addTextAlign(Builder.ALIGN_CENTER);
-				builder.addTextSize(2, 2);
-				builder.addTextStyle(Builder.FALSE, Builder.FALSE,
-						Builder.TRUE, Builder.PARAM_UNSPECIFIED);
-				if( UtilAppCommon.bprintdupl)
-					builder.addText("Duplicate Bill\n");
-
-				builder.addText("\n");
-				builder.addText("\n");
-
-				builder.addCut(Builder.CUT_FEED);
-				// <Send print data>
-
-				printer.openPrinter(Print.DEVTYPE_BLUETOOTH, address,
-						Print.TRUE, Print.PARAM_DEFAULT);
-				printer.sendData(builder, 18000, status, battery);
-				//startActivity(new Intent(getBaseContext(), PoleMobileActivity.class));
-
-				printer.closePrinter();
-				//
-
-
-			} catch (Exception e) {
-				// Handle communications error here.
-				e.printStackTrace();
-				Toast.makeText(getApplicationContext(), e.getMessage(),
-						Toast.LENGTH_LONG).show();
-				Log.e("Bill Print", e.getMessage());
-
-			}
-			finally {
-				if (UtilAppCommon.bprintdupl)
-					startActivity(new Intent(getBaseContext(), ActvConsumerNbrInputForDuplicateBill.class));
-				if(UtilAppCommon.blActyncBtn)
-					startActivity(new Intent(getBaseContext(), SyncMobPoleActivity.class));
-					//else if(UtilAppCommon.inSAPSendMsg.equalsIgnoreCase("1") && !UtilAppCommon.blActyncBtn)
-					//	startActivity(new Intent(getBaseContext(), PoleMobileActivity.class));
-				else if(UtilAppCommon.billType.equalsIgnoreCase("A"))
-					startActivity(new Intent(getBaseContext(), ActvConsumerNbrInput.class));
-				else if(UtilAppCommon.billType.equalsIgnoreCase("L"))
-					startActivity(new Intent(getBaseContext(), ActvLegacyNbrInput.class));
-				else if(UtilAppCommon.billType.equalsIgnoreCase("S"))
-					startActivity(new Intent(getBaseContext(), ActvSequenceData.class));
-				else if(UtilAppCommon.billType.equalsIgnoreCase("M"))
-					startActivity(new Intent(getBaseContext(), MeterNbrInput.class));
-				else
-					startActivity(new Intent(getBaseContext(), ActvBillingOption.class));
-			}
-		}
-	}*/
-
 	class EpsonThermal extends Thread {
 
 		private BluetoothDevice device = null;
@@ -931,21 +818,31 @@ public class ActvBillPrinting extends AppCompatActivity {
 						Toast.LENGTH_LONG).show();
 				Builder builder = new Builder("TM-P60", Builder.MODEL_ANK);
 				builder.addCommand(new byte[]{0x1C, 0x28, 0x43, 0x02, 0x00, 0x30, 0x02});
-
-
-
-
 				/*Builder builder = new Builder("TM-P60", Builder.MODEL_ANK);
 				builder.addCommand(new byte[] {0x1C, 0x28, 0x43, 0x02, 0x00, 0x30, 0x02});
 				builder.addTextFont(Builder.FONT_A);*/
-
+				double paybaleAmt=Double.parseDouble(UtilAppCommon.out.SubTotal_B)-Double.parseDouble(UtilAppCommon.out.CurrentMonthDps);
 				builder.addText(".\n");
-
+				//if((UtilAppCommon.out.Category.startsWith("DS")||UtilAppCommon.out.Category.startsWith("KJ")) && paybaleAmt<=0) {
+				if((UtilAppCommon.out.Category.startsWith("DS")||UtilAppCommon.out.Category.startsWith("KJ")) && Double.parseDouble(UtilAppCommon.out.AmtPayableUptoAmt)<=0 && paybaleAmt<=0) {
+					builder.addTextFont(Builder.FONT_A);
+					builder.addText(String.format("\n"));
+					builder.addTextAlign(Builder.ALIGN_CENTER);
+					builder.addTextSize(2, 2);
+					builder.addTextStyle(Builder.FALSE, Builder.FALSE,
+							Builder.TRUE, Builder.PARAM_UNSPECIFIED);
+					builder.addText("\"ZERO BILL\"");
+				}
+				builder.addTextAlign(Builder.ALIGN_CENTER);
+				builder.addTextFont(Builder.FONT_C);
+				builder.addTextSize(2, 1);
+				builder.addText("Energy Bill \n");
+				builder.addText(UtilAppCommon.out.Company+"CL\n");
 				try {
 					Drawable photoPathlogo = null;
-					Bitmap azadi = Utilities.getBitmapFromDrawable(ActvBillPrinting.this, R.drawable.solar);
+					Bitmap azadi = Utilities.getBitmapFromDrawable(ActvBillPrinting.this, R.drawable.cm);
 					//Bitmap azadi = BitmapFactory.decodeResource(getResources(), R.drawable.chunav);
-					azadi = Bitmap.createScaledBitmap(azadi, 350, 220, true);
+					azadi = Bitmap.createScaledBitmap(azadi, 350, 350, true);
 					builder.addImage(azadi, 0, 0, azadi.getWidth(), azadi.getHeight(), Builder.PARAM_DEFAULT);
 					Log.v("Azadi Photo Print Added", "Azadi Photo Print Added");
 				} catch (Exception ex) {
@@ -954,24 +851,33 @@ public class ActvBillPrinting extends AppCompatActivity {
 					System.out
 							.println("Error In Azadi Photo Print: " + ex.toString());
 				}
-				builder.addTextFont(Builder.FONT_A);
-				builder.addText(String.format("\n"));
+				StringBuilder ntsMsg = new StringBuilder();
+				ntsMsg.append("\nसभी घरेलू उपभोक्ताओं से अब 125 यूनिट तक\nबिजली खपत पर कोई शुल्क नहीं लिया\nजाएगा। यह लाभ जुलाई माह की खपत\nसे लागू है।\n");
+				builder.addTextSize(1, 2);
+				builder.addTextFont(Builder.FONT_C);
+				builder.addTextAlign(Builder.ALIGN_LEFT);
+				builder.addCommand(ntsMsg.toString().getBytes(StandardCharsets.UTF_8));
+				builder.addTextFont(Builder.FONT_C);
+				builder.addTextAlign(Builder.ALIGN_RIGHT);
+				builder.addCommand("-नीतीश कुमार,मुख्यमंत्री बिहार\n".getBytes(StandardCharsets.UTF_8));
+				builder.addText(" -------------------------------\n");
 				builder.addTextAlign(Builder.ALIGN_CENTER);
 				builder.addTextSize(2, 2);
 				builder.addTextStyle(Builder.FALSE, Builder.FALSE,
 						Builder.TRUE, Builder.PARAM_UNSPECIFIED);
-				if (UtilAppCommon.bprintdupl)
-					builder.addText("Duplicate Bill\n");
-				UtilAppCommon.bprintdupl = false;
-				builder.addText(UtilAppCommon.out.Company + "CL\n");
+				builder.addText("STATE GOV SUBSIDY\n");
+				builder.addText(UtilAppCommon.out.GOVT_SUB+"\n");
+				//if (UtilAppCommon.bprintdupl)
+					//builder.addText("Energy Bill\n");
+				//UtilAppCommon.bprintdupl = false;
+				//builder.addText(UtilAppCommon.out.Company + "CL\n");
 
-				builder.addTextStyle(Builder.FALSE, Builder.FALSE,
-						Builder.FALSE, Builder.PARAM_UNSPECIFIED);
+				//builder.addTextStyle(Builder.FALSE, Builder.FALSE,
+						//Builder.FALSE, Builder.PARAM_UNSPECIFIED);
 				builder.addTextSize(1, 1);
 				builder.addText(" -------------------------------\n");
 				builder.addTextAlign(Builder.ALIGN_LEFT);
-				//builder.addTextFont(Builder.FONT_C);
-				//builder.addTextSize(2, 2);
+				builder.addTextFont(Builder.FONT_C);
 				builder.addText(String.format(
 						"  ELECTRICITY BILL:%s\n", UtilAppCommon.out.BillMonth));
 
@@ -1002,34 +908,34 @@ public class ActvBillPrinting extends AppCompatActivity {
 						+ UtilAppCommon.out.AmtPayableUptoDt.trim() + "\nके पश्चात विदयुत सम्बन्ध विच्छेदित\nकर दिया जाएगा|" + "\n" +
 						"                 स0 वि0 अभि0" + "\n";
 				Log.v("ActvBillPrinting", "************************Printing Stage Checkpoint 3");
-				try {
+//				try {
+//
+//					if (Double.parseDouble(UtilAppCommon.out.ArrearSubTotal_A) > 1000) {
+//						Log.v("ActvBillPrinting", "************************Printing Stage Checkpoint 4");
+//						builder.addCommand(String.format(
+//								hindiMessage).getBytes("UTF-8"));
+//
+//						Log.v("ActvBillPrinting", "************************Printing Stage Checkpoint 5");
+//						//	("प्रिय " + bill.get_CNAME().trim() + ",\n" + "कृपया विदयुत बकाया राशि रू" + bill.get_PROMPT_AMT().trim() + " का\nभुगतान सुचना प्राप्ति के 15 दिनों के\nभीतर सुनिश्चित करें अन्यथा विदयुत \nअधिनियम 2003 के धारा 56 के आलोक में दि." + bill.get_UPTO_DATE().trim() + " के पश्चात विदयुत\nसम्बन्ध विच्छेदित कर दिया जाएगा।" + "\n" + "                 स0 वि0 अभि0" + "\n")
+//					}
+//				} catch (NumberFormatException e) {
+//					try {
+//						Log.v("ActvBillPrinting", "************************Printing Stage Checkpoint 6");
+//						if (Float.parseFloat(UtilAppCommon.out.ArrearSubTotal_A) > 1000) {
+//							Log.v("ActvBillPrinting", "************************Printing Stage Checkpoint 7");
+//							builder.addCommand(String.format(
+//									hindiMessage).getBytes("UTF-8"));
+//							Log.v("ActvBillPrinting", "************************Printing Stage Checkpoint 8");
+//						}
+//					} catch (NumberFormatException e1) {
+//						e.printStackTrace();
+//					}
+//				}
 
-					if (Double.parseDouble(UtilAppCommon.out.ArrearSubTotal_A) > 1000) {
-						Log.v("ActvBillPrinting", "************************Printing Stage Checkpoint 4");
-						builder.addCommand(String.format(
-								hindiMessage).getBytes("UTF-8"));
 
-						Log.v("ActvBillPrinting", "************************Printing Stage Checkpoint 5");
-						//	("प्रिय " + bill.get_CNAME().trim() + ",\n" + "कृपया विदयुत बकाया राशि रू" + bill.get_PROMPT_AMT().trim() + " का\nभुगतान सुचना प्राप्ति के 15 दिनों के\nभीतर सुनिश्चित करें अन्यथा विदयुत \nअधिनियम 2003 के धारा 56 के आलोक में दि." + bill.get_UPTO_DATE().trim() + " के पश्चात विदयुत\nसम्बन्ध विच्छेदित कर दिया जाएगा।" + "\n" + "                 स0 वि0 अभि0" + "\n")
-					}
-				} catch (NumberFormatException e) {
-					try {
-						Log.v("ActvBillPrinting", "************************Printing Stage Checkpoint 6");
-						if (Float.parseFloat(UtilAppCommon.out.ArrearSubTotal_A) > 1000) {
-							Log.v("ActvBillPrinting", "************************Printing Stage Checkpoint 7");
-							builder.addCommand(String.format(
-									hindiMessage).getBytes("UTF-8"));
-							Log.v("ActvBillPrinting", "************************Printing Stage Checkpoint 8");
-						}
-					} catch (NumberFormatException e1) {
-						e.printStackTrace();
-					}
-				}
-
-
-/**
- * End adding lines for tariff change 2018-19
- */
+				/**
+				 * End adding lines for tariff change 2018-19
+				 */
 
 				//cpclData += "UNDERLINE OFF\r\n";
 				Log.v("ActvBillPrinting", "************************Printing Stage Checkpoint 9");
@@ -1214,9 +1120,7 @@ public class ActvBillPrinting extends AppCompatActivity {
 					builder.addText("READING DETAILS\n");
 					builder.addText("----------------\n");
 					builder.addTextAlign(Builder.ALIGN_LEFT);
-
 					builder.addText("\t PREVIOUS \tCURRENT\n");
-
 					builder.addText(String.format(
 							" READING: %s   %S\n", UtilAppCommon.in.PREV_KWH_CYCLE1, UtilAppCommon.SAPBlueIn.CurrentReadingKwh));
 
@@ -1257,10 +1161,8 @@ public class ActvBillPrinting extends AppCompatActivity {
 									bitmap_crop.getHeight(),
 									Builder.PARAM_DEFAULT);*/
 					} catch (Exception ex) {
-
 						Log.e("Bill Photo Print", ex.getMessage());
-						System.out
-								.println("Error In Photo Print: " + ex.toString());
+						System.out.println("Error In Photo Print: " + ex.toString());
 					}
 					// Print Reading Image End
 
@@ -1403,9 +1305,6 @@ public class ActvBillPrinting extends AppCompatActivity {
 						"  ENERGY CHARGES    :   %.2f\n", engchg));
 
 				builder.addText(String.format(
-						"  DPS               :   %.2f\n", curdps));
-
-				builder.addText(String.format(
 						"  FIXED/DEMD CHG    :   %.2f\n", fixchg));
 
 				builder.addText(String.format(
@@ -1414,18 +1313,18 @@ public class ActvBillPrinting extends AppCompatActivity {
 				builder.addText(String.format(
 						"  ELEC. DUTY        :   %.2f\n", ed));
 
-				builder.addText(String.format(
-						"  METER RENT        :   %.2f\n", mr));
+//				builder.addText(String.format(
+//						"  METER RENT        :   %.2f\n", mr));
 
 				/**
 				 * Adding New lines for tariff change 2018-19
 				 */
-				Log.v("ActvBillPrinting", "************************Printing Stage Checkpoint 24");
-				builder.addText(String.format(
-						"  CGST @ 9%%    	 : %.2f\n", cgst));
-				builder.addText(String.format(
-						"  SGST @ 9%%     	 : %.2f\n", sgst));
-				Log.v("ActvBillPrinting", "************************Printing Stage Checkpoint 25");
+				//Log.v("ActvBillPrinting", "************************Printing Stage Checkpoint 24");
+//				builder.addText(String.format(
+//						"  CGST @ 9%%    	 : %.2f\n", cgst));
+//				builder.addText(String.format(
+//						"  SGST @ 9%%     	 : %.2f\n", sgst));
+				//Log.v("ActvBillPrinting", "************************Printing Stage Checkpoint 25");
 				/**
 				 * End adding lines for tariff change 2018-19
 				 */
@@ -1439,30 +1338,33 @@ public class ActvBillPrinting extends AppCompatActivity {
 				builder.addText(String.format(
 						"  OTHER CHG         :   %.2f\n", othrchg));
 
-				builder.addTextSize(1, 2);
+				builder.addTextSize(1, 1);
 				builder.addTextFont(Builder.FONT_A);
 
 				builder.addText(String.format(
-						"  STATE GOV SUBSIDY : %.2f\n", Float.parseFloat(UtilAppCommon.out.GOVT_SUB)));
+						"STATE GOV SUBSIDY : %.2f\n", Float.parseFloat(UtilAppCommon.out.GOVT_SUB)));
 
+				builder.addTextFont(Builder.FONT_A);
+				builder.addTextSize(2, 2);
+				builder.addTextAlign(Builder.ALIGN_CENTER);
+				builder.addText("Current Bill Amt\n");
+				builder.addText(String.format("%.2f\n", paybaleAmt));
 				builder.addTextFont(Builder.FONT_A);
 				builder.addTextSize(1, 1);
-
-
-				builder.addText(String.format(
-						"  SUB TOTAL(B)      :   %.2f\n", subtotb));
-
+				builder.addTextAlign(Builder.ALIGN_CENTER);
 				builder.addText(" ****************************\n");
+				if(!(UtilAppCommon.out.Category.startsWith("DS")||UtilAppCommon.out.Category.startsWith("KJ"))) {
+					builder.addText(String.format(
+							"   DPS               :   %.2f\n", curdps));
+					builder.addText(String.format(
+							"  INTEREST ON SD(C) :   %.2f\n", intonsd));
 
-				builder.addText(String.format(
-						"  INTEREST ON SD(C) :   %.2f\n", intonsd));
+					builder.addText(String.format(
+							"  INCENTIVE         :   %.2f\n", incentive));
 
-				builder.addText(String.format(
-						"  INCENTIVE         :   %.2f\n", incentive));
-
-				builder.addText(String.format(
-						"  REMISSION         :   %.2f\n", rebonmmc));
-
+					builder.addText(String.format(
+							"  REMISSION         :   %.2f\n", rebonmmc));
+				}
 				builder.addText(String.format(
 						"  GROSS TOTAL(A+B+C):   %.2f\n", grosstot));
 
@@ -1527,15 +1429,25 @@ public class ActvBillPrinting extends AppCompatActivity {
 				//builder.addBarcode(strBarcodeData, Builder.BARCODE_GS1_128 , Builder.HRI_NONE, Builder.FONT_A, 50, 100);
 
 				builder.addText("\n");
-
 				builder.addText(String.format("Consumer Helpline- 1912"));
 
 				builder.addText("\n");
-
+				try {
+					Bitmap solar = Utilities.getBitmapFromDrawable(ActvBillPrinting.this, R.drawable.solar);
+					//Bitmap azadi = BitmapFactory.decodeResource(getResources(), R.drawable.chunav);
+					solar = Bitmap.createScaledBitmap(solar, 350, 220, true);
+					builder.addImage(solar, 0, 0, solar.getWidth(), solar.getHeight(), Builder.PARAM_DEFAULT);
+					Log.v("solar Photo Print Added", "solar Photo Print Added");
+				} catch (Exception ex) {
+					ex.printStackTrace();
+					Log.v("solar Photo Print", ex.getMessage());
+					System.out
+							.println("Error In solar Photo Print: " + ex.toString());
+				}
 				builder.addTextAlign(Builder.ALIGN_CENTER);
-				builder.addText("*************************************** \n");
-				builder.addText("Solar lagaen bijali bill bachaen " + "\n");
-				builder.addText("*************************************** \n");
+				builder.addText("******************************* \n");
+				builder.addText("Install solar,save electricity" + "\n");
+				builder.addText("******************************* \n");
 					/*builder.addTextAlign(Builder.ALIGN_LEFT);
 					builder.addText("For application go to \n https://www.pmsuryaghar.gov.in \n");
 					builder.addText("*************************************** \n");*/
@@ -1556,13 +1468,11 @@ public class ActvBillPrinting extends AppCompatActivity {
 
 				printer.openPrinter(Print.DEVTYPE_BLUETOOTH, address,
 						Print.TRUE, Print.PARAM_DEFAULT);
-				printer.sendData(builder, 18000, status, battery);
+				printer.sendData(builder, 21000, status, battery);
 				//startActivity(new Intent(getBaseContext(), PoleMobileActivity.class));
-
+				//printer.endTransaction();
 				printer.closePrinter();
 				//
-
-
 			} catch (Exception e) {
 				// Handle communications error here.
 				e.printStackTrace();
@@ -1571,26 +1481,1807 @@ public class ActvBillPrinting extends AppCompatActivity {
 				Log.e("Bill Print", e.getMessage());
 
 			} finally {
+				Intent nextIntent = null;
+
 				if (UtilAppCommon.bprintdupl)
-					startActivity(new Intent(getBaseContext(), ActvConsumerNbrInputForDuplicateBill.class));
-				if (UtilAppCommon.blActyncBtn)
-					startActivity(new Intent(getBaseContext(), SyncMobPoleActivity.class));
-					//else if(UtilAppCommon.inSAPSendMsg.equalsIgnoreCase("1") && !UtilAppCommon.blActyncBtn)
-					//	startActivity(new Intent(getBaseContext(), PoleMobileActivity.class));
+					nextIntent = new Intent(getBaseContext(), ActvConsumerNbrInputForDuplicateBill.class);
+				else if (UtilAppCommon.blActyncBtn)
+					nextIntent = new Intent(getBaseContext(), SyncMobPoleActivity.class);
 				else if (UtilAppCommon.billType.equalsIgnoreCase("A"))
-					startActivity(new Intent(getBaseContext(), ActvConsumerNbrInput.class));
+					nextIntent = new Intent(getBaseContext(), ActvConsumerNbrInput.class);
 				else if (UtilAppCommon.billType.equalsIgnoreCase("L"))
-					startActivity(new Intent(getBaseContext(), ActvLegacyNbrInput.class));
+					nextIntent = new Intent(getBaseContext(), ActvLegacyNbrInput.class);
 				else if (UtilAppCommon.billType.equalsIgnoreCase("S"))
-					startActivity(new Intent(getBaseContext(), ActvSequenceData.class));
+					nextIntent = new Intent(getBaseContext(), ActvSequenceData.class);
 				else if (UtilAppCommon.billType.equalsIgnoreCase("M"))
-					startActivity(new Intent(getBaseContext(), MeterNbrInput.class));
+					nextIntent = new Intent(getBaseContext(), MeterNbrInput.class);
 				else
-					startActivity(new Intent(getBaseContext(), ActvBillingOption.class));
+					nextIntent = new Intent(getBaseContext(), ActvBillingOption.class);
+
+				// Clear all and keep MainActivity at bottom
+				Intent mainIntent = new Intent(getBaseContext(), MainActivity.class);
+				mainIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+				startActivity(mainIntent);
+
+				startActivity(nextIntent);
+			}
+
+		}
+	}
+	class EpsonThermalHindi extends Thread {
+
+		private BluetoothDevice device = null;
+		private String address = null;
+
+		final int barcodeWidth = 2;
+		final int barcodeHeight = 100;
+
+		public EpsonThermalHindi(String address) {
+			this.address = address;
+			device = mBluetoothAdapter.getRemoteDevice(address);
+			Toast.makeText(getApplicationContext(), "Connected To:" + address,
+					Toast.LENGTH_LONG).show();
+		}
+
+		SimpleDateFormat ft = new SimpleDateFormat("dd-MM-yy' TIME:'hh:mm");
+
+		@SuppressLint("SuspiciousIndentation")
+		public void run() {
+			Print printer = new Print();
+			int[] status = new int[1];
+			int[] battery = new int[1];
+			status[0] = 0;
+			battery[0] = 0;
+
+			SimpleDateFormat ft = new SimpleDateFormat("dd-MM-yy'  TIME:'hh:mm");
+
+			try {
+				//UtilAppCommon.bprintdupl = false;
+				Toast.makeText(getApplicationContext(), "Sending Data",
+						Toast.LENGTH_LONG).show();
+				Builder builder = new Builder("TM-P60", Builder.MODEL_ANK);
+
+				builder.addCommand(new byte[]{0x1C, 0x28, 0x43, 0x02, 0x00, 0x30, 0x02});
+				builder.addText("\n");
+				double paybaleAmt=Double.parseDouble(UtilAppCommon.out.SubTotal_B)-Double.parseDouble(UtilAppCommon.out.CurrentMonthDps);
+				//if((UtilAppCommon.out.Category.startsWith("DS")||UtilAppCommon.out.Category.startsWith("KJ")) && paybaleAmt<=0) {
+				if((UtilAppCommon.out.Category.startsWith("DS")||UtilAppCommon.out.Category.startsWith("KJ")) && Double.parseDouble(UtilAppCommon.out.AmtPayableUptoAmt)<=0 && paybaleAmt<=0) {
+					builder.addTextFont(Builder.FONT_A);
+					builder.addText(String.format("\n"));
+					builder.addTextAlign(Builder.ALIGN_CENTER);
+					builder.addTextSize(2, 2);
+					builder.addTextStyle(Builder.FALSE, Builder.FALSE,
+							Builder.TRUE, Builder.PARAM_UNSPECIFIED);
+					builder.addCommand("\"शून्य बिल\"".getBytes("UTF-8"));
+				}
+				builder.addTextFont(Builder.FONT_C);
+				builder.addTextAlign(Builder.ALIGN_CENTER);
+				builder.addTextSize(2, 1);
+				builder.addTextStyle(Builder.FALSE, Builder.FALSE,
+						Builder.TRUE, Builder.PARAM_UNSPECIFIED);
+//				if (UtilAppCommon.bprintdupl)
+				String header="\nऊर्जा विपत्र\n";
+				builder.addCommand(header.getBytes("UTF-8"));
+				//UtilAppCommon.bprintdupl = false;
+				builder.addText(UtilAppCommon.out.Company + "CL\n");
+				try {
+					Bitmap bt_logo = Utilities.getBitmapFromDrawable(getApplicationContext(), R.drawable.cm);
+					bt_logo = Bitmap.createScaledBitmap(bt_logo, 350, 350, true);
+					builder.addImage(bt_logo, 0, 0, bt_logo.getWidth(), bt_logo.getHeight(), Builder.PARAM_DEFAULT);
+					Log.v("Azadi Photo Print Added", "Azadi Photo Print Added");
+				} catch (Exception ex) {
+
+					Log.v("Azadi Photo Print", ex.getMessage());
+					System.out
+							.println("Error In Azadi Photo Print: " + ex.toString());
+				}
+				StringBuilder ntsMsg = new StringBuilder();
+				ntsMsg.append("\nसभी घरेलू उपभोक्ताओं से अब 125 यूनिट तक\nबिजली खपत पर कोई शुल्क नहीं लिया\nजाएगा। यह लाभ जुलाई माह की खपत\nसे लागू है।\n");
+				builder.addTextSize(1, 2);
+				builder.addTextFont(Builder.FONT_C);
+				builder.addTextAlign(Builder.ALIGN_LEFT);
+				builder.addCommand(ntsMsg.toString().getBytes(StandardCharsets.UTF_8));
+				builder.addTextFont(Builder.FONT_C);
+				builder.addTextAlign(Builder.ALIGN_RIGHT);
+				builder.addCommand("-नीतीश कुमार,मुख्यमंत्री बिहार\n".getBytes(StandardCharsets.UTF_8));
+				builder.addText(" -------------------------------\n");
+				builder.addTextSize(2, 2);
+				builder.addTextFont(Builder.FONT_C);
+				builder.addTextAlign(Builder.ALIGN_CENTER);
+				builder.addCommand("राज्य सरकार अनुदान\n".getBytes("UTF-8"));
+				builder.addText(UtilAppCommon.out.GOVT_SUB+"\n");
+				builder.addCommand(String.format("\n").getBytes("UTF-8"));
+				builder.addTextStyle(Builder.FALSE, Builder.FALSE,
+						Builder.FALSE, Builder.PARAM_UNSPECIFIED);
+				builder.addTextSize(1, 1);
+				builder.addText(" -------------------------------\n");
+				builder.addTextAlign(Builder.ALIGN_LEFT);
+
+
+				String bmonth;
+				bmonth = UtilAppCommon.out.BillMonth.substring(0, 4) + UtilAppCommon.out.BillMonth.substring(6, 8);
+				//printerdata1.append(printer.font_Courier_24_VIP(String.format(
+				//		"ELECTRICITY BILL:%s\n", bmonth)));
+				builder.addCommand(String.format("विदयुत विपत्र माह : %s\n", bmonth).getBytes("UTF-8"));
+				//builder.addText(String.format("बिधुत वील माह           : %s\n",bmonth));
+
+				/**
+				 * Adding lines below for change in tariff 2018-19
+				 */
+				String gstNo = "";
+				if (UtilAppCommon.out.Company.equalsIgnoreCase("NBPD")) {
+					gstNo = "10AAECN1588M2ZB";
+				} else if (UtilAppCommon.out.Company.equalsIgnoreCase("SBPD")) {
+					gstNo = "10AASCS2207G2ZN";
+				}
+
+
+				builder.addCommand(String.format(
+						"जीएसटीआईएन:%s\n\n", gstNo).getBytes("UTF-8"));
+				builder.addTextAlign(Builder.ALIGN_CENTER);
+				String hindiMessage = "प्रिय " + UtilAppCommon.out.Name + ",\n" + " कृपया विदयुत बकाया राशि\nरू "
+						+ UtilAppCommon.out.AmtPayableUptoAmt.trim()
+						+ " का भुगतान सुचना\nप्राप्ति के 15 दिनों के भीतर\nसुनिश्चित करें अन्यथा विदयुत \nअधिनियम 2003 के धारा 56 के\nआलोक में दि."
+						+ UtilAppCommon.out.AmtPayableUptoDt.trim() + "\nके पश्चात विदयुत सम्बन्ध विच्छेदित\nकर दिया जाएगा|" + "\n" +
+						"                 स0 वि0 अभि0" + "\n";
+//				try {
+//
+//					if (Double.parseDouble(UtilAppCommon.out.ArrearSubTotal_A) > 1000) {
+//						builder.addCommand(String.format(
+//								hindiMessage).getBytes("UTF-8"));
+//						//	("प्रिय " + bill.get_CNAME().trim() + ",\n" + "कृपया विदयुत बकाया राशि रू" + bill.get_PROMPT_AMT().trim() + " का\nभुगतान सुचना प्राप्ति के 15 दिनों के\nभीतर सुनिश्चित करें अन्यथा विदयुत \nअधिनियम 2003 के धारा 56 के आलोक में दि." + bill.get_UPTO_DATE().trim() + " के पश्चात विदयुत\nसम्बन्ध विच्छेदित कर दिया जाएगा।" + "\n" + "                 स0 वि0 अभि0" + "\n")
+//					}
+//				} catch (NumberFormatException e) {
+//					try {
+//						if (Float.parseFloat(UtilAppCommon.out.ArrearSubTotal_A) > 1000) {
+//							builder.addCommand(String.format(
+//									hindiMessage).getBytes("UTF-8"));
+//						}
+//					} catch (NumberFormatException e1) {
+//
+//					}
+//				}
+
+
+/**
+ * End adding lines for tariff change 2018-19
+ */
+
+
+				builder.addText(String.format("**************************\n"));
+
+				builder.addCommand(String.format("दिनांक   : %s\n", UtilAppCommon.out.REC_DATE_TIME).getBytes("UTF-8"));
+				builder.addCommand(String.format(" दॆय तिथि : %s\n", UtilAppCommon.out.AmtPayableUptoDt).getBytes("UTF-8"));
+
+				builder.addCommand(String.format("कनेक्शन का विवरण  \n").getBytes("UTF-8"));
+				builder.addTextAlign(Builder.ALIGN_CENTER);
+				builder.addText(" **************************\n");
+				builder.addTextAlign(Builder.ALIGN_LEFT);
+				builder.addCommand(String.format("विपत्र संख्या       : %s\n", UtilAppCommon.out.BillNo).getBytes("UTF-8"));
+
+				builder.addCommand(String.format("प्रमंडल/कोड    :%s\n", UtilAppCommon.out.Division).getBytes("UTF-8"));
+
+				builder.addCommand(String.format("अवर प्रमंडल    :%s\n", UtilAppCommon.out.SubDivision).getBytes("UTF-8"));
+				builder.addCommand(String.format("उपभोक्ता संख्या : ").getBytes("UTF-8"));
+				builder.addTextSize(2, 2);
+				builder.addTextFont(Builder.FONT_C);
+				//builder.addText(String.format(
+				//		" CA NUMBER:%s\n", UtilAppCommon.out.CANumber));
+				builder.addText(String.format("%s\n", UtilAppCommon.out.CANumber));
+
+				builder.addTextFont(Builder.FONT_A);
+				builder.addTextSize(1, 1);
+				builder.addCommand(String.format("कंज्युमर आईडी      :%s\n", UtilAppCommon.out.LegacyNumber).getBytes("UTF-8"));
+
+				builder.addCommand(String.format("एम.आर.यू संख्या :%s\n", UtilAppCommon.out.MRU).getBytes("UTF-8"));
+
+				builder.addCommand(String.format("नाम :%s\n", UtilAppCommon.in.CONSUMER_NAME).getBytes("UTF-8"));
+
+				builder.addCommand(String.format("पता :").getBytes("UTF-8"));
+
+
+				int alen = 0;
+				alen = UtilAppCommon.out.Address.length();
+				String addr1 = "";
+				String addr2 = "";
+				if (alen > 30) {
+					addr1 = UtilAppCommon.out.Address.substring(0, 30);
+					if (alen > 60)
+						addr2 = UtilAppCommon.out.Address.substring(30, 60);
+					else
+						addr2 = UtilAppCommon.out.Address.substring(30, alen);
+				} else
+					addr1 = UtilAppCommon.out.Address;
+
+				builder.addCommand(String.format(
+						" %s\n", addr1).getBytes("UTF-8"));
+				builder.addCommand(String.format(
+						" %s\n", addr2).getBytes("UTF-8"));
+				builder.addCommand(String.format("मोबाइल संख्या  :%s\n", UtilAppCommon.in.METER_CAP).getBytes("UTF-8"));
+				builder.addCommand(String.format("क्षेत्र         :%s\n", UtilAppCommon.out.Area_type).getBytes("UTF-8"));
+				builder.addCommand(String.format("पोल कोड     :%s\n", UtilAppCommon.out.PoleNo).getBytes("UTF-8"));
+				if (!UtilAppCommon.in.PWR_FACTOR.equalsIgnoreCase(""))
+					builder.addCommand(String.format("मीटर संख्या :%s  फेज:%s\n", UtilAppCommon.out.MtrNo + ", " + UtilAppCommon.in.PWR_FACTOR, UtilAppCommon.out.Phase).getBytes("UTF-8"));
+				else
+					builder.addCommand(String.format("मीटर संख्या :%s  फेज:%s\n", UtilAppCommon.out.MtrNo, UtilAppCommon.out.Phase).getBytes("UTF-8"));
+
+				builder.addCommand(String.format(
+						"मीटर ओनर : %s\n", UtilAppCommon.out.MtrMake
+								.equalsIgnoreCase("C") ? "Company" : UtilAppCommon.out.MtrMake
+								.equalsIgnoreCase("O") ? "Consumer" : "").getBytes("UTF-8"));
+
+				builder.addCommand(String.format(
+						"उपभोक्ता श्रेणी : %s\n", UtilAppCommon.out.Category).getBytes("UTF-8"));
+
+				String CD2 = "";
+				double result = 0.0;
+				Log.v("ActvBillPrinting", "************************Printing Stage Checkpoint 11");
+				if (UtilAppCommon.out.Category.equalsIgnoreCase("NDS-IID(B)")
+						|| UtilAppCommon.out.Category.equalsIgnoreCase("IAS-IIM")
+						|| UtilAppCommon.out.Category.equalsIgnoreCase("LTEV")
+						|| UtilAppCommon.out.Category.equalsIgnoreCase("LTIS-ID")
+						|| UtilAppCommon.out.Category.equalsIgnoreCase("LTIS-IID")
+						|| UtilAppCommon.out.Category.equalsIgnoreCase("PUBWW")) {
+					Log.v("ActvBillPrinting", "************************Printing Stage Checkpoint 12");
+					result = (double) (Double.parseDouble(UtilAppCommon.out.CD) / 0.9f);
+					CD2 = String.format("%.2f", result) + " KVA";
+					Log.v("ActvBillPrinting", "************************Printing Stage Checkpoint 13");
+				} else if (UtilAppCommon.out.Category.equalsIgnoreCase("HGN")
+						|| UtilAppCommon.out.Category.equalsIgnoreCase("IAS-IM")
+						|| UtilAppCommon.out.Category.equalsIgnoreCase("IAS-IU")) {
+					result = (double) (Double.parseDouble(UtilAppCommon.out.SanctLoad));
+					CD2 = result + " HP";
+				} else if (UtilAppCommon.out.Category.equalsIgnoreCase("DS-IID")
+						|| UtilAppCommon.out.Category.equalsIgnoreCase("DS-IIID")
+						|| UtilAppCommon.out.Category.equalsIgnoreCase("NDS-IID(A)")) {
+					result = (double) (Double.parseDouble(UtilAppCommon.out.CD));
+					CD2 = result + " KW";
+				}else {
+					/**
+					 * End ading lines for tariff change
+					 */
+					result = (double) (Double.parseDouble(UtilAppCommon.out.SanctLoad));
+					Log.v("ActvBillPrinting", "************************Printing Stage Checkpoint 14");
+					CD2 = result + " KW";
+				}
+
+				builder.addCommand(String.format(
+						"स्वीकृत भार :%s\n", CD2).getBytes("UTF-8"));
+
+
+				builder.addCommand(String.format(
+						"जमानत की जमा राशि  :%s\n", UtilAppCommon.out.SD).getBytes("UTF-8"));
+
+				String billdays;
+
+				if (UtilAppCommon.out.Type.equalsIgnoreCase("(PL Adj.) Actual")) {
+					billdays = UtilAppCommon.out.BillDays + "(" + UtilAppCommon.out.MESSAGE10 + ")";
+				} else {
+					billdays = UtilAppCommon.out.BillDays;
+				}
+				builder.addCommand(String.format(
+						"कुल विपत्र दिवस  :%s\n", billdays).getBytes("UTF-8"));
+
+				builder.addText("****************************\n");
+
+
+				builder.addTextAlign(Builder.ALIGN_CENTER);
+				builder.addCommand("मान पठन स्थिति \n".getBytes("UTF-8"));
+				builder.addCommand("-------------------------\n".getBytes("UTF-8"));
+				builder.addTextAlign(Builder.ALIGN_LEFT);
+
+				builder.addCommand("        पूर्व         वर्तमान  \n".getBytes("UTF-8"));
+
+				builder.addCommand(String.format(
+						"पठन   : %s     %s\n", UtilAppCommon.out.PreviusReading, UtilAppCommon.out.CurrentReading).getBytes("UTF-8"));
+
+				builder.addCommand(String.format(
+						"दिनांक : %s  %s\n", UtilAppCommon.out.PrevusMtrRdgDt, UtilAppCommon.out.CurrentMtrRdgDt).getBytes("UTF-8"));
+				if (!UtilAppCommon.out.PrevusMtrRdgDt.equalsIgnoreCase("0000.00.00"))
+					builder.addCommand(String.format(
+							"पठन स्थिति : %s   %s \n", UtilAppCommon.out.PreviusMtrReadingNote, UtilAppCommon.out.CurrentMtrReadingNote).getBytes("UTF-8"));
+
+
+				if (!UtilAppCommon.in.MONTH_SEASONAL.equalsIgnoreCase("")) {
+					builder.addText("****************************\n");
+					builder.addTextAlign(Builder.ALIGN_CENTER);
+					builder.addCommand("ब्ल्यूटुथ पठन स्थिति \n".getBytes("UTF-8"));
+					builder.addCommand("-------------------------\n".getBytes("UTF-8"));
+					builder.addTextAlign(Builder.ALIGN_LEFT);
+
+					builder.addCommand("        पूर्व         वर्तमान  \n".getBytes("UTF-8"));
+
+					builder.addCommand(String.format(
+							"पठन   : %s     %s\n", UtilAppCommon.in.PREV_KWH_CYCLE1, UtilAppCommon.SAPBlueIn.CurrentReadingKwh).getBytes("UTF-8"));
+
+					builder.addCommand(String.format(
+							"दिनांक : %s  %s\n", UtilAppCommon.in.DATE_1, UtilAppCommon.out.CurrentMtrRdgDt).getBytes("UTF-8"));
+					if (!UtilAppCommon.in.DATE_1.equalsIgnoreCase("0000.00.00"))
+						builder.addCommand(String.format("बस्तु स्थिति : %s   %s \n", "OK", "OK").getBytes("UTF-8"));
+
+				}
+
+				// Print Reading Image
+				if (UtilAppCommon.in.PRV_MTR_READING_NOTE.toUpperCase() != "RN") {
+					try {
+					/*String PhotoDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+							.getPath()
+							+ "/SBDocs/Photos_Crop"
+							+ "/"
+							+ UtilAppCommon.sdoCode
+							+ "/"
+							+ UtilAppCommon.out.MRU;*/
+						String PhotoDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES + "/SBDocs/Photos/" + UtilAppCommon.in.SUB_DIVISION_CODE + "/" + UtilAppCommon.in.MRU)
+								.getPath();
+						strmonth = String.valueOf(Arrays.asList(strMonths).indexOf(UtilAppCommon.out.BillMonth) + 1);
+						String PhotoPath = PhotoDir + "/" + UtilAppCommon.in.SCHEDULED_BILLING_DATE.substring(0, 4) +
+								UtilAppCommon.in.SCHEDULED_BILLING_DATE.substring(5, 7) +
+								"_" + UtilAppCommon.out.CANumber + ".jpg";
+
+						System.out.println("Photo: " + PhotoPath);
+						//BitmapFactory bf = new BitmapFactory();
+
+//					builder.addImage(bf.decodeFile(PhotoPath), 0, 0, bf
+//							.decodeFile(PhotoPath).getWidth(),
+//							bf.decodeFile(PhotoPath).getHeight(),
+//							Builder.PARAM_DEFAULT);
+						File filedir = new File(PhotoDir, UtilAppCommon.in.SCHEDULED_BILLING_DATE.substring(0, 4) +
+								UtilAppCommon.in.SCHEDULED_BILLING_DATE.substring(5, 7) +
+								"_" + UtilAppCommon.out.CANumber + ".jpg");
+						Bitmap btmImg = Utilities.getBitmapForAllVersions(context, filedir);
+						builder.addImage(btmImg, 0, 0, btmImg.getWidth(),
+								btmImg.getHeight(),
+								Builder.PARAM_DEFAULT);
+					} catch (Exception ex) {
+
+						System.out
+								.println("Error In Photo Print: " + ex.toString());
+					}
+					// Print Reading Image End
+
+				}
+				builder.addCommand(String.format("\n").getBytes("UTF-8"));
+
+				float mf = 0, consump = 0;
+				//mf=Float.parseFloat(UtilAppCommon.out.MF);
+				if (!UtilAppCommon.out.MF.equalsIgnoreCase(""))
+					mf = Float.parseFloat(UtilAppCommon.out.MF);
+				consump = Float.parseFloat(UtilAppCommon.out.Consumption);
+
+				builder.addCommand(String.format(
+						"गुणक    :%.2f खपत :%.2f\n", mf, consump).getBytes("UTF-8"));
+
+				builder.addCommand(String.format(
+						"दर्ज मांग  :%s पीएफ्  :%s \n", UtilAppCommon.out.RecordedDemd, UtilAppCommon.out.PowerFactor).getBytes("UTF-8"));
+
+
+				float mmcunits = 0, avg = 0;
+				if (UtilAppCommon.out.Category.equals("DS-II") || UtilAppCommon.out.Category.equals("NDS-IM")) {
+					mmcunits = 0;
+				} else {
+					mmcunits = Float.parseFloat(UtilAppCommon.out.MMCUnits);
+				}
+				if (UtilAppCommon.out.CurrentMtrReadingNote.equalsIgnoreCase("OK")) {
+					avg = 0;
+				} else {
+					avg = Float.parseFloat(UtilAppCommon.out.Average);
+				}
+
+				builder.addCommand(String.format(
+						"मासिक न्युनतम प्रभार:%.2f  \n", mmcunits).getBytes("UTF-8"));
+				builder.addCommand(String.format(
+						"औसत    :%.2f \nकुल विपत्र दिवस   :%s\n", avg, UtilAppCommon.out.BilledUnits).getBytes("UTF-8"));
+
+				builder.addCommand(String.format(
+						"विपत्र का आधार  :%s \n", UtilAppCommon.out.Type).getBytes("UTF-8"));
+
+
+				builder.addText(" ****************************\n");
+
+				builder.addTextAlign(Builder.ALIGN_CENTER);
+				builder.addCommand("बकाया का विवरण   \n".getBytes("UTF-8"));
+				builder.addCommand("--------------------------\n".getBytes("UTF-8"));
+				builder.addTextAlign(Builder.ALIGN_LEFT);
+
+				float pmtonacct = 0, arrengdue = 0, arrdps = 0, arrothr = 0;
+				pmtonacct = Float.parseFloat(UtilAppCommon.out.PaymentOnAccount);
+				arrengdue = Float.parseFloat(UtilAppCommon.out.ArrearEnergyDues);
+				arrdps = Float.parseFloat(UtilAppCommon.out.ArrearDPs);
+				arrothr = Float.parseFloat(UtilAppCommon.out.ArrearOthers);
+
+				builder.addCommand(String.format(
+						"अग्रिम जमा         :%.2f\n", pmtonacct).getBytes("UTF-8"));
+
+				builder.addCommand(String.format(
+						"ऊर्जा  बकाया        :%.2f\n", arrengdue).getBytes("UTF-8"));
+
+				builder.addCommand(String.format(
+						"विलंबअधिभार बकाया   :%.2f\n", arrdps).getBytes("UTF-8"));
+
+				builder.addCommand(String.format(
+						"अन्य  प्रभार         :%.2f\n", arrothr).getBytes("UTF-8"));
+
+				builder.addCommand(String.format(
+						"कुल बकाया (अ)     :%.2f\n", Float.parseFloat(UtilAppCommon.out.ArrearSubTotal_A)).getBytes("UTF-8"));
+
+
+				builder.addText(" ****************************\n");
+
+				builder.addTextAlign(Builder.ALIGN_CENTER);
+				builder.addCommand("वर्तमान बिपत्र का विवरण       \n".getBytes("UTF-8"));
+				builder.addCommand("---------------------------\n".getBytes("UTF-8"));
+				builder.addTextAlign(Builder.ALIGN_LEFT);
+
+				float engchg = 0;
+				engchg = Float.parseFloat(UtilAppCommon.out.CurrentEnergyCharges);
+
+				float fixchg = 0, curdps = 0, excessdemdchg = 0, ed = 0, mr = 0, shuntcapchg = 0, othrchg = 0, subtotb = 0, govsubsidy = 0, cgst = 0, sgst = 0;
+				;
+				float intonsd = 0, incentive = 0, rebonmmc = 0, grosstot = 0;
+
+				curdps = Float.parseFloat(UtilAppCommon.out.CurrentMonthDps);
+				fixchg = Float.parseFloat(UtilAppCommon.out.FixDemdCharge);
+				excessdemdchg = Float.parseFloat(UtilAppCommon.out.ExcessDemdCharge);
+				ed = Float.parseFloat(UtilAppCommon.out.ElectricityDuty);
+				mr = Float.parseFloat(UtilAppCommon.out.MeterRent);
+				/**
+				 * Adding lines for tariff change 2018-19
+				 */
+
+				cgst = Float.parseFloat(UtilAppCommon.out.METER_CGST);
+				sgst = Float.parseFloat(UtilAppCommon.out.METER_SGST);
+				/**
+				 * End ading lines for tariff change
+				 */
+				shuntcapchg = Float.parseFloat(UtilAppCommon.out.ShauntCapCharge);
+				othrchg = Float.parseFloat(UtilAppCommon.out.OtherCharge);
+				govsubsidy = Float.parseFloat(UtilAppCommon.out.GOVT_SUB);
+				subtotb = Float.parseFloat(UtilAppCommon.out.SubTotal_B);
+				if (UtilAppCommon.out.InterestOnSD_C.equalsIgnoreCase(""))
+					intonsd = 0;
+				else
+					intonsd = Float.parseFloat(UtilAppCommon.out.InterestOnSD_C);
+				if (UtilAppCommon.out.Incentive.equalsIgnoreCase(""))
+					incentive = 0;
+				else
+					incentive = Float.parseFloat(UtilAppCommon.out.Incentive);
+
+				rebonmmc = Float.parseFloat(UtilAppCommon.out.RebateOnMMC);
+				grosstot = Float.parseFloat(UtilAppCommon.out.GrossTotal);
+
+				float installmt_amt = 0;
+				if (UtilAppCommon.in.CURR_MON_AMT.equalsIgnoreCase(""))
+					installmt_amt = 0;
+				else
+					installmt_amt = Float.parseFloat(UtilAppCommon.in.CURR_MON_AMT);
+
+
+				builder.addCommand(String.format(
+						"ऊर्जा शुल्क          :%.2f\n", engchg).getBytes("UTF-8"));
+				builder.addCommand(String.format(
+						"फिक्स्ड/डिमांड प्रभार :%.2f\n", fixchg).getBytes("UTF-8"));
+
+				builder.addCommand(String.format(
+						"आधिक्य डिमांड प्रभार :%.2f\n", excessdemdchg).getBytes("UTF-8"));
+
+				builder.addCommand(String.format(
+						"विदयुत  शुल्क      :%.2f\n", ed).getBytes("UTF-8"));
+//				builder.addCommand(String.format(
+//						"मीटर किराया       :%.2f\n", mr).getBytes("UTF-8"));
+				/**
+				 * Adding New lines for tariff change 2018-19
+				 */
+//				builder.addCommand(String.format(
+//						"सीजीएसटी @ 9%%    : %.2f\n", cgst).getBytes("UTF-8"));
+//				builder.addCommand(String.format(
+//						"एसजीएसटी @ 9%%    : %.2f\n", sgst).getBytes("UTF-8"));
+				/**
+				 * End adding lines for tariff change 2018-19
+				 */
+				builder.addCommand(String.format(
+						"कैपिसिटर प्रभार     :%.2f\n", shuntcapchg).getBytes("UTF-8"));
+
+				builder.addCommand(String.format(
+						"किस्त की राशि     :%.2f\n", installmt_amt).getBytes("UTF-8"));
+
+				builder.addCommand(String.format(
+						"अन्य शुल्क        :%.2f\n", othrchg).getBytes("UTF-8"));
+				builder.addTextSize(1, 1);
+				builder.addTextFont(Builder.FONT_A);
+				builder.addCommand(String.format(
+						"राज्य सरकार अनुदान:%.2f\n", govsubsidy).getBytes("UTF-8"));
+				builder.addTextFont(Builder.FONT_C);
+				builder.addTextSize(2, 2);
+				builder.addTextAlign(Builder.ALIGN_CENTER);
+				builder.addCommand(
+						"वर्तमान विपत्र राशि\n".getBytes("UTF-8"));
+				builder.addText(String.format("%.2f\n", paybaleAmt));
+				builder.addTextFont(Builder.FONT_A);
+				builder.addTextSize(1, 1);
+				builder.addTextAlign(Builder.ALIGN_LEFT);
+				builder.addText(" ****************************\n");
+				if(!(UtilAppCommon.out.Category.startsWith("DS")||UtilAppCommon.out.Category.startsWith("KJ"))) {
+					builder.addCommand(String.format(
+							"वर्तमान विलंब अधिभार:%.2f\n", curdps).getBytes("UTF-8"));
+					builder.addCommand(String.format(
+							"जमानत राशि पर सूद(-):%.2f\n", intonsd).getBytes("UTF-8"));
+					builder.addCommand(String.format(
+							"इन्सेंटिव्स          :%.2f\n", incentive).getBytes("UTF-8"));
+					builder.addCommand(String.format(
+							"रीमिशन           :%.2f\n", rebonmmc).getBytes("UTF-8"));
+				}
+					builder.addCommand(String.format(
+							"उप-जोड :%.2f\n", grosstot).getBytes("UTF-8"));
+				builder.addText(" ***********************\n");
+				builder.addCommand(String.format(
+						"छूट की राशि    :%s\n", UtilAppCommon.out.Rebate).getBytes("UTF-8"));
+				builder.addText(" ***********************\n");
+				builder.addTextAlign(Builder.ALIGN_CENTER);
+				builder.addCommand("कूल मांग    \n".getBytes("UTF-8"));
+				builder.addText("----------------------------\n");
+				builder.addTextAlign(Builder.ALIGN_LEFT);
+				builder.addCommand(String.format(
+						"%s तक रूo  : %s\n", UtilAppCommon.out.AmtPayableUptoDt, UtilAppCommon.out.AmtPayableUptoAmt).getBytes("UTF-8"));
+				builder.addCommand(String.format(
+						"%s तक रूo  : %s\n", UtilAppCommon.out.AmtPayablePYDt, UtilAppCommon.out.AmtPayablePYAmt).getBytes("UTF-8"));
+				builder.addCommand(String.format(
+						"%s पश्चात रूo : %s\n", UtilAppCommon.out.AmtPayableAfterDt, UtilAppCommon.out.AmtPayableAfterAmt).getBytes("UTF-8"));
+				builder.addText("****************************\n");
+				builder.addTextAlign(Builder.ALIGN_CENTER);
+				builder.addCommand("पिछले भुगतान का  विवरण     \n".getBytes("UTF-8"));
+				builder.addText(" ----------------------------\n");
+				builder.addTextAlign(Builder.ALIGN_LEFT);
+				builder.addCommand(String.format(
+						"भुगतान की राशि  :%s\n", UtilAppCommon.out.LastPaymentAmt).getBytes("UTF-8"));
+				builder.addCommand(String.format(
+						"भुगतान दिनांक    :%s\n", UtilAppCommon.out.LastPaidDate).getBytes("UTF-8"));
+				builder.addCommand(String.format(
+						"रसीद  संख्या  :%s\n", UtilAppCommon.out.ReceiptNumber).getBytes("UTF-8"));
+				builder.addCommand(String.format(
+						"मीटर रीडर आईडी :%s\n", UtilAppCommon.out.MTR_READER_ID).getBytes("UTF-8"));
+				builder.addText(String.format("Ver: %s", UtilAppCommon.strAppVersion.replace(".apk", "")));
+				builder.addText("\n");
+				strBarcodeData = UtilAppCommon.acctNbr;
+					builder.addTextAlign(Builder.ALIGN_CENTER);
+				builder.addBarcode(strBarcodeData, Builder.BARCODE_CODE39, Builder.HRI_BELOW, Builder.FONT_A, barcodeWidth, barcodeHeight);
+				builder.addTextAlign(Builder.ALIGN_LEFT);
+				builder.addText("\n");
+				builder.addText(String.format("Consumer Helpline- 1912\n\n"));
+				try {
+					Bitmap solar = Utilities.getBitmapFromDrawable(ActvBillPrinting.this, R.drawable.solar);
+					solar = Bitmap.createScaledBitmap(solar, 350, 220, true);
+					builder.addImage(solar, 0, 0, solar.getWidth(), solar.getHeight(), Builder.PARAM_DEFAULT);
+				} catch (Exception ex) {
+					ex.printStackTrace();
+					Log.v("Azadi Photo Print", ex.getMessage());
+					System.out
+							.println("Error In Azadi Photo Print: " + ex.toString());
+				}
+				builder.addTextAlign(Builder.ALIGN_CENTER);
+				builder.addText("**********************\n");
+				builder.addCommand("सोलर लगाए बिजली बिल बचाए ! \n".getBytes("UTF-8"));
+				builder.addText("**********************\n");
+				float flIntDisc = 0;
+				if (!(UtilAppCommon.out.INT_DISC.equalsIgnoreCase("") || UtilAppCommon.out.INT_DISC.equalsIgnoreCase("null"))) {
+					flIntDisc = Float.parseFloat(UtilAppCommon.out.INT_DISC);
+					if (Math.abs(flIntDisc) > 0)
+						builder.addCommand(String.format("देय तिथि %s तक विपत्र राशि रू %s का ऑनलाईन भुगतान करेँ एव पाये रू"
+								+ " %.2f अतिरिक्त छुट।", UtilAppCommon.out.AmtPayableUptoDt, UtilAppCommon.out.AmtPayableUptoAmt, Math.abs(flIntDisc)).getBytes("UTF-8"));
+				}
+				builder.addText("\n");
+				builder.addText("\n");
+				builder.addCut(Builder.CUT_FEED);
+				printer.openPrinter(Print.DEVTYPE_BLUETOOTH, address, Print.TRUE, Print.PARAM_DEFAULT);
+				printer.sendData(builder, 22000, status, battery);
+				//startActivity(new Intent(getBaseContext(), PoleMobileActivity.class));
+				printer.closePrinter();
+				//
+			} catch (Exception e) {
+				//e.printStackTrace();
+				// Handle communications error here.
+				Toast.makeText(getApplicationContext(), e.toString(),
+						Toast.LENGTH_LONG).show();
+				Log.e("Epson Hindi Printing", e.getMessage().toString());
+
+			} finally {
+				Intent nextIntent = null;
+
+				if (UtilAppCommon.bprintdupl)
+					nextIntent = new Intent(getBaseContext(), ActvConsumerNbrInputForDuplicateBill.class);
+				else if (UtilAppCommon.blActyncBtn)
+					nextIntent = new Intent(getBaseContext(), SyncMobPoleActivity.class);
+				else if (UtilAppCommon.billType.equalsIgnoreCase("A"))
+					nextIntent = new Intent(getBaseContext(), ActvConsumerNbrInput.class);
+				else if (UtilAppCommon.billType.equalsIgnoreCase("L"))
+					nextIntent = new Intent(getBaseContext(), ActvLegacyNbrInput.class);
+				else if (UtilAppCommon.billType.equalsIgnoreCase("S"))
+					nextIntent = new Intent(getBaseContext(), ActvSequenceData.class);
+				else if (UtilAppCommon.billType.equalsIgnoreCase("M"))
+					nextIntent = new Intent(getBaseContext(), MeterNbrInput.class);
+				else
+					nextIntent = new Intent(getBaseContext(), ActvBillingOption.class);
+
+				// Clear all and keep MainActivity at bottom
+				Intent mainIntent = new Intent(getBaseContext(), MainActivity.class);
+				mainIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+				startActivity(mainIntent);
+
+				startActivity(nextIntent);
 			}
 		}
 	}
+	class TVSEnglish extends Thread {
 
+		private String address = null;
+		BluetoothDevice device = null;
+		HPRTPrinterHelper hprtPrinterHelper = null;
+
+		public TVSEnglish(String address) {
+			this.address = address;
+			device = mBluetoothAdapter.getRemoteDevice(address);
+
+			if (mBluetoothAdapter == null) {
+				Toast.makeText(ActvBillPrinting.this, "Bluetooth not available.", Toast.LENGTH_SHORT).show();
+
+				return;
+			}
+			if (!mBluetoothAdapter.isEnabled()) {
+				Toast.makeText(ActvBillPrinting.this,
+						"Bluetooth feature is turned off now...Please turned it on! ", Toast.LENGTH_SHORT).show();
+				if (ActivityCompat.checkSelfPermission(ActvBillPrinting.this, Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
+					// TODO: Consider calling
+					//    ActivityCompat#requestPermissions
+					// here to request the missing permissions, and then overriding
+					//   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+					//                                          int[] grantResults)
+					// to handle the case where the user grants the permission. See the documentation
+					// for ActivityCompat#requestPermissions for more details.
+					return;
+				}
+				mBluetoothAdapter.enable();
+				try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				return;
+			}
+
+			try {
+				hprtPrinterHelper = new HPRTPrinterHelper();
+				int portOpen = hprtPrinterHelper.PortOpen("Bluetooth," + address);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+		}
+
+		SimpleDateFormat ft = new SimpleDateFormat("dd-MM-yy' TIME:'hh:mm");
+
+		public void run() {
+
+			try {
+
+				// AnalogicsThermalPrinterProf conn= new AnalogicsThermalPrinterProf();
+//				AnalogicsThermalPrinter conn = new AnalogicsThermalPrinter();
+//
+//				conn.openBT(address);
+//
+//				Bluetooth_Printer_2inch_prof_ThermalAPI printer = new Bluetooth_Printer_2inch_prof_ThermalAPI();
+
+
+				Toast.makeText(getBaseContext(), BILL, Toast.LENGTH_SHORT)
+						.show();
+
+				char lf = 0x0A;
+				char cr = 0x0D;
+				// char dp = 0x1D;
+				// char nm = 0x13;
+                double paybaleAmt=Double.parseDouble(UtilAppCommon.out.SubTotal_B)-Double.parseDouble(UtilAppCommon.out.CurrentMonthDps);
+				// ////////Print On Paper Start////////////
+				StringBuilder printerdata1 = new StringBuilder();
+				StringBuilder printerdata2 = new StringBuilder();
+				StringBuilder printerdata3 = new StringBuilder();
+				StringBuilder printerdata4 = new StringBuilder();
+				StringBuilder printerdata5 = new StringBuilder();
+				StringBuilder printerdata6 = new StringBuilder();
+				StringBuilder printerdata7 = new StringBuilder();
+				StringBuilder printerbarcode = new StringBuilder();
+				//Print part 1
+				String bmonth;
+				bmonth = UtilAppCommon.out.BillMonth.substring(0, 4) + UtilAppCommon.out.BillMonth.substring(6, 8);
+
+				printerdata1.append( UtilAppCommon.out.GOVT_SUB + "\n");
+				printerdata1.append("ELECTRICITY BILL: " + bmonth + "\n");
+
+				/**
+				 * Adding lines below for change in tariff 2018-19
+				 */
+				String gstNo = "";
+				if (UtilAppCommon.out.Company.equalsIgnoreCase("NBPD")) {
+					gstNo = "10AAECN1588M2ZB";
+				} else if (UtilAppCommon.out.Company.equalsIgnoreCase("SBPD")) {
+					gstNo = "10AASCS2207G2ZN";
+				}
+
+
+				printerdata1.append(String.format("GSTIN:%s\n", gstNo));
+
+				String hindiMessage = "प्रिय " + UtilAppCommon.out.Name + ",\n" + " कृपया विदयुत बकाया राशि\nरू "
+						+ UtilAppCommon.out.AmtPayableUptoAmt.trim()
+						+ " का भुगतान सुचना\nप्राप्ति के 15 दिनों के भीतर\nसुनिश्चित करें अन्यथा विदयुत \nअधिनियम 2003 के धारा 56 के\nआलोक में दि."
+						+ UtilAppCommon.out.AmtPayableUptoDt.trim() + "\nके पश्चात विदयुत सम्बन्ध\nविच्छेदित कर दिया जाएगा|" + "\n" +
+						"                 स0 वि0 अभि0" + "\n";
+				//try {
+
+					//if (Double.parseDouble(UtilAppCommon.out.ArrearSubTotal_A) > 1000) {
+//						printerdata1.append((String.format(
+//								hindiMessage)));
+						//	("प्रिय " + bill.get_CNAME().trim() + ",\n" + "कृपया विदयुत बकाया राशि रू" + bill.get_PROMPT_AMT().trim() + " का\nभुगतान सुचना प्राप्ति के 15 दिनों के\nभीतर सुनिश्चित करें अन्यथा विदयुत \nअधिनियम 2003 के धारा 56 के आलोक में दि." + bill.get_UPTO_DATE().trim() + " के पश्चात विदयुत\nसम्बन्ध विच्छेदित कर दिया जाएगा।" + "\n" + "                 स0 वि0 अभि0" + "\n")
+					//}
+				//} catch (NumberFormatException e) {
+					//try {
+						//if (Float.parseFloat(UtilAppCommon.out.ArrearSubTotal_A) > 1000) {
+							printerdata1.append((String.format(hindiMessage)));
+						//}
+					//} catch (NumberFormatException e1) {
+                        //e1.printStackTrace();
+					//}
+				//}
+
+
+				//* End adding lines for tariff change 2018-19
+
+				printerdata1.append(String.format("********************************\n"));
+
+
+				printerdata1.append(String.format("DATE : %s\n", UtilAppCommon.out.REC_DATE_TIME));
+				printerdata1.append(String.format("DUE DATE:  %s\n", UtilAppCommon.out.AmtPayableUptoDt));
+
+				printerdata1.append(String.format("CONSUMER DETAILS \n"));
+				printerdata1.append(String.format("********************************\n"));
+				printerdata1.append(String.format("Bill No: %s\n", UtilAppCommon.out.BillNo));
+				printerdata1.append(String.format("DIVISION:%s\n", UtilAppCommon.out.Division));
+				printerdata1.append(String.format("SUB DIVN:%s\n", UtilAppCommon.out.SubDivision));
+				printerdata1.append(String.format("CA NUMBER:%s\n", UtilAppCommon.out.CANumber));
+				printerdata1.append(String.format("LEGACY NO:%s\n", UtilAppCommon.out.LegacyNumber));
+				printerdata1.append(String.format("MRU :%s\n", UtilAppCommon.out.MRU));
+				printerdata1.append(String.format("NAME :%s\n", UtilAppCommon.in.CONSUMER_NAME));
+
+				int alen = 0;
+				alen = UtilAppCommon.out.Address.length();
+				String addr1 = "";
+				String addr2 = "";
+				if (alen > 24) {
+					addr1 = UtilAppCommon.out.Address.substring(0, 24);
+					if (alen > 48)
+						addr2 = UtilAppCommon.out.Address.substring(24, 48);
+					else
+						addr2 = UtilAppCommon.out.Address.substring(24, alen);
+				} else
+					addr1 = UtilAppCommon.out.Address;
+
+				printerdata1.append(String.format("ADDRESS: "));
+				printerdata1.append(String.format(" %s\n", addr1));
+				printerdata1.append(String.format("%s\n", addr2));
+				printerdata1.append(String.format("MOBILE NO:%s\n", UtilAppCommon.in.METER_CAP));
+				printerdata1.append(String.format("AREA TYPE:%s\n", UtilAppCommon.out.Area_type));
+				printerdata1.append(String.format("POLE NO:%s\n", UtilAppCommon.out.PoleNo));
+				if (!UtilAppCommon.in.PWR_FACTOR.equalsIgnoreCase(""))
+					printerdata1.append(String.format("MTR NO:%s \nPHASE:%s\n", UtilAppCommon.out.MtrNo + ", " + UtilAppCommon.in.PWR_FACTOR, UtilAppCommon.out.Phase));
+				else
+					printerdata1.append(String.format("MTR NO:%s \nPHASE:%s\n", UtilAppCommon.out.MtrNo, UtilAppCommon.out.Phase));
+
+				printerdata1.append(String.format("MTR COMP : %s\n", UtilAppCommon.out.MtrMake
+						.equalsIgnoreCase("C") ? "Company" : UtilAppCommon.out.MtrMake
+						.equalsIgnoreCase("O") ? "Consumer" : ""));
+				printerdata1.append(String.format("CATEGORY :%s\n", UtilAppCommon.out.Category));
+
+				//String CD="";
+				//String CD1="";
+				String CD2 = "";
+				float val = 0;
+				double result = 0.0;
+				Log.v("ActvBillPrinting", "************************Printing Stage Checkpoint 11");
+				if (UtilAppCommon.out.Category.equalsIgnoreCase("NDS-IID(B)")
+						|| UtilAppCommon.out.Category.equalsIgnoreCase("IAS-IIM")
+						|| UtilAppCommon.out.Category.equalsIgnoreCase("LTEV")
+						|| UtilAppCommon.out.Category.equalsIgnoreCase("LTIS-ID")
+						|| UtilAppCommon.out.Category.equalsIgnoreCase("LTIS-IID")
+						|| UtilAppCommon.out.Category.equalsIgnoreCase("PUBWW")) {
+					Log.v("ActvBillPrinting", "************************Printing Stage Checkpoint 12");
+					result = (double) (Double.parseDouble(UtilAppCommon.out.CD) / 0.9f);
+					CD2 = String.format("%.2f", result) + "KVA";
+					Log.v("ActvBillPrinting", "************************Printing Stage Checkpoint 13");
+				} else if (UtilAppCommon.out.Category.equalsIgnoreCase("HGN")
+						|| UtilAppCommon.out.Category.equalsIgnoreCase("IAS-IM")
+						|| UtilAppCommon.out.Category.equalsIgnoreCase("IAS-IU")) {
+					result = (double) (Double.parseDouble(UtilAppCommon.out.SanctLoad));
+					CD2 = result + " HP";
+				} else if (UtilAppCommon.out.Category.equalsIgnoreCase("DS-IID")
+						|| UtilAppCommon.out.Category.equalsIgnoreCase("DS-IIID")
+						|| UtilAppCommon.out.Category.equalsIgnoreCase("NDS-IID(A)")) {
+					result = (double) (Double.parseDouble(UtilAppCommon.out.CD));
+					CD2 = result + " KW";
+				}else {
+					/**
+					 * End ading lines for tariff change
+					 */
+					result = (double) (Double.parseDouble(UtilAppCommon.out.SanctLoad));
+					Log.v("ActvBillPrinting", "************************Printing Stage Checkpoint 14");
+					CD2 = result + " KW";
+				}
+
+				//printerdata1.append(String.format("LOAD :%s\n",CD,CD1));
+				printerdata1.append(String.format("LOAD :%s\n", CD2));
+				printerdata1.append(String.format("SD :%s\n", UtilAppCommon.out.SD));
+
+				String billdays;
+
+				if (UtilAppCommon.out.Type.equalsIgnoreCase("(PL Adj.) Actual")) {
+					billdays = UtilAppCommon.out.BillDays + "(" + UtilAppCommon.out.MESSAGE10 + ")";
+				} else {
+					billdays = UtilAppCommon.out.BillDays;
+				}
+				printerdata2.append(String.format("\nBILLED DAYS :%s\n", billdays));
+				printerdata2.append(String.format("********************************\n"));
+				printerdata2.append(String.format("READING DETAILS  \n"));
+				printerdata2.append(String.format(" -----------------------------\n"));
+				printerdata2.append(String.format("      PREVIOUS   CURRENT\n"));
+				printerdata2.append(String.format("READING   : %s    %s\n", UtilAppCommon.out.PreviusReading, UtilAppCommon.out.CurrentReading));
+				printerdata2.append(String.format("DATE : %s  %s\n", UtilAppCommon.out.PrevusMtrRdgDt, UtilAppCommon.out.CurrentMtrRdgDt));
+				if (!UtilAppCommon.out.PrevusMtrRdgDt.equalsIgnoreCase("0000.00.00"))
+					printerdata2.append(String.format("STATUS : %s          %s \n", UtilAppCommon.out.PreviusMtrReadingNote, UtilAppCommon.out.CurrentMtrReadingNote));
+
+				if (!UtilAppCommon.in.MONTH_SEASONAL.equalsIgnoreCase("")) {
+					printerdata2.append(String.format("******************************* \n"));
+					printerdata2.append(String.format("BLUETOOTH READING DETAILS:\n"));
+					//printerdata2.append(String.format("ब्ल्यूटुथ  मीटर   पठन  का  विवरण :\n"));
+					printerdata2.append(String.format(" ------------------------------\n"));
+					printerdata2.append(String.format("   PREVIOUS     CURRENT \n"));
+					printerdata2.append(String.format("READING  : %s     %s \n", UtilAppCommon.in.PREV_KWH_CYCLE1, UtilAppCommon.SAPBlueIn.CurrentReadingKwh));
+					printerdata2.append(String.format("DATE: %s  %s \n", UtilAppCommon.in.DATE_1, UtilAppCommon.out.CurrentMtrRdgDt));
+					if (!UtilAppCommon.in.DATE_1.equalsIgnoreCase("0000.00.00"))
+						printerdata2.append(String.format("STATUS : %s     %s \n", "OK", "OK"));
+				}
+
+				// 2nd block after image
+
+
+				float mf = 0, consump = 0;
+				//mf=Float.parseFloat(UtilAppCommon.out.MF);
+				if (!UtilAppCommon.out.MF.equalsIgnoreCase(""))
+					mf = Float.parseFloat(UtilAppCommon.out.MF);
+				consump = Float.parseFloat(UtilAppCommon.out.Consumption);
+
+				printerdata3.append(String.format("MULTIPLYING FACTOR : %.2f", mf));
+				printerdata3.append(String.format("\n"));
+				printerdata3.append(String.format("CONSUMPTION:%.2f", consump));
+				printerdata3.append(String.format("\n"));
+				printerdata3.append(String.format("RECORDED DEMD :%s ", UtilAppCommon.out.RecordedDemd));
+				printerdata3.append(String.format("\n"));
+				printerdata3.append(String.format("POWER FACTOR:%s", UtilAppCommon.out.PowerFactor));
+				printerdata3.append(String.format("\n"));
+
+				float mmcunits = 0, avg = 0;
+				if (UtilAppCommon.out.Category.equals("DS-II") || UtilAppCommon.out.Category.equals("NDS-IM")) {
+					mmcunits = 0;
+				} else {
+					mmcunits = Float.parseFloat(UtilAppCommon.out.MMCUnits);
+				}
+
+
+				if (UtilAppCommon.out.CurrentMtrReadingNote.equalsIgnoreCase("OK")) {
+					avg = 0;
+				} else {
+					avg = Float.parseFloat(UtilAppCommon.out.Average);
+
+				}
+
+				printerdata3.append(String.format("MIN UNIT:%.2f \n", mmcunits));
+				printerdata3.append(String.format("AVG :%.2f \nBLD UNITS :%s\n", avg, UtilAppCommon.out.BilledUnits));
+				printerdata3.append(String.format("TYPE:%s \n", UtilAppCommon.out.Type));
+				printerdata3.append(String.format("******************************\n"));
+				printerdata3.append(String.format("    ARREAR DETAILS\n"));
+				printerdata3.append(String.format(" -----------------------------\n"));
+				float pmtonacct = 0, arrengdue = 0, arrdps = 0, arrothr = 0;
+				pmtonacct = Float.parseFloat(UtilAppCommon.out.PaymentOnAccount);
+				arrengdue = Float.parseFloat(UtilAppCommon.out.ArrearEnergyDues);
+				arrdps = Float.parseFloat(UtilAppCommon.out.ArrearDPs);
+				arrothr = Float.parseFloat(UtilAppCommon.out.ArrearOthers);
+
+
+				printerdata3.append(String.format("PYMT ON ACCT %1.2f\n", pmtonacct));
+				printerdata3.append(String.format("ENERGY DUES:%1.2f\n", arrengdue));
+				printerdata3.append(String.format("ARREAR DPS:%1.2f\n", arrdps));
+				printerdata3.append(String.format("OTHERS :%1.2f\n", arrothr));
+				printerdata3.append(String.format("SUB TOTAL(A):%1.2f\n", Float.parseFloat(UtilAppCommon.out.ArrearSubTotal_A)));
+
+				printerdata3.append(String.format("******************************\n"));
+				printerdata3.append(String.format("CURRENT BILL DETAILS\n"));
+				printerdata3.append(String.format("****************************** \n"));
+
+				float engchg = 0;
+				engchg = Float.parseFloat(UtilAppCommon.out.CurrentEnergyCharges);
+				float fixchg = 0, curdps = 0, excessdemdchg = 0, ed = 0, mr = 0, shuntcapchg = 0, othrchg = 0, subtotb = 0, govsubsidy = 0, cgst = 0, sgst = 0;
+				;
+				float intonsd = 0, incentive = 0, rebonmmc = 0, grosstot = 0;
+
+				curdps = Float.parseFloat(UtilAppCommon.out.CurrentMonthDps);
+				fixchg = Float.parseFloat(UtilAppCommon.out.FixDemdCharge);
+				excessdemdchg = Float.parseFloat(UtilAppCommon.out.ExcessDemdCharge);
+				ed = Float.parseFloat(UtilAppCommon.out.ElectricityDuty);
+				mr = Float.parseFloat(UtilAppCommon.out.MeterRent);
+				/**
+				 * Adding lines for tariff change 2018-19
+				 */
+				cgst = Float.parseFloat(UtilAppCommon.out.METER_CGST);
+				sgst = Float.parseFloat(UtilAppCommon.out.METER_SGST);
+				/**
+				 * End ading lines for tariff change
+				 */
+				shuntcapchg = Float.parseFloat(UtilAppCommon.out.ShauntCapCharge);
+				othrchg = Float.parseFloat(UtilAppCommon.out.OtherCharge);
+				govsubsidy = Float.parseFloat(UtilAppCommon.out.GOVT_SUB);
+				subtotb = Float.parseFloat(UtilAppCommon.out.SubTotal_B);
+				if (UtilAppCommon.out.InterestOnSD_C.equalsIgnoreCase(""))
+					intonsd = 0;
+				else
+					intonsd = Float.parseFloat(UtilAppCommon.out.InterestOnSD_C);
+				if (UtilAppCommon.out.Incentive.equalsIgnoreCase(""))
+					incentive = 0;
+				else
+					incentive = Float.parseFloat(UtilAppCommon.out.Incentive);
+
+				rebonmmc = Float.parseFloat(UtilAppCommon.out.RebateOnMMC);
+				grosstot = Float.parseFloat(UtilAppCommon.out.GrossTotal);
+
+				float installmt_amt = 0;
+				if (UtilAppCommon.in.CURR_MON_AMT.equalsIgnoreCase(""))
+					installmt_amt = 0;
+				else
+					installmt_amt = Float.parseFloat(UtilAppCommon.in.CURR_MON_AMT);
+
+				printerdata3.append(String.format("ENERGY CHARGES : %1.2f\n", engchg));
+				printerdata3.append(String.format("FIXED/DEMD CHG: %1s\n", fixchg));
+				printerdata3.append(String.format("EXCESS DEMDCHG: %1s\n", excessdemdchg));
+				printerdata3.append(String.format("ELEC. DUTY    : %1s\n", ed));
+				//printerdata3.append(String.format("METER RENT    : %1s\n", mr));
+				//printerdata3.append(String.format("CGST @ 9%%    :%1s\n", cgst));
+				//printerdata3.append(String.format("SGST @ 9%%    :%1s\n", sgst));
+				printerdata3.append(String.format("SHUNT CAP.CHG :%1s\n", shuntcapchg));
+				printerdata3.append(String.format("INSTALLMT AMT :%1s\n", installmt_amt));
+				printerdata3.append(String.format("OTHER CHG     :%1s\n", othrchg));
+				/**
+				 * Adding New lines for tariff change 2018-19
+				 */
+
+
+				/**
+				 * End adding lines for tariff change 2018-19
+				 */
+
+
+				printerdata4.append(String.format("STATE GOVT SUBSIDY:%1s\n", govsubsidy));
+				printerdata4.append("----------------------\n");
+				//printerdata5.append(String.format("SUB TOTAL(B):%1s\n", subtotb));
+				//start string 5
+				printerdata5.append(String.format("*****************************\n"));
+				if(!(UtilAppCommon.out.Category.startsWith("DS")||UtilAppCommon.out.Category.startsWith("KJ"))) {
+					printerdata5.append(String.format("DPS: %1.2f\n", curdps));
+					printerdata5.append(String.format("INT. ON SD(C):%1s\n", intonsd));
+					printerdata5.append(String.format("INCENTIVE   :%1s\n", incentive));
+					printerdata5.append(String.format("REMISSION   :%1s\n", rebonmmc));
+				}
+				printerdata5.append(String.format("TOTAL(A+B+C):%1s\n", grosstot));
+
+				printerdata5.append(String.format("******************************* \n"));
+
+				printerdata5.append(String.format("REBATE :%10s\n", UtilAppCommon.out.Rebate));
+
+
+				printerdata5.append(String.format("AMOUNT PAYABLE  \n"));
+
+				printerdata5.append(String.format("*****************************\n"));
+
+				printerdata5.append(String.format("%s UPTO  रूo :%1s\n ", UtilAppCommon.out.AmtPayableUptoDt, UtilAppCommon.out.AmtPayableUptoAmt));
+
+				printerdata5.append(String.format("%s BY रूo :%1s\n ", UtilAppCommon.out.AmtPayablePYDt, UtilAppCommon.out.AmtPayablePYAmt));
+
+				printerdata5.append(String.format("%s AFTER रूo:%1s\n ", UtilAppCommon.out.AmtPayableAfterDt, UtilAppCommon.out.AmtPayableAfterAmt));
+
+
+				printerdata5.append(String.format("DETAILS OF LAST PAYMENT \n"));
+				printerdata5.append(String.format("*************************** \n"));
+
+
+				printerdata5.append(String.format("LAST PAID AMT:%s\n", UtilAppCommon.out.LastPaymentAmt));
+
+
+				printerdata5.append(String.format("LAST PAID DT:%s\n", UtilAppCommon.out.LastPaidDate));
+
+
+				printerdata5.append(String.format("RECEIPT NO:%s\n", UtilAppCommon.out.ReceiptNumber));
+
+				printerdata5.append(String.format("MTR RDR :%s\n", UtilAppCommon.out.MTR_READER_ID));
+
+				printerdata5.append(String.format("Ver     :%10s \n", UtilAppCommon.strAppVersion.replace(".apk", "")));
+
+
+				strBarcodeData = UtilAppCommon.acctNbr;
+				printerdata6.append(String.format("Consumer Helpline- 1912 \n\n"));
+				printerdata6.append(String.format("******************************\n"));
+				printerdata6.append(String.format("Solar lagaen bijali bill bachaen " + "\n"));
+				printerdata6.append(String.format("****************************** \n"));
+				//printerdata6.append(String.format("For application go to https://www.pmsuryaghar.gov.in \n"));
+
+				float flIntDisc = 0;
+				if (!(UtilAppCommon.out.INT_DISC.equalsIgnoreCase("") || UtilAppCommon.out.INT_DISC.equalsIgnoreCase("null"))) {
+					flIntDisc = Float.parseFloat(UtilAppCommon.out.INT_DISC);
+					if (Math.abs(flIntDisc) > 0) {
+						printerdata6.append(String.format("Pay Online रूo.%s   by %s to get रूo.%.2f extra rebate.", UtilAppCommon.out.AmtPayableUptoDt, UtilAppCommon.out.AmtPayableUptoAmt, Math.abs(flIntDisc)));
+						//printerdata6.append(String.format("देय  तिथि  %s तक  विपत्र  राशि  " ,UtilAppCommon.out.AmtPayableUptoDt));
+						//printerdata6.append(String.format("रू %s का ऑनलाईन  भुगतान करेँ ",UtilAppCommon.out.AmtPayableUptoAmt));
+						//printerdata6.append(String.format("एव पाये  रू %s अतिरिक्त  छुट",Math.abs(flIntDisc)));
+					}
+				}
+
+
+				printerdata7.append(String.format("%s\n\n\n", " "));
+
+				String PhotoPath = null;
+				if (UtilAppCommon.in.PRV_MTR_READING_NOTE.toUpperCase() != "RN") {
+					// Print Reading Image
+					byte[] imagedata = null;
+					try {
+						String PhotoDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES + "/SBDocs/Photos/" + UtilAppCommon.in.SUB_DIVISION_CODE + "/" + UtilAppCommon.in.MRU).getPath();
+						strmonth = String.valueOf(Arrays.asList(strMonths).indexOf(UtilAppCommon.out.BillMonth) + 1);
+						PhotoPath = PhotoDir + "/" + UtilAppCommon.in.SCHEDULED_BILLING_DATE.substring(0, 4) +
+								UtilAppCommon.in.SCHEDULED_BILLING_DATE.substring(5, 7) +
+								"_" + UtilAppCommon.out.CANumber + ".jpg";
+
+					} catch (Exception e) {
+						// TODO: handle exception
+						e.printStackTrace();
+					}
+					String header = "         Energy Bill";
+					String zeroBill = "  \"ZERO BILL\"";
+					//if((UtilAppCommon.out.Category.startsWith("DS")||UtilAppCommon.out.Category.startsWith("KJ")) && paybaleAmt<=0) {
+					if((UtilAppCommon.out.Category.startsWith("DS")||UtilAppCommon.out.Category.startsWith("KJ")) && Double.parseDouble(UtilAppCommon.out.AmtPayableUptoAmt)<=0 && paybaleAmt<=0) {
+						hprtPrinterHelper.WriteData(new byte[]{0x1B, 0x45, 0x01}); // Bold ON
+						hprtPrinterHelper.WriteData(new byte[]{0x1D, 0x21, 0x11}); // Double height and width
+						hprtPrinterHelper.WriteData((zeroBill + "\n").getBytes("UTF-8"));
+						hprtPrinterHelper.WriteData(new byte[]{0x1d, 0x0c});
+					}
+					// Reset formatting
+					hprtPrinterHelper.WriteData(new byte[]{0x1B, 0x45, 0x00}); // Bold OFF
+					hprtPrinterHelper.WriteData(new byte[]{0x1D, 0x21, 0x00}); // Font size reset
+					hprtPrinterHelper.WriteData((header + "\n").getBytes("gb2312"));
+					//HPRTPrinterHelper.WriteData(("       " + header + "\n").getBytes("gb2312"));
+					hprtPrinterHelper.WriteData(("           " + UtilAppCommon.out.Company+"CL\n").getBytes("gb2312"));
+					hprtPrinterHelper.WriteData(new byte[]{0x1d, 0x0c});
+					tvsPrintImageAzadi(R.drawable.cm);
+					StringBuilder ntsMsg = new StringBuilder();
+					ntsMsg.append("\nसभी घरेलू उपभोक्ताओं से अब\n125 यूनिट तक बिजली खपत पर\nकोई शुल्क नहीं लिया जाएगा। \nयह लाभ जुलाई माह की \nखपत से लागू है।\n");
+					hprtPrinterHelper.WriteData((ntsMsg.toString()).getBytes("UTF-8"));
+					hprtPrinterHelper.WriteData((" -नीतीश कुमार,मुख्यमंत्री बिहार\n").getBytes("UTF-8"));
+					hprtPrinterHelper.WriteData(("-----------------------\n").getBytes("UTF-8"));
+					String subsidy="  STATE GOVT." ;
+					hprtPrinterHelper.WriteData(new byte[]{0x1B, 0x45, 0x01}); // Bold ON
+					hprtPrinterHelper.WriteData(new byte[]{0x1D, 0x21, 0x11}); // Double height and width
+					hprtPrinterHelper.WriteData((subsidy + "\n").getBytes("gb2312"));
+					hprtPrinterHelper.WriteData(("SUBSIDY: ").getBytes("gb2312"));
+					//HPRTPrinterHelper.WriteData((header + "\n").getBytes("gb2312"));
+					hprtPrinterHelper.WriteData(new byte[]{0x1d, 0x0c});
+					hprtPrinterHelper.WriteData(new byte[]{0x1B, 0x45, 0x00}); // Bold OFF
+					hprtPrinterHelper.WriteData(new byte[]{0x1D, 0x21, 0x00}); // Font size reset
+					hprtPrinterHelper.WriteData(printerdata1.toString().getBytes("UTF-8"));
+					hprtPrinterHelper.WriteData(String.format("CA NUMBER  :%s", UtilAppCommon.out.CANumber).getBytes("UTF-8"));
+
+
+					hprtPrinterHelper.WriteData(printerdata2.toString().getBytes("UTF-8"));
+					if (PhotoPath != null && PhotoPath.length() > 0) {
+						tvsPrintImage(PhotoPath);
+					}
+					hprtPrinterHelper.WriteData(printerdata3.toString().getBytes("UTF-8"));
+					hprtPrinterHelper.WriteData(printerdata4.toString().getBytes("UTF-8"));
+					hprtPrinterHelper.WriteData(new byte[]{0x1B, 0x45, 0x01}); // Bold ON
+					hprtPrinterHelper.WriteData(new byte[]{0x1D, 0x21, 0x11}); // Double height and width
+					hprtPrinterHelper.WriteData("Current Bill Amt\n".getBytes("UTF-8"));
+					hprtPrinterHelper.WriteData("  ".getBytes("UTF-8"));
+					hprtPrinterHelper.WriteData(String.format("%.2f", paybaleAmt).getBytes("UTF-8"));
+					hprtPrinterHelper.WriteData("\n".getBytes("UTF-8"));
+					hprtPrinterHelper.WriteData(new byte[]{0x1B, 0x45, 0x00}); // Bold OFF
+					hprtPrinterHelper.WriteData(new byte[]{0x1D, 0x21, 0x00}); // Font size reset
+					hprtPrinterHelper.WriteData(printerdata5.toString().getBytes("UTF-8"));
+					try {
+						Bitmap btMap_bar1 = BarcodeCreater.creatBarcode(ActvBillPrinting.this, UtilAppCommon.out.CANumber.trim(), 380, 50,
+								true, 1);
+						btMap_bar1 = BitmapDeleteNoUseSpaceUtil.deleteNoUseWhiteSpace(btMap_bar1);
+						//btMap_bar1 = zoomImg(btMap_bar1, 570, btMap_bar1.getHeight());
+						if (btMap_bar1 == null) {
+							Toast.makeText(ActvBillPrinting.this, "no barcode", Toast.LENGTH_SHORT).show();
+							return;
+						}
+						try {
+							HPRTPrinterHelper.PrintBitmap(btMap_bar1, (byte) 0, (byte) 0, 203);
+							//HPRTPrinterHelper.WriteData(new byte[]{0x1d, 0x0c});
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+
+					hprtPrinterHelper.WriteData(printerbarcode.toString().getBytes("UTF-8"));
+
+					hprtPrinterHelper.WriteData(printerdata6.toString().getBytes("UTF-8"));
+
+					//conn.multiLinguallinePrint_ver_2_0_printer(address, String.format("      %s","."), 23,Typeface.DEFAULT_BOLD);
+					hprtPrinterHelper.WriteData(printerdata7.toString().getBytes("UTF-8"));
+					tvsPrintImageAzadi(R.drawable.solar);
+					//	conn.printData(printerdata4.toString().getBytes());
+					Thread.sleep(1000);
+					//conn.closeBT();
+				}
+
+			} catch (Exception e) {
+				// Handle communications error here.
+				e.printStackTrace();
+				Toast.makeText(getApplicationContext(), "English Printing Not Working Properly", Toast.LENGTH_LONG).show();
+				Log.e("", e.getMessage());
+
+			} finally {
+				Intent nextIntent = null;
+
+				if (UtilAppCommon.bprintdupl)
+					nextIntent = new Intent(getBaseContext(), ActvConsumerNbrInputForDuplicateBill.class);
+				else if (UtilAppCommon.blActyncBtn)
+					nextIntent = new Intent(getBaseContext(), SyncMobPoleActivity.class);
+				else if (UtilAppCommon.billType.equalsIgnoreCase("A"))
+					nextIntent = new Intent(getBaseContext(), ActvConsumerNbrInput.class);
+				else if (UtilAppCommon.billType.equalsIgnoreCase("L"))
+					nextIntent = new Intent(getBaseContext(), ActvLegacyNbrInput.class);
+				else if (UtilAppCommon.billType.equalsIgnoreCase("S"))
+					nextIntent = new Intent(getBaseContext(), ActvSequenceData.class);
+				else if (UtilAppCommon.billType.equalsIgnoreCase("M"))
+					nextIntent = new Intent(getBaseContext(), MeterNbrInput.class);
+				else
+					nextIntent = new Intent(getBaseContext(), ActvBillingOption.class);
+
+				// Clear all and keep MainActivity at bottom
+				Intent mainIntent = new Intent(getBaseContext(), MainActivity.class);
+				mainIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+				startActivity(mainIntent);
+
+				startActivity(nextIntent);
+			}
+		}
+	}
+	class TVSHindi extends Thread {
+
+		private String address = null;
+		BluetoothDevice device = null;
+		HPRTPrinterHelper hprtPrinterHelper = null;
+
+		public TVSHindi(String address) {
+			this.address = address;
+			device = mBluetoothAdapter.getRemoteDevice(address);
+
+			if (mBluetoothAdapter == null) {
+				Toast.makeText(ActvBillPrinting.this, "Bluetooth not available.", Toast.LENGTH_SHORT).show();
+
+				return;
+			}
+			if (!mBluetoothAdapter.isEnabled()) {
+				Toast.makeText(ActvBillPrinting.this,
+						"Bluetooth feature is turned off now...Please turned it on! ", Toast.LENGTH_SHORT).show();
+				if (ActivityCompat.checkSelfPermission(ActvBillPrinting.this, Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
+					// TODO: Consider calling
+					//    ActivityCompat#requestPermissions
+					// here to request the missing permissions, and then overriding
+					//   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+					//                                          int[] grantResults)
+					// to handle the case where the user grants the permission. See the documentation
+					// for ActivityCompat#requestPermissions for more details.
+					return;
+				}
+				mBluetoothAdapter.enable();
+				try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				return;
+			}
+
+			hprtPrinterHelper = new HPRTPrinterHelper();
+			try {
+				int portOpen = hprtPrinterHelper.PortOpen("Bluetooth," + address);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+		}
+
+
+		public void run() {
+			SimpleDateFormat ft = new SimpleDateFormat("dd-MM-yy' TIME:'hh:mm");
+			try {
+
+
+				Toast.makeText(getBaseContext(), BILL, Toast.LENGTH_SHORT)
+						.show();
+
+				char lf = 0x0A;
+				char cr = 0x0D;
+				// char dp = 0x1D;
+				// char nm = 0x13;
+				double paybaleAmt=Double.parseDouble(UtilAppCommon.out.SubTotal_B)-Double.parseDouble(UtilAppCommon.out.CurrentMonthDps);
+				// ////////Print On Paper Start////////////
+				StringBuilder printerdata1 = new StringBuilder();
+				StringBuilder printerdata2 = new StringBuilder();
+				StringBuilder printerdata3 = new StringBuilder();
+				StringBuilder printerdata4 = new StringBuilder();
+				StringBuilder printerdata5 = new StringBuilder();
+				StringBuilder printerdata6 = new StringBuilder();
+				StringBuilder printerdata7 = new StringBuilder();
+				StringBuilder printerbarcode = new StringBuilder();
+				//Print part 1
+
+
+				String bmonth;
+				bmonth = UtilAppCommon.out.BillMonth.substring(0, 4) + UtilAppCommon.out.BillMonth.substring(6, 8);
+
+				printerdata1.append("विपत्र माह   : " + bmonth + "\n");
+				/**
+				 * Adding lines below for change in tariff 2018-19
+				 */
+				String gstNo = "";
+				if (UtilAppCommon.out.Company.equalsIgnoreCase("NBPD")) {
+					gstNo = "10AAECN1588M2ZB";
+				} else if (UtilAppCommon.out.Company.equalsIgnoreCase("SBPD")) {
+					gstNo = "10AASCS2207G2ZN";
+				}
+
+
+				printerdata1.append(String.format("जीएसटीआईएन:%s\n", gstNo));
+
+				String hindiMessage = "प्रिय " + UtilAppCommon.out.Name + ",\n" + " कृपया विदयुत बकाया राशि\nरू "
+						+ UtilAppCommon.out.AmtPayableUptoAmt.trim()
+						+ " का भुगतान सुचना\nप्राप्ति के 15 दिनों के भीतर\nसुनिश्चित करें अन्यथा विदयुत \nअधिनियम 2003 के धारा 56 के\nआलोक में दि."
+						+ UtilAppCommon.out.AmtPayableUptoDt.trim() + "\nके पश्चात विदयुत सम्बन्ध\nविच्छेदित कर दिया जाएगा|" + "\n" +
+						"                 स0 वि0 अभि0" + "\n";
+//				try {
+//
+//					if (Double.parseDouble(UtilAppCommon.out.ArrearSubTotal_A) > 1000) {
+//						printerdata1.append((String.format(
+//								hindiMessage)));
+//						//	("प्रिय " + bill.get_CNAME().trim() + ",\n" + "कृपया विदयुत बकाया राशि रू" + bill.get_PROMPT_AMT().trim() + " का\nभुगतान सुचना प्राप्ति के 15 दिनों के\nभीतर सुनिश्चित करें अन्यथा विदयुत \nअधिनियम 2003 के धारा 56 के आलोक में दि." + bill.get_UPTO_DATE().trim() + " के पश्चात विदयुत\nसम्बन्ध विच्छेदित कर दिया जाएगा।" + "\n" + "                 स0 वि0 अभि0" + "\n")
+//					}
+//				} catch (NumberFormatException e) {
+//					try {
+//						if (Float.parseFloat(UtilAppCommon.out.ArrearSubTotal_A) > 1000) {
+//							printerdata1.append((String.format(hindiMessage)));
+//						}
+//					} catch (NumberFormatException e1) {
+//
+//					}
+//				}
+
+
+				//* End adding lines for tariff change 2018-19
+
+				printerdata1.append(String.format("********************************\n"));
+
+
+				printerdata1.append(String.format("दिनांक     : %s\n", UtilAppCommon.out.REC_DATE_TIME));
+				printerdata1.append(String.format("दॆय तिथि   :  %s\n", UtilAppCommon.out.AmtPayableUptoDt));
+
+				printerdata1.append(String.format("कनेक्शन का  विवरण  \n"));
+				printerdata1.append(String.format("********************************\n"));
+				printerdata1.append(String.format("विपत्र संख्या  : %s\n", UtilAppCommon.out.BillNo));
+				printerdata1.append(String.format("प्रमंडल/कोड  :%s\n", UtilAppCommon.out.Division));
+				printerdata1.append(String.format("अवर प्रमंडल  :%s\n", UtilAppCommon.out.SubDivision));
+				printerdata1.append(String.format("उपभोक्ता संख्या:%s\n", UtilAppCommon.out.CANumber));
+				printerdata1.append(String.format("कंज्युमर आईडी :%s\n", UtilAppCommon.out.LegacyNumber));
+				printerdata1.append(String.format("एम.आर.यू संख्या :%s\n", UtilAppCommon.out.MRU));
+				printerdata1.append(String.format("नाम :%s\n", UtilAppCommon.in.CONSUMER_NAME));
+
+				int alen = 0;
+				alen = UtilAppCommon.out.Address.length();
+				String addr1 = "";
+				String addr2 = "";
+				if (alen > 24) {
+					addr1 = UtilAppCommon.out.Address.substring(0, 24);
+					if (alen > 48)
+						addr2 = UtilAppCommon.out.Address.substring(24, 48);
+					else
+						addr2 = UtilAppCommon.out.Address.substring(24, alen);
+				} else
+					addr1 = UtilAppCommon.out.Address;
+
+				printerdata1.append(String.format("पता : "));
+				printerdata1.append(String.format(" %s\n", addr1));
+				printerdata1.append(String.format("%s\n", addr2));
+				printerdata1.append(String.format("मोबाइल संख्या:%s\n", UtilAppCommon.in.METER_CAP));
+				printerdata1.append(String.format("क्षेत्र        :%s\n", UtilAppCommon.out.Area_type));
+				printerdata1.append(String.format("पोल कोड    :%s\n", UtilAppCommon.out.PoleNo));
+				if (!UtilAppCommon.in.PWR_FACTOR.equalsIgnoreCase(""))
+					printerdata1.append(String.format("मीटर संख्या :%s फेज:%s\n", UtilAppCommon.out.MtrNo + ", " + UtilAppCommon.in.PWR_FACTOR, UtilAppCommon.out.Phase));
+				else
+					printerdata1.append(String.format("मीटर संख्या :%s फेज:%s\n", UtilAppCommon.out.MtrNo, UtilAppCommon.out.Phase));
+
+				printerdata1.append(String.format("मीटर ओनर    : %s\n", UtilAppCommon.out.MtrMake
+						.equalsIgnoreCase("C") ? "Company" : UtilAppCommon.out.MtrMake
+						.equalsIgnoreCase("O") ? "Consumer" : ""));
+				printerdata1.append(String.format("उपभोक्ता श्रेणी  :%s\n", UtilAppCommon.out.Category));
+
+				/*String CD = "";
+				String CD1 = "";
+				String CD2 = "";
+				float val = 0;
+				if (UtilAppCommon.out.SanctLoad.length() > 0) {
+					val = Float.parseFloat(UtilAppCommon.out.SanctLoad);
+					CD = val + " KW";
+					CD1 = "";
+					CD2 = "";
+				} else if (UtilAppCommon.out.ConnectedLoad.length() > 0) {
+					val = Float.parseFloat(UtilAppCommon.out.ConnectedLoad);
+					CD = "";
+					CD1 = val + " HP";
+					CD2 = "";
+				} else if (UtilAppCommon.out.CD.length() > 0) {
+					val = Float.parseFloat(UtilAppCommon.out.CD);
+					CD = "";
+					CD1 = "";*/
+					/**
+					 * Adding lines for tariff change 2018-19
+					 */
+				String CD2 = "";
+				float val = 0;
+				double result = 0.0;
+				Log.v("ActvBillPrinting", "************************Printing Stage Checkpoint 11");
+				if (UtilAppCommon.out.Category.equalsIgnoreCase("NDS-IID(B)")
+						|| UtilAppCommon.out.Category.equalsIgnoreCase("IAS-IIM")
+						|| UtilAppCommon.out.Category.equalsIgnoreCase("LTEV")
+						|| UtilAppCommon.out.Category.equalsIgnoreCase("LTIS-ID")
+						|| UtilAppCommon.out.Category.equalsIgnoreCase("LTIS-IID")
+						|| UtilAppCommon.out.Category.equalsIgnoreCase("PUBWW")) {
+					Log.v("ActvBillPrinting", "************************Printing Stage Checkpoint 12");
+					result = (double) (Double.parseDouble(UtilAppCommon.out.CD) / 0.9f);
+					CD2 = String.format("%.2f", result) + "KVA";
+					Log.v("ActvBillPrinting", "************************Printing Stage Checkpoint 13");
+				} else if (UtilAppCommon.out.Category.equalsIgnoreCase("HGN")
+						|| UtilAppCommon.out.Category.equalsIgnoreCase("IAS-IM")
+						|| UtilAppCommon.out.Category.equalsIgnoreCase("IAS-IU")) {
+					result = (double) (Double.parseDouble(UtilAppCommon.out.SanctLoad));
+					CD2 = result + " HP";
+				} else if (UtilAppCommon.out.Category.equalsIgnoreCase("DS-IID")
+						|| UtilAppCommon.out.Category.equalsIgnoreCase("DS-IIID")
+						|| UtilAppCommon.out.Category.equalsIgnoreCase("NDS-IID(A)")) {
+					result = (double) (Double.parseDouble(UtilAppCommon.out.CD));
+					CD2 = result + " KW";
+				}else {
+					/**
+					 * End ading lines for tariff change
+					 */
+					result = (double) (Double.parseDouble(UtilAppCommon.out.SanctLoad));
+					Log.v("ActvBillPrinting", "************************Printing Stage Checkpoint 14");
+					CD2 = result + " KW";
+				}
+
+
+				//printerdata1.append(String.format("स्वीकृत भार   :%s \n", CD, CD1));
+				printerdata1.append(String.format("संविदा मांग    :%s\n", CD2));
+				printerdata1.append(String.format("जमानत की जमा राशि:%s\n", UtilAppCommon.out.SD));
+
+				String billdays;
+
+				if (UtilAppCommon.out.Type.equalsIgnoreCase("(PL Adj.) Actual")) {
+					billdays = UtilAppCommon.out.BillDays + "(" + UtilAppCommon.out.MESSAGE10 + ")";
+				} else {
+					billdays = UtilAppCommon.out.BillDays;
+				}
+				printerdata2.append(String.format("\nकुल विपत्र दिवस   :%s\n", billdays));
+				printerdata2.append(String.format("********************************\n"));
+				printerdata2.append(String.format("मान पठन स्थिति  \n"));
+				//printerdata2.append(String.format("मीटर   पठन  का  विवरण :\n"));
+				printerdata2.append(String.format(" -----------------------------\n"));
+				printerdata2.append(String.format("           पूर्व       वर्तमान\n"));
+				printerdata2.append(String.format("पठन      : %s     %s\n", UtilAppCommon.out.PreviusReading, UtilAppCommon.out.CurrentReading));
+				printerdata2.append(String.format("दिनांक : %s  %s\n", UtilAppCommon.out.PrevusMtrRdgDt, UtilAppCommon.out.CurrentMtrRdgDt));
+				if (!UtilAppCommon.out.PrevusMtrRdgDt.equalsIgnoreCase("0000.00.00"))
+					printerdata2.append(String.format("पठन स्थिति   : %s          %s \n", UtilAppCommon.out.PreviusMtrReadingNote, UtilAppCommon.out.CurrentMtrReadingNote));
+
+				if (!UtilAppCommon.in.MONTH_SEASONAL.equalsIgnoreCase("")) {
+					printerdata2.append(String.format("******************************* \n"));
+					printerdata2.append(String.format("ब्ल्यूटुथ पठन स्थिति  :\n"));
+					printerdata2.append(String.format("ब्ल्यूटुथ  मीटर   पठन  का  विवरण :\n"));
+					printerdata2.append(String.format(" ------------------------------\n"));
+					printerdata2.append(String.format("       पूर्व         वर्तमान  \n"));
+					printerdata2.append(String.format("पठन      : %s     %s \n", UtilAppCommon.in.PREV_KWH_CYCLE1, UtilAppCommon.SAPBlueIn.CurrentReadingKwh));
+					printerdata2.append(String.format("दिनांक : %s  %s \n", UtilAppCommon.in.DATE_1, UtilAppCommon.out.CurrentMtrRdgDt));
+					if (!UtilAppCommon.in.DATE_1.equalsIgnoreCase("0000.00.00"))
+						printerdata2.append(String.format("बस्तु स्थिति   : %s     %s \n", "OK", "OK"));
+				}
+
+				// 2nd block after image
+
+
+				float mf = 0, consump = 0;
+				//mf=Float.parseFloat(UtilAppCommon.out.MF);
+				if (!UtilAppCommon.out.MF.equalsIgnoreCase(""))
+					mf = Float.parseFloat(UtilAppCommon.out.MF);
+				consump = Float.parseFloat(UtilAppCommon.out.Consumption);
+
+				printerdata3.append(String.format("गुणक   : %.2f  खपत :%.2f\n", mf, consump));
+				printerdata3.append(String.format("दर्ज मांग  :%s   पीएफ्  :%s\n", UtilAppCommon.out.RecordedDemd, UtilAppCommon.out.PowerFactor));
+
+
+				float mmcunits = 0, avg = 0;
+				if (UtilAppCommon.out.Category.equals("DS-II") || UtilAppCommon.out.Category.equals("NDS-IM")) {
+					mmcunits = 0;
+				} else {
+					mmcunits = Float.parseFloat(UtilAppCommon.out.MMCUnits);
+				}
+
+
+				if (UtilAppCommon.out.CurrentMtrReadingNote.equalsIgnoreCase("OK")) {
+					avg = 0;
+				} else {
+					avg = Float.parseFloat(UtilAppCommon.out.Average);
+
+				}
+
+				printerdata3.append(String.format("मासिक न्युनतम प्रभार :%.2f \n", mmcunits));
+				printerdata3.append(String.format("औसत   :%.2f \nबिल इकाई  :%s\n", avg, UtilAppCommon.out.BilledUnits));
+				printerdata3.append(String.format("विपत्र का आधार  :%s \n", UtilAppCommon.out.Type));
+				printerdata3.append(String.format("******************************\n"));
+				printerdata3.append(String.format("     बकाया का विवरण \n"));
+
+				printerdata3.append(String.format(" -----------------------------\n"));
+				float pmtonacct = 0, arrengdue = 0, arrdps = 0, arrothr = 0;
+				pmtonacct = Float.parseFloat(UtilAppCommon.out.PaymentOnAccount);
+				arrengdue = Float.parseFloat(UtilAppCommon.out.ArrearEnergyDues);
+				arrdps = Float.parseFloat(UtilAppCommon.out.ArrearDPs);
+				arrothr = Float.parseFloat(UtilAppCommon.out.ArrearOthers);
+
+
+				printerdata3.append(String.format("अग्रिम जमा :%1.2f\n", pmtonacct));
+				printerdata3.append(String.format("ऊर्जा  बकाया:%1.2f\n", arrengdue));
+				printerdata3.append(String.format("विलंब अधिभार बकाया :%1.2f\n", arrdps));
+				printerdata3.append(String.format("अन्य  प्रभार :%1.2f\n", arrothr));
+				printerdata3.append(String.format("कुल  बकाया (अ):%1.2f\n", Float.parseFloat(UtilAppCommon.out.ArrearSubTotal_A)));
+
+				printerdata3.append(String.format("******************************\n"));
+				printerdata3.append(String.format("वर्तमान   विपत्र का  विवरण\n"));
+				printerdata3.append(String.format("****************************** \n"));
+
+				float engchg = 0;
+				engchg = Float.parseFloat(UtilAppCommon.out.CurrentEnergyCharges);
+				float fixchg = 0, curdps = 0, excessdemdchg = 0, ed = 0, mr = 0, shuntcapchg = 0, othrchg = 0, subtotb = 0, govsubsidy = 0, cgst = 0, sgst = 0;
+				;
+				float intonsd = 0, incentive = 0, rebonmmc = 0, grosstot = 0;
+
+				curdps = Float.parseFloat(UtilAppCommon.out.CurrentMonthDps);
+				fixchg = Float.parseFloat(UtilAppCommon.out.FixDemdCharge);
+				excessdemdchg = Float.parseFloat(UtilAppCommon.out.ExcessDemdCharge);
+				ed = Float.parseFloat(UtilAppCommon.out.ElectricityDuty);
+				mr = Float.parseFloat(UtilAppCommon.out.MeterRent);
+/**
+ * Adding lines for tariff change 2018-19
+ */
+
+				cgst = Float.parseFloat(UtilAppCommon.out.METER_CGST);
+				sgst = Float.parseFloat(UtilAppCommon.out.METER_SGST);
+				/**
+				 * End ading lines for tariff change
+				 */
+				shuntcapchg = Float.parseFloat(UtilAppCommon.out.ShauntCapCharge);
+				othrchg = Float.parseFloat(UtilAppCommon.out.OtherCharge);
+				govsubsidy = Float.parseFloat(UtilAppCommon.out.GOVT_SUB);
+				subtotb = Float.parseFloat(UtilAppCommon.out.SubTotal_B);
+				if (UtilAppCommon.out.InterestOnSD_C.equalsIgnoreCase(""))
+					intonsd = 0;
+				else
+					intonsd = Float.parseFloat(UtilAppCommon.out.InterestOnSD_C);
+				if (UtilAppCommon.out.Incentive.equalsIgnoreCase(""))
+					incentive = 0;
+				else
+					incentive = Float.parseFloat(UtilAppCommon.out.Incentive);
+
+				rebonmmc = Float.parseFloat(UtilAppCommon.out.RebateOnMMC);
+				grosstot = Float.parseFloat(UtilAppCommon.out.GrossTotal);
+
+				float installmt_amt = 0;
+				if (UtilAppCommon.in.CURR_MON_AMT.equalsIgnoreCase(""))
+					installmt_amt = 0;
+				else
+					installmt_amt = Float.parseFloat(UtilAppCommon.in.CURR_MON_AMT);
+
+				printerdata3.append(String.format("ऊर्जा शुल्क   : %1.2f\n", engchg));
+				printerdata3.append(String.format("फीक्सड/डिमांड प्रभार: %1s\n", fixchg));
+				printerdata3.append(String.format("आधिक्य डिमांड प्रभार: %1s\n", excessdemdchg));
+				printerdata3.append(String.format("विदयुत  शुल्क    : %1s\n", ed));
+				//printerdata3.append(String.format("मीटर किराया     : %1s\n", mr));
+				//printerdata3.append(String.format("सीजीएसटी @ 9%% :%1s\n", cgst));
+				//printerdata3.append(String.format("एसजीएसटी @ 9%% :%1s\n", sgst));
+				printerdata3.append(String.format("कैपिसिटर प्रभार   :%1s\n", shuntcapchg));
+				printerdata3.append(String.format("किस्त की राशि   :%1s\n", installmt_amt));
+				printerdata3.append(String.format("अन्य शुल्क      :%1s\n", othrchg));
+				/**
+				 * Adding New lines for tariff change 2018-19
+				 */
+
+
+				/**
+				 * End adding lines for tariff change 2018-19
+				 */
+
+
+				printerdata4.append(String.format("राज्य सरकार अनुदान :%1s\n", govsubsidy));
+
+				//printerdata5.append(String.format("कुल अभिनिर्धारण (बी):%1s\n", subtotb));
+
+
+				printerdata5.append(String.format("*****************************\n"));
+				if(!(UtilAppCommon.out.Category.startsWith("DS")||UtilAppCommon.out.Category.startsWith("KJ"))) {
+					printerdata5.append(String.format("वर्तमान विलंब अधिभार: %1.2f\n", curdps));
+					printerdata5.append(String.format("जमानत राशि पर सूद (सी) :%1s\n", intonsd));
+					printerdata5.append(String.format("इन्सेंटिव्स     :%1s\n", incentive));
+					printerdata5.append(String.format("रीमिशन      :%1s\n", rebonmmc));
+				}
+				printerdata5.append(String.format("उप-जोड(ए+बी+सी):%1s\n", grosstot));
+
+				printerdata5.append(String.format("******************************* \n"));
+
+				printerdata5.append(String.format("छूट की राशि   :%10s\n", UtilAppCommon.out.Rebate));
+
+
+				printerdata5.append(String.format("कूल मांग    \n"));
+
+				printerdata5.append(String.format("*****************************\n"));
+
+				printerdata5.append(String.format("%s तक  रूo :%1s\n ", UtilAppCommon.out.AmtPayableUptoDt, UtilAppCommon.out.AmtPayableUptoAmt));
+
+				printerdata5.append(String.format("%s तक रूo :%1s\n ", UtilAppCommon.out.AmtPayablePYDt, UtilAppCommon.out.AmtPayablePYAmt));
+
+				printerdata5.append(String.format("%s पश्चात रूo:%1s\n ", UtilAppCommon.out.AmtPayableAfterDt, UtilAppCommon.out.AmtPayableAfterAmt));
+
+
+				printerdata5.append(String.format("पिछले भुगतान का  विवरण    \n"));
+				printerdata5.append(String.format("*************************** \n"));
+
+
+				printerdata5.append(String.format("भुगतान की राशि  :%s\n", UtilAppCommon.out.LastPaymentAmt));
+
+
+				printerdata5.append(String.format("भुगतान दिनांक  :%s\n", UtilAppCommon.out.LastPaidDate));
+
+
+				printerdata5.append(String.format("रसीद  संख्या  :%s\n", UtilAppCommon.out.ReceiptNumber));
+
+				printerdata5.append(String.format("मीटर रीडर आईडी :%s\n", UtilAppCommon.out.MTR_READER_ID));
+
+				printerdata5.append(String.format("Ver     :%10s \n", UtilAppCommon.strAppVersion.replace(".apk", "")));
+
+
+				strBarcodeData = UtilAppCommon.acctNbr;
+				//printerdata4.append(printer.barcode_Code_39_VIP(strBarcodeData));
+
+				//printerdata4.append(printer.font_Courier_24_VIP(String.format("Consumer Helpline- 1912")));
+				//printerdata4.append(String.format("Consumer Helpline- 1912"));
+				// image
+				printerdata6.append(String.format("Consumer Helpline- 1912 \n"));
+				float flIntDisc = 0;
+				if (!(UtilAppCommon.out.INT_DISC.equalsIgnoreCase("") || UtilAppCommon.out.INT_DISC.equalsIgnoreCase("null"))) {
+					flIntDisc = Float.parseFloat(UtilAppCommon.out.INT_DISC);
+					if (Math.abs(flIntDisc) > 0) {
+						//printerdata6.append(String.format("देय  तिथि  %s तक  विपत्र  राशि  रू %s का ऑनलाईन  भुगतान करेँ एव पाये  "
+						//		+ " रू %s अतिरिक्त  छुट",UtilAppCommon.out.AmtPayableUptoDt, UtilAppCommon.out.AmtPayableUptoAmt, Math.abs(flIntDisc)));
+						printerdata6.append(String.format("देय  तिथि  %s तक  विपत्र  राशि  ", UtilAppCommon.out.AmtPayableUptoDt));
+						printerdata6.append(String.format("रू %s का ऑनलाईन  भुगतान करेँ ", UtilAppCommon.out.AmtPayableUptoAmt));
+						printerdata6.append(String.format("एव पाये  रू %s अतिरिक्त  छुट", Math.abs(flIntDisc)));
+					}
+				}
+
+
+				printerdata7.append(String.format("%s\n\n", " "));
+
+				String PhotoPath = null;
+				if (UtilAppCommon.in.PRV_MTR_READING_NOTE.toUpperCase() != "RN") {
+					// Print Reading Image
+					byte[] imagedata = null;
+					try {
+                       /* String PhotoDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+                                .getPath()
+                                + "/SBDocs/Photos_Crop"
+                                + "/"
+                                + UtilAppCommon.sdoCode
+                                + "/"
+                                + UtilAppCommon.out.MRU;*/
+						String PhotoDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+								.getPath() + "/SBDocs/Photos/" + UtilAppCommon.in.SUB_DIVISION_CODE + "/" + UtilAppCommon.in.MRU;
+
+
+						strmonth = String.valueOf(Arrays.asList(strMonths).indexOf(UtilAppCommon.out.BillMonth) + 1);
+						PhotoPath = PhotoDir + "/" + UtilAppCommon.in.SCHEDULED_BILLING_DATE.substring(0, 4) +
+								UtilAppCommon.in.SCHEDULED_BILLING_DATE.substring(5, 7) +
+								"_" + UtilAppCommon.out.CANumber + ".jpg";
+
+						//imagedata=printer.prepareImageDataToPrint_VIP(address,PhotoPath);
+
+					} catch (Exception e) {
+						// TODO: handle exception
+						e.printStackTrace();
+					}
+					//hprtPrinterHelper.WriteData(new byte[]{0x1D, 0x21, 0x00});
+//					tvsPrintImageAzadi(R.drawable.solar);
+//
+//					if (UtilAppCommon.bprintdupl) {
+//						//conn.multiLinguallinePrint_ver_2_0_printer(address, String.format("      %s", "DUPLICATE BILL"), 30, Typeface.DEFAULT_BOLD);
+//						hprtPrinterHelper.WriteData(String.format("      %s\n", "DUPLICATE BILL").getBytes("UTF-8"));
+//					}
+//
+//					UtilAppCommon.bprintdupl = false;
+					String header = "        ऊर्जा विपत्र";
+					String zeroBill="  \"शून्य बिल\"";
+					//if((UtilAppCommon.out.Category.startsWith("DS")||UtilAppCommon.out.Category.startsWith("KJ")) && paybaleAmt<=0) {
+					if((UtilAppCommon.out.Category.startsWith("DS")||UtilAppCommon.out.Category.startsWith("KJ")) && Double.parseDouble(UtilAppCommon.out.AmtPayableUptoAmt)<=0 && paybaleAmt<=0) {
+						hprtPrinterHelper.WriteData(new byte[]{0x1B, 0x45, 0x01}); // Bold ON
+						hprtPrinterHelper.WriteData(new byte[]{0x1D, 0x21, 0x11}); // Double height and width
+						hprtPrinterHelper.WriteData((zeroBill + "\n").getBytes("UTF-8"));
+						hprtPrinterHelper.WriteData(new byte[]{0x1d, 0x0c});
+						Thread.sleep(100);
+					}
+					// Reset formatting
+					hprtPrinterHelper.WriteData(new byte[]{0x1B, 0x45, 0x00}); // Bold OFF
+					hprtPrinterHelper.WriteData(new byte[]{0x1D, 0x21, 0x00}); // Font size reset
+					hprtPrinterHelper.WriteData((header + "\n").getBytes("UTF-8"));
+					//HPRTPrinterHelper.WriteData(("       " +  + "\n").getBytes("UTF-8"));
+					hprtPrinterHelper.WriteData(("           " + UtilAppCommon.out.Company+"CL\n").getBytes("gb2312"));
+					hprtPrinterHelper.WriteData(new byte[]{0x1d, 0x0c});
+					Thread.sleep(50);
+					tvsPrintImageAzadi(R.drawable.cm);
+					StringBuilder ntsMsg = new StringBuilder();
+					ntsMsg.append("\nसभी घरेलू उपभोक्ताओं से अब\n125 यूनिट तक बिजली खपत पर\nकोई शुल्क नहीं लिया जाएगा।\nयह लाभ जुलाई माह की\nखपत से लागू है।\n");
+					hprtPrinterHelper.WriteData((ntsMsg.toString()).getBytes("UTF-8"));
+					hprtPrinterHelper.WriteData((" -नीतीश कुमार,मुख्यमंत्री बिहार\n").getBytes("UTF-8"));
+					hprtPrinterHelper.WriteData(("-----------------------\n").getBytes("UTF-8"));
+					hprtPrinterHelper.WriteData(new byte[]{0x1d, 0x0c});
+					String subsidy=" राज्य सरकार";;
+					hprtPrinterHelper.WriteData(new byte[]{0x1B, 0x45, 0x01}); // Bold ON
+					hprtPrinterHelper.WriteData(new byte[]{0x1D, 0x21, 0x11}); // Double height and width
+					hprtPrinterHelper.WriteData((subsidy + "\n").getBytes("UTF-8"));
+					hprtPrinterHelper.WriteData((" अनुदान: ").getBytes("UTF-8"));
+					//HPRTPrinterHelper.WriteData((header + "\n").getBytes("gb2312"));
+					hprtPrinterHelper.WriteData(new byte[]{0x1d, 0x0c});
+					Thread.sleep(50);
+					hprtPrinterHelper.WriteData(new byte[]{0x1B, 0x45, 0x00}); // Bold OFF
+					hprtPrinterHelper.WriteData(new byte[]{0x1D, 0x21, 0x00}); // Font size reset
+					//conn.multiLinguallinePrint_ver_2_0_printer(address, String.format("          %s", UtilAppCommon.out.Company+"CL"), 40,Typeface.DEFAULT_BOLD);
+					hprtPrinterHelper.WriteData(UtilAppCommon.out.GOVT_SUB.getBytes("UTF-8"));
+					hprtPrinterHelper.WriteData("\n".getBytes("UTF-8"));
+					hprtPrinterHelper.WriteData(printerdata1.toString().getBytes("UTF-8"));
+					hprtPrinterHelper.WriteData(String.format("खाता संख्या     :%s\n", UtilAppCommon.out.CANumber).getBytes("UTF-8"));
+
+
+					hprtPrinterHelper.WriteData(printerdata2.toString().getBytes("UTF-8"));
+
+					if (PhotoPath != null && PhotoPath.length() > 0) {
+						tvsPrintImage(PhotoPath);
+					}
+                    /*if(imagedata!=null)
+                    {
+                        conn.printData(imagedata);
+                    }*/
+					hprtPrinterHelper.WriteData(printerdata3.toString().getBytes("UTF-8"));
+					hprtPrinterHelper.WriteData(printerdata4.toString().getBytes("UTF-8"));
+					HPRTPrinterHelper.WriteData(new byte[]{0x1B, 0x45, 0x01}); // Bold ON
+					HPRTPrinterHelper.WriteData(new byte[]{0x1D, 0x21, 0x11}); // Double height and width
+					hprtPrinterHelper.WriteData(String.format("%.2f", paybaleAmt).getBytes("UTF-8"));
+					hprtPrinterHelper.WriteData("राशि: ".getBytes("UTF-8"));
+					hprtPrinterHelper.WriteData(String.valueOf(paybaleAmt).getBytes("UTF-8"));
+					hprtPrinterHelper.WriteData("\n".getBytes("UTF-8"));
+					HPRTPrinterHelper.WriteData(new byte[]{0x1B, 0x45, 0x00}); // Bold OFF
+					HPRTPrinterHelper.WriteData(new byte[]{0x1D, 0x21, 0x00}); // Font size reset
+					hprtPrinterHelper.WriteData(printerdata5.toString().getBytes("UTF-8"));
+
+
+					//conn.printData(printerbarcode.toString().getBytes());
+                    /*Bitmap btMap_bar1 = BarcodeCreater.creatBarcode(this, UtilAppCommon.out.CANumber.trim(), widht, height,
+                            true, 1);*/
+					//printerbarcode.append(printer.barcode_Code_39_VIP(UtilAppCommon.out.CANumber));
+
+					//printerbarcode.append(String.format("%s\n","."));
+					try {
+						Bitmap btMap_bar1 = BarcodeCreater.creatBarcode(ActvBillPrinting.this, UtilAppCommon.out.CANumber.trim(), 380, 50,
+								true, 1);
+						btMap_bar1 = BitmapDeleteNoUseSpaceUtil.deleteNoUseWhiteSpace(btMap_bar1);
+						//btMap_bar1 = zoomImg(btMap_bar1, 570, btMap_bar1.getHeight());
+						if (btMap_bar1 == null) {
+							Toast.makeText(ActvBillPrinting.this, "no barcode", Toast.LENGTH_SHORT).show();
+							return;
+						}
+						try {
+							HPRTPrinterHelper.PrintBitmap(btMap_bar1, (byte) 0, (byte) 0, 203);
+							//HPRTPrinterHelper.WriteData(new byte[]{0x1d, 0x0c});
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+					hprtPrinterHelper.WriteData(printerbarcode.toString().getBytes("UTF-8"));
+
+					hprtPrinterHelper.WriteData(printerdata6.toString().getBytes("UTF-8"));
+					tvsPrintImageAzadi(R.drawable.solar);
+					//conn.multiLinguallinePrint_ver_2_0_printer(address, String.format("      %s","."), 23,Typeface.DEFAULT_BOLD);
+					hprtPrinterHelper.WriteData(printerdata7.toString().getBytes("UTF-8"));
+					//	conn.printData(printerdata4.toString().getBytes());
+					Thread.sleep(1000);
+
+				}
+
+			} catch (Exception e) {
+				// Handle communications error here.
+				e.printStackTrace();
+				Toast.makeText(getApplicationContext(), "Hindi Printing Not Working Properly", Toast.LENGTH_LONG).show();
+				Log.e("", e.getMessage());
+
+			} finally {
+				Intent nextIntent = null;
+
+				if (UtilAppCommon.bprintdupl)
+					nextIntent = new Intent(getBaseContext(), ActvConsumerNbrInputForDuplicateBill.class);
+				else if (UtilAppCommon.blActyncBtn)
+					nextIntent = new Intent(getBaseContext(), SyncMobPoleActivity.class);
+				else if (UtilAppCommon.billType.equalsIgnoreCase("A"))
+					nextIntent = new Intent(getBaseContext(), ActvConsumerNbrInput.class);
+				else if (UtilAppCommon.billType.equalsIgnoreCase("L"))
+					nextIntent = new Intent(getBaseContext(), ActvLegacyNbrInput.class);
+				else if (UtilAppCommon.billType.equalsIgnoreCase("S"))
+					nextIntent = new Intent(getBaseContext(), ActvSequenceData.class);
+				else if (UtilAppCommon.billType.equalsIgnoreCase("M"))
+					nextIntent = new Intent(getBaseContext(), MeterNbrInput.class);
+				else
+					nextIntent = new Intent(getBaseContext(), ActvBillingOption.class);
+
+				// Clear all and keep MainActivity at bottom
+				Intent mainIntent = new Intent(getBaseContext(), MainActivity.class);
+				mainIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+				startActivity(mainIntent);
+
+				startActivity(nextIntent);
+			}
+
+
+		}
+
+
+		public void showTVSPrintBarCode(HPRTPrinterHelper hprtPrinterHelper, String conId) {
+			Bitmap btMap_bar1 = BarcodeCreater.creatBarcode(ActvBillPrinting.this, conId.trim(), 380, 50,
+					true, 1);
+
+
+			btMap_bar1 = BitmapDeleteNoUseSpaceUtil.deleteNoUseWhiteSpace(btMap_bar1);
+			//btMap_bar1 = zoomImg(btMap_bar1, 570, btMap_bar1.getHeight());
+			if (btMap_bar1 == null) {
+				Toast.makeText(ActvBillPrinting.this, "no barcode", Toast.LENGTH_SHORT).show();
+				return;
+			}
+			try {
+				hprtPrinterHelper.PrintBitmap(btMap_bar1, (byte) 0, (byte) 0, 203);
+				//HPRTPrinterHelper.WriteData(new byte[]{0x1d, 0x0c});
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+		}
+
+
+	}
 	class AnalogicThermal extends Thread {
 
 		private String address = null;
@@ -2173,596 +3864,6 @@ public class ActvBillPrinting extends AppCompatActivity {
 
 		}
 	}
-
-	class EpsonThermalHindi extends Thread {
-
-		private BluetoothDevice device = null;
-		private String address = null;
-
-		final int barcodeWidth = 2;
-		final int barcodeHeight = 100;
-
-		public EpsonThermalHindi(String address) {
-			this.address = address;
-			device = mBluetoothAdapter.getRemoteDevice(address);
-			Toast.makeText(getApplicationContext(), "Connected To:" + address,
-					Toast.LENGTH_LONG).show();
-		}
-
-		SimpleDateFormat ft = new SimpleDateFormat("dd-MM-yy' TIME:'hh:mm");
-
-		@SuppressLint("SuspiciousIndentation")
-		public void run() {
-			Print printer = new Print();
-			int[] status = new int[1];
-			int[] battery = new int[1];
-			status[0] = 0;
-			battery[0] = 0;
-
-			SimpleDateFormat ft = new SimpleDateFormat("dd-MM-yy'  TIME:'hh:mm");
-
-			try {
-				//UtilAppCommon.bprintdupl = false;
-				Toast.makeText(getApplicationContext(), "Sending Data",
-						Toast.LENGTH_LONG).show();
-				Builder builder = new Builder("TM-P60", Builder.MODEL_ANK);
-
-				builder.addCommand(new byte[]{0x1C, 0x28, 0x43, 0x02, 0x00, 0x30, 0x02});
-				builder.addText("\n");
-
-				try {
-
-					//Drawable PhotoPath = getResources().getDrawable(R.drawable.chunav);
-
-					//System.out.println("Photo: " + PhotoPath);
-					//BitmapFactory bf = new BitmapFactory();
-//					builder.addImage(bf.decodeResource(getResources(), R.drawable.chunav), 0, 0, bf
-//									.decodeResource(getResources(), R.drawable.chunav).getWidth(),
-//							bf.decodeResource(getResources(), R.drawable.chunav).getHeight(),
-//							Builder.PARAM_DEFAULT);
-					/*builder.addImage(bf.decodeFile(PhotoPath), 0, 0, bf
-									.decodeFile(PhotoPath).getWidth(),
-							bf.decodeFile(PhotoPath).getHeight(),
-							Builder.PARAM_DEFAULT);*/
-					Bitmap bt_logo = Utilities.getBitmapFromDrawable(getApplicationContext(), R.drawable.solar);
-					builder.addImage(bt_logo, 0, 0, bt_logo.getWidth(), bt_logo.getHeight(), Builder.PARAM_DEFAULT);
-					Log.v("Azadi Photo Print Added", "Azadi Photo Print Added");
-				} catch (Exception ex) {
-
-					Log.v("Azadi Photo Print", ex.getMessage());
-					System.out
-							.println("Error In Azadi Photo Print: " + ex.toString());
-				}
-				builder.addCommand(String.format("\n").getBytes("UTF-8"));
-
-				builder.addTextFont(Builder.FONT_A);
-
-				builder.addTextAlign(Builder.ALIGN_CENTER);
-				builder.addTextSize(2, 2);
-				builder.addTextStyle(Builder.FALSE, Builder.FALSE,
-						Builder.TRUE, Builder.PARAM_UNSPECIFIED);
-				if (UtilAppCommon.bprintdupl)
-					builder.addText("Duplicate Bill\n");
-				UtilAppCommon.bprintdupl = false;
-				builder.addText(UtilAppCommon.out.Company + "CL\n");
-
-				builder.addTextStyle(Builder.FALSE, Builder.FALSE,
-						Builder.FALSE, Builder.PARAM_UNSPECIFIED);
-				builder.addTextSize(1, 1);
-				builder.addText(" -------------------------------\n");
-				builder.addTextAlign(Builder.ALIGN_LEFT);
-
-
-				String bmonth;
-				bmonth = UtilAppCommon.out.BillMonth.substring(0, 4) + UtilAppCommon.out.BillMonth.substring(6, 8);
-				//printerdata1.append(printer.font_Courier_24_VIP(String.format(
-				//		"ELECTRICITY BILL:%s\n", bmonth)));
-				builder.addCommand(String.format("विदयुत विपत्र माह : %s\n", bmonth).getBytes("UTF-8"));
-				//builder.addText(String.format("बिधुत वील माह           : %s\n",bmonth));
-
-				/**
-				 * Adding lines below for change in tariff 2018-19
-				 */
-				String gstNo = "";
-				if (UtilAppCommon.out.Company.equalsIgnoreCase("NBPD")) {
-					gstNo = "10AAECN1588M2ZB";
-				} else if (UtilAppCommon.out.Company.equalsIgnoreCase("SBPD")) {
-					gstNo = "10AASCS2207G2ZN";
-				}
-
-
-				builder.addCommand(String.format(
-						"जीएसटीआईएन:%s\n\n", gstNo).getBytes("UTF-8"));
-				builder.addTextAlign(Builder.ALIGN_CENTER);
-				String hindiMessage = "प्रिय " + UtilAppCommon.out.Name + ",\n" + " कृपया विदयुत बकाया राशि\nरू "
-						+ UtilAppCommon.out.AmtPayableUptoAmt.trim()
-						+ " का भुगतान सुचना\nप्राप्ति के 15 दिनों के भीतर\nसुनिश्चित करें अन्यथा विदयुत \nअधिनियम 2003 के धारा 56 के\nआलोक में दि."
-						+ UtilAppCommon.out.AmtPayableUptoDt.trim() + "\nके पश्चात विदयुत सम्बन्ध विच्छेदित\nकर दिया जाएगा|" + "\n" +
-						"                 स0 वि0 अभि0" + "\n";
-				try {
-
-					if (Double.parseDouble(UtilAppCommon.out.ArrearSubTotal_A) > 1000) {
-						builder.addCommand(String.format(
-								hindiMessage).getBytes("UTF-8"));
-						//	("प्रिय " + bill.get_CNAME().trim() + ",\n" + "कृपया विदयुत बकाया राशि रू" + bill.get_PROMPT_AMT().trim() + " का\nभुगतान सुचना प्राप्ति के 15 दिनों के\nभीतर सुनिश्चित करें अन्यथा विदयुत \nअधिनियम 2003 के धारा 56 के आलोक में दि." + bill.get_UPTO_DATE().trim() + " के पश्चात विदयुत\nसम्बन्ध विच्छेदित कर दिया जाएगा।" + "\n" + "                 स0 वि0 अभि0" + "\n")
-					}
-				} catch (NumberFormatException e) {
-					try {
-						if (Float.parseFloat(UtilAppCommon.out.ArrearSubTotal_A) > 1000) {
-							builder.addCommand(String.format(
-									hindiMessage).getBytes("UTF-8"));
-						}
-					} catch (NumberFormatException e1) {
-
-					}
-				}
-
-
-/**
- * End adding lines for tariff change 2018-19
- */
-
-
-				builder.addText(String.format("**************************\n"));
-
-				builder.addCommand(String.format("दिनांक   : %s\n", UtilAppCommon.out.REC_DATE_TIME).getBytes("UTF-8"));
-				builder.addCommand(String.format("दॆय  तिथि : %s\n", UtilAppCommon.out.AmtPayableUptoDt).getBytes("UTF-8"));
-
-				builder.addCommand(String.format("कनेक्शन का विवरण  \n").getBytes("UTF-8"));
-				builder.addTextAlign(Builder.ALIGN_CENTER);
-				builder.addText(" **************************\n");
-				builder.addTextAlign(Builder.ALIGN_LEFT);
-				builder.addCommand(String.format("विपत्र संख्या       : %s\n", UtilAppCommon.out.BillNo).getBytes("UTF-8"));
-
-				builder.addCommand(String.format("प्रमंडल/कोड    :%s\n", UtilAppCommon.out.Division).getBytes("UTF-8"));
-
-				builder.addCommand(String.format("अवर प्रमंडल    :%s\n", UtilAppCommon.out.SubDivision).getBytes("UTF-8"));
-				builder.addCommand(String.format("उपभोक्ता संख्या : ").getBytes("UTF-8"));
-				builder.addTextSize(2, 2);
-				builder.addTextFont(Builder.FONT_C);
-				//builder.addText(String.format(
-				//		" CA NUMBER:%s\n", UtilAppCommon.out.CANumber));
-				builder.addText(String.format("%s\n", UtilAppCommon.out.CANumber));
-
-				builder.addTextFont(Builder.FONT_A);
-				builder.addTextSize(1, 1);
-				builder.addCommand(String.format("कंज्युमर आईडी      :%s\n", UtilAppCommon.out.LegacyNumber).getBytes("UTF-8"));
-
-				builder.addCommand(String.format("एम.आर.यू संख्या :%s\n", UtilAppCommon.out.MRU).getBytes("UTF-8"));
-
-				builder.addCommand(String.format("नाम :%s\n", UtilAppCommon.in.CONSUMER_NAME).getBytes("UTF-8"));
-
-				builder.addCommand(String.format("पता :").getBytes("UTF-8"));
-
-
-				int alen = 0;
-				alen = UtilAppCommon.out.Address.length();
-				String addr1 = "";
-				String addr2 = "";
-				if (alen > 30) {
-					addr1 = UtilAppCommon.out.Address.substring(0, 30);
-					if (alen > 60)
-						addr2 = UtilAppCommon.out.Address.substring(30, 60);
-					else
-						addr2 = UtilAppCommon.out.Address.substring(30, alen);
-				} else
-					addr1 = UtilAppCommon.out.Address;
-
-				builder.addCommand(String.format(
-						" %s\n", addr1).getBytes("UTF-8"));
-				builder.addCommand(String.format(
-						" %s\n", addr2).getBytes("UTF-8"));
-				builder.addCommand(String.format("मोबाइल संख्या  :%s\n", UtilAppCommon.in.METER_CAP).getBytes("UTF-8"));
-				builder.addCommand(String.format("क्षेत्र         :%s\n", UtilAppCommon.out.Area_type).getBytes("UTF-8"));
-				builder.addCommand(String.format("पोल कोड     :%s\n", UtilAppCommon.out.PoleNo).getBytes("UTF-8"));
-				if (!UtilAppCommon.in.PWR_FACTOR.equalsIgnoreCase(""))
-					builder.addCommand(String.format("मीटर संख्या :%s  फेज:%s\n", UtilAppCommon.out.MtrNo + ", " + UtilAppCommon.in.PWR_FACTOR, UtilAppCommon.out.Phase).getBytes("UTF-8"));
-				else
-					builder.addCommand(String.format("मीटर संख्या :%s  फेज:%s\n", UtilAppCommon.out.MtrNo, UtilAppCommon.out.Phase).getBytes("UTF-8"));
-
-				builder.addCommand(String.format(
-						"मीटर ओनर : %s\n", UtilAppCommon.out.MtrMake
-								.equalsIgnoreCase("C") ? "Company" : UtilAppCommon.out.MtrMake
-								.equalsIgnoreCase("O") ? "Consumer" : "").getBytes("UTF-8"));
-
-				builder.addCommand(String.format(
-						"उपभोक्ता श्रेणी : %s\n", UtilAppCommon.out.Category).getBytes("UTF-8"));
-
-				String CD2 = "";
-				double result = 0.0;
-				Log.v("ActvBillPrinting", "************************Printing Stage Checkpoint 11");
-				if (UtilAppCommon.out.Category.equalsIgnoreCase("NDS-IID(B)")
-						|| UtilAppCommon.out.Category.equalsIgnoreCase("IAS-IIM")
-						|| UtilAppCommon.out.Category.equalsIgnoreCase("LTEV")
-						|| UtilAppCommon.out.Category.equalsIgnoreCase("LTIS-ID")
-						|| UtilAppCommon.out.Category.equalsIgnoreCase("LTIS-IID")
-						|| UtilAppCommon.out.Category.equalsIgnoreCase("PUBWW")) {
-					Log.v("ActvBillPrinting", "************************Printing Stage Checkpoint 12");
-					result = (double) (Double.parseDouble(UtilAppCommon.out.CD) / 0.9f);
-					CD2 = String.format("%.2f", result) + " KVA";
-					Log.v("ActvBillPrinting", "************************Printing Stage Checkpoint 13");
-				} else if (UtilAppCommon.out.Category.equalsIgnoreCase("HGN")
-						|| UtilAppCommon.out.Category.equalsIgnoreCase("IAS-IM")
-						|| UtilAppCommon.out.Category.equalsIgnoreCase("IAS-IU")) {
-					result = (double) (Double.parseDouble(UtilAppCommon.out.SanctLoad));
-					CD2 = result + " HP";
-				} else if (UtilAppCommon.out.Category.equalsIgnoreCase("DS-IID")
-						|| UtilAppCommon.out.Category.equalsIgnoreCase("DS-IIID")
-						|| UtilAppCommon.out.Category.equalsIgnoreCase("NDS-IID(A)")) {
-					result = (double) (Double.parseDouble(UtilAppCommon.out.CD));
-					CD2 = result + " KW";
-				}else {
-					/**
-					 * End ading lines for tariff change
-					 */
-					result = (double) (Double.parseDouble(UtilAppCommon.out.SanctLoad));
-					Log.v("ActvBillPrinting", "************************Printing Stage Checkpoint 14");
-					CD2 = result + " KW";
-				}
-
-				builder.addCommand(String.format(
-						"स्वीकृत भार :%s\n", CD2).getBytes("UTF-8"));
-
-
-				builder.addCommand(String.format(
-						"जमानत की जमा राशि  :%s\n", UtilAppCommon.out.SD).getBytes("UTF-8"));
-
-				String billdays;
-
-				if (UtilAppCommon.out.Type.equalsIgnoreCase("(PL Adj.) Actual")) {
-					billdays = UtilAppCommon.out.BillDays + "(" + UtilAppCommon.out.MESSAGE10 + ")";
-				} else {
-					billdays = UtilAppCommon.out.BillDays;
-				}
-				builder.addCommand(String.format(
-						"कुल विपत्र दिवस  :%s\n", billdays).getBytes("UTF-8"));
-
-				builder.addText("****************************\n");
-
-
-				builder.addTextAlign(Builder.ALIGN_CENTER);
-				builder.addCommand("मान पठन स्थिति \n".getBytes("UTF-8"));
-				builder.addCommand("-------------------------\n".getBytes("UTF-8"));
-				builder.addTextAlign(Builder.ALIGN_LEFT);
-
-				builder.addCommand("        पूर्व         वर्तमान  \n".getBytes("UTF-8"));
-
-				builder.addCommand(String.format(
-						"पठन   : %s     %s\n", UtilAppCommon.out.PreviusReading, UtilAppCommon.out.CurrentReading).getBytes("UTF-8"));
-
-				builder.addCommand(String.format(
-						"दिनांक : %s  %s\n", UtilAppCommon.out.PrevusMtrRdgDt, UtilAppCommon.out.CurrentMtrRdgDt).getBytes("UTF-8"));
-				if (!UtilAppCommon.out.PrevusMtrRdgDt.equalsIgnoreCase("0000.00.00"))
-					builder.addCommand(String.format(
-							"पठन स्थिति : %s   %s \n", UtilAppCommon.out.PreviusMtrReadingNote, UtilAppCommon.out.CurrentMtrReadingNote).getBytes("UTF-8"));
-
-
-				if (!UtilAppCommon.in.MONTH_SEASONAL.equalsIgnoreCase("")) {
-					builder.addText("****************************\n");
-					builder.addTextAlign(Builder.ALIGN_CENTER);
-					builder.addCommand("ब्ल्यूटुथ पठन स्थिति \n".getBytes("UTF-8"));
-					builder.addCommand("-------------------------\n".getBytes("UTF-8"));
-					builder.addTextAlign(Builder.ALIGN_LEFT);
-
-					builder.addCommand("        पूर्व         वर्तमान  \n".getBytes("UTF-8"));
-
-					builder.addCommand(String.format(
-							"पठन   : %s     %s\n", UtilAppCommon.in.PREV_KWH_CYCLE1, UtilAppCommon.SAPBlueIn.CurrentReadingKwh).getBytes("UTF-8"));
-
-					builder.addCommand(String.format(
-							"दिनांक : %s  %s\n", UtilAppCommon.in.DATE_1, UtilAppCommon.out.CurrentMtrRdgDt).getBytes("UTF-8"));
-					if (!UtilAppCommon.in.DATE_1.equalsIgnoreCase("0000.00.00"))
-						builder.addCommand(String.format("बस्तु स्थिति : %s   %s \n", "OK", "OK").getBytes("UTF-8"));
-
-				}
-
-				// Print Reading Image
-				if (UtilAppCommon.in.PRV_MTR_READING_NOTE.toUpperCase() != "RN") {
-					try {
-					/*String PhotoDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES)
-							.getPath()
-							+ "/SBDocs/Photos_Crop"
-							+ "/"
-							+ UtilAppCommon.sdoCode
-							+ "/"
-							+ UtilAppCommon.out.MRU;*/
-						String PhotoDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES + "/SBDocs/Photos/" + UtilAppCommon.in.SUB_DIVISION_CODE + "/" + UtilAppCommon.in.MRU)
-								.getPath();
-						strmonth = String.valueOf(Arrays.asList(strMonths).indexOf(UtilAppCommon.out.BillMonth) + 1);
-						String PhotoPath = PhotoDir + "/" + UtilAppCommon.in.SCHEDULED_BILLING_DATE.substring(0, 4) +
-								UtilAppCommon.in.SCHEDULED_BILLING_DATE.substring(5, 7) +
-								"_" + UtilAppCommon.out.CANumber + ".jpg";
-
-						System.out.println("Photo: " + PhotoPath);
-						//BitmapFactory bf = new BitmapFactory();
-
-//					builder.addImage(bf.decodeFile(PhotoPath), 0, 0, bf
-//							.decodeFile(PhotoPath).getWidth(),
-//							bf.decodeFile(PhotoPath).getHeight(),
-//							Builder.PARAM_DEFAULT);
-						File filedir = new File(PhotoDir, UtilAppCommon.in.SCHEDULED_BILLING_DATE.substring(0, 4) +
-								UtilAppCommon.in.SCHEDULED_BILLING_DATE.substring(5, 7) +
-								"_" + UtilAppCommon.out.CANumber + ".jpg");
-						Bitmap btmImg = Utilities.getBitmapForAllVersions(context, filedir);
-						builder.addImage(btmImg, 0, 0, btmImg.getWidth(),
-								btmImg.getHeight(),
-								Builder.PARAM_DEFAULT);
-					} catch (Exception ex) {
-
-						System.out
-								.println("Error In Photo Print: " + ex.toString());
-					}
-					// Print Reading Image End
-
-				}
-				builder.addCommand(String.format("\n").getBytes("UTF-8"));
-
-				float mf = 0, consump = 0;
-				//mf=Float.parseFloat(UtilAppCommon.out.MF);
-				if (!UtilAppCommon.out.MF.equalsIgnoreCase(""))
-					mf = Float.parseFloat(UtilAppCommon.out.MF);
-				consump = Float.parseFloat(UtilAppCommon.out.Consumption);
-
-				builder.addCommand(String.format(
-						"गुणक    :%.2f खपत :%.2f\n", mf, consump).getBytes("UTF-8"));
-
-				builder.addCommand(String.format(
-						"दर्ज मांग  :%s पीएफ्  :%s \n", UtilAppCommon.out.RecordedDemd, UtilAppCommon.out.PowerFactor).getBytes("UTF-8"));
-
-
-				float mmcunits = 0, avg = 0;
-				if (UtilAppCommon.out.Category.equals("DS-II") || UtilAppCommon.out.Category.equals("NDS-IM")) {
-					mmcunits = 0;
-				} else {
-					mmcunits = Float.parseFloat(UtilAppCommon.out.MMCUnits);
-				}
-				if (UtilAppCommon.out.CurrentMtrReadingNote.equalsIgnoreCase("OK")) {
-					avg = 0;
-				} else {
-					avg = Float.parseFloat(UtilAppCommon.out.Average);
-				}
-
-				builder.addCommand(String.format(
-						"मासिक न्युनतम प्रभार:%.2f  \n", mmcunits).getBytes("UTF-8"));
-				builder.addCommand(String.format(
-						"औसत    :%.2f \nकुल विपत्र दिवस   :%s\n", avg, UtilAppCommon.out.BilledUnits).getBytes("UTF-8"));
-
-				builder.addCommand(String.format(
-						"विपत्र का आधार  :%s \n", UtilAppCommon.out.Type).getBytes("UTF-8"));
-
-
-				builder.addText(" ****************************\n");
-
-				builder.addTextAlign(Builder.ALIGN_CENTER);
-				builder.addCommand("बकाया का विवरण   \n".getBytes("UTF-8"));
-				builder.addCommand("--------------------------\n".getBytes("UTF-8"));
-				builder.addTextAlign(Builder.ALIGN_LEFT);
-
-				float pmtonacct = 0, arrengdue = 0, arrdps = 0, arrothr = 0;
-				pmtonacct = Float.parseFloat(UtilAppCommon.out.PaymentOnAccount);
-				arrengdue = Float.parseFloat(UtilAppCommon.out.ArrearEnergyDues);
-				arrdps = Float.parseFloat(UtilAppCommon.out.ArrearDPs);
-				arrothr = Float.parseFloat(UtilAppCommon.out.ArrearOthers);
-
-				builder.addCommand(String.format(
-						"अग्रिम जमा         :%.2f\n", pmtonacct).getBytes("UTF-8"));
-
-				builder.addCommand(String.format(
-						"ऊर्जा  बकाया        :%.2f\n", arrengdue).getBytes("UTF-8"));
-
-				builder.addCommand(String.format(
-						"विलंबअधिभार बकाया   :%.2f\n", arrdps).getBytes("UTF-8"));
-
-				builder.addCommand(String.format(
-						"अन्य  प्रभार         :%.2f\n", arrothr).getBytes("UTF-8"));
-
-				builder.addCommand(String.format(
-						"कुल बकाया (अ)     :%.2f\n", Float.parseFloat(UtilAppCommon.out.ArrearSubTotal_A)).getBytes("UTF-8"));
-
-
-				builder.addText(" ****************************\n");
-
-				builder.addTextAlign(Builder.ALIGN_CENTER);
-				builder.addCommand("वर्तमान बिपत्र का विवरण       \n".getBytes("UTF-8"));
-				builder.addCommand("---------------------------\n".getBytes("UTF-8"));
-				builder.addTextAlign(Builder.ALIGN_LEFT);
-
-				float engchg = 0;
-				engchg = Float.parseFloat(UtilAppCommon.out.CurrentEnergyCharges);
-
-				float fixchg = 0, curdps = 0, excessdemdchg = 0, ed = 0, mr = 0, shuntcapchg = 0, othrchg = 0, subtotb = 0, govsubsidy = 0, cgst = 0, sgst = 0;
-				;
-				float intonsd = 0, incentive = 0, rebonmmc = 0, grosstot = 0;
-
-				curdps = Float.parseFloat(UtilAppCommon.out.CurrentMonthDps);
-				fixchg = Float.parseFloat(UtilAppCommon.out.FixDemdCharge);
-				excessdemdchg = Float.parseFloat(UtilAppCommon.out.ExcessDemdCharge);
-				ed = Float.parseFloat(UtilAppCommon.out.ElectricityDuty);
-				mr = Float.parseFloat(UtilAppCommon.out.MeterRent);
-				/**
-				 * Adding lines for tariff change 2018-19
-				 */
-
-				cgst = Float.parseFloat(UtilAppCommon.out.METER_CGST);
-				sgst = Float.parseFloat(UtilAppCommon.out.METER_SGST);
-				/**
-				 * End ading lines for tariff change
-				 */
-				shuntcapchg = Float.parseFloat(UtilAppCommon.out.ShauntCapCharge);
-				othrchg = Float.parseFloat(UtilAppCommon.out.OtherCharge);
-				govsubsidy = Float.parseFloat(UtilAppCommon.out.GOVT_SUB);
-				subtotb = Float.parseFloat(UtilAppCommon.out.SubTotal_B);
-				if (UtilAppCommon.out.InterestOnSD_C.equalsIgnoreCase(""))
-					intonsd = 0;
-				else
-					intonsd = Float.parseFloat(UtilAppCommon.out.InterestOnSD_C);
-				if (UtilAppCommon.out.Incentive.equalsIgnoreCase(""))
-					incentive = 0;
-				else
-					incentive = Float.parseFloat(UtilAppCommon.out.Incentive);
-
-				rebonmmc = Float.parseFloat(UtilAppCommon.out.RebateOnMMC);
-				grosstot = Float.parseFloat(UtilAppCommon.out.GrossTotal);
-
-				float installmt_amt = 0;
-				if (UtilAppCommon.in.CURR_MON_AMT.equalsIgnoreCase(""))
-					installmt_amt = 0;
-				else
-					installmt_amt = Float.parseFloat(UtilAppCommon.in.CURR_MON_AMT);
-
-
-				builder.addCommand(String.format(
-						"ऊर्जा शुल्क          :%.2f\n", engchg).getBytes("UTF-8"));
-				builder.addCommand(String.format(
-						"वर्तमान विलंब अधिभार:%.2f\n", curdps).getBytes("UTF-8"));
-				builder.addCommand(String.format(
-						"फीक्सड/डिमांड प्रभार :%.2f\n", fixchg).getBytes("UTF-8"));
-
-				builder.addCommand(String.format(
-						"आधिक्य डिमांड प्रभार :%.2f\n", excessdemdchg).getBytes("UTF-8"));
-
-				builder.addCommand(String.format(
-						"विदयुत  शुल्क      :%.2f\n", ed).getBytes("UTF-8"));
-				builder.addCommand(String.format(
-						"मीटर किराया       :%.2f\n", mr).getBytes("UTF-8"));
-				/**
-				 * Adding New lines for tariff change 2018-19
-				 */
-				builder.addCommand(String.format(
-						"सीजीएसटी @ 9%%    : %.2f\n", cgst).getBytes("UTF-8"));
-				builder.addCommand(String.format(
-						"एसजीएसटी @ 9%%    : %.2f\n", sgst).getBytes("UTF-8"));
-				/**
-				 * End adding lines for tariff change 2018-19
-				 */
-				builder.addCommand(String.format(
-						"कैपिसिटर प्रभार     :%.2f\n", shuntcapchg).getBytes("UTF-8"));
-
-				builder.addCommand(String.format(
-						"किस्त की राशि     :%.2f\n", installmt_amt).getBytes("UTF-8"));
-
-				builder.addCommand(String.format(
-						"अन्य शुल्क        :%.2f\n", othrchg).getBytes("UTF-8"));
-				builder.addTextSize(1, 2);
-				builder.addTextFont(Builder.FONT_A);
-				builder.addCommand(String.format(
-						"राज्य सरकार अनुदान:%.2f\n", govsubsidy).getBytes("UTF-8"));
-				builder.addTextFont(Builder.FONT_A);
-				builder.addTextSize(1, 1);
-				builder.addCommand(String.format(
-						"कुल अभिनिर्धारण (बी):%.2f\n", subtotb).getBytes("UTF-8"));
-				builder.addText(" ****************************\n");
-				builder.addCommand(String.format(
-						"जमानत राशि पर सूद(सी):%.2f\n", intonsd).getBytes("UTF-8"));
-				builder.addCommand(String.format(
-						"इन्सेंटिव्स          :%.2f\n", incentive).getBytes("UTF-8"));
-				builder.addCommand(String.format(
-						"रीमिशन           :%.2f\n", rebonmmc).getBytes("UTF-8"));
-				builder.addCommand(String.format(
-						"उप-जोड(ए+बी+सी) :%.2f\n", grosstot).getBytes("UTF-8"));
-				builder.addText(" ***********************\n");
-				builder.addCommand(String.format(
-						"छूट की राशि    :%s\n", UtilAppCommon.out.Rebate).getBytes("UTF-8"));
-				builder.addText(" ***********************\n");
-				builder.addTextAlign(Builder.ALIGN_CENTER);
-				builder.addCommand("कूल मांग    \n".getBytes("UTF-8"));
-				builder.addText("----------------------------\n");
-				builder.addTextAlign(Builder.ALIGN_LEFT);
-				builder.addCommand(String.format(
-						"%s तक रूo  : %s\n", UtilAppCommon.out.AmtPayableUptoDt, UtilAppCommon.out.AmtPayableUptoAmt).getBytes("UTF-8"));
-				builder.addCommand(String.format(
-						"%s तक रूo  : %s\n", UtilAppCommon.out.AmtPayablePYDt, UtilAppCommon.out.AmtPayablePYAmt).getBytes("UTF-8"));
-				builder.addCommand(String.format(
-						"%s पश्चात रूo : %s\n", UtilAppCommon.out.AmtPayableAfterDt, UtilAppCommon.out.AmtPayableAfterAmt).getBytes("UTF-8"));
-
-				builder.addText("****************************\n");
-				builder.addTextAlign(Builder.ALIGN_CENTER);
-				builder.addCommand("पिछले भुगतान का  विवरण     \n".getBytes("UTF-8"));
-				builder.addText(" ----------------------------\n");
-				builder.addTextAlign(Builder.ALIGN_LEFT);
-				builder.addCommand(String.format(
-						"भुगतान की राशि  :%s\n", UtilAppCommon.out.LastPaymentAmt).getBytes("UTF-8"));
-				builder.addCommand(String.format(
-						"भुगतान दिनांक    :%s\n", UtilAppCommon.out.LastPaidDate).getBytes("UTF-8"));
-				builder.addCommand(String.format(
-						"रसीद  संख्या  :%s\n", UtilAppCommon.out.ReceiptNumber).getBytes("UTF-8"));
-				builder.addCommand(String.format(
-						"मीटर रीडर आईडी :%s\n", UtilAppCommon.out.MTR_READER_ID).getBytes("UTF-8"));
-				//dNow = new Date();
-				//strDateTime = ft.format(dNow);
-				//builder.addCommand(String.format("DATE: %s\n", strDateTime));
-				builder.addText(String.format("Ver: %s", UtilAppCommon.strAppVersion.replace(".apk", "")));
-				builder.addText("\n");
-				strBarcodeData = UtilAppCommon.acctNbr;
-				//builder.addBarcode(strBarcodeData, Builder.BARCODE_JAN13 , Builder.HRI_NONE, Builder.FONT_A, 50, 100);
-				//builder.addBarcode(strBarcodeData, Builder.BARCODE_CODE128 , Builder.HRI_NONE, Builder.FONT_A, 50, 100);
-				builder.addTextAlign(Builder.ALIGN_CENTER);
-				builder.addBarcode(strBarcodeData, Builder.BARCODE_CODE39, Builder.HRI_BELOW, Builder.FONT_A, barcodeWidth, barcodeHeight);
-				//nasha mukti msg
-				//Bitmap bt_nasha = Utilities.getBitmapFromDrawable(getApplicationContext(), R.drawable.nasha);
-				//builder.addImage(bt_nasha, 0, 0, bt_nasha.getWidth(), bt_nasha.getHeight(), Builder.PARAM_DEFAULT);
-				//Log.v("Azadi Photo Print Added", "Azadi Photo Print Added");
-				builder.addTextAlign(Builder.ALIGN_LEFT);
-				//builder.addBarcode(strBarcodeData, Builder.BARCODE_CODE93 , Builder.HRI_NONE, Builder.FONT_A, 50, 100);
-				//builder.addBarcode(strBarcodeData, Builder.BARCODE_EAN8 , Builder.HRI_NONE, Builder.FONT_A, 50, 100);
-				//builder.addBarcode(strBarcodeData, Builder.BARCODE_GS1_128 , Builder.HRI_NONE, Builder.FONT_A, 50, 100);
-				builder.addText("\n");
-				builder.addText(String.format("Consumer Helpline- 1912"));
-				builder.addText("\n");
-				builder.addText("\n");
-				builder.addTextAlign(Builder.ALIGN_CENTER);
-				builder.addText("*****************************\n");
-				builder.addText("सोलर लगाए बिजली बिल बचाए ! \n");
-				builder.addText("*****************************\n");
-//					builder.addTextAlign(Builder.ALIGN_LEFT);
-//					builder.addText("आवेदन हेतु https://www.pmsuryaghar.gov.in \n");
-//					builder.addText("*****************************\n");
-
-				float flIntDisc = 0;
-				if (!(UtilAppCommon.out.INT_DISC.equalsIgnoreCase("") || UtilAppCommon.out.INT_DISC.equalsIgnoreCase("null"))) {
-					flIntDisc = Float.parseFloat(UtilAppCommon.out.INT_DISC);
-					if (Math.abs(flIntDisc) > 0)
-						builder.addCommand(String.format("देय तिथि %s तक विपत्र राशि रू %s का ऑनलाईन भुगतान करेँ एव पाये रू"
-								+ " %.2f अतिरिक्त छुट।", UtilAppCommon.out.AmtPayableUptoDt, UtilAppCommon.out.AmtPayableUptoAmt, Math.abs(flIntDisc)).getBytes("UTF-8"));
-				}
-				builder.addText("\n");
-				builder.addText("\n");
-				builder.addCut(Builder.CUT_FEED);
-				// <Send print data>
-				//builder.
-				printer.openPrinter(Print.DEVTYPE_BLUETOOTH, address, Print.TRUE, Print.PARAM_DEFAULT);
-				printer.sendData(builder, 21000, status, battery);
-				//startActivity(new Intent(getBaseContext(), PoleMobileActivity.class));
-				printer.closePrinter();
-				//
-			} catch (Exception e) {
-				e.printStackTrace();
-				// Handle communications error here.
-				Toast.makeText(getApplicationContext(), e.toString(),
-						Toast.LENGTH_LONG).show();
-				Log.e("Epson Hindi Printing", e.getMessage().toString());
-
-			} finally {
-				if (UtilAppCommon.bprintdupl)
-					startActivity(new Intent(getBaseContext(), ActvConsumerNbrInputForDuplicateBill.class));
-				if (UtilAppCommon.blActyncBtn)
-					startActivity(new Intent(getBaseContext(), SyncMobPoleActivity.class));
-					//else if(UtilAppCommon.inSAPSendMsg.equalsIgnoreCase("1") && !UtilAppCommon.blActyncBtn)
-					//	startActivity(new Intent(getBaseContext(), PoleMobileActivity.class));
-				else if (UtilAppCommon.billType.equalsIgnoreCase("A"))
-					startActivity(new Intent(getBaseContext(), ActvConsumerNbrInput.class));
-				else if (UtilAppCommon.billType.equalsIgnoreCase("L"))
-					startActivity(new Intent(getBaseContext(), ActvLegacyNbrInput.class));
-				else if (UtilAppCommon.billType.equalsIgnoreCase("S"))
-					startActivity(new Intent(getBaseContext(), ActvSequenceData.class));
-				else if (UtilAppCommon.billType.equalsIgnoreCase("M"))
-					startActivity(new Intent(getBaseContext(), MeterNbrInput.class));
-				else
-					startActivity(new Intent(getBaseContext(), ActvBillingOption.class));
-			}
-		}
-	}
-
 	class AnalogicThermalHindi extends Thread {
 
 		private String address = null;
@@ -3095,14 +4196,14 @@ public class ActvBillPrinting extends AppCompatActivity {
 
 				//printerdata4.append(printer.font_Courier_24_VIP(String.format("Consumer Helpline- 1912")));
 				//printerdata4.append(String.format("Consumer Helpline- 1912"));
-				// image 
+				// image
 				printerdata6.append(String.format("Consumer Helpline- 1912 \n\n"));
 				float flIntDisc = 0;
 				if (!(UtilAppCommon.out.INT_DISC.equalsIgnoreCase("") || UtilAppCommon.out.INT_DISC.equalsIgnoreCase("null"))) {
 					flIntDisc = Float.parseFloat(UtilAppCommon.out.INT_DISC);
 					if (Math.abs(flIntDisc) > 0) {
 						//printerdata6.append(String.format("देय  तिथि  %s तक  विपत्र  राशि  रू %s का ऑनलाईन  भुगतान करेँ एव पाये  "
-						//		+ " रू %s अतिरिक्त  छुट",UtilAppCommon.out.AmtPayableUptoDt, UtilAppCommon.out.AmtPayableUptoAmt, Math.abs(flIntDisc)));	
+						//		+ " रू %s अतिरिक्त  छुट",UtilAppCommon.out.AmtPayableUptoDt, UtilAppCommon.out.AmtPayableUptoAmt, Math.abs(flIntDisc)));
 						printerdata6.append(String.format("देय  तिथि  %s तक  विपत्र  राशि \n ", UtilAppCommon.out.AmtPayableUptoDt));
 						printerdata6.append(String.format("रू %s का ऑनलाईन  भुगतान करेँ \n", UtilAppCommon.out.AmtPayableUptoAmt));
 						printerdata6.append(String.format("एव पाये  रू %s अतिरिक्त  छुट", Math.abs(flIntDisc)));
@@ -3206,1248 +4307,11 @@ public class ActvBillPrinting extends AppCompatActivity {
 		}
 	}
 
-	class TVSEnglish extends Thread {
 
-		private String address = null;
-		BluetoothDevice device = null;
-		HPRTPrinterHelper hprtPrinterHelper = null;
-
-		public TVSEnglish(String address) {
-			this.address = address;
-			device = mBluetoothAdapter.getRemoteDevice(address);
-
-			if (mBluetoothAdapter == null) {
-				Toast.makeText(ActvBillPrinting.this, "Bluetooth not available.", Toast.LENGTH_SHORT).show();
-
-				return;
-			}
-			if (!mBluetoothAdapter.isEnabled()) {
-				Toast.makeText(ActvBillPrinting.this,
-						"Bluetooth feature is turned off now...Please turned it on! ", Toast.LENGTH_SHORT).show();
-				if (ActivityCompat.checkSelfPermission(ActvBillPrinting.this, Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
-					// TODO: Consider calling
-					//    ActivityCompat#requestPermissions
-					// here to request the missing permissions, and then overriding
-					//   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-					//                                          int[] grantResults)
-					// to handle the case where the user grants the permission. See the documentation
-					// for ActivityCompat#requestPermissions for more details.
-					return;
-				}
-				mBluetoothAdapter.enable();
-				try {
-					Thread.sleep(1000);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-				return;
-			}
-
-			try {
-				hprtPrinterHelper = new HPRTPrinterHelper();
-				int portOpen = hprtPrinterHelper.PortOpen("Bluetooth," + address);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-
-		}
-
-		SimpleDateFormat ft = new SimpleDateFormat("dd-MM-yy' TIME:'hh:mm");
-
-		public void run() {
-
-			try {
-
-				// AnalogicsThermalPrinterProf conn= new AnalogicsThermalPrinterProf();
-				AnalogicsThermalPrinter conn = new AnalogicsThermalPrinter();
-
-				conn.openBT(address);
-
-				Bluetooth_Printer_2inch_prof_ThermalAPI printer = new Bluetooth_Printer_2inch_prof_ThermalAPI();
-
-
-				Toast.makeText(getBaseContext(), BILL, Toast.LENGTH_SHORT)
-						.show();
-
-				char lf = 0x0A;
-				char cr = 0x0D;
-				// char dp = 0x1D;
-				// char nm = 0x13;
-
-				// ////////Print On Paper Start////////////
-				StringBuilder printerdata1 = new StringBuilder();
-				StringBuilder printerdata2 = new StringBuilder();
-				StringBuilder printerdata3 = new StringBuilder();
-				StringBuilder printerdata4 = new StringBuilder();
-				StringBuilder printerdata5 = new StringBuilder();
-				StringBuilder printerdata6 = new StringBuilder();
-				StringBuilder printerdata7 = new StringBuilder();
-				StringBuilder printerbarcode = new StringBuilder();
-				//Print part 1
-
-
-				String bmonth;
-				bmonth = UtilAppCommon.out.BillMonth.substring(0, 4) + UtilAppCommon.out.BillMonth.substring(6, 8);
-
-				printerdata1.append("ELECTRICITY BILL: " + bmonth + "\n");
-
-				/**
-				 * Adding lines below for change in tariff 2018-19
-				 */
-				String gstNo = "";
-				if (UtilAppCommon.out.Company.equalsIgnoreCase("NBPD")) {
-					gstNo = "10AAECN1588M2ZB";
-				} else if (UtilAppCommon.out.Company.equalsIgnoreCase("SBPD")) {
-					gstNo = "10AASCS2207G2ZN";
-				}
-
-
-				printerdata1.append(String.format("GSTIN:%s\n", gstNo));
-
-				String hindiMessage = "प्रिय " + UtilAppCommon.out.Name + ",\n" + " कृपया विदयुत बकाया राशि\nरू "
-						+ UtilAppCommon.out.AmtPayableUptoAmt.trim()
-						+ " का भुगतान सुचना\nप्राप्ति के 15 दिनों के भीतर\nसुनिश्चित करें अन्यथा विदयुत \nअधिनियम 2003 के धारा 56 के\nआलोक में दि."
-						+ UtilAppCommon.out.AmtPayableUptoDt.trim() + "\nके पश्चात विदयुत सम्बन्ध\nविच्छेदित कर दिया जाएगा|" + "\n" +
-						"                 स0 वि0 अभि0" + "\n";
-				try {
-
-					if (Double.parseDouble(UtilAppCommon.out.ArrearSubTotal_A) > 1000) {
-						printerdata1.append((String.format(
-								hindiMessage)));
-						//	("प्रिय " + bill.get_CNAME().trim() + ",\n" + "कृपया विदयुत बकाया राशि रू" + bill.get_PROMPT_AMT().trim() + " का\nभुगतान सुचना प्राप्ति के 15 दिनों के\nभीतर सुनिश्चित करें अन्यथा विदयुत \nअधिनियम 2003 के धारा 56 के आलोक में दि." + bill.get_UPTO_DATE().trim() + " के पश्चात विदयुत\nसम्बन्ध विच्छेदित कर दिया जाएगा।" + "\n" + "                 स0 वि0 अभि0" + "\n")
-					}
-				} catch (NumberFormatException e) {
-					try {
-						if (Float.parseFloat(UtilAppCommon.out.ArrearSubTotal_A) > 1000) {
-							printerdata1.append((String.format(hindiMessage)));
-						}
-					} catch (NumberFormatException e1) {
-
-					}
-				}
-
-
-				//* End adding lines for tariff change 2018-19
-
-				printerdata1.append(String.format("********************************\n"));
-
-
-				printerdata1.append(String.format("DATE : %s\n", UtilAppCommon.out.REC_DATE_TIME));
-				printerdata1.append(String.format("DUE DATE:  %s\n", UtilAppCommon.out.AmtPayableUptoDt));
-
-				printerdata1.append(String.format("CONSUMER DETAILS \n"));
-				printerdata1.append(String.format("********************************\n"));
-				printerdata1.append(String.format("Bill No: %s\n", UtilAppCommon.out.BillNo));
-				printerdata1.append(String.format("DIVISION:%s\n", UtilAppCommon.out.Division));
-				printerdata1.append(String.format("SUB DIVN:%s\n", UtilAppCommon.out.SubDivision));
-				printerdata1.append(String.format("CA NUMBER:%s\n", UtilAppCommon.out.CANumber));
-				printerdata1.append(String.format("LEGACY NO:%s\n", UtilAppCommon.out.LegacyNumber));
-				printerdata1.append(String.format("MRU :%s\n", UtilAppCommon.out.MRU));
-				printerdata1.append(String.format("NAME :%s\n", UtilAppCommon.in.CONSUMER_NAME));
-
-				int alen = 0;
-				alen = UtilAppCommon.out.Address.length();
-				String addr1 = "";
-				String addr2 = "";
-				if (alen > 24) {
-					addr1 = UtilAppCommon.out.Address.substring(0, 24);
-					if (alen > 48)
-						addr2 = UtilAppCommon.out.Address.substring(24, 48);
-					else
-						addr2 = UtilAppCommon.out.Address.substring(24, alen);
-				} else
-					addr1 = UtilAppCommon.out.Address;
-
-				printerdata1.append(String.format("ADDRESS: "));
-				printerdata1.append(String.format(" %s\n", addr1));
-				printerdata1.append(String.format("%s\n", addr2));
-				printerdata1.append(String.format("MOBILE NO:%s\n", UtilAppCommon.in.METER_CAP));
-				printerdata1.append(String.format("AREA TYPE:%s\n", UtilAppCommon.out.Area_type));
-				printerdata1.append(String.format("POLE NO:%s\n", UtilAppCommon.out.PoleNo));
-				if (!UtilAppCommon.in.PWR_FACTOR.equalsIgnoreCase(""))
-					printerdata1.append(String.format("MTR NO:%s \nPHASE:%s\n", UtilAppCommon.out.MtrNo + ", " + UtilAppCommon.in.PWR_FACTOR, UtilAppCommon.out.Phase));
-				else
-					printerdata1.append(String.format("MTR NO:%s \nPHASE:%s\n", UtilAppCommon.out.MtrNo, UtilAppCommon.out.Phase));
-
-				printerdata1.append(String.format("MTR COMP : %s\n", UtilAppCommon.out.MtrMake
-						.equalsIgnoreCase("C") ? "Company" : UtilAppCommon.out.MtrMake
-						.equalsIgnoreCase("O") ? "Consumer" : ""));
-				printerdata1.append(String.format("CATEGORY :%s\n", UtilAppCommon.out.Category));
-
-				//String CD="";
-				//String CD1="";
-				String CD2 = "";
-				float val = 0;
-				double result = 0.0;
-				Log.v("ActvBillPrinting", "************************Printing Stage Checkpoint 11");
-				if (UtilAppCommon.out.Category.equalsIgnoreCase("NDS-IID(B)")
-						|| UtilAppCommon.out.Category.equalsIgnoreCase("IAS-IIM")
-						|| UtilAppCommon.out.Category.equalsIgnoreCase("LTEV")
-						|| UtilAppCommon.out.Category.equalsIgnoreCase("LTIS-ID")
-						|| UtilAppCommon.out.Category.equalsIgnoreCase("LTIS-IID")
-						|| UtilAppCommon.out.Category.equalsIgnoreCase("PUBWW")) {
-					Log.v("ActvBillPrinting", "************************Printing Stage Checkpoint 12");
-					result = (double) (Double.parseDouble(UtilAppCommon.out.CD) / 0.9f);
-					CD2 = String.format("%.2f", result) + "KVA";
-					Log.v("ActvBillPrinting", "************************Printing Stage Checkpoint 13");
-				} else if (UtilAppCommon.out.Category.equalsIgnoreCase("HGN")
-						|| UtilAppCommon.out.Category.equalsIgnoreCase("IAS-IM")
-						|| UtilAppCommon.out.Category.equalsIgnoreCase("IAS-IU")) {
-					result = (double) (Double.parseDouble(UtilAppCommon.out.SanctLoad));
-					CD2 = result + " HP";
-				} else if (UtilAppCommon.out.Category.equalsIgnoreCase("DS-IID")
-						|| UtilAppCommon.out.Category.equalsIgnoreCase("DS-IIID")
-						|| UtilAppCommon.out.Category.equalsIgnoreCase("NDS-IID(A)")) {
-					result = (double) (Double.parseDouble(UtilAppCommon.out.CD));
-					CD2 = result + " KW";
-				}else {
-					/**
-					 * End ading lines for tariff change
-					 */
-					result = (double) (Double.parseDouble(UtilAppCommon.out.SanctLoad));
-					Log.v("ActvBillPrinting", "************************Printing Stage Checkpoint 14");
-					CD2 = result + " KW";
-				}
-
-				//printerdata1.append(String.format("LOAD :%s\n",CD,CD1));
-				printerdata1.append(String.format("LOAD :%s\n", CD2));
-				printerdata1.append(String.format("SD :%s\n", UtilAppCommon.out.SD));
-
-				String billdays;
-
-				if (UtilAppCommon.out.Type.equalsIgnoreCase("(PL Adj.) Actual")) {
-					billdays = UtilAppCommon.out.BillDays + "(" + UtilAppCommon.out.MESSAGE10 + ")";
-				} else {
-					billdays = UtilAppCommon.out.BillDays;
-				}
-				printerdata2.append(String.format("\nBILLED DAYS :%s\n", billdays));
-				printerdata2.append(String.format("********************************\n"));
-				printerdata2.append(String.format("READING DETAILS  \n"));
-				printerdata2.append(String.format(" -----------------------------\n"));
-				printerdata2.append(String.format("      PREVIOUS   CURRENT\n"));
-				printerdata2.append(String.format("READING   : %s    %s\n", UtilAppCommon.out.PreviusReading, UtilAppCommon.out.CurrentReading));
-				printerdata2.append(String.format("DATE : %s  %s\n", UtilAppCommon.out.PrevusMtrRdgDt, UtilAppCommon.out.CurrentMtrRdgDt));
-				if (!UtilAppCommon.out.PrevusMtrRdgDt.equalsIgnoreCase("0000.00.00"))
-					printerdata2.append(String.format("STATUS : %s          %s \n", UtilAppCommon.out.PreviusMtrReadingNote, UtilAppCommon.out.CurrentMtrReadingNote));
-
-				if (!UtilAppCommon.in.MONTH_SEASONAL.equalsIgnoreCase("")) {
-					printerdata2.append(String.format("******************************* \n"));
-					printerdata2.append(String.format("BLUETOOTH READING DETAILS:\n"));
-					//printerdata2.append(String.format("ब्ल्यूटुथ  मीटर   पठन  का  विवरण :\n"));
-					printerdata2.append(String.format(" ------------------------------\n"));
-					printerdata2.append(String.format("   PREVIOUS     CURRENT \n"));
-					printerdata2.append(String.format("READING  : %s     %s \n", UtilAppCommon.in.PREV_KWH_CYCLE1, UtilAppCommon.SAPBlueIn.CurrentReadingKwh));
-					printerdata2.append(String.format("DATE: %s  %s \n", UtilAppCommon.in.DATE_1, UtilAppCommon.out.CurrentMtrRdgDt));
-					if (!UtilAppCommon.in.DATE_1.equalsIgnoreCase("0000.00.00"))
-						printerdata2.append(String.format("STATUS : %s     %s \n", "OK", "OK"));
-				}
-
-				// 2nd block after image
-
-
-				float mf = 0, consump = 0;
-				//mf=Float.parseFloat(UtilAppCommon.out.MF);
-				if (!UtilAppCommon.out.MF.equalsIgnoreCase(""))
-					mf = Float.parseFloat(UtilAppCommon.out.MF);
-				consump = Float.parseFloat(UtilAppCommon.out.Consumption);
-
-				printerdata3.append(String.format("MULTIPLYING FACTOR : %.2f", mf));
-				printerdata3.append(String.format("\n"));
-				printerdata3.append(String.format("CONSUMPTION:%.2f", consump));
-				printerdata3.append(String.format("\n"));
-				printerdata3.append(String.format("RECORDED DEMD :%s ", UtilAppCommon.out.RecordedDemd));
-				printerdata3.append(String.format("\n"));
-				printerdata3.append(String.format("POWER FACTOR:%s", UtilAppCommon.out.PowerFactor));
-				printerdata3.append(String.format("\n"));
-
-				float mmcunits = 0, avg = 0;
-				if (UtilAppCommon.out.Category.equals("DS-II") || UtilAppCommon.out.Category.equals("NDS-IM")) {
-					mmcunits = 0;
-				} else {
-					mmcunits = Float.parseFloat(UtilAppCommon.out.MMCUnits);
-				}
-
-
-				if (UtilAppCommon.out.CurrentMtrReadingNote.equalsIgnoreCase("OK")) {
-					avg = 0;
-				} else {
-					avg = Float.parseFloat(UtilAppCommon.out.Average);
-
-				}
-
-				printerdata3.append(String.format("MIN UNIT:%.2f \n", mmcunits));
-				printerdata3.append(String.format("AVG :%.2f \nBLD UNITS :%s\n", avg, UtilAppCommon.out.BilledUnits));
-				printerdata3.append(String.format("TYPE:%s \n", UtilAppCommon.out.Type));
-				printerdata3.append(String.format("******************************\n"));
-				printerdata3.append(String.format("    ARREAR DETAILS\n"));
-
-				printerdata3.append(String.format(" -----------------------------\n"));
-				float pmtonacct = 0, arrengdue = 0, arrdps = 0, arrothr = 0;
-				pmtonacct = Float.parseFloat(UtilAppCommon.out.PaymentOnAccount);
-				arrengdue = Float.parseFloat(UtilAppCommon.out.ArrearEnergyDues);
-				arrdps = Float.parseFloat(UtilAppCommon.out.ArrearDPs);
-				arrothr = Float.parseFloat(UtilAppCommon.out.ArrearOthers);
-
-
-				printerdata3.append(String.format("PYMT ON ACCT %1.2f\n", pmtonacct));
-				printerdata3.append(String.format("ENERGY DUES:%1.2f\n", arrengdue));
-				printerdata3.append(String.format("ARREAR DPS:%1.2f\n", arrdps));
-				printerdata3.append(String.format("OTHERS :%1.2f\n", arrothr));
-				printerdata3.append(String.format("SUB TOTAL(A):%1.2f\n", Float.parseFloat(UtilAppCommon.out.ArrearSubTotal_A)));
-
-				printerdata3.append(String.format("******************************\n"));
-				printerdata3.append(String.format("CURRENT BILL DETAILS\n"));
-				printerdata3.append(String.format("****************************** \n"));
-
-				float engchg = 0;
-				engchg = Float.parseFloat(UtilAppCommon.out.CurrentEnergyCharges);
-				float fixchg = 0, curdps = 0, excessdemdchg = 0, ed = 0, mr = 0, shuntcapchg = 0, othrchg = 0, subtotb = 0, govsubsidy = 0, cgst = 0, sgst = 0;
-				;
-				float intonsd = 0, incentive = 0, rebonmmc = 0, grosstot = 0;
-
-				curdps = Float.parseFloat(UtilAppCommon.out.CurrentMonthDps);
-				fixchg = Float.parseFloat(UtilAppCommon.out.FixDemdCharge);
-				excessdemdchg = Float.parseFloat(UtilAppCommon.out.ExcessDemdCharge);
-				ed = Float.parseFloat(UtilAppCommon.out.ElectricityDuty);
-				mr = Float.parseFloat(UtilAppCommon.out.MeterRent);
-				/**
-				 * Adding lines for tariff change 2018-19
-				 */
-				cgst = Float.parseFloat(UtilAppCommon.out.METER_CGST);
-				sgst = Float.parseFloat(UtilAppCommon.out.METER_SGST);
-				/**
-				 * End ading lines for tariff change
-				 */
-				shuntcapchg = Float.parseFloat(UtilAppCommon.out.ShauntCapCharge);
-				othrchg = Float.parseFloat(UtilAppCommon.out.OtherCharge);
-				govsubsidy = Float.parseFloat(UtilAppCommon.out.GOVT_SUB);
-				subtotb = Float.parseFloat(UtilAppCommon.out.SubTotal_B);
-				if (UtilAppCommon.out.InterestOnSD_C.equalsIgnoreCase(""))
-					intonsd = 0;
-				else
-					intonsd = Float.parseFloat(UtilAppCommon.out.InterestOnSD_C);
-				if (UtilAppCommon.out.Incentive.equalsIgnoreCase(""))
-					incentive = 0;
-				else
-					incentive = Float.parseFloat(UtilAppCommon.out.Incentive);
-
-				rebonmmc = Float.parseFloat(UtilAppCommon.out.RebateOnMMC);
-				grosstot = Float.parseFloat(UtilAppCommon.out.GrossTotal);
-
-				float installmt_amt = 0;
-				if (UtilAppCommon.in.CURR_MON_AMT.equalsIgnoreCase(""))
-					installmt_amt = 0;
-				else
-					installmt_amt = Float.parseFloat(UtilAppCommon.in.CURR_MON_AMT);
-
-				printerdata3.append(String.format("ENERGY CHARGES : %1.2f\n", engchg));
-				printerdata3.append(String.format("DPS: %1.2f\n", curdps));
-				printerdata3.append(String.format("FIXED/DEMD CHG: %1s\n", fixchg));
-				printerdata3.append(String.format("EXCESS DEMDCHG: %1s\n", excessdemdchg));
-				printerdata3.append(String.format("ELEC. DUTY    : %1s\n", ed));
-				printerdata3.append(String.format("METER RENT    : %1s\n", mr));
-				printerdata3.append(String.format("CGST @ 9%%    :%1s\n", cgst));
-				printerdata3.append(String.format("SGST @ 9%%    :%1s\n", sgst));
-				printerdata3.append(String.format("SHUNT CAP.CHG :%1s\n", shuntcapchg));
-				printerdata3.append(String.format("INSTALLMT AMT :%1s\n", installmt_amt));
-				printerdata3.append(String.format("OTHER CHG     :%1s\n", othrchg));
-				/**
-				 * Adding New lines for tariff change 2018-19
-				 */
-
-
-				/**
-				 * End adding lines for tariff change 2018-19
-				 */
-
-
-				printerdata4.append(String.format("STATE GOVT SUBSIDY:%1s\n", govsubsidy));
-
-				printerdata5.append(String.format("SUB TOTAL(B):%1s\n", subtotb));
-
-
-				printerdata5.append(String.format("*****************************\n"));
-
-				printerdata5.append(String.format("INT. ON SD(C):%1s\n", intonsd));
-				printerdata5.append(String.format("INCENTIVE   :%1s\n", incentive));
-				printerdata5.append(String.format("REMISSION   :%1s\n", rebonmmc));
-
-				printerdata5.append(String.format("TOTAL(A+B+C):%1s\n", grosstot));
-
-				printerdata5.append(String.format("******************************* \n"));
-
-				printerdata5.append(String.format("REBATE :%10s\n", UtilAppCommon.out.Rebate));
-
-
-				printerdata5.append(String.format("AMOUNT PAYABLE  \n"));
-
-				printerdata5.append(String.format("*****************************\n"));
-
-				printerdata5.append(String.format("%s UPTO  रूo :%1s\n ", UtilAppCommon.out.AmtPayableUptoDt, UtilAppCommon.out.AmtPayableUptoAmt));
-
-				printerdata5.append(String.format("%s BY रूo :%1s\n ", UtilAppCommon.out.AmtPayablePYDt, UtilAppCommon.out.AmtPayablePYAmt));
-
-				printerdata5.append(String.format("%s AFTER रूo:%1s\n ", UtilAppCommon.out.AmtPayableAfterDt, UtilAppCommon.out.AmtPayableAfterAmt));
-
-
-				printerdata5.append(String.format("DETAILS OF LAST PAYMENT \n"));
-				printerdata5.append(String.format("*************************** \n"));
-
-
-				printerdata5.append(String.format("LAST PAID AMT:%s\n", UtilAppCommon.out.LastPaymentAmt));
-
-
-				printerdata5.append(String.format("LAST PAID DT:%s\n", UtilAppCommon.out.LastPaidDate));
-
-
-				printerdata5.append(String.format("RECEIPT NO:%s\n", UtilAppCommon.out.ReceiptNumber));
-
-				printerdata5.append(String.format("MTR RDR :%s\n", UtilAppCommon.out.MTR_READER_ID));
-
-				printerdata5.append(String.format("Ver     :%10s \n", UtilAppCommon.strAppVersion.replace(".apk", "")));
-
-
-				strBarcodeData = UtilAppCommon.acctNbr;
-				//printerdata4.append(printer.barcode_Code_39_VIP(strBarcodeData));
-
-				//printerdata4.append(printer.font_Courier_24_VIP(String.format("Consumer Helpline- 1912")));
-				//printerdata4.append(String.format("Consumer Helpline- 1912"));
-				// image
-				printerdata6.append(String.format("Consumer Helpline- 1912 \n\n"));
-				if (UtilAppCommon.out.Company.equalsIgnoreCase("NBPD")) {
-					printerdata6.append(String.format("********************************* \n"));
-					printerdata6.append(String.format("Solar lagaen bijali bill bachaen " + "\n"));
-					printerdata6.append(String.format("****************************** \n"));
-					//printerdata6.append(String.format("For application go to https://www.pmsuryaghar.gov.in \n"));
-				}
-				float flIntDisc = 0;
-				if (!(UtilAppCommon.out.INT_DISC.equalsIgnoreCase("") || UtilAppCommon.out.INT_DISC.equalsIgnoreCase("null"))) {
-					flIntDisc = Float.parseFloat(UtilAppCommon.out.INT_DISC);
-					if (Math.abs(flIntDisc) > 0) {
-						printerdata6.append(String.format("Pay Online रूo.%s   by %s to get रूo.%.2f extra rebate.", UtilAppCommon.out.AmtPayableUptoDt, UtilAppCommon.out.AmtPayableUptoAmt, Math.abs(flIntDisc)));
-						//printerdata6.append(String.format("देय  तिथि  %s तक  विपत्र  राशि  " ,UtilAppCommon.out.AmtPayableUptoDt));
-						//printerdata6.append(String.format("रू %s का ऑनलाईन  भुगतान करेँ ",UtilAppCommon.out.AmtPayableUptoAmt));
-						//printerdata6.append(String.format("एव पाये  रू %s अतिरिक्त  छुट",Math.abs(flIntDisc)));
-					}
-				}
-
-
-				printerdata7.append(String.format("%s\n\n\n", " "));
-
-				String PhotoPath = null;
-				if (UtilAppCommon.in.PRV_MTR_READING_NOTE.toUpperCase() != "RN") {
-					// Print Reading Image
-					byte[] imagedata = null;
-					try {
-                        /*String PhotoDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES)
-                                .getPath()
-                                + "/SBDocs/Photos_Crop"
-                                + "/"
-                                + UtilAppCommon.sdoCode
-                                + "/"
-                                + UtilAppCommon.out.MRU;*/
-						String PhotoDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES + "/SBDocs/Photos/" + UtilAppCommon.in.SUB_DIVISION_CODE + "/" + UtilAppCommon.in.MRU).getPath();
-						strmonth = String.valueOf(Arrays.asList(strMonths).indexOf(UtilAppCommon.out.BillMonth) + 1);
-						PhotoPath = PhotoDir + "/" + UtilAppCommon.in.SCHEDULED_BILLING_DATE.substring(0, 4) +
-								UtilAppCommon.in.SCHEDULED_BILLING_DATE.substring(5, 7) +
-								"_" + UtilAppCommon.out.CANumber + ".jpg";
-
-
-						imagedata = printer.prepareImageDataToPrint_VIP(address, PhotoPath);
-
-
-					} catch (Exception e) {
-						// TODO: handle exception
-						e.printStackTrace();
-					}
-					//hprtPrinterHelper.WriteData(new byte[]{0x1D, 0x21, 0x00});
-					tvsPrintImageAzadi();
-					if (UtilAppCommon.bprintdupl) {
-						//conn.multiLinguallinePrint_ver_2_0_printer(address, String.format("      %s", "DUPLICATE BILL"), 30, Typeface.DEFAULT_BOLD);
-						hprtPrinterHelper.WriteData(String.format("   %s\n", "DUPLICATE BILL").getBytes("UTF-8"));
-					}
-
-					UtilAppCommon.bprintdupl = false;
-
-					//conn.multiLinguallinePrint_ver_2_0_printer(address, String.format("          %s", UtilAppCommon.out.Company+"CL"), 40,Typeface.DEFAULT_BOLD);
-					hprtPrinterHelper.WriteData(String.format("          %s\n", UtilAppCommon.out.Company + "CL").getBytes("UTF-8"));
-
-					hprtPrinterHelper.WriteData(printerdata1.toString().getBytes("UTF-8"));
-					hprtPrinterHelper.WriteData(String.format("CA NUMBER  :%s", UtilAppCommon.out.CANumber).getBytes("UTF-8"));
-
-
-					hprtPrinterHelper.WriteData(printerdata2.toString().getBytes("UTF-8"));
-
-					if (PhotoPath != null && PhotoPath.length() > 0) {
-						tvsPrintImage(PhotoPath);
-					}
-                    /*if(imagedata!=null)
-                    {
-                        conn.printData(imagedata);
-                    }*/
-					hprtPrinterHelper.WriteData(printerdata3.toString().getBytes("UTF-8"));
-					hprtPrinterHelper.WriteData(printerdata4.toString().getBytes("UTF-8"));
-					hprtPrinterHelper.WriteData(printerdata5.toString().getBytes("UTF-8"));
-
-
-					//conn.printData(printerbarcode.toString().getBytes());
-                    /*Bitmap btMap_bar1 = BarcodeCreater.creatBarcode(this, UtilAppCommon.out.CANumber.trim(), widht, height,
-                            true, 1);*/
-					//printerbarcode.append(printer.barcode_Code_39_VIP(UtilAppCommon.out.CANumber));
-
-					//printerbarcode.append(String.format("%s\n","."));
-					try {
-						Bitmap btMap_bar1 = BarcodeCreater.creatBarcode(ActvBillPrinting.this, UtilAppCommon.out.CANumber.trim(), 380, 50,
-								true, 1);
-						btMap_bar1 = BitmapDeleteNoUseSpaceUtil.deleteNoUseWhiteSpace(btMap_bar1);
-						//btMap_bar1 = zoomImg(btMap_bar1, 570, btMap_bar1.getHeight());
-						if (btMap_bar1 == null) {
-							Toast.makeText(ActvBillPrinting.this, "no barcode", Toast.LENGTH_SHORT).show();
-							return;
-						}
-						try {
-							HPRTPrinterHelper.PrintBitmap(btMap_bar1, (byte) 0, (byte) 0, 203);
-							//HPRTPrinterHelper.WriteData(new byte[]{0x1d, 0x0c});
-						} catch (Exception e) {
-							e.printStackTrace();
-						}
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
-					hprtPrinterHelper.WriteData(printerbarcode.toString().getBytes("UTF-8"));
-
-					hprtPrinterHelper.WriteData(printerdata6.toString().getBytes("UTF-8"));
-
-					//conn.multiLinguallinePrint_ver_2_0_printer(address, String.format("      %s","."), 23,Typeface.DEFAULT_BOLD);
-					hprtPrinterHelper.WriteData(printerdata7.toString().getBytes("UTF-8"));
-
-					//	conn.printData(printerdata4.toString().getBytes());
-					Thread.sleep(1000);
-					//conn.closeBT();
-				}
-
-			} catch (Exception e) {
-				// Handle communications error here.
-				e.printStackTrace();
-				Toast.makeText(getApplicationContext(), "English Printing Not Working Properly", Toast.LENGTH_LONG).show();
-				Log.e("", e.getMessage());
-
-			} finally {
-				if (UtilAppCommon.bprintdupl)
-					startActivity(new Intent(getBaseContext(), ActvConsumerNbrInputForDuplicateBill.class));
-				if (UtilAppCommon.blActyncBtn)
-					startActivity(new Intent(getBaseContext(), SyncMobPoleActivity.class));
-//				else if(UtilAppCommon.inSAPSendMsg.equalsIgnoreCase("1") && !UtilAppCommon.blActyncBtn)
-//					startActivity(new Intent(getBaseContext(), PoleMobileActivity.class));
-				else if (UtilAppCommon.billType.equalsIgnoreCase("A"))
-					startActivity(new Intent(getBaseContext(), ActvConsumerNbrInput.class));
-				else if (UtilAppCommon.billType.equalsIgnoreCase("L"))
-					startActivity(new Intent(getBaseContext(), ActvLegacyNbrInput.class));
-				else if (UtilAppCommon.billType.equalsIgnoreCase("S"))
-					startActivity(new Intent(getBaseContext(), ActvSequenceData.class));
-				else if (UtilAppCommon.billType.equalsIgnoreCase("M"))
-					startActivity(new Intent(getBaseContext(), MeterNbrInput.class));
-				else
-					startActivity(new Intent(getBaseContext(), ActvBillingOption.class));
-			}
-
-		}
-	}
-
-
-	class TVSHindi extends Thread {
-
-		private String address = null;
-		BluetoothDevice device = null;
-		HPRTPrinterHelper hprtPrinterHelper = null;
-
-		public TVSHindi(String address) {
-			this.address = address;
-			device = mBluetoothAdapter.getRemoteDevice(address);
-
-			if (mBluetoothAdapter == null) {
-				Toast.makeText(ActvBillPrinting.this, "Bluetooth not available.", Toast.LENGTH_SHORT).show();
-
-				return;
-			}
-			if (!mBluetoothAdapter.isEnabled()) {
-				Toast.makeText(ActvBillPrinting.this,
-						"Bluetooth feature is turned off now...Please turned it on! ", Toast.LENGTH_SHORT).show();
-				if (ActivityCompat.checkSelfPermission(ActvBillPrinting.this, Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
-					// TODO: Consider calling
-					//    ActivityCompat#requestPermissions
-					// here to request the missing permissions, and then overriding
-					//   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-					//                                          int[] grantResults)
-					// to handle the case where the user grants the permission. See the documentation
-					// for ActivityCompat#requestPermissions for more details.
-					return;
-				}
-				mBluetoothAdapter.enable();
-				try {
-					Thread.sleep(1000);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-				return;
-			}
-
-			hprtPrinterHelper = new HPRTPrinterHelper();
-			try {
-				int portOpen = hprtPrinterHelper.PortOpen("Bluetooth," + address);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-
-		}
-
-
-		public void run() {
-			SimpleDateFormat ft = new SimpleDateFormat("dd-MM-yy' TIME:'hh:mm");
-			try {
-
-
-				Toast.makeText(getBaseContext(), BILL, Toast.LENGTH_SHORT)
-						.show();
-
-				char lf = 0x0A;
-				char cr = 0x0D;
-				// char dp = 0x1D;
-				// char nm = 0x13;
-
-				// ////////Print On Paper Start////////////
-				StringBuilder printerdata1 = new StringBuilder();
-				StringBuilder printerdata2 = new StringBuilder();
-				StringBuilder printerdata3 = new StringBuilder();
-				StringBuilder printerdata4 = new StringBuilder();
-				StringBuilder printerdata5 = new StringBuilder();
-				StringBuilder printerdata6 = new StringBuilder();
-				StringBuilder printerdata7 = new StringBuilder();
-				StringBuilder printerbarcode = new StringBuilder();
-				//Print part 1
-
-
-				String bmonth;
-				bmonth = UtilAppCommon.out.BillMonth.substring(0, 4) + UtilAppCommon.out.BillMonth.substring(6, 8);
-
-				printerdata1.append("बिधुत विपत्र माह   : " + bmonth + "\n");
-
-				/**
-				 * Adding lines below for change in tariff 2018-19
-				 */
-				String gstNo = "";
-				if (UtilAppCommon.out.Company.equalsIgnoreCase("NBPD")) {
-					gstNo = "10AAECN1588M2ZB";
-				} else if (UtilAppCommon.out.Company.equalsIgnoreCase("SBPD")) {
-					gstNo = "10AASCS2207G2ZN";
-				}
-
-
-				printerdata1.append(String.format("जीएसटीआईएन:%s\n", gstNo));
-
-				String hindiMessage = "प्रिय " + UtilAppCommon.out.Name + ",\n" + " कृपया विदयुत बकाया राशि\nरू "
-						+ UtilAppCommon.out.AmtPayableUptoAmt.trim()
-						+ " का भुगतान सुचना\nप्राप्ति के 15 दिनों के भीतर\nसुनिश्चित करें अन्यथा विदयुत \nअधिनियम 2003 के धारा 56 के\nआलोक में दि."
-						+ UtilAppCommon.out.AmtPayableUptoDt.trim() + "\nके पश्चात विदयुत सम्बन्ध\nविच्छेदित कर दिया जाएगा|" + "\n" +
-						"                 स0 वि0 अभि0" + "\n";
-				try {
-
-					if (Double.parseDouble(UtilAppCommon.out.ArrearSubTotal_A) > 1000) {
-						printerdata1.append((String.format(
-								hindiMessage)));
-						//	("प्रिय " + bill.get_CNAME().trim() + ",\n" + "कृपया विदयुत बकाया राशि रू" + bill.get_PROMPT_AMT().trim() + " का\nभुगतान सुचना प्राप्ति के 15 दिनों के\nभीतर सुनिश्चित करें अन्यथा विदयुत \nअधिनियम 2003 के धारा 56 के आलोक में दि." + bill.get_UPTO_DATE().trim() + " के पश्चात विदयुत\nसम्बन्ध विच्छेदित कर दिया जाएगा।" + "\n" + "                 स0 वि0 अभि0" + "\n")
-					}
-				} catch (NumberFormatException e) {
-					try {
-						if (Float.parseFloat(UtilAppCommon.out.ArrearSubTotal_A) > 1000) {
-							printerdata1.append((String.format(hindiMessage)));
-						}
-					} catch (NumberFormatException e1) {
-
-					}
-				}
-
-
-				//* End adding lines for tariff change 2018-19
-
-				printerdata1.append(String.format("********************************\n"));
-
-
-				printerdata1.append(String.format("दिनांक     : %s\n", UtilAppCommon.out.REC_DATE_TIME));
-				printerdata1.append(String.format("दॆय तिथि   :  %s\n", UtilAppCommon.out.AmtPayableUptoDt));
-
-				printerdata1.append(String.format("कनेक्शन का  विवरण  \n"));
-				printerdata1.append(String.format("********************************\n"));
-				printerdata1.append(String.format("विपत्र संख्या  : %s\n", UtilAppCommon.out.BillNo));
-				printerdata1.append(String.format("प्रमंडल/कोड  :%s\n", UtilAppCommon.out.Division));
-				printerdata1.append(String.format("अवर प्रमंडल  :%s\n", UtilAppCommon.out.SubDivision));
-				printerdata1.append(String.format("उपभोक्ता संख्या:%s\n", UtilAppCommon.out.CANumber));
-				printerdata1.append(String.format("कंज्युमर आईडी :%s\n", UtilAppCommon.out.LegacyNumber));
-				printerdata1.append(String.format("एम.आर.यू संख्या :%s\n", UtilAppCommon.out.MRU));
-				printerdata1.append(String.format("नाम :%s\n", UtilAppCommon.in.CONSUMER_NAME));
-
-				int alen = 0;
-				alen = UtilAppCommon.out.Address.length();
-				String addr1 = "";
-				String addr2 = "";
-				if (alen > 24) {
-					addr1 = UtilAppCommon.out.Address.substring(0, 24);
-					if (alen > 48)
-						addr2 = UtilAppCommon.out.Address.substring(24, 48);
-					else
-						addr2 = UtilAppCommon.out.Address.substring(24, alen);
-				} else
-					addr1 = UtilAppCommon.out.Address;
-
-				printerdata1.append(String.format("पता : "));
-				printerdata1.append(String.format(" %s\n", addr1));
-				printerdata1.append(String.format("%s\n", addr2));
-				printerdata1.append(String.format("मोबाइल संख्या:%s\n", UtilAppCommon.in.METER_CAP));
-				printerdata1.append(String.format("क्षेत्र        :%s\n", UtilAppCommon.out.Area_type));
-				printerdata1.append(String.format("पोल कोड    :%s\n", UtilAppCommon.out.PoleNo));
-				if (!UtilAppCommon.in.PWR_FACTOR.equalsIgnoreCase(""))
-					printerdata1.append(String.format("मीटर संख्या :%s फेज:%s\n", UtilAppCommon.out.MtrNo + ", " + UtilAppCommon.in.PWR_FACTOR, UtilAppCommon.out.Phase));
-				else
-					printerdata1.append(String.format("मीटर संख्या :%s फेज:%s\n", UtilAppCommon.out.MtrNo, UtilAppCommon.out.Phase));
-
-				printerdata1.append(String.format("मीटर ओनर    : %s\n", UtilAppCommon.out.MtrMake
-						.equalsIgnoreCase("C") ? "Company" : UtilAppCommon.out.MtrMake
-						.equalsIgnoreCase("O") ? "Consumer" : ""));
-				printerdata1.append(String.format("उपभोक्ता श्रेणी  :%s\n", UtilAppCommon.out.Category));
-
-				/*String CD = "";
-				String CD1 = "";
-				String CD2 = "";
-				float val = 0;
-				if (UtilAppCommon.out.SanctLoad.length() > 0) {
-					val = Float.parseFloat(UtilAppCommon.out.SanctLoad);
-					CD = val + " KW";
-					CD1 = "";
-					CD2 = "";
-				} else if (UtilAppCommon.out.ConnectedLoad.length() > 0) {
-					val = Float.parseFloat(UtilAppCommon.out.ConnectedLoad);
-					CD = "";
-					CD1 = val + " HP";
-					CD2 = "";
-				} else if (UtilAppCommon.out.CD.length() > 0) {
-					val = Float.parseFloat(UtilAppCommon.out.CD);
-					CD = "";
-					CD1 = "";*/
-					/**
-					 * Adding lines for tariff change 2018-19
-					 */
-				String CD2 = "";
-				float val = 0;
-				double result = 0.0;
-				Log.v("ActvBillPrinting", "************************Printing Stage Checkpoint 11");
-				if (UtilAppCommon.out.Category.equalsIgnoreCase("NDS-IID(B)")
-						|| UtilAppCommon.out.Category.equalsIgnoreCase("IAS-IIM")
-						|| UtilAppCommon.out.Category.equalsIgnoreCase("LTEV")
-						|| UtilAppCommon.out.Category.equalsIgnoreCase("LTIS-ID")
-						|| UtilAppCommon.out.Category.equalsIgnoreCase("LTIS-IID")
-						|| UtilAppCommon.out.Category.equalsIgnoreCase("PUBWW")) {
-					Log.v("ActvBillPrinting", "************************Printing Stage Checkpoint 12");
-					result = (double) (Double.parseDouble(UtilAppCommon.out.CD) / 0.9f);
-					CD2 = String.format("%.2f", result) + "KVA";
-					Log.v("ActvBillPrinting", "************************Printing Stage Checkpoint 13");
-				} else if (UtilAppCommon.out.Category.equalsIgnoreCase("HGN")
-						|| UtilAppCommon.out.Category.equalsIgnoreCase("IAS-IM")
-						|| UtilAppCommon.out.Category.equalsIgnoreCase("IAS-IU")) {
-					result = (double) (Double.parseDouble(UtilAppCommon.out.SanctLoad));
-					CD2 = result + " HP";
-				} else if (UtilAppCommon.out.Category.equalsIgnoreCase("DS-IID")
-						|| UtilAppCommon.out.Category.equalsIgnoreCase("DS-IIID")
-						|| UtilAppCommon.out.Category.equalsIgnoreCase("NDS-IID(A)")) {
-					result = (double) (Double.parseDouble(UtilAppCommon.out.CD));
-					CD2 = result + " KW";
-				}else {
-					/**
-					 * End ading lines for tariff change
-					 */
-					result = (double) (Double.parseDouble(UtilAppCommon.out.SanctLoad));
-					Log.v("ActvBillPrinting", "************************Printing Stage Checkpoint 14");
-					CD2 = result + " KW";
-				}
-
-
-				//printerdata1.append(String.format("स्वीकृत भार   :%s \n", CD, CD1));
-				printerdata1.append(String.format("संविदा मांग    :%s\n", CD2));
-				printerdata1.append(String.format("जमानत की जमा राशि:%s\n", UtilAppCommon.out.SD));
-
-				String billdays;
-
-				if (UtilAppCommon.out.Type.equalsIgnoreCase("(PL Adj.) Actual")) {
-					billdays = UtilAppCommon.out.BillDays + "(" + UtilAppCommon.out.MESSAGE10 + ")";
-				} else {
-					billdays = UtilAppCommon.out.BillDays;
-				}
-				printerdata2.append(String.format("\nकुल विपत्र दीवस   :%s\n", billdays));
-				printerdata2.append(String.format("********************************\n"));
-				printerdata2.append(String.format("मान पठन स्थिति  \n"));
-				//printerdata2.append(String.format("मीटर   पठन  का  विवरण :\n"));
-				printerdata2.append(String.format(" -----------------------------\n"));
-				printerdata2.append(String.format("           पूर्व       वर्तमान\n"));
-				printerdata2.append(String.format("पठन      : %s     %s\n", UtilAppCommon.out.PreviusReading, UtilAppCommon.out.CurrentReading));
-				printerdata2.append(String.format("दिनांक : %s  %s\n", UtilAppCommon.out.PrevusMtrRdgDt, UtilAppCommon.out.CurrentMtrRdgDt));
-				if (!UtilAppCommon.out.PrevusMtrRdgDt.equalsIgnoreCase("0000.00.00"))
-					printerdata2.append(String.format("पठन स्थिति   : %s          %s \n", UtilAppCommon.out.PreviusMtrReadingNote, UtilAppCommon.out.CurrentMtrReadingNote));
-
-				if (!UtilAppCommon.in.MONTH_SEASONAL.equalsIgnoreCase("")) {
-					printerdata2.append(String.format("******************************* \n"));
-					printerdata2.append(String.format("ब्ल्यूटुथ पठन स्थिति  :\n"));
-					printerdata2.append(String.format("ब्ल्यूटुथ  मीटर   पठन  का  विवरण :\n"));
-					printerdata2.append(String.format(" ------------------------------\n"));
-					printerdata2.append(String.format("       पूर्व         वर्तमान  \n"));
-					printerdata2.append(String.format("पठन      : %s     %s \n", UtilAppCommon.in.PREV_KWH_CYCLE1, UtilAppCommon.SAPBlueIn.CurrentReadingKwh));
-					printerdata2.append(String.format("दिनांक : %s  %s \n", UtilAppCommon.in.DATE_1, UtilAppCommon.out.CurrentMtrRdgDt));
-					if (!UtilAppCommon.in.DATE_1.equalsIgnoreCase("0000.00.00"))
-						printerdata2.append(String.format("बस्तु स्थिति   : %s     %s \n", "OK", "OK"));
-				}
-
-				// 2nd block after image
-
-
-				float mf = 0, consump = 0;
-				//mf=Float.parseFloat(UtilAppCommon.out.MF);
-				if (!UtilAppCommon.out.MF.equalsIgnoreCase(""))
-					mf = Float.parseFloat(UtilAppCommon.out.MF);
-				consump = Float.parseFloat(UtilAppCommon.out.Consumption);
-
-				printerdata3.append(String.format("गुणक   : %.2f  खपत :%.2f\n", mf, consump));
-				printerdata3.append(String.format("दर्ज मांग  :%s   पीएफ्  :%s\n", UtilAppCommon.out.RecordedDemd, UtilAppCommon.out.PowerFactor));
-
-
-				float mmcunits = 0, avg = 0;
-				if (UtilAppCommon.out.Category.equals("DS-II") || UtilAppCommon.out.Category.equals("NDS-IM")) {
-					mmcunits = 0;
-				} else {
-					mmcunits = Float.parseFloat(UtilAppCommon.out.MMCUnits);
-				}
-
-
-				if (UtilAppCommon.out.CurrentMtrReadingNote.equalsIgnoreCase("OK")) {
-					avg = 0;
-				} else {
-					avg = Float.parseFloat(UtilAppCommon.out.Average);
-
-				}
-
-				printerdata3.append(String.format("मासिक न्युनतम प्रभार :%.2f \n", mmcunits));
-				printerdata3.append(String.format("औसत   :%.2f \nबिल इकाई  :%s\n", avg, UtilAppCommon.out.BilledUnits));
-				printerdata3.append(String.format("विपत्र का आधार  :%s \n", UtilAppCommon.out.Type));
-				printerdata3.append(String.format("******************************\n"));
-				printerdata3.append(String.format("     बकाया का विवरण \n"));
-
-				printerdata3.append(String.format(" -----------------------------\n"));
-				float pmtonacct = 0, arrengdue = 0, arrdps = 0, arrothr = 0;
-				pmtonacct = Float.parseFloat(UtilAppCommon.out.PaymentOnAccount);
-				arrengdue = Float.parseFloat(UtilAppCommon.out.ArrearEnergyDues);
-				arrdps = Float.parseFloat(UtilAppCommon.out.ArrearDPs);
-				arrothr = Float.parseFloat(UtilAppCommon.out.ArrearOthers);
-
-
-				printerdata3.append(String.format("अग्रिम जमा :%1.2f\n", pmtonacct));
-				printerdata3.append(String.format("ऊर्जा  बकाया:%1.2f\n", arrengdue));
-				printerdata3.append(String.format("विलंब अधिभार बकाया :%1.2f\n", arrdps));
-				printerdata3.append(String.format("अन्य  प्रभार :%1.2f\n", arrothr));
-				printerdata3.append(String.format("कुल  बकाया (अ):%1.2f\n", Float.parseFloat(UtilAppCommon.out.ArrearSubTotal_A)));
-
-				printerdata3.append(String.format("******************************\n"));
-				printerdata3.append(String.format("वर्तमान   बिपत्र का  विवरण\n"));
-				printerdata3.append(String.format("****************************** \n"));
-
-				float engchg = 0;
-				engchg = Float.parseFloat(UtilAppCommon.out.CurrentEnergyCharges);
-				float fixchg = 0, curdps = 0, excessdemdchg = 0, ed = 0, mr = 0, shuntcapchg = 0, othrchg = 0, subtotb = 0, govsubsidy = 0, cgst = 0, sgst = 0;
-				;
-				float intonsd = 0, incentive = 0, rebonmmc = 0, grosstot = 0;
-
-				curdps = Float.parseFloat(UtilAppCommon.out.CurrentMonthDps);
-				fixchg = Float.parseFloat(UtilAppCommon.out.FixDemdCharge);
-				excessdemdchg = Float.parseFloat(UtilAppCommon.out.ExcessDemdCharge);
-				ed = Float.parseFloat(UtilAppCommon.out.ElectricityDuty);
-				mr = Float.parseFloat(UtilAppCommon.out.MeterRent);
-/**
- * Adding lines for tariff change 2018-19
- */
-
-				cgst = Float.parseFloat(UtilAppCommon.out.METER_CGST);
-				sgst = Float.parseFloat(UtilAppCommon.out.METER_SGST);
-				/**
-				 * End ading lines for tariff change
-				 */
-				shuntcapchg = Float.parseFloat(UtilAppCommon.out.ShauntCapCharge);
-				othrchg = Float.parseFloat(UtilAppCommon.out.OtherCharge);
-				govsubsidy = Float.parseFloat(UtilAppCommon.out.GOVT_SUB);
-				subtotb = Float.parseFloat(UtilAppCommon.out.SubTotal_B);
-				if (UtilAppCommon.out.InterestOnSD_C.equalsIgnoreCase(""))
-					intonsd = 0;
-				else
-					intonsd = Float.parseFloat(UtilAppCommon.out.InterestOnSD_C);
-				if (UtilAppCommon.out.Incentive.equalsIgnoreCase(""))
-					incentive = 0;
-				else
-					incentive = Float.parseFloat(UtilAppCommon.out.Incentive);
-
-				rebonmmc = Float.parseFloat(UtilAppCommon.out.RebateOnMMC);
-				grosstot = Float.parseFloat(UtilAppCommon.out.GrossTotal);
-
-				float installmt_amt = 0;
-				if (UtilAppCommon.in.CURR_MON_AMT.equalsIgnoreCase(""))
-					installmt_amt = 0;
-				else
-					installmt_amt = Float.parseFloat(UtilAppCommon.in.CURR_MON_AMT);
-
-				printerdata3.append(String.format("ऊर्जा शुल्क   : %1.2f\n", engchg));
-				printerdata3.append(String.format("वर्तमान विलंब अधिभार: %1.2f\n", curdps));
-				printerdata3.append(String.format("फीक्सड/डिमांड प्रभार: %1s\n", fixchg));
-				printerdata3.append(String.format("आधिक्य डिमांड प्रभार: %1s\n", excessdemdchg));
-				printerdata3.append(String.format("विदयुत  शुल्क    : %1s\n", ed));
-				printerdata3.append(String.format("मीटर किराया     : %1s\n", mr));
-				printerdata3.append(String.format("सीजीएसटी @ 9%% :%1s\n", cgst));
-				printerdata3.append(String.format("एसजीएसटी @ 9%% :%1s\n", sgst));
-				printerdata3.append(String.format("कैपिसिटर प्रभार   :%1s\n", shuntcapchg));
-				printerdata3.append(String.format("किस्त की राशि   :%1s\n", installmt_amt));
-				printerdata3.append(String.format("अन्य शुल्क      :%1s\n", othrchg));
-				/**
-				 * Adding New lines for tariff change 2018-19
-				 */
-
-
-				/**
-				 * End adding lines for tariff change 2018-19
-				 */
-
-
-				printerdata4.append(String.format("राज्य सरकार अनुदान :%1s\n", govsubsidy));
-
-				printerdata5.append(String.format("कुल अभिनिर्धारण (बी):%1s\n", subtotb));
-
-
-				printerdata5.append(String.format("*****************************\n"));
-
-				printerdata5.append(String.format("जमानत राशि पर सूद (सी) :%1s\n", intonsd));
-				printerdata5.append(String.format("इन्सेंटिव्स     :%1s\n", incentive));
-				printerdata5.append(String.format("रीमिशन      :%1s\n", rebonmmc));
-
-				printerdata5.append(String.format("उप-जोड(ए+बी+सी):%1s\n", grosstot));
-
-				printerdata5.append(String.format("******************************* \n"));
-
-				printerdata5.append(String.format("छूट की राशि   :%10s\n", UtilAppCommon.out.Rebate));
-
-
-				printerdata5.append(String.format("कूल मांग    \n"));
-
-				printerdata5.append(String.format("*****************************\n"));
-
-				printerdata5.append(String.format("%s तक  रूo :%1s\n ", UtilAppCommon.out.AmtPayableUptoDt, UtilAppCommon.out.AmtPayableUptoAmt));
-
-				printerdata5.append(String.format("%s तक रूo :%1s\n ", UtilAppCommon.out.AmtPayablePYDt, UtilAppCommon.out.AmtPayablePYAmt));
-
-				printerdata5.append(String.format("%s पश्चात रूo:%1s\n ", UtilAppCommon.out.AmtPayableAfterDt, UtilAppCommon.out.AmtPayableAfterAmt));
-
-
-				printerdata5.append(String.format("पीछले भुगतान का  विवरण    \n"));
-				printerdata5.append(String.format("*************************** \n"));
-
-
-				printerdata5.append(String.format("भुगतान की राशि  :%s\n", UtilAppCommon.out.LastPaymentAmt));
-
-
-				printerdata5.append(String.format("भुगतान दिनांक  :%s\n", UtilAppCommon.out.LastPaidDate));
-
-
-				printerdata5.append(String.format("रसीद  संख्या  :%s\n", UtilAppCommon.out.ReceiptNumber));
-
-				printerdata5.append(String.format("मीटर रीडर आईडी :%s\n", UtilAppCommon.out.MTR_READER_ID));
-
-				printerdata5.append(String.format("Ver     :%10s \n", UtilAppCommon.strAppVersion.replace(".apk", "")));
-
-
-				strBarcodeData = UtilAppCommon.acctNbr;
-				//printerdata4.append(printer.barcode_Code_39_VIP(strBarcodeData));
-
-				//printerdata4.append(printer.font_Courier_24_VIP(String.format("Consumer Helpline- 1912")));
-				//printerdata4.append(String.format("Consumer Helpline- 1912"));
-				// image
-				printerdata6.append(String.format("Consumer Helpline- 1912 \n\n"));
-				float flIntDisc = 0;
-				if (!(UtilAppCommon.out.INT_DISC.equalsIgnoreCase("") || UtilAppCommon.out.INT_DISC.equalsIgnoreCase("null"))) {
-					flIntDisc = Float.parseFloat(UtilAppCommon.out.INT_DISC);
-					if (Math.abs(flIntDisc) > 0) {
-						//printerdata6.append(String.format("देय  तिथि  %s तक  विपत्र  राशि  रू %s का ऑनलाईन  भुगतान करेँ एव पाये  "
-						//		+ " रू %s अतिरिक्त  छुट",UtilAppCommon.out.AmtPayableUptoDt, UtilAppCommon.out.AmtPayableUptoAmt, Math.abs(flIntDisc)));
-						printerdata6.append(String.format("देय  तिथि  %s तक  विपत्र  राशि  ", UtilAppCommon.out.AmtPayableUptoDt));
-						printerdata6.append(String.format("रू %s का ऑनलाईन  भुगतान करेँ ", UtilAppCommon.out.AmtPayableUptoAmt));
-						printerdata6.append(String.format("एव पाये  रू %s अतिरिक्त  छुट", Math.abs(flIntDisc)));
-					}
-				}
-
-
-				printerdata7.append(String.format("%s\n\n\n", " "));
-
-				String PhotoPath = null;
-				if (UtilAppCommon.in.PRV_MTR_READING_NOTE.toUpperCase() != "RN") {
-					// Print Reading Image
-					byte[] imagedata = null;
-					try {
-                       /* String PhotoDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES)
-                                .getPath()
-                                + "/SBDocs/Photos_Crop"
-                                + "/"
-                                + UtilAppCommon.sdoCode
-                                + "/"
-                                + UtilAppCommon.out.MRU;*/
-						String PhotoDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES)
-								.getPath() + "/SBDocs/Photos/" + UtilAppCommon.in.SUB_DIVISION_CODE + "/" + UtilAppCommon.in.MRU;
-
-
-						strmonth = String.valueOf(Arrays.asList(strMonths).indexOf(UtilAppCommon.out.BillMonth) + 1);
-						PhotoPath = PhotoDir + "/" + UtilAppCommon.in.SCHEDULED_BILLING_DATE.substring(0, 4) +
-								UtilAppCommon.in.SCHEDULED_BILLING_DATE.substring(5, 7) +
-								"_" + UtilAppCommon.out.CANumber + ".jpg";
-
-						//imagedata=printer.prepareImageDataToPrint_VIP(address,PhotoPath);
-
-					} catch (Exception e) {
-						// TODO: handle exception
-						e.printStackTrace();
-					}
-					//hprtPrinterHelper.WriteData(new byte[]{0x1D, 0x21, 0x00});
-					tvsPrintImageAzadi();
-
-					if (UtilAppCommon.bprintdupl) {
-						//conn.multiLinguallinePrint_ver_2_0_printer(address, String.format("      %s", "DUPLICATE BILL"), 30, Typeface.DEFAULT_BOLD);
-						hprtPrinterHelper.WriteData(String.format("      %s\n", "DUPLICATE BILL").getBytes("UTF-8"));
-					}
-
-					UtilAppCommon.bprintdupl = false;
-
-					//conn.multiLinguallinePrint_ver_2_0_printer(address, String.format("          %s", UtilAppCommon.out.Company+"CL"), 40,Typeface.DEFAULT_BOLD);
-					hprtPrinterHelper.WriteData(String.format("          %s\n", UtilAppCommon.out.Company + "CL").getBytes("UTF-8"));
-
-					hprtPrinterHelper.WriteData(printerdata1.toString().getBytes("UTF-8"));
-					hprtPrinterHelper.WriteData(String.format("खाता संख्या     :%s\n", UtilAppCommon.out.CANumber).getBytes("UTF-8"));
-
-
-					hprtPrinterHelper.WriteData(printerdata2.toString().getBytes("UTF-8"));
-
-					if (PhotoPath != null && PhotoPath.length() > 0) {
-						tvsPrintImage(PhotoPath);
-					}
-                    /*if(imagedata!=null)
-                    {
-                        conn.printData(imagedata);
-                    }*/
-					hprtPrinterHelper.WriteData(printerdata3.toString().getBytes("UTF-8"));
-					hprtPrinterHelper.WriteData(printerdata4.toString().getBytes("UTF-8"));
-					hprtPrinterHelper.WriteData(printerdata5.toString().getBytes("UTF-8"));
-
-
-					//conn.printData(printerbarcode.toString().getBytes());
-                    /*Bitmap btMap_bar1 = BarcodeCreater.creatBarcode(this, UtilAppCommon.out.CANumber.trim(), widht, height,
-                            true, 1);*/
-					//printerbarcode.append(printer.barcode_Code_39_VIP(UtilAppCommon.out.CANumber));
-
-					//printerbarcode.append(String.format("%s\n","."));
-					try {
-						Bitmap btMap_bar1 = BarcodeCreater.creatBarcode(ActvBillPrinting.this, UtilAppCommon.out.CANumber.trim(), 380, 50,
-								true, 1);
-						btMap_bar1 = BitmapDeleteNoUseSpaceUtil.deleteNoUseWhiteSpace(btMap_bar1);
-						//btMap_bar1 = zoomImg(btMap_bar1, 570, btMap_bar1.getHeight());
-						if (btMap_bar1 == null) {
-							Toast.makeText(ActvBillPrinting.this, "no barcode", Toast.LENGTH_SHORT).show();
-							return;
-						}
-						try {
-							HPRTPrinterHelper.PrintBitmap(btMap_bar1, (byte) 0, (byte) 0, 203);
-							//HPRTPrinterHelper.WriteData(new byte[]{0x1d, 0x0c});
-						} catch (Exception e) {
-							e.printStackTrace();
-						}
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
-					hprtPrinterHelper.WriteData(printerbarcode.toString().getBytes("UTF-8"));
-
-					hprtPrinterHelper.WriteData(printerdata6.toString().getBytes("UTF-8"));
-
-					//conn.multiLinguallinePrint_ver_2_0_printer(address, String.format("      %s","."), 23,Typeface.DEFAULT_BOLD);
-					hprtPrinterHelper.WriteData(printerdata7.toString().getBytes("UTF-8"));
-
-					//	conn.printData(printerdata4.toString().getBytes());
-					Thread.sleep(1000);
-
-				}
-
-			} catch (Exception e) {
-				// Handle communications error here.
-				e.printStackTrace();
-				Toast.makeText(getApplicationContext(), "Hindi Printing Not Working Properly", Toast.LENGTH_LONG).show();
-				Log.e("", e.getMessage());
-
-			} finally {
-				if (UtilAppCommon.bprintdupl)
-					startActivity(new Intent(getBaseContext(), ActvConsumerNbrInputForDuplicateBill.class));
-				if (UtilAppCommon.blActyncBtn)
-					startActivity(new Intent(getBaseContext(), SyncMobPoleActivity.class));
-//				else if(UtilAppCommon.inSAPSendMsg.equalsIgnoreCase("1") && !UtilAppCommon.blActyncBtn)
-//					startActivity(new Intent(getBaseContext(), PoleMobileActivity.class));
-				else if (UtilAppCommon.billType.equalsIgnoreCase("A"))
-					startActivity(new Intent(getBaseContext(), ActvConsumerNbrInput.class));
-				else if (UtilAppCommon.billType.equalsIgnoreCase("L"))
-					startActivity(new Intent(getBaseContext(), ActvLegacyNbrInput.class));
-				else if (UtilAppCommon.billType.equalsIgnoreCase("S"))
-					startActivity(new Intent(getBaseContext(), ActvSequenceData.class));
-				else if (UtilAppCommon.billType.equalsIgnoreCase("M"))
-					startActivity(new Intent(getBaseContext(), MeterNbrInput.class));
-				else
-					startActivity(new Intent(getBaseContext(), ActvBillingOption.class));
-			}
-
-		}
-
-
-		public void showTVSPrintBarCode(HPRTPrinterHelper hprtPrinterHelper, String conId) {
-			Bitmap btMap_bar1 = BarcodeCreater.creatBarcode(ActvBillPrinting.this, conId.trim(), 380, 50,
-					true, 1);
-
-
-			btMap_bar1 = BitmapDeleteNoUseSpaceUtil.deleteNoUseWhiteSpace(btMap_bar1);
-			//btMap_bar1 = zoomImg(btMap_bar1, 570, btMap_bar1.getHeight());
-			if (btMap_bar1 == null) {
-				Toast.makeText(ActvBillPrinting.this, "no barcode", Toast.LENGTH_SHORT).show();
-				return;
-			}
-			try {
-				hprtPrinterHelper.PrintBitmap(btMap_bar1, (byte) 0, (byte) 0, 203);
-				//HPRTPrinterHelper.WriteData(new byte[]{0x1d, 0x0c});
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-
-		}
-
-
-	}
-
-	class TVSHindi2 extends Thread {
-
-		private String address = null;
-		BluetoothDevice device = null;
-		HPRTPrinterHelper hprtPrinterHelper = null;
-
-		public TVSHindi2(String address) {
-			this.address = address;
-			device = mBluetoothAdapter.getRemoteDevice(address);
-
-			if (mBluetoothAdapter == null) {
-				Toast.makeText(ActvBillPrinting.this, "Bluetooth not available.", Toast.LENGTH_SHORT).show();
-
-				return;
-			}
-			if (!mBluetoothAdapter.isEnabled()) {
-				Toast.makeText(ActvBillPrinting.this,
-						"Bluetooth feature is turned off now...Please turned it on! ", Toast.LENGTH_SHORT).show();
-				if (ActivityCompat.checkSelfPermission(ActvBillPrinting.this, Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
-					// TODO: Consider calling
-					//    ActivityCompat#requestPermissions
-					// here to request the missing permissions, and then overriding
-					//   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-					//                                          int[] grantResults)
-					// to handle the case where the user grants the permission. See the documentation
-					// for ActivityCompat#requestPermissions for more details.
-					return;
-				}
-				mBluetoothAdapter.enable();
-				try {
-					Thread.sleep(1000);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-				return;
-			}
-
-			hprtPrinterHelper = new HPRTPrinterHelper();
-			try {
-				int portOpen = hprtPrinterHelper.PortOpen("Bluetooth," + address);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-
-		}
-
-
-
-		public void run() {
-			try{
-					tvsPrintImageAzadi();
-
-
-
-					//	conn.printData(printerdata4.toString().getBytes());
-					Thread.sleep(1000);
-
-
-
-			} catch (Exception e) {
-				// Handle communications error here.
-				e.printStackTrace();
-				Toast.makeText(getApplicationContext(), "Hindi Printing Not Working Properly",	Toast.LENGTH_LONG).show();
-				Log.e("", e.getMessage());
-
-			}
-
-			finally {
-				if (UtilAppCommon.bprintdupl)
-					startActivity(new Intent(getBaseContext(), ActvConsumerNbrInputForDuplicateBill.class));
-				if(UtilAppCommon.blActyncBtn)
-					startActivity(new Intent(getBaseContext(), SyncMobPoleActivity.class));
-//				else if(UtilAppCommon.inSAPSendMsg.equalsIgnoreCase("1") && !UtilAppCommon.blActyncBtn)
-//					startActivity(new Intent(getBaseContext(), PoleMobileActivity.class));
-				else if(UtilAppCommon.billType.equalsIgnoreCase("A"))
-					startActivity(new Intent(getBaseContext(), ActvConsumerNbrInput.class));
-				else if(UtilAppCommon.billType.equalsIgnoreCase("L"))
-					startActivity(new Intent(getBaseContext(), ActvLegacyNbrInput.class));
-				else if(UtilAppCommon.billType.equalsIgnoreCase("S"))
-					startActivity(new Intent(getBaseContext(), ActvSequenceData.class));
-				else if(UtilAppCommon.billType.equalsIgnoreCase("M"))
-					startActivity(new Intent(getBaseContext(), MeterNbrInput.class));
-				else
-					startActivity(new Intent(getBaseContext(), ActvBillingOption.class));
-			}
-
-		}
-
-
-		public  void showTVSPrintBarCode(HPRTPrinterHelper hprtPrinterHelper, String conId) {
-			Bitmap btMap_bar1 = BarcodeCreater.creatBarcode(ActvBillPrinting.this, conId.trim(), 380, 50,
-					true, 1);
-
-
-			btMap_bar1 = BitmapDeleteNoUseSpaceUtil.deleteNoUseWhiteSpace(btMap_bar1);
-			//btMap_bar1 = zoomImg(btMap_bar1, 570, btMap_bar1.getHeight());
-			if (btMap_bar1 == null) {
-				Toast.makeText(ActvBillPrinting.this, "no barcode", Toast.LENGTH_SHORT).show();
-				return;
-			}
-			try {
-				hprtPrinterHelper.PrintBitmap(btMap_bar1, (byte) 0, (byte) 0, 203);
-				//HPRTPrinterHelper.WriteData(new byte[]{0x1d, 0x0c});
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-
-		}
-
-
-	}
-
-	public void tvsPrintImageAzadi() {
+	public void tvsPrintImageAzadi(int imageId) {
 
 		BitmapFactory.Options bitmapOptions = new BitmapFactory.Options();
-		Bitmap bmp_print = BitmapFactory.decodeResource(getResources(), R.drawable.chunav);
+		Bitmap bmp_print = BitmapFactory.decodeResource(getResources(), imageId);
 		bmp_print = getResizedBitmap(bmp_print, 400);
 
 		ByteArrayOutputStream out = new ByteArrayOutputStream();

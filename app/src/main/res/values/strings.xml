@@ -3,11 +3,14 @@
     <string name="home">Main</string>
 
     <!--Production-->
-    <string name="app_name">BMB (B4.1.9)</string>
+ <!--   <string name="app_name">BMB (B4.1.9)</string>
     <string name="app_version"></string>
     <string name="appcode_version">C4.1B4.1.8.9</string>
-    <string name="app_fileversion">VP4.1.9.apk</string>
-
+    <string name="app_fileversion">VP4.1.9.apk</string>-->
+       <string name="app_name">BMB (B4.2.1)</string>
+       <string name="app_version"></string>
+       <string name="appcode_version">C4.1B4.2.0.1</string>
+       <string name="app_fileversion">VP4.2.1.apk</string>
     <!--Testing-->
    <!--<string name="app_name">BMB (B4.0.1)</string>
     <string name="app_version">B4.0.1</string>
