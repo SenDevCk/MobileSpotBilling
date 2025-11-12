@@ -3704,7 +3704,7 @@ public class ActvBillPrinting extends AppCompatActivity {
 						"SGST @ 9%%      : %12s\n", UtilAppCommon.out.METER_SGST)));
 
 				/**
-				 * End adding lines for tariff change 2018-19 ch
+				 * End adding lines for tariff change 2018-19
 				 */
 				printerdata2.append(printer.font_Courier_32_VIP(String.format(
 						"SHUNT CAP.CHG  : %12s\n", UtilAppCommon.out.ShauntCapCharge)));
