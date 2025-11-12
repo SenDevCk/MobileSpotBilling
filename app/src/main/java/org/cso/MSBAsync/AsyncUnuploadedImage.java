@@ -76,7 +76,7 @@ public class AsyncUnuploadedImage extends AsyncTask<String, Void, String>  {
                     }else{
                         img_str="";
                     }
-                    Log.e("AsyncUploadImage",img_str);
+                    //Log.e("AsyncUploadImage",img_str);
                     glbVar = "0";
                     //String fileName = imageFiles[jcntr].getName();
                     //Log.i("Unuploaded Img", "Image File Name ==>> " + fileName);

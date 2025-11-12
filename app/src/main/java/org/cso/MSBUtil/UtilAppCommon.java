@@ -1,21 +1,12 @@
 package org.cso.MSBUtil;
 
-import java.io.BufferedReader;
-import java.io.DataInputStream;
+
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.TimeZone;
-
-
-
-import com.google.gson.Gson;
 import com.itextpdf.text.Chunk;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
@@ -30,9 +21,6 @@ import org.cso.MSBModel.StructSAPBlueInput;
 import org.cso.MSBModel.StructSAPInput;
 import org.cso.MSBModel.StructUserInfo;
 import org.cso.MSBModel.StructSlabInfo;
-//import org.cso.MobileSpotBilling.BuildConfig;
-import org.cso.MobileSpotBilling.R;
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.database.Cursor;

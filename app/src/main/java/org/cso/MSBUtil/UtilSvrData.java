@@ -20,7 +20,9 @@ public class UtilSvrData {
 	/*private String HostName = "http://125.16.220.10/";
 	private String AlternateHost = "http://125.16.220.10/";
 	private String strHostNameConstant = "http://125.16.220.10/";*/
-
+//	private String HostName = "http://172.16.3.122/";
+//	private String AlternateHost = "http://172.16.3.122/";
+//	private String strHostNameConstant = "http://172.16.3.122/";
 	//Production
 	private String HostName = "https://www.bihardiscom.co.in/";
 	private String AlternateHost = "https://www.bihardiscom.co.in/";
@@ -136,7 +138,7 @@ public class UtilSvrData {
 		{
 			request = new SoapObject(SOAPNamespace,SOAPMethod);
 			//request.addProperty("USerID", strIME);
-			Log.e("IMEINo", UtilAppCommon.IMEI_Number);
+			Log.e("IMEINo", UtilAppCommon.IMEI_Number.toUpperCase());
 			Log.e("SOAPAddress", SOAPAddress);
 			Log.e("IP Address",UtilAppCommon.strHostName + " == " +  strHostNameConstant);
 			//Log.e("Passkey", strPass);

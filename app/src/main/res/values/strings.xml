@@ -3,19 +3,15 @@
     <string name="home">Main</string>
 
     <!--Production-->
- <!--   <string name="app_name">BMB (B4.1.9)</string>
-    <string name="app_version"></string>
-    <string name="appcode_version">C4.1B4.1.8.9</string>
-    <string name="app_fileversion">VP4.1.9.apk</string>-->
-       <string name="app_name">BMB (B4.2.1)</string>
+       <string name="app_name">BMB (B4.2.3)</string>
        <string name="app_version"></string>
-       <string name="appcode_version">C4.1B4.2.0.1</string>
-       <string name="app_fileversion">VP4.2.1.apk</string>
+       <string name="appcode_version">C4.1B4.2.0.3</string>
+       <string name="app_fileversion">VP4.2.3.apk</string>```````````````````````````````````````````````````````````````
     <!--Testing-->
-   <!--<string name="app_name">BMB (B4.0.1)</string>
-    <string name="app_version">B4.0.1</string>
-    <string name="appcode_version">C4.0.1</string>
-    <string name="app_fileversion">VP4.0.1.apk</string>-->
+   <!--<string name="app_name">BMB (B4.1.9)</string>
+    <string name="app_version">B4.1.9</string>
+    <string name="appcode_version">C4.1.9</string>
+    <string name="app_fileversion">VP4.1.9.apk</string>-->
 
     <string name="consumer_details">Consumer Details</string>
     <string name="billing_by_account_no">Billing By Account Number</string>

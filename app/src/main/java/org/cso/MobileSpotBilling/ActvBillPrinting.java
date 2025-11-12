@@ -838,28 +838,28 @@ public class ActvBillPrinting extends AppCompatActivity {
 				builder.addTextSize(2, 1);
 				builder.addText("Energy Bill \n");
 				builder.addText(UtilAppCommon.out.Company+"CL\n");
-				try {
-					Drawable photoPathlogo = null;
-					Bitmap azadi = Utilities.getBitmapFromDrawable(ActvBillPrinting.this, R.drawable.cm);
-					//Bitmap azadi = BitmapFactory.decodeResource(getResources(), R.drawable.chunav);
-					azadi = Bitmap.createScaledBitmap(azadi, 350, 350, true);
-					builder.addImage(azadi, 0, 0, azadi.getWidth(), azadi.getHeight(), Builder.PARAM_DEFAULT);
-					Log.v("Azadi Photo Print Added", "Azadi Photo Print Added");
-				} catch (Exception ex) {
-					ex.printStackTrace();
-					Log.v("Azadi Photo Print", ex.getMessage());
-					System.out
-							.println("Error In Azadi Photo Print: " + ex.toString());
-				}
+//				try {
+//					Drawable photoPathlogo = null;
+//					Bitmap azadi = Utilities.getBitmapFromDrawable(ActvBillPrinting.this, R.drawable.cm);
+//					//Bitmap azadi = BitmapFactory.decodeResource(getResources(), R.drawable.chunav);
+//					azadi = Bitmap.createScaledBitmap(azadi, 350, 350, true);
+//					builder.addImage(azadi, 0, 0, azadi.getWidth(), azadi.getHeight(), Builder.PARAM_DEFAULT);
+//					Log.v("Azadi Photo Print Added", "Azadi Photo Print Added");
+//				} catch (Exception ex) {
+//					ex.printStackTrace();
+//					Log.v("Azadi Photo Print", ex.getMessage());
+//					System.out
+//							.println("Error In Azadi Photo Print: " + ex.toString());
+//				}
 				StringBuilder ntsMsg = new StringBuilder();
 				ntsMsg.append("\nसभी घरेलू उपभोक्ताओं से अब 125 यूनिट तक\nबिजली खपत पर कोई शुल्क नहीं लिया\nजाएगा। यह लाभ जुलाई माह की खपत\nसे लागू है।\n");
 				builder.addTextSize(1, 2);
 				builder.addTextFont(Builder.FONT_C);
 				builder.addTextAlign(Builder.ALIGN_LEFT);
 				builder.addCommand(ntsMsg.toString().getBytes(StandardCharsets.UTF_8));
-				builder.addTextFont(Builder.FONT_C);
-				builder.addTextAlign(Builder.ALIGN_RIGHT);
-				builder.addCommand("-नीतीश कुमार,मुख्यमंत्री बिहार\n".getBytes(StandardCharsets.UTF_8));
+//				builder.addTextFont(Builder.FONT_C);
+//				builder.addTextAlign(Builder.ALIGN_RIGHT);
+//				builder.addCommand("-नीतीश कुमार,मुख्यमंत्री बिहार\n".getBytes(StandardCharsets.UTF_8));
 				builder.addText(" -------------------------------\n");
 				builder.addTextAlign(Builder.ALIGN_CENTER);
 				builder.addTextSize(2, 2);
@@ -1433,9 +1433,9 @@ public class ActvBillPrinting extends AppCompatActivity {
 
 				builder.addText("\n");
 				try {
-					Bitmap solar = Utilities.getBitmapFromDrawable(ActvBillPrinting.this, R.drawable.solar);
+					Bitmap solar = Utilities.getBitmapFromDrawable(ActvBillPrinting.this, R.drawable.chunav2);
 					//Bitmap azadi = BitmapFactory.decodeResource(getResources(), R.drawable.chunav);
-					solar = Bitmap.createScaledBitmap(solar, 350, 220, true);
+					solar = Bitmap.createScaledBitmap(solar, 400, 400, true);
 					builder.addImage(solar, 0, 0, solar.getWidth(), solar.getHeight(), Builder.PARAM_DEFAULT);
 					Log.v("solar Photo Print Added", "solar Photo Print Added");
 				} catch (Exception ex) {
@@ -1564,26 +1564,26 @@ public class ActvBillPrinting extends AppCompatActivity {
 				builder.addCommand(header.getBytes("UTF-8"));
 				//UtilAppCommon.bprintdupl = false;
 				builder.addText(UtilAppCommon.out.Company + "CL\n");
-				try {
-					Bitmap bt_logo = Utilities.getBitmapFromDrawable(getApplicationContext(), R.drawable.cm);
-					bt_logo = Bitmap.createScaledBitmap(bt_logo, 350, 350, true);
-					builder.addImage(bt_logo, 0, 0, bt_logo.getWidth(), bt_logo.getHeight(), Builder.PARAM_DEFAULT);
-					Log.v("Azadi Photo Print Added", "Azadi Photo Print Added");
-				} catch (Exception ex) {
-
-					Log.v("Azadi Photo Print", ex.getMessage());
-					System.out
-							.println("Error In Azadi Photo Print: " + ex.toString());
-				}
+//				try {
+//					Bitmap bt_logo = Utilities.getBitmapFromDrawable(getApplicationContext(), R.drawable.cm);
+//					bt_logo = Bitmap.createScaledBitmap(bt_logo, 350, 350, true);
+//					builder.addImage(bt_logo, 0, 0, bt_logo.getWidth(), bt_logo.getHeight(), Builder.PARAM_DEFAULT);
+//					Log.v("Azadi Photo Print Added", "Azadi Photo Print Added");
+//				} catch (Exception ex) {
+//
+//					Log.v("Azadi Photo Print", ex.getMessage());
+//					System.out
+//							.println("Error In Azadi Photo Print: " + ex.toString());
+//				}
 				StringBuilder ntsMsg = new StringBuilder();
 				ntsMsg.append("\nसभी घरेलू उपभोक्ताओं से अब 125 यूनिट तक\nबिजली खपत पर कोई शुल्क नहीं लिया\nजाएगा। यह लाभ जुलाई माह की खपत\nसे लागू है।\n");
 				builder.addTextSize(1, 2);
 				builder.addTextFont(Builder.FONT_C);
 				builder.addTextAlign(Builder.ALIGN_LEFT);
 				builder.addCommand(ntsMsg.toString().getBytes(StandardCharsets.UTF_8));
-				builder.addTextFont(Builder.FONT_C);
-				builder.addTextAlign(Builder.ALIGN_RIGHT);
-				builder.addCommand("-नीतीश कुमार,मुख्यमंत्री बिहार\n".getBytes(StandardCharsets.UTF_8));
+//				builder.addTextFont(Builder.FONT_C);
+//				builder.addTextAlign(Builder.ALIGN_RIGHT);
+//				builder.addCommand("-नीतीश कुमार,मुख्यमंत्री बिहार\n".getBytes(StandardCharsets.UTF_8));
 				builder.addText(" -------------------------------\n");
 				builder.addTextSize(2, 2);
 				builder.addTextFont(Builder.FONT_C);
@@ -2048,8 +2048,8 @@ public class ActvBillPrinting extends AppCompatActivity {
 				builder.addText("\n");
 				builder.addText(String.format("Consumer Helpline- 1912\n\n"));
 				try {
-					Bitmap solar = Utilities.getBitmapFromDrawable(ActvBillPrinting.this, R.drawable.solar);
-					solar = Bitmap.createScaledBitmap(solar, 350, 220, true);
+					Bitmap solar = Utilities.getBitmapFromDrawable(ActvBillPrinting.this, R.drawable.chunav2);
+					solar = Bitmap.createScaledBitmap(solar, 400, 400, true);
 					builder.addImage(solar, 0, 0, solar.getWidth(), solar.getHeight(), Builder.PARAM_DEFAULT);
 				} catch (Exception ex) {
 					ex.printStackTrace();
@@ -2560,11 +2560,11 @@ public class ActvBillPrinting extends AppCompatActivity {
 					//HPRTPrinterHelper.WriteData(("       " + header + "\n").getBytes("gb2312"));
 					hprtPrinterHelper.WriteData(("           " + UtilAppCommon.out.Company+"CL\n").getBytes("gb2312"));
 					hprtPrinterHelper.WriteData(new byte[]{0x1d, 0x0c});
-					tvsPrintImageAzadi(R.drawable.cm);
+//					tvsPrintImageAzadi(R.drawable.cm);
 					StringBuilder ntsMsg = new StringBuilder();
 					ntsMsg.append("\nसभी घरेलू उपभोक्ताओं से अब\n125 यूनिट तक बिजली खपत पर\nकोई शुल्क नहीं लिया जाएगा। \nयह लाभ जुलाई माह की \nखपत से लागू है।\n");
 					hprtPrinterHelper.WriteData((ntsMsg.toString()).getBytes("UTF-8"));
-					hprtPrinterHelper.WriteData((" -नीतीश कुमार,मुख्यमंत्री बिहार\n").getBytes("UTF-8"));
+//					hprtPrinterHelper.WriteData((" -नीतीश कुमार,मुख्यमंत्री बिहार\n").getBytes("UTF-8"));
 					hprtPrinterHelper.WriteData(("-----------------------\n").getBytes("UTF-8"));
 					String subsidy="  STATE GOVT." ;
 					hprtPrinterHelper.WriteData(new byte[]{0x1B, 0x45, 0x01}); // Bold ON
@@ -2577,11 +2577,14 @@ public class ActvBillPrinting extends AppCompatActivity {
 					hprtPrinterHelper.WriteData(new byte[]{0x1D, 0x21, 0x00}); // Font size reset
 					hprtPrinterHelper.WriteData(printerdata1.toString().getBytes("UTF-8"));
 					hprtPrinterHelper.WriteData(String.format("CA NUMBER  :%s", UtilAppCommon.out.CANumber).getBytes("UTF-8"));
-
-
 					hprtPrinterHelper.WriteData(printerdata2.toString().getBytes("UTF-8"));
 					if (PhotoPath != null && PhotoPath.length() > 0) {
-						tvsPrintImage(PhotoPath);
+						File filedir = new File(PhotoPath, UtilAppCommon.in.SCHEDULED_BILLING_DATE.substring(0, 4) +
+								UtilAppCommon.in.SCHEDULED_BILLING_DATE.substring(5, 7) +
+								"_" + UtilAppCommon.out.CANumber + ".jpg");
+						Bitmap btmImg = Utilities.getBitmapForAllVersions(context, filedir);
+						//tvsPrintImage(PhotoPath);
+						printimageTvs(btmImg);
 					}
 					hprtPrinterHelper.WriteData(printerdata3.toString().getBytes("UTF-8"));
 					hprtPrinterHelper.WriteData(printerdata4.toString().getBytes("UTF-8"));
@@ -2619,7 +2622,7 @@ public class ActvBillPrinting extends AppCompatActivity {
 
 					//conn.multiLinguallinePrint_ver_2_0_printer(address, String.format("      %s","."), 23,Typeface.DEFAULT_BOLD);
 					hprtPrinterHelper.WriteData(printerdata7.toString().getBytes("UTF-8"));
-					tvsPrintImageAzadi(R.drawable.solar);
+					tvsPrintImageAzadi(R.drawable.chunav2);
 					//	conn.printData(printerdata4.toString().getBytes());
 					Thread.sleep(1000);
 					//conn.closeBT();
@@ -3143,11 +3146,11 @@ public class ActvBillPrinting extends AppCompatActivity {
 					hprtPrinterHelper.WriteData(("           " + UtilAppCommon.out.Company+"CL\n").getBytes("gb2312"));
 					hprtPrinterHelper.WriteData(new byte[]{0x1d, 0x0c});
 					Thread.sleep(50);
-					tvsPrintImageAzadi(R.drawable.cm);
+//					tvsPrintImageAzadi(R.drawable.cm);
 					StringBuilder ntsMsg = new StringBuilder();
 					ntsMsg.append("\nसभी घरेलू उपभोक्ताओं से अब\n125 यूनिट तक बिजली खपत पर\nकोई शुल्क नहीं लिया जाएगा।\nयह लाभ जुलाई माह की\nखपत से लागू है।\n");
 					hprtPrinterHelper.WriteData((ntsMsg.toString()).getBytes("UTF-8"));
-					hprtPrinterHelper.WriteData((" -नीतीश कुमार,मुख्यमंत्री बिहार\n").getBytes("UTF-8"));
+//					hprtPrinterHelper.WriteData((" -नीतीश कुमार,मुख्यमंत्री बिहार\n").getBytes("UTF-8"));
 					hprtPrinterHelper.WriteData(("-----------------------\n").getBytes("UTF-8"));
 					hprtPrinterHelper.WriteData(new byte[]{0x1d, 0x0c});
 					String subsidy=" राज्य सरकार";;
@@ -3170,7 +3173,12 @@ public class ActvBillPrinting extends AppCompatActivity {
 					hprtPrinterHelper.WriteData(printerdata2.toString().getBytes("UTF-8"));
 
 					if (PhotoPath != null && PhotoPath.length() > 0) {
-						tvsPrintImage(PhotoPath);
+						File filedir = new File(PhotoPath, UtilAppCommon.in.SCHEDULED_BILLING_DATE.substring(0, 4) +
+								UtilAppCommon.in.SCHEDULED_BILLING_DATE.substring(5, 7) +
+								"_" + UtilAppCommon.out.CANumber + ".jpg");
+						Bitmap btmImg = Utilities.getBitmapForAllVersions(context, filedir);
+						//tvsPrintImage(PhotoPath);
+						printimageTvs(btmImg);
 					}
                     /*if(imagedata!=null)
                     {
@@ -3193,7 +3201,6 @@ public class ActvBillPrinting extends AppCompatActivity {
                     /*Bitmap btMap_bar1 = BarcodeCreater.creatBarcode(this, UtilAppCommon.out.CANumber.trim(), widht, height,
                             true, 1);*/
 					//printerbarcode.append(printer.barcode_Code_39_VIP(UtilAppCommon.out.CANumber));
-
 					//printerbarcode.append(String.format("%s\n","."));
 					try {
 						Bitmap btMap_bar1 = BarcodeCreater.creatBarcode(ActvBillPrinting.this, UtilAppCommon.out.CANumber.trim(), 380, 50,
@@ -3216,7 +3223,7 @@ public class ActvBillPrinting extends AppCompatActivity {
 					hprtPrinterHelper.WriteData(printerbarcode.toString().getBytes("UTF-8"));
 
 					hprtPrinterHelper.WriteData(printerdata6.toString().getBytes("UTF-8"));
-					tvsPrintImageAzadi(R.drawable.solar);
+					tvsPrintImageAzadi(R.drawable.chunav2);
 					//conn.multiLinguallinePrint_ver_2_0_printer(address, String.format("      %s","."), 23,Typeface.DEFAULT_BOLD);
 					hprtPrinterHelper.WriteData(printerdata7.toString().getBytes("UTF-8"));
 					//	conn.printData(printerdata4.toString().getBytes());
@@ -3627,7 +3634,6 @@ public class ActvBillPrinting extends AppCompatActivity {
 					avg = Float.parseFloat(UtilAppCommon.out.Average);
 					//avg = Integer.parseInt(UtilAppCommon.out.Average);
 				}
-
 				printerdata2.append(printer.font_Courier_24_VIP(String.format(
 						"MIN UNIT:%.2f AVG:%.2f\n", mmcunits, avg)));
 				//printerdata2.append(printer.font_Courier_24_VIP(String.format(
@@ -3692,7 +3698,6 @@ public class ActvBillPrinting extends AppCompatActivity {
 				/**
 				 * Adding New lines for tariff change 2018-19
 				 */
-
 				printerdata2.append(printer.font_Courier_32_VIP(String.format(
 						"CGST @ 9%%      : %12s\n", UtilAppCommon.out.METER_CGST)));
 				printerdata2.append(printer.font_Courier_32_VIP(String.format(
@@ -4361,11 +4366,13 @@ public class ActvBillPrinting extends AppCompatActivity {
 	}
 
     public void tvsPrintImage(String addressImage) {
+		Log.i("path",addressImage);
         //Log.e("bmp_print", String.valueOf(bmp_print));
 			/*String PhotoDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES)
 					.getPath()
 					+ "/DCIM/Camera/20210707_124237.jpg";*/
         File f =new File(addressImage.toString());
+		if (!f.exists()) return;
         BitmapFactory.Options bitmapOptions = new BitmapFactory.Options();
         Bitmap bmp_print = BitmapFactory.decodeFile(f.getAbsolutePath(), bitmapOptions);
         bmp_print = getResizedBitmap(bmp_print, 400);
@@ -4495,7 +4502,24 @@ public class ActvBillPrinting extends AppCompatActivity {
         }
     }
 
+	public void printimageTvs(Bitmap bitmap) {
+		try {
+			HPRTPrinterHelper.WriteData(new byte[]{0x1B, 0x61, 0x01});
+			//  Log.e("printnu", String.valueOf(1));
+			for (int i = 0; i < 1; i++) {
+				//Log.e("bmp_print3", bmp_print.toString());
+				HPRTPrinterHelper.PrintBitmap(bitmap, (byte) 1, (byte) 0, 203);
+				HPRTPrinterHelper.WriteData(new byte[]{0x1d, 0x0c});
+				Thread.sleep(500);
 
+			}
+			//恢复居左对齐
+			HPRTPrinterHelper.WriteData(new byte[]{0x1B, 0x61, 0x00});
+		} catch (Exception e) {
+			Log.e("exception", e.getMessage());
+			e.printStackTrace();
+		}
+	}
     public Bitmap zoomImg(Bitmap bm, int newWidth, int newHeight) {
         // 获得图片的宽高
         int width = bm.getWidth();
@@ -4511,7 +4535,4 @@ public class ActvBillPrinting extends AppCompatActivity {
                 true);
         return newbm;
     }
-
-
-    
 }

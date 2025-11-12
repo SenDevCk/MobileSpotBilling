@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 
@@ -70,7 +71,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.res.ResourcesCompat;
 
 public class ActvDuplicateBillPrinting extends AppCompatActivity {
-	/** Called when the activity is first created. */
 	/** Called when the activity is first created. */
 	private BluetoothAdapter mBluetoothAdapter = null;
 	static final UUID MY_UUID = UUID.randomUUID();
@@ -1611,7 +1611,8 @@ public class ActvDuplicateBillPrinting extends AppCompatActivity {
 			this.address = address;
 		}
 	
-		public void run() {
+		@SuppressLint("MissingPermission")
+        public void run() {
 			try {
 				mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
 				device = mBluetoothAdapter.getRemoteDevice(address);

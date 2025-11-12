@@ -123,7 +123,6 @@ public class ActvBilling extends AppCompatActivity implements OnClickListener, T
             UtilAppCommon.inSAPSendMsg = "";
             finish();
         }
-
     }
 
     @Override

@@ -55,7 +55,7 @@ public class AsyncImage extends  AsyncTask<String, Void, String> {
 		try
 		{
 			String path_img=params[4];
-			Log.e("path_img58",path_img);
+			//Log.e("path_img58",path_img);
 			File file = new File(path_img);
 			Bitmap bitmap = BitmapFactory.decodeFile(file.getAbsolutePath());
 			//Bitmap bitmap =Utilities.getBitmapForAllVersions(context,file);
@@ -63,7 +63,7 @@ public class AsyncImage extends  AsyncTask<String, Void, String> {
 			bitmap.compress(Bitmap.CompressFormat.JPEG, 90, stream);
 			byte[] image = stream.toByteArray();
 			img_str = Base64.encodeToString(image, 0);
-			Log.e("imagedata",img_str);
+			//Log.e("imagedata",img_str);
 			glbVar = "0";
 			jsonTxt=sv.updateImage(params[0], params[1], params[2], params[3], img_str, params[5]);			
 			if(jsonTxt.equalsIgnoreCase("Network Issue / Not Reachable"))
