@@ -71,7 +71,8 @@ public class ActvBillPrinting extends AppCompatActivity {
 	EpsonThermalHindi sendDataEpsonHindi = null;
 	SimpleDateFormat ft = new SimpleDateFormat("hh:mm:ss");
 	String strDateTime = null;
-	String strBarcodeData = ""; //UtilAppCommon.out.BillNo + UtilAppCommon.out.AmtPayableUptoDt + UtilAppCommon.out.CurrentMtrReadingNote;
+	String strBarcodeData = "";
+	//UtilAppCommon.out.BillNo + UtilAppCommon.out.AmtPayableUptoDt + UtilAppCommon.out.CurrentMtrReadingNote;
 
 	String strMonths[] = {"JAN", "FEB", "MAR", "ARP", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"};
 	String strmonth = "";
@@ -201,593 +202,6 @@ public class ActvBillPrinting extends AppCompatActivity {
 		}
 		// End Added on 1.3.2014
 	}
-
-/*	
-	@Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-      MenuInflater inflater = getMenuInflater();
-      inflater.inflate(R.menu.mainmenu, menu);
-      return true;
-    }
-	
-    public boolean onOptionsItemSelected(MenuItem item) {
-	   	 switch (item.getItemId()) {
-	   	 case R.id.home:
-	   		finish();
-	 		 startActivity(new Intent(this, ActvivityMain.class));
-	   		finish();	   	 
-	    	 Intent intent = new Intent(this, ActvivityMain.class);  
-	    	 
-	    	 startActivity(intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));  
-	         startActivity(intent);
-	   		 break;
-	     }
-	     return true;
-   }
-
-	@Override
-	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-		// TODO Auto-generated method stub
-		
-		ClsListData data = (ClsListData) parent.getItemAtPosition(position);
-		String value =  data.getValue();
-		String item = data.getDisplay();
-		Intent intent = getIntent();
-	    strPrinterValue = value;
-	    strPrinterItem = item;
-	    
-		// Added on 3.7.2014
-		
-	}
-*/
-
-	public void getImageByCANo(String CANo) {
-		String AppDir = "";
-
-		Log.e("getImageByCANo", "Started");
-		UtilDB utildb = new UtilDB(getApplicationContext());
-		AppDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES + "/SBDocs/Photos_Crop" + "/" + utildb.getSdoCode() + "/"
-				+ utildb.getActiveMRU()).getPath();
-
-		Cursor cursorImage = utildb.getUnCompressedImage(CANo);
-		File file = null;
-		//getUnCompressedImage
-		if (cursorImage != null) {
-			cursorImage.moveToFirst();
-			file = new File(AppDir, cursorImage.getString(1));
-		}
-		//ImageProcessing imageProcessing = new ImageProcessing();
-
-		AsyncImage asyncImage = new AsyncImage(this, () -> {
-			// TODO Auto-generated method stub
-		});
-
-		//String strArray[] = imageProcessing.processImage(AppDir, file, this, cursorImage.getString(1), CANo);
-		String credentials[] = new String[6];
-		credentials[0] = CANo;
-		credentials[1] = cursorImage.getString(1).substring(4, 6);
-		credentials[2] = cursorImage.getString(1).substring(0, 4);
-		credentials[3] = utildb.getSdoCode();
-		File f = new File(AppDir);
-		credentials[4] = f.getAbsolutePath() + "/" + cursorImage.getString(1);
-		credentials[5] = utildb.getActiveMRU();
-
-		if (credentials != null)
-			asyncImage.execute(credentials);
-
-		Log.e("getImageByCANo", "Completed");
-	}
-
-	public void onBackPressed() {
-		// do something on back.
-		super.onBackPressed();
-		//finish();
-		// startActivity(new Intent(this, ActvivityMain.class));
-		return;
-	}
-
-	class ZebraThermal extends Thread {
-
-		private BluetoothDevice device = null;
-		private BluetoothSocket btSocket = null;
-		private OutputStream outStream = null;
-		private OutputStreamWriter writer = null;
-		private String address = null;
-
-		public ZebraThermal(String address) {
-			this.address = address;
-			device = mBluetoothAdapter.getRemoteDevice(address);
-			Toast.makeText(getApplicationContext(), "Connected To:" + address,
-					Toast.LENGTH_LONG).show();
-		}
-
-		@SuppressLint("SuspiciousIndentation")
-		@SuppressWarnings("deprecation")
-		public void run() {
-			try {
-				Toast.makeText(getApplicationContext(), "Sending Data",
-						Toast.LENGTH_LONG).show();
-
-				ZebraPrinterConnection thePrinterConn = new BluetoothPrinterConnection(
-						address);
-				thePrinterConn.open();
-				// Initialize
-
-				SimpleDateFormat ft = new SimpleDateFormat("dd-MM-yy'   TIME: 'hh:mm");
-
-				// Open the connection - physical connection is established
-				// here.
-				ZebraPrinter printer = ZebraPrinterFactory
-						.getInstance(thePrinterConn);
-				PrinterLanguage pcLanguage = printer
-						.getPrinterControlLanguage();
-				Toast.makeText(getApplicationContext(),
-						"Language: " + pcLanguage, Toast.LENGTH_LONG).show();
-
-				// This example prints "This is a ZPL test." near the top of the
-				// label.
-				String cpclData = null;
-				PrintUtilZebra.LineNo = 0;
-				if (UtilAppCommon.bprintdupl)
-					cpclData = "! 90 200 200 1140 1\r\n";
-				else
-					cpclData = "! 90 200 200 1110 1\r\n";
-				cpclData += "CENTER\r\n";
-				cpclData += "UNDERLINE ON\r\n";
-
-				if (UtilAppCommon.bprintdupl)
-					cpclData += PrintUtilZebra.PrintLargeNext("Duplicate Bill");
-				UtilAppCommon.bprintdupl = false;
-				cpclData += PrintUtilZebra.PrintLargeNext(UtilAppCommon.out.Company + "CL");
-
-				cpclData += PrintUtilZebra
-						.PrintNext("*******************   ");
-				cpclData += "LEFT\r\n";
-				cpclData += PrintUtilZebra.PrintNext(String.format(
-						" ELECTRICITY BILL :%s", UtilAppCommon.out.BillMonth));
-				//cpclData += "UNDERLINE OFF\r\n";
-				cpclData += PrintUtilZebra
-						.PrintNext("**************************");
-				cpclData += PrintUtilZebra.PrintNext(String.format(
-						" DATE: %s", UtilAppCommon.out.REC_DATE_TIME));
-				cpclData += PrintUtilZebra.PrintNext(String.format(
-						" DUE DATE: %s", UtilAppCommon.out.AmtPayableUptoDt));
-				cpclData += PrintUtilZebra.PrintNext(String.format(
-						" CONSUMER DETAILS"));
-				//cpclData += "CENTER\r\n";
-				cpclData += PrintUtilZebra
-						.PrintNext("**************************");
-				cpclData += "LEFT\r\n";
-
-				cpclData += PrintUtilZebra.PrintNextData("  Bill No       ",
-						String.format("%s", UtilAppCommon.out.BillNo));
-
-				cpclData += PrintUtilZebra.PrintNextData("  DIVISION       ",
-						String.format("%s", UtilAppCommon.out.Division));
-
-				cpclData += PrintUtilZebra.PrintNextData(" SUB DIVN    ",
-						String.format("%s", UtilAppCommon.out.SubDivision));
-
-				cpclData += PrintUtilZebra.PrintNextData(" CA NUMBER   ",
-						String.format("%s", UtilAppCommon.in.CONTRACT_AC_NO));
-
-				cpclData += PrintUtilZebra.PrintNextData(" LEGACY NO       ",
-						String.format("%s", UtilAppCommon.in.CONSUMER_LEGACY_ACC_NO));
-
-				cpclData += PrintUtilZebra.PrintNextData(" MRU             ",
-						String.format("%10s", UtilAppCommon.in.MRU));
-
-
-				cpclData += PrintUtilZebra.PrintNext(String.format(
-						"NAME  : %s", UtilAppCommon.in.CONSUMER_NAME));
-
-				int alen = 0;
-				alen = UtilAppCommon.out.Address.length();
-				String addr1 = "";
-				String addr2 = "";
-				if (alen > 26) {
-					addr1 = UtilAppCommon.out.Address.substring(0, 26);
-					if (alen > 52)
-						addr2 = UtilAppCommon.out.Address.substring(26, 52);
-					else
-						addr2 = UtilAppCommon.out.Address.substring(26, alen);
-				} else
-					addr1 = UtilAppCommon.out.Address;
-
-
-				cpclData += PrintUtilZebra.PrintNext(String.format(
-						"ADDRESS  : "));
-
-				cpclData += "LEFT\r\n";
-
-				//cpclData += PrintUtilZebra.PrintNext(String.format(
-				//		" %s", UtilAppCommon.out.Address));
-				//cpclData += PrintUtilZebra.PrintNext(String.format(
-				//		" %s",UtilAppCommon.out.Address.substring(0, 26)));
-				cpclData += PrintUtilZebra.PrintNext(String.format(
-						" %s", addr1));
-				cpclData += PrintUtilZebra.PrintNext(String.format(
-						" %s", addr2));
-
-				cpclData += PrintUtilZebra.PrintNext(String.format(
-						"MOBILE NO  : %s", UtilAppCommon.in.METER_CAP));
-
-				cpclData += PrintUtilZebra.PrintNext(String.format(
-						"AREA TYPE  : %s", UtilAppCommon.out.Area_type));
-
-				cpclData += PrintUtilZebra.PrintNext(String.format(
-						"POLE NO          : %s", UtilAppCommon.out.PoleNo));
-
-				cpclData += PrintUtilZebra.PrintNext(String.format(
-						"MTR NO: %s PH: %s", UtilAppCommon.out.MtrNo + ", " + UtilAppCommon.in.MONTH_SEASONAL, UtilAppCommon.out.Phase));
-
-
-				//added 
-
-				cpclData += PrintUtilZebra.PrintNext(String.format(
-						"MTR COMP : %s", UtilAppCommon.out.MtrMake
-								.equalsIgnoreCase("C") ? "Company" : UtilAppCommon.out.MtrMake
-								.equalsIgnoreCase("O") ? "Consumer" : ""));
-
-				//
-				cpclData += PrintUtilZebra.PrintNext(String.format(
-						"CATEGORY         : %s", UtilAppCommon.in.RATE_CATEGORY));
-
-
-				//String CD="";
-				//String CD1="";
-				String CD2 = "";
-				double result = 0.0;
-				Log.v("ActvBillPrinting", "************************Printing Stage Checkpoint 11");
-				if (UtilAppCommon.out.Category.equalsIgnoreCase("NDS-IID(B)")
-						|| UtilAppCommon.out.Category.equalsIgnoreCase("IAS-IIM")
-						|| UtilAppCommon.out.Category.equalsIgnoreCase("LTEV")
-						|| UtilAppCommon.out.Category.equalsIgnoreCase("LTIS-ID")
-						|| UtilAppCommon.out.Category.equalsIgnoreCase("LTIS-IID")
-						|| UtilAppCommon.out.Category.equalsIgnoreCase("PUBWW")) {
-					Log.v("ActvBillPrinting", "************************Printing Stage Checkpoint 12");
-					result = (double) (Double.parseDouble(UtilAppCommon.out.ConnectedLoad) / 0.9f);
-					CD2 = String.format("%.2f", result) + "KVA";
-					Log.v("ActvBillPrinting", "************************Printing Stage Checkpoint 13");
-				} else if (UtilAppCommon.out.Category.equalsIgnoreCase("HGN")
-						|| UtilAppCommon.out.Category.equalsIgnoreCase("IAS-IM")) {
-					result = (double) (Double.parseDouble(UtilAppCommon.out.SanctLoad));
-					CD2 = result + " HP";
-				} else {
-					/**
-					 * End ading lines for tariff change
-					 */
-					result = (double) (Double.parseDouble(UtilAppCommon.out.SanctLoad));
-					Log.v("ActvBillPrinting", "************************Printing Stage Checkpoint 14");
-					CD2 = result + " KW";
-				}
-				cpclData += PrintUtilZebra.PrintNext(String.format(
-						"LOAD:%s ", CD2));
-
-
-				cpclData += PrintUtilZebra.PrintNext(String.format(
-						"SD               : %s", UtilAppCommon.in.SECURITY_DEPOSIT));
-
-				String billdays;
-
-				if (UtilAppCommon.out.Type.equalsIgnoreCase("(PL Adj.) Actual")) {
-					billdays = UtilAppCommon.out.BillDays + "(" + UtilAppCommon.out.MESSAGE10 + ")";
-				} else {
-					billdays = UtilAppCommon.out.BillDays;
-				}
-				cpclData += PrintUtilZebra.PrintNext(String.format(
-						"BILLED DAYS      : %s", billdays));
-				cpclData += PrintUtilZebra
-						.PrintNext("**************************");
-
-
-				cpclData += "CENTER\r\n";
-				cpclData += PrintUtilZebra
-						.PrintNext("READING DETAILS");
-				cpclData += PrintUtilZebra
-						.PrintNext("----------------");
-				cpclData += "LEFT\r\n";
-
-				cpclData += PrintUtilZebra
-						.PrintNext("\t\t      PREVIOUS \t     CURRENT");
-				// 21.11.15
-				cpclData += PrintUtilZebra.PrintNext(String.format(
-						"READING :   %s   \t %S", UtilAppCommon.out.PreviusReading, UtilAppCommon.out.CurrentReading));
-
-				cpclData += PrintUtilZebra.PrintNext(String.format(
-						"DATE    :   %s   \t %s", UtilAppCommon.out.PrevusMtrRdgDt, UtilAppCommon.out.CurrentMtrRdgDt));
-				if (!UtilAppCommon.out.PrevusMtrRdgDt.equalsIgnoreCase("0000.00.00"))
-					cpclData += PrintUtilZebra.PrintNext(String.format(
-							"STATUS  :   %s   \t %s", UtilAppCommon.out.PreviusMtrReadingNote, UtilAppCommon.out.CurrentMtrReadingNote));
-				//
-
-				if (!UtilAppCommon.in.MONTH_SEASONAL.trim().equalsIgnoreCase("")) {
-					cpclData += "CENTER\r\n";
-					cpclData += PrintUtilZebra
-							.PrintNext("BL METER READING DETAILS");
-					cpclData += PrintUtilZebra
-							.PrintNext("----------------");
-					cpclData += "LEFT\r\n";
-
-					cpclData += PrintUtilZebra
-							.PrintNext("\t\t      PREVIOUS \t     CURRENT");
-					// 21.11.15
-					cpclData += PrintUtilZebra.PrintNext(String.format(
-							"READING :   %s   \t %S", UtilAppCommon.out.PreviusReading, UtilAppCommon.out.CurrentReading));
-
-					cpclData += PrintUtilZebra.PrintNext(String.format(
-							"DATE    :   %s   \t %s", UtilAppCommon.out.PrevusMtrRdgDt, UtilAppCommon.out.CurrentMtrRdgDt));
-					if (!UtilAppCommon.out.PrevusMtrRdgDt.equalsIgnoreCase("0000.00.00"))
-						cpclData += PrintUtilZebra.PrintNext(String.format(
-								"STATUS  :   %s   \t %s", UtilAppCommon.out.PreviusMtrReadingNote, UtilAppCommon.out.CurrentMtrReadingNote));
-					//
-				}
-
-
-				//
-
-
-				cpclData += "PRINT\r\n";
-
-				thePrinterConn.write(cpclData.getBytes());
-				PrintUtilZebra.LineNo = 0;
-
-				if (UtilAppCommon.in.PRV_MTR_READING_NOTE.toUpperCase() != "RN") {
-					Log.e("Inside", "Inside Photo routine");
-					// Print Reading Image
-					try {
-					/*String PhotoDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES)
-							.getPath()
-							+ "/SBDocs/Photos_Crop"
-							+ "/"
-							+ UtilAppCommon.sdoCode
-							+ "/"
-							+ UtilAppCommon.out.MRU;*/
-						String PhotoDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES)
-								.getPath() + "/SBDocs/Photos/" + UtilAppCommon.in.SUB_DIVISION_CODE + "/" + UtilAppCommon.in.MRU;
-
-						strmonth = String.valueOf(Arrays.asList(strMonths).indexOf(UtilAppCommon.out.BillMonth) + 1);
-						String PhotoPath = PhotoDir + "/" + UtilAppCommon.in.SCHEDULED_BILLING_DATE.substring(0, 4) +
-								UtilAppCommon.in.SCHEDULED_BILLING_DATE.substring(5, 7) +
-								"_" + UtilAppCommon.out.CANumber + ".jpg";
-
-
-						System.out.println("Photopath:" + PhotoPath);
-
-
-						thePrinterConn.write("! U1 JOURNAL\r\n! U1 SETFF 50 2\r\n".getBytes());
-
-
-						//printer.getGraphicsUtil().printImage("/storage/sdcard0/img_tick.png",0,0,-1,-1,false);
-						printer.getGraphicsUtil().printImage(PhotoPath, 100, 0, -1, -1, false);
-
-					} catch (Exception ex) {
-
-						System.out
-								.println("Error In Photo Print: " + ex.toString());
-					}
-					// Print Reading Image End
-				}
-
-				cpclData = "! 90 200 200 1360 1\r\n";
-
-				cpclData += "\n\n";
-
-				float mf = 0, consump = 0;
-				//mf=Float.parseFloat(UtilAppCommon.out.MF);
-				if (!UtilAppCommon.out.MF.equalsIgnoreCase(""))
-					mf = Float.parseFloat(UtilAppCommon.out.MF);
-				consump = Float.parseFloat(UtilAppCommon.out.Consumption);
-
-				cpclData += PrintUtilZebra.PrintNext(String.format(
-						"MULTIPLYING FACTOR:  %.2f \n", mf));
-				cpclData += PrintUtilZebra.PrintNext(String.format(
-						"CONSUMPTION:  %.0f \n", consump));
-				cpclData += PrintUtilZebra.PrintNext(String.format(
-						"RECORDED DEMD: %s \n", UtilAppCommon.out.RecordedDemd));
-				cpclData += PrintUtilZebra.PrintNext(String.format(
-						"Power Factor:%s \n", UtilAppCommon.out.PowerFactor));
-
-				float mmcunits = 0, avg = 0;
-				if (UtilAppCommon.out.Category.equals("DS-II") || UtilAppCommon.out.Category.equals("NDS-IM")) {
-					mmcunits = 0;
-				} else {
-					mmcunits = Float.parseFloat(UtilAppCommon.out.MMCUnits);
-				}
-				//if (UtilAppCommon.out.Type.equalsIgnoreCase("ACTUAL")||UtilAppCommon.out.Type.equalsIgnoreCase("(PL Adj.) Actual")||UtilAppCommon.out.Type.equalsIgnoreCase("(PL Adj.) MIN"))
-				if (UtilAppCommon.out.CurrentMtrReadingNote.equalsIgnoreCase("OK")) {
-					avg = 0;
-				} else {
-					avg = Float.parseFloat(UtilAppCommon.out.Average);
-				}
-
-				cpclData += PrintUtilZebra.PrintNext(String.format(
-						"MIN UNITS:%.2f\tAVG.:%.2f", mmcunits, avg));
-
-				cpclData += PrintUtilZebra.PrintNext(String.format(
-						"BLD UNITS:%s\tTYPE:%s", UtilAppCommon.out.BilledUnits, UtilAppCommon.out.Type));
-
-				cpclData += PrintUtilZebra
-						.PrintNext("**************************");
-
-				cpclData += "CENTER\r\n";
-				cpclData += PrintUtilZebra
-						.PrintNext("ARREAR DETAILS");
-				cpclData += PrintUtilZebra
-						.PrintNext("----------------");
-				cpclData += "LEFT\r\n";
-
-
-				float pmtonacct = 0, arrengdue = 0, arrdps = 0, arrothr = 0;
-				pmtonacct = Float.parseFloat(UtilAppCommon.out.PaymentOnAccount);
-				arrengdue = Float.parseFloat(UtilAppCommon.out.ArrearEnergyDues);
-				arrdps = Float.parseFloat(UtilAppCommon.out.ArrearDPs);
-				arrothr = Float.parseFloat(UtilAppCommon.out.ArrearOthers);
-				cpclData += PrintUtilZebra.PrintNextData1("PYMT ON ACCT     ",
-						String.format("%.2f", pmtonacct));
-
-				cpclData += PrintUtilZebra.PrintNextData1("ENERGY DUES          ",
-						String.format("%.2f", arrengdue));
-
-				cpclData += PrintUtilZebra.PrintNextData1(" ARREAR DPS          ",
-						String.format("%.2f", arrdps));
-
-				cpclData += PrintUtilZebra.PrintNextData1(" OTHERS              ",
-						String.format("%.2f", arrothr));
-
-
-				cpclData += PrintUtilZebra.PrintNextData1(" SUB TOTAL(A)        ",
-						String.format("%.2f", Float.parseFloat(UtilAppCommon.out.ArrearSubTotal_A)));
-				cpclData += PrintUtilZebra
-						.PrintNext("**************************");
-
-				cpclData += "CENTER\r\n";
-				cpclData += PrintUtilZebra
-						.PrintNext("CURRENT BILL DETAILS");
-				cpclData += PrintUtilZebra
-						.PrintNext("----------------");
-				cpclData += "LEFT\r\n";
-
-				float engchg = 0;
-				engchg = Float.parseFloat(UtilAppCommon.out.CurrentEnergyCharges);
-				cpclData += PrintUtilZebra.PrintNextData1("ENERGY CHARGES       ",
-						String.format("%.2f", engchg));
-
-				cpclData += PrintUtilZebra.PrintNextData1("DPS   ",
-						String.format("%.2f", Float.parseFloat(UtilAppCommon.out.CurrentMonthDps)));
-
-				cpclData += PrintUtilZebra.PrintNextData1("FIXED/DEMD CHG    ",
-						String.format("%.2f", Float.parseFloat(UtilAppCommon.out.FixDemdCharge)));
-
-				cpclData += PrintUtilZebra.PrintNextData1("EXCESS DEMD CHG    ",
-						String.format("%10s", UtilAppCommon.out.ExcessDemdCharge));
-
-
-				cpclData += PrintUtilZebra.PrintNextData1("ELEC. DUTY    ",
-						String.format("%10s", UtilAppCommon.out.ElectricityDuty));
-
-
-				cpclData += PrintUtilZebra.PrintNextData1(" METER RENT        ",
-						String.format("%10s", UtilAppCommon.out.MeterRent));
-
-
-				cpclData += PrintUtilZebra.PrintNextData1(" SHUNT CAP.CHG ",
-						String.format("%10s", UtilAppCommon.out.ShauntCapCharge));
-
-				cpclData += PrintUtilZebra.PrintNextData1(" INSTALLMT AMT ",
-						String.format("%10s", UtilAppCommon.in.CURR_MON_AMT));
-
-				cpclData += PrintUtilZebra.PrintNextData1(" OTHER CHG      ",
-						String.format("%10s", UtilAppCommon.out.OtherCharge));
-
-
-				cpclData += PrintUtilZebra.PrintNextData1(" SUB TOTAL  (B)    ",
-						String.format("%10s", UtilAppCommon.out.SubTotal_B));
-
-				cpclData += PrintUtilZebra
-						.PrintNext("**************************");
-
-				cpclData += PrintUtilZebra.PrintNextData1(" INTEREST ON SD(C) ",
-						String.format("%10s", UtilAppCommon.out.InterestOnSD_C));
-
-				cpclData += PrintUtilZebra.PrintNextData1("   INCENTIVE        ",
-						String.format("%10s", UtilAppCommon.out.Incentive));
-
-				cpclData += PrintUtilZebra.PrintNextData1("  REMISSION        ",
-						String.format("%10s", UtilAppCommon.out.RebateOnMMC));
-
-				cpclData += PrintUtilZebra.PrintNextData1("  TOTAL(A+B+C)   ",
-						String.format("%10s", UtilAppCommon.out.GrossTotal));
-
-				cpclData += PrintUtilZebra
-						.PrintNext("**************************");
-
-				cpclData += PrintUtilZebra.PrintNextData1("  REBATES           ",
-						String.format("%10s", UtilAppCommon.out.Rebate));
-
-				cpclData += "CENTER\r\n";
-				cpclData += PrintUtilZebra.PrintNext("AMOUNT PAYABLE");
-				cpclData += PrintUtilZebra
-						.PrintNext("----------------");
-				cpclData += "LEFT\r\n";
-
-				cpclData += PrintUtilZebra.PrintNextData2("  UPTO       ",
-						String.format("%s", UtilAppCommon.out.AmtPayableUptoDt), String.format("%s", UtilAppCommon.out.AmtPayableUptoAmt));
-
-				cpclData += PrintUtilZebra.PrintNextData2(" BY       ",
-						String.format("%s", UtilAppCommon.out.AmtPayablePYDt), String.format("%s", UtilAppCommon.out.AmtPayablePYAmt));
-
-				cpclData += PrintUtilZebra.PrintNextData2(" AFTER    ",
-						String.format("%s", UtilAppCommon.out.AmtPayableAfterDt), String.format("%s", UtilAppCommon.out.AmtPayableAfterAmt));
-
-
-				cpclData += PrintUtilZebra
-						.PrintNext("**************************");
-
-				cpclData += PrintUtilZebra.PrintNext("DETAILS OF LAST PAYMENT");
-				cpclData += PrintUtilZebra
-						.PrintNext("**************************");
-
-				cpclData += PrintUtilZebra.PrintNextData1("   LAST PAID AMT     ",
-						String.format("%10s", UtilAppCommon.out.LastPaymentAmt));
-
-
-				cpclData += PrintUtilZebra.PrintNextData1("   LAST PAID DT      ",
-						String.format("%10s", UtilAppCommon.out.LastPaidDate));
-
-
-				cpclData += PrintUtilZebra.PrintNextData1("   RECEIPT NO        ",
-						String.format("%12s", UtilAppCommon.out.ReceiptNumber));
-
-
-				cpclData += PrintUtilZebra.PrintNextData1("   MTR RDR        ",
-						String.format("%12s", UtilAppCommon.out.MTR_READER_ID));
-
-				//dNow = new Date();
-				//strDateTime = ft.format(dNow);
-				cpclData += PrintUtilZebra.PrintNextData1("", String.format("Ver: %s", UtilAppCommon.strAppVersion.replace(".apk", "")));
-
-
-				//cpclData += 
-
-				cpclData += "ENDQR\r\nPRINT\r\n";
-
-				cpclData += "PRINT\r\n";
-
-				thePrinterConn.write(cpclData.getBytes());
-
-				Thread.sleep(500);
-
-				thePrinterConn.close();
-				PrintUtilZebra.LineNo = 0;
-				//startActivity(new Intent(getBaseContext(), PoleMobileActivity.class));
-
-			} catch (Exception e) {
-				// Handle communications error here.
-				Toast.makeText(getApplicationContext(), e.toString(),
-						Toast.LENGTH_LONG).show();
-
-			} finally {
-				if (UtilAppCommon.bprintdupl)
-					startActivity(new Intent(getBaseContext(), ActvConsumerNbrInputForDuplicateBill.class));
-				if (UtilAppCommon.blActyncBtn)
-					startActivity(new Intent(getBaseContext(), SyncMobPoleActivity.class));
-					//else if(UtilAppCommon.inSAPSendMsg.equalsIgnoreCase("1") && !UtilAppCommon.blActyncBtn)
-					//	startActivity(new Intent(getBaseContext(), PoleMobileActivity.class));
-				else if (UtilAppCommon.billType.equalsIgnoreCase("A"))
-					startActivity(new Intent(getBaseContext(), ActvConsumerNbrInput.class));
-				else if (UtilAppCommon.billType.equalsIgnoreCase("L"))
-					startActivity(new Intent(getBaseContext(), ActvLegacyNbrInput.class));
-				else if (UtilAppCommon.billType.equalsIgnoreCase("S"))
-					startActivity(new Intent(getBaseContext(), ActvSequenceData.class));
-				else if (UtilAppCommon.billType.equalsIgnoreCase("M"))
-					startActivity(new Intent(getBaseContext(), MeterNbrInput.class));
-				else
-					startActivity(new Intent(getBaseContext(), ActvBillingOption.class));
-			}
-
-		}
-	}
 	class EpsonThermal extends Thread {
 
 		private BluetoothDevice device = null;
@@ -857,9 +271,9 @@ public class ActvBillPrinting extends AppCompatActivity {
 				builder.addTextFont(Builder.FONT_C);
 				builder.addTextAlign(Builder.ALIGN_LEFT);
 				builder.addCommand(ntsMsg.toString().getBytes(StandardCharsets.UTF_8));
-//				builder.addTextFont(Builder.FONT_C);
-//				builder.addTextAlign(Builder.ALIGN_RIGHT);
-//				builder.addCommand("-नीतीश कुमार,मुख्यमंत्री बिहार\n".getBytes(StandardCharsets.UTF_8));
+				builder.addTextFont(Builder.FONT_C);
+				builder.addTextAlign(Builder.ALIGN_RIGHT);
+				builder.addCommand("-नीतीश कुमार,मुख्यमंत्री बिहार\n".getBytes(StandardCharsets.UTF_8));
 				builder.addText(" -------------------------------\n");
 				builder.addTextAlign(Builder.ALIGN_CENTER);
 				builder.addTextSize(2, 2);
@@ -1353,7 +767,7 @@ public class ActvBillPrinting extends AppCompatActivity {
 				builder.addTextSize(1, 1);
 				builder.addTextAlign(Builder.ALIGN_CENTER);
 				builder.addText(" ****************************\n");
-				if(!(UtilAppCommon.out.Category.startsWith("DS")||UtilAppCommon.out.Category.startsWith("KJ"))) {
+				//if(!(UtilAppCommon.out.Category.startsWith("DS")||UtilAppCommon.out.Category.startsWith("KJ"))) {
 					builder.addText(String.format(
 							"   DPS               :   %.2f\n", curdps));
 					builder.addText(String.format(
@@ -1364,7 +778,7 @@ public class ActvBillPrinting extends AppCompatActivity {
 
 					builder.addText(String.format(
 							"  REMISSION         :   %.2f\n", rebonmmc));
-				}
+				//}
 				builder.addText(String.format(
 						"  GROSS TOTAL(A+B+C):   %.2f\n", grosstot));
 
@@ -1433,9 +847,9 @@ public class ActvBillPrinting extends AppCompatActivity {
 
 				builder.addText("\n");
 				try {
-					Bitmap solar = Utilities.getBitmapFromDrawable(ActvBillPrinting.this, R.drawable.chunav2);
+					Bitmap solar = Utilities.getBitmapFromDrawable(ActvBillPrinting.this, R.drawable.nasha);
 					//Bitmap azadi = BitmapFactory.decodeResource(getResources(), R.drawable.chunav);
-					solar = Bitmap.createScaledBitmap(solar, 400, 400, true);
+					solar = Bitmap.createScaledBitmap(solar, solar.getWidth(), solar.getHeight(), true);
 					builder.addImage(solar, 0, 0, solar.getWidth(), solar.getHeight(), Builder.PARAM_DEFAULT);
 					Log.v("solar Photo Print Added", "solar Photo Print Added");
 				} catch (Exception ex) {
@@ -1581,9 +995,9 @@ public class ActvBillPrinting extends AppCompatActivity {
 				builder.addTextFont(Builder.FONT_C);
 				builder.addTextAlign(Builder.ALIGN_LEFT);
 				builder.addCommand(ntsMsg.toString().getBytes(StandardCharsets.UTF_8));
-//				builder.addTextFont(Builder.FONT_C);
-//				builder.addTextAlign(Builder.ALIGN_RIGHT);
-//				builder.addCommand("-नीतीश कुमार,मुख्यमंत्री बिहार\n".getBytes(StandardCharsets.UTF_8));
+				builder.addTextFont(Builder.FONT_C);
+				builder.addTextAlign(Builder.ALIGN_RIGHT);
+				builder.addCommand("-नीतीश कुमार,मुख्यमंत्री बिहार\n".getBytes(StandardCharsets.UTF_8));
 				builder.addText(" -------------------------------\n");
 				builder.addTextSize(2, 2);
 				builder.addTextFont(Builder.FONT_C);
@@ -2000,7 +1414,7 @@ public class ActvBillPrinting extends AppCompatActivity {
 				builder.addTextSize(1, 1);
 				builder.addTextAlign(Builder.ALIGN_LEFT);
 				builder.addText(" ****************************\n");
-				if(!(UtilAppCommon.out.Category.startsWith("DS")||UtilAppCommon.out.Category.startsWith("KJ"))) {
+				//if(!(UtilAppCommon.out.Category.startsWith("DS")||UtilAppCommon.out.Category.startsWith("KJ"))) {
 					builder.addCommand(String.format(
 							"वर्तमान विलंब अधिभार:%.2f\n", curdps).getBytes("UTF-8"));
 					builder.addCommand(String.format(
@@ -2009,7 +1423,7 @@ public class ActvBillPrinting extends AppCompatActivity {
 							"इन्सेंटिव्स          :%.2f\n", incentive).getBytes("UTF-8"));
 					builder.addCommand(String.format(
 							"रीमिशन           :%.2f\n", rebonmmc).getBytes("UTF-8"));
-				}
+				//}
 					builder.addCommand(String.format(
 							"उप-जोड :%.2f\n", grosstot).getBytes("UTF-8"));
 				builder.addText(" ***********************\n");
@@ -2048,14 +1462,13 @@ public class ActvBillPrinting extends AppCompatActivity {
 				builder.addText("\n");
 				builder.addText(String.format("Consumer Helpline- 1912\n\n"));
 				try {
-					Bitmap solar = Utilities.getBitmapFromDrawable(ActvBillPrinting.this, R.drawable.chunav2);
-					solar = Bitmap.createScaledBitmap(solar, 400, 400, true);
+					Bitmap solar = Utilities.getBitmapFromDrawable(ActvBillPrinting.this, R.drawable.nasha);
+					solar = Bitmap.createScaledBitmap(solar, solar.getWidth(), solar.getHeight(), true);
 					builder.addImage(solar, 0, 0, solar.getWidth(), solar.getHeight(), Builder.PARAM_DEFAULT);
 				} catch (Exception ex) {
 					ex.printStackTrace();
 					Log.v("Azadi Photo Print", ex.getMessage());
-					System.out
-							.println("Error In Azadi Photo Print: " + ex.toString());
+					System.out.println("Error In Azadi Photo Print: " + ex.toString());
 				}
 				builder.addTextAlign(Builder.ALIGN_CENTER);
 				builder.addText("**********************\n");
@@ -2467,12 +1880,12 @@ public class ActvBillPrinting extends AppCompatActivity {
 				//printerdata5.append(String.format("SUB TOTAL(B):%1s\n", subtotb));
 				//start string 5
 				printerdata5.append(String.format("*****************************\n"));
-				if(!(UtilAppCommon.out.Category.startsWith("DS")||UtilAppCommon.out.Category.startsWith("KJ"))) {
+				//if(!(UtilAppCommon.out.Category.startsWith("DS")||UtilAppCommon.out.Category.startsWith("KJ"))) {
 					printerdata5.append(String.format("DPS: %1.2f\n", curdps));
 					printerdata5.append(String.format("INT. ON SD(C):%1s\n", intonsd));
 					printerdata5.append(String.format("INCENTIVE   :%1s\n", incentive));
 					printerdata5.append(String.format("REMISSION   :%1s\n", rebonmmc));
-				}
+				//}
 				printerdata5.append(String.format("TOTAL(A+B+C):%1s\n", grosstot));
 
 				printerdata5.append(String.format("******************************* \n"));
@@ -2564,7 +1977,7 @@ public class ActvBillPrinting extends AppCompatActivity {
 					StringBuilder ntsMsg = new StringBuilder();
 					ntsMsg.append("\nसभी घरेलू उपभोक्ताओं से अब\n125 यूनिट तक बिजली खपत पर\nकोई शुल्क नहीं लिया जाएगा। \nयह लाभ जुलाई माह की \nखपत से लागू है।\n");
 					hprtPrinterHelper.WriteData((ntsMsg.toString()).getBytes("UTF-8"));
-//					hprtPrinterHelper.WriteData((" -नीतीश कुमार,मुख्यमंत्री बिहार\n").getBytes("UTF-8"));
+					hprtPrinterHelper.WriteData((" -नीतीश कुमार,मुख्यमंत्री बिहार\n").getBytes("UTF-8"));
 					hprtPrinterHelper.WriteData(("-----------------------\n").getBytes("UTF-8"));
 					String subsidy="  STATE GOVT." ;
 					hprtPrinterHelper.WriteData(new byte[]{0x1B, 0x45, 0x01}); // Bold ON
@@ -2622,7 +2035,7 @@ public class ActvBillPrinting extends AppCompatActivity {
 
 					//conn.multiLinguallinePrint_ver_2_0_printer(address, String.format("      %s","."), 23,Typeface.DEFAULT_BOLD);
 					hprtPrinterHelper.WriteData(printerdata7.toString().getBytes("UTF-8"));
-					tvsPrintImageAzadi(R.drawable.chunav2);
+					tvsPrintImageAzadi(R.drawable.nasha);
 					//	conn.printData(printerdata4.toString().getBytes());
 					Thread.sleep(1000);
 					//conn.closeBT();
@@ -3029,12 +2442,12 @@ public class ActvBillPrinting extends AppCompatActivity {
 
 
 				printerdata5.append(String.format("*****************************\n"));
-				if(!(UtilAppCommon.out.Category.startsWith("DS")||UtilAppCommon.out.Category.startsWith("KJ"))) {
+				//if(!(UtilAppCommon.out.Category.startsWith("DS")||UtilAppCommon.out.Category.startsWith("KJ"))) {
 					printerdata5.append(String.format("वर्तमान विलंब अधिभार: %1.2f\n", curdps));
 					printerdata5.append(String.format("जमानत राशि पर सूद (सी) :%1s\n", intonsd));
 					printerdata5.append(String.format("इन्सेंटिव्स     :%1s\n", incentive));
 					printerdata5.append(String.format("रीमिशन      :%1s\n", rebonmmc));
-				}
+				//}
 				printerdata5.append(String.format("उप-जोड(ए+बी+सी):%1s\n", grosstot));
 
 				printerdata5.append(String.format("******************************* \n"));
@@ -3150,7 +2563,7 @@ public class ActvBillPrinting extends AppCompatActivity {
 					StringBuilder ntsMsg = new StringBuilder();
 					ntsMsg.append("\nसभी घरेलू उपभोक्ताओं से अब\n125 यूनिट तक बिजली खपत पर\nकोई शुल्क नहीं लिया जाएगा।\nयह लाभ जुलाई माह की\nखपत से लागू है।\n");
 					hprtPrinterHelper.WriteData((ntsMsg.toString()).getBytes("UTF-8"));
-//					hprtPrinterHelper.WriteData((" -नीतीश कुमार,मुख्यमंत्री बिहार\n").getBytes("UTF-8"));
+					hprtPrinterHelper.WriteData((" -नीतीश कुमार,मुख्यमंत्री बिहार\n").getBytes("UTF-8"));
 					hprtPrinterHelper.WriteData(("-----------------------\n").getBytes("UTF-8"));
 					hprtPrinterHelper.WriteData(new byte[]{0x1d, 0x0c});
 					String subsidy=" राज्य सरकार";;
@@ -3223,7 +2636,7 @@ public class ActvBillPrinting extends AppCompatActivity {
 					hprtPrinterHelper.WriteData(printerbarcode.toString().getBytes("UTF-8"));
 
 					hprtPrinterHelper.WriteData(printerdata6.toString().getBytes("UTF-8"));
-					tvsPrintImageAzadi(R.drawable.chunav2);
+					tvsPrintImageAzadi(R.drawable.nasha);
 					//conn.multiLinguallinePrint_ver_2_0_printer(address, String.format("      %s","."), 23,Typeface.DEFAULT_BOLD);
 					hprtPrinterHelper.WriteData(printerdata7.toString().getBytes("UTF-8"));
 					//	conn.printData(printerdata4.toString().getBytes());
@@ -4308,13 +3721,513 @@ public class ActvBillPrinting extends AppCompatActivity {
 
 		}
 	}
+	class ZebraThermal extends Thread {
+
+		private BluetoothDevice device = null;
+		private BluetoothSocket btSocket = null;
+		private OutputStream outStream = null;
+		private OutputStreamWriter writer = null;
+		private String address = null;
+
+		public ZebraThermal(String address) {
+			this.address = address;
+			device = mBluetoothAdapter.getRemoteDevice(address);
+			Toast.makeText(getApplicationContext(), "Connected To:" + address,
+					Toast.LENGTH_LONG).show();
+		}
+
+		@SuppressLint("SuspiciousIndentation")
+		@SuppressWarnings("deprecation")
+		public void run() {
+			try {
+				Toast.makeText(getApplicationContext(), "Sending Data",
+						Toast.LENGTH_LONG).show();
+
+				ZebraPrinterConnection thePrinterConn = new BluetoothPrinterConnection(
+						address);
+				thePrinterConn.open();
+				// Initialize
+
+				SimpleDateFormat ft = new SimpleDateFormat("dd-MM-yy'   TIME: 'hh:mm");
+
+				// Open the connection - physical connection is established
+				// here.
+				ZebraPrinter printer = ZebraPrinterFactory
+						.getInstance(thePrinterConn);
+				PrinterLanguage pcLanguage = printer
+						.getPrinterControlLanguage();
+				Toast.makeText(getApplicationContext(),
+						"Language: " + pcLanguage, Toast.LENGTH_LONG).show();
+
+				// This example prints "This is a ZPL test." near the top of the
+				// label.
+				String cpclData = null;
+				PrintUtilZebra.LineNo = 0;
+				if (UtilAppCommon.bprintdupl)
+					cpclData = "! 90 200 200 1140 1\r\n";
+				else
+					cpclData = "! 90 200 200 1110 1\r\n";
+				cpclData += "CENTER\r\n";
+				cpclData += "UNDERLINE ON\r\n";
+
+				if (UtilAppCommon.bprintdupl)
+					cpclData += PrintUtilZebra.PrintLargeNext("Duplicate Bill");
+				UtilAppCommon.bprintdupl = false;
+				cpclData += PrintUtilZebra.PrintLargeNext(UtilAppCommon.out.Company + "CL");
+
+				cpclData += PrintUtilZebra
+						.PrintNext("*******************   ");
+				cpclData += "LEFT\r\n";
+				cpclData += PrintUtilZebra.PrintNext(String.format(
+						" ELECTRICITY BILL :%s", UtilAppCommon.out.BillMonth));
+				//cpclData += "UNDERLINE OFF\r\n";
+				cpclData += PrintUtilZebra
+						.PrintNext("**************************");
+				cpclData += PrintUtilZebra.PrintNext(String.format(
+						" DATE: %s", UtilAppCommon.out.REC_DATE_TIME));
+				cpclData += PrintUtilZebra.PrintNext(String.format(
+						" DUE DATE: %s", UtilAppCommon.out.AmtPayableUptoDt));
+				cpclData += PrintUtilZebra.PrintNext(String.format(
+						" CONSUMER DETAILS"));
+				//cpclData += "CENTER\r\n";
+				cpclData += PrintUtilZebra
+						.PrintNext("**************************");
+				cpclData += "LEFT\r\n";
+
+				cpclData += PrintUtilZebra.PrintNextData("  Bill No       ",
+						String.format("%s", UtilAppCommon.out.BillNo));
+
+				cpclData += PrintUtilZebra.PrintNextData("  DIVISION       ",
+						String.format("%s", UtilAppCommon.out.Division));
+
+				cpclData += PrintUtilZebra.PrintNextData(" SUB DIVN    ",
+						String.format("%s", UtilAppCommon.out.SubDivision));
+
+				cpclData += PrintUtilZebra.PrintNextData(" CA NUMBER   ",
+						String.format("%s", UtilAppCommon.in.CONTRACT_AC_NO));
+
+				cpclData += PrintUtilZebra.PrintNextData(" LEGACY NO       ",
+						String.format("%s", UtilAppCommon.in.CONSUMER_LEGACY_ACC_NO));
+
+				cpclData += PrintUtilZebra.PrintNextData(" MRU             ",
+						String.format("%10s", UtilAppCommon.in.MRU));
 
 
+				cpclData += PrintUtilZebra.PrintNext(String.format(
+						"NAME  : %s", UtilAppCommon.in.CONSUMER_NAME));
+
+				int alen = 0;
+				alen = UtilAppCommon.out.Address.length();
+				String addr1 = "";
+				String addr2 = "";
+				if (alen > 26) {
+					addr1 = UtilAppCommon.out.Address.substring(0, 26);
+					if (alen > 52)
+						addr2 = UtilAppCommon.out.Address.substring(26, 52);
+					else
+						addr2 = UtilAppCommon.out.Address.substring(26, alen);
+				} else
+					addr1 = UtilAppCommon.out.Address;
+
+
+				cpclData += PrintUtilZebra.PrintNext(String.format(
+						"ADDRESS  : "));
+
+				cpclData += "LEFT\r\n";
+
+				//cpclData += PrintUtilZebra.PrintNext(String.format(
+				//		" %s", UtilAppCommon.out.Address));
+				//cpclData += PrintUtilZebra.PrintNext(String.format(
+				//		" %s",UtilAppCommon.out.Address.substring(0, 26)));
+				cpclData += PrintUtilZebra.PrintNext(String.format(
+						" %s", addr1));
+				cpclData += PrintUtilZebra.PrintNext(String.format(
+						" %s", addr2));
+
+				cpclData += PrintUtilZebra.PrintNext(String.format(
+						"MOBILE NO  : %s", UtilAppCommon.in.METER_CAP));
+
+				cpclData += PrintUtilZebra.PrintNext(String.format(
+						"AREA TYPE  : %s", UtilAppCommon.out.Area_type));
+
+				cpclData += PrintUtilZebra.PrintNext(String.format(
+						"POLE NO          : %s", UtilAppCommon.out.PoleNo));
+
+				cpclData += PrintUtilZebra.PrintNext(String.format(
+						"MTR NO: %s PH: %s", UtilAppCommon.out.MtrNo + ", " + UtilAppCommon.in.MONTH_SEASONAL, UtilAppCommon.out.Phase));
+
+
+				//added
+
+				cpclData += PrintUtilZebra.PrintNext(String.format(
+						"MTR COMP : %s", UtilAppCommon.out.MtrMake
+								.equalsIgnoreCase("C") ? "Company" : UtilAppCommon.out.MtrMake
+								.equalsIgnoreCase("O") ? "Consumer" : ""));
+
+				//
+				cpclData += PrintUtilZebra.PrintNext(String.format(
+						"CATEGORY         : %s", UtilAppCommon.in.RATE_CATEGORY));
+
+
+				//String CD="";
+				//String CD1="";
+				String CD2 = "";
+				double result = 0.0;
+				Log.v("ActvBillPrinting", "************************Printing Stage Checkpoint 11");
+				if (UtilAppCommon.out.Category.equalsIgnoreCase("NDS-IID(B)")
+						|| UtilAppCommon.out.Category.equalsIgnoreCase("IAS-IIM")
+						|| UtilAppCommon.out.Category.equalsIgnoreCase("LTEV")
+						|| UtilAppCommon.out.Category.equalsIgnoreCase("LTIS-ID")
+						|| UtilAppCommon.out.Category.equalsIgnoreCase("LTIS-IID")
+						|| UtilAppCommon.out.Category.equalsIgnoreCase("PUBWW")) {
+					Log.v("ActvBillPrinting", "************************Printing Stage Checkpoint 12");
+					result = (double) (Double.parseDouble(UtilAppCommon.out.ConnectedLoad) / 0.9f);
+					CD2 = String.format("%.2f", result) + "KVA";
+					Log.v("ActvBillPrinting", "************************Printing Stage Checkpoint 13");
+				} else if (UtilAppCommon.out.Category.equalsIgnoreCase("HGN")
+						|| UtilAppCommon.out.Category.equalsIgnoreCase("IAS-IM")) {
+					result = (double) (Double.parseDouble(UtilAppCommon.out.SanctLoad));
+					CD2 = result + " HP";
+				} else {
+					/**
+					 * End ading lines for tariff change
+					 */
+					result = (double) (Double.parseDouble(UtilAppCommon.out.SanctLoad));
+					Log.v("ActvBillPrinting", "************************Printing Stage Checkpoint 14");
+					CD2 = result + " KW";
+				}
+				cpclData += PrintUtilZebra.PrintNext(String.format(
+						"LOAD:%s ", CD2));
+
+
+				cpclData += PrintUtilZebra.PrintNext(String.format(
+						"SD               : %s", UtilAppCommon.in.SECURITY_DEPOSIT));
+
+				String billdays;
+
+				if (UtilAppCommon.out.Type.equalsIgnoreCase("(PL Adj.) Actual")) {
+					billdays = UtilAppCommon.out.BillDays + "(" + UtilAppCommon.out.MESSAGE10 + ")";
+				} else {
+					billdays = UtilAppCommon.out.BillDays;
+				}
+				cpclData += PrintUtilZebra.PrintNext(String.format(
+						"BILLED DAYS      : %s", billdays));
+				cpclData += PrintUtilZebra
+						.PrintNext("**************************");
+
+
+				cpclData += "CENTER\r\n";
+				cpclData += PrintUtilZebra
+						.PrintNext("READING DETAILS");
+				cpclData += PrintUtilZebra
+						.PrintNext("----------------");
+				cpclData += "LEFT\r\n";
+
+				cpclData += PrintUtilZebra
+						.PrintNext("\t\t      PREVIOUS \t     CURRENT");
+				// 21.11.15
+				cpclData += PrintUtilZebra.PrintNext(String.format(
+						"READING :   %s   \t %S", UtilAppCommon.out.PreviusReading, UtilAppCommon.out.CurrentReading));
+
+				cpclData += PrintUtilZebra.PrintNext(String.format(
+						"DATE    :   %s   \t %s", UtilAppCommon.out.PrevusMtrRdgDt, UtilAppCommon.out.CurrentMtrRdgDt));
+				if (!UtilAppCommon.out.PrevusMtrRdgDt.equalsIgnoreCase("0000.00.00"))
+					cpclData += PrintUtilZebra.PrintNext(String.format(
+							"STATUS  :   %s   \t %s", UtilAppCommon.out.PreviusMtrReadingNote, UtilAppCommon.out.CurrentMtrReadingNote));
+				//
+
+				if (!UtilAppCommon.in.MONTH_SEASONAL.trim().equalsIgnoreCase("")) {
+					cpclData += "CENTER\r\n";
+					cpclData += PrintUtilZebra
+							.PrintNext("BL METER READING DETAILS");
+					cpclData += PrintUtilZebra
+							.PrintNext("----------------");
+					cpclData += "LEFT\r\n";
+
+					cpclData += PrintUtilZebra
+							.PrintNext("\t\t      PREVIOUS \t     CURRENT");
+					// 21.11.15
+					cpclData += PrintUtilZebra.PrintNext(String.format(
+							"READING :   %s   \t %S", UtilAppCommon.out.PreviusReading, UtilAppCommon.out.CurrentReading));
+
+					cpclData += PrintUtilZebra.PrintNext(String.format(
+							"DATE    :   %s   \t %s", UtilAppCommon.out.PrevusMtrRdgDt, UtilAppCommon.out.CurrentMtrRdgDt));
+					if (!UtilAppCommon.out.PrevusMtrRdgDt.equalsIgnoreCase("0000.00.00"))
+						cpclData += PrintUtilZebra.PrintNext(String.format(
+								"STATUS  :   %s   \t %s", UtilAppCommon.out.PreviusMtrReadingNote, UtilAppCommon.out.CurrentMtrReadingNote));
+					//
+				}
+
+
+				//
+
+
+				cpclData += "PRINT\r\n";
+
+				thePrinterConn.write(cpclData.getBytes());
+				PrintUtilZebra.LineNo = 0;
+
+				if (UtilAppCommon.in.PRV_MTR_READING_NOTE.toUpperCase() != "RN") {
+					Log.e("Inside", "Inside Photo routine");
+					// Print Reading Image
+					try {
+					/*String PhotoDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+							.getPath()
+							+ "/SBDocs/Photos_Crop"
+							+ "/"
+							+ UtilAppCommon.sdoCode
+							+ "/"
+							+ UtilAppCommon.out.MRU;*/
+						String PhotoDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+								.getPath() + "/SBDocs/Photos/" + UtilAppCommon.in.SUB_DIVISION_CODE + "/" + UtilAppCommon.in.MRU;
+
+						strmonth = String.valueOf(Arrays.asList(strMonths).indexOf(UtilAppCommon.out.BillMonth) + 1);
+						String PhotoPath = PhotoDir + "/" + UtilAppCommon.in.SCHEDULED_BILLING_DATE.substring(0, 4) +
+								UtilAppCommon.in.SCHEDULED_BILLING_DATE.substring(5, 7) +
+								"_" + UtilAppCommon.out.CANumber + ".jpg";
+
+
+						System.out.println("Photopath:" + PhotoPath);
+
+
+						thePrinterConn.write("! U1 JOURNAL\r\n! U1 SETFF 50 2\r\n".getBytes());
+
+
+						//printer.getGraphicsUtil().printImage("/storage/sdcard0/img_tick.png",0,0,-1,-1,false);
+						printer.getGraphicsUtil().printImage(PhotoPath, 100, 0, -1, -1, false);
+
+					} catch (Exception ex) {
+
+						System.out
+								.println("Error In Photo Print: " + ex.toString());
+					}
+					// Print Reading Image End
+				}
+
+				cpclData = "! 90 200 200 1360 1\r\n";
+
+				cpclData += "\n\n";
+
+				float mf = 0, consump = 0;
+				//mf=Float.parseFloat(UtilAppCommon.out.MF);
+				if (!UtilAppCommon.out.MF.equalsIgnoreCase(""))
+					mf = Float.parseFloat(UtilAppCommon.out.MF);
+				consump = Float.parseFloat(UtilAppCommon.out.Consumption);
+
+				cpclData += PrintUtilZebra.PrintNext(String.format(
+						"MULTIPLYING FACTOR:  %.2f \n", mf));
+				cpclData += PrintUtilZebra.PrintNext(String.format(
+						"CONSUMPTION:  %.0f \n", consump));
+				cpclData += PrintUtilZebra.PrintNext(String.format(
+						"RECORDED DEMD: %s \n", UtilAppCommon.out.RecordedDemd));
+				cpclData += PrintUtilZebra.PrintNext(String.format(
+						"Power Factor:%s \n", UtilAppCommon.out.PowerFactor));
+
+				float mmcunits = 0, avg = 0;
+				if (UtilAppCommon.out.Category.equals("DS-II") || UtilAppCommon.out.Category.equals("NDS-IM")) {
+					mmcunits = 0;
+				} else {
+					mmcunits = Float.parseFloat(UtilAppCommon.out.MMCUnits);
+				}
+				//if (UtilAppCommon.out.Type.equalsIgnoreCase("ACTUAL")||UtilAppCommon.out.Type.equalsIgnoreCase("(PL Adj.) Actual")||UtilAppCommon.out.Type.equalsIgnoreCase("(PL Adj.) MIN"))
+				if (UtilAppCommon.out.CurrentMtrReadingNote.equalsIgnoreCase("OK")) {
+					avg = 0;
+				} else {
+					avg = Float.parseFloat(UtilAppCommon.out.Average);
+				}
+
+				cpclData += PrintUtilZebra.PrintNext(String.format(
+						"MIN UNITS:%.2f\tAVG.:%.2f", mmcunits, avg));
+
+				cpclData += PrintUtilZebra.PrintNext(String.format(
+						"BLD UNITS:%s\tTYPE:%s", UtilAppCommon.out.BilledUnits, UtilAppCommon.out.Type));
+
+				cpclData += PrintUtilZebra
+						.PrintNext("**************************");
+
+				cpclData += "CENTER\r\n";
+				cpclData += PrintUtilZebra
+						.PrintNext("ARREAR DETAILS");
+				cpclData += PrintUtilZebra
+						.PrintNext("----------------");
+				cpclData += "LEFT\r\n";
+
+
+				float pmtonacct = 0, arrengdue = 0, arrdps = 0, arrothr = 0;
+				pmtonacct = Float.parseFloat(UtilAppCommon.out.PaymentOnAccount);
+				arrengdue = Float.parseFloat(UtilAppCommon.out.ArrearEnergyDues);
+				arrdps = Float.parseFloat(UtilAppCommon.out.ArrearDPs);
+				arrothr = Float.parseFloat(UtilAppCommon.out.ArrearOthers);
+				cpclData += PrintUtilZebra.PrintNextData1("PYMT ON ACCT     ",
+						String.format("%.2f", pmtonacct));
+
+				cpclData += PrintUtilZebra.PrintNextData1("ENERGY DUES          ",
+						String.format("%.2f", arrengdue));
+
+				cpclData += PrintUtilZebra.PrintNextData1(" ARREAR DPS          ",
+						String.format("%.2f", arrdps));
+
+				cpclData += PrintUtilZebra.PrintNextData1(" OTHERS              ",
+						String.format("%.2f", arrothr));
+
+
+				cpclData += PrintUtilZebra.PrintNextData1(" SUB TOTAL(A)        ",
+						String.format("%.2f", Float.parseFloat(UtilAppCommon.out.ArrearSubTotal_A)));
+				cpclData += PrintUtilZebra
+						.PrintNext("**************************");
+
+				cpclData += "CENTER\r\n";
+				cpclData += PrintUtilZebra
+						.PrintNext("CURRENT BILL DETAILS");
+				cpclData += PrintUtilZebra
+						.PrintNext("----------------");
+				cpclData += "LEFT\r\n";
+
+				float engchg = 0;
+				engchg = Float.parseFloat(UtilAppCommon.out.CurrentEnergyCharges);
+				cpclData += PrintUtilZebra.PrintNextData1("ENERGY CHARGES       ",
+						String.format("%.2f", engchg));
+
+				cpclData += PrintUtilZebra.PrintNextData1("DPS   ",
+						String.format("%.2f", Float.parseFloat(UtilAppCommon.out.CurrentMonthDps)));
+
+				cpclData += PrintUtilZebra.PrintNextData1("FIXED/DEMD CHG    ",
+						String.format("%.2f", Float.parseFloat(UtilAppCommon.out.FixDemdCharge)));
+
+				cpclData += PrintUtilZebra.PrintNextData1("EXCESS DEMD CHG    ",
+						String.format("%10s", UtilAppCommon.out.ExcessDemdCharge));
+
+
+				cpclData += PrintUtilZebra.PrintNextData1("ELEC. DUTY    ",
+						String.format("%10s", UtilAppCommon.out.ElectricityDuty));
+
+
+				cpclData += PrintUtilZebra.PrintNextData1(" METER RENT        ",
+						String.format("%10s", UtilAppCommon.out.MeterRent));
+
+
+				cpclData += PrintUtilZebra.PrintNextData1(" SHUNT CAP.CHG ",
+						String.format("%10s", UtilAppCommon.out.ShauntCapCharge));
+
+				cpclData += PrintUtilZebra.PrintNextData1(" INSTALLMT AMT ",
+						String.format("%10s", UtilAppCommon.in.CURR_MON_AMT));
+
+				cpclData += PrintUtilZebra.PrintNextData1(" OTHER CHG      ",
+						String.format("%10s", UtilAppCommon.out.OtherCharge));
+
+
+				cpclData += PrintUtilZebra.PrintNextData1(" SUB TOTAL  (B)    ",
+						String.format("%10s", UtilAppCommon.out.SubTotal_B));
+
+				cpclData += PrintUtilZebra
+						.PrintNext("**************************");
+
+				cpclData += PrintUtilZebra.PrintNextData1(" INTEREST ON SD(C) ",
+						String.format("%10s", UtilAppCommon.out.InterestOnSD_C));
+
+				cpclData += PrintUtilZebra.PrintNextData1("   INCENTIVE        ",
+						String.format("%10s", UtilAppCommon.out.Incentive));
+
+				cpclData += PrintUtilZebra.PrintNextData1("  REMISSION        ",
+						String.format("%10s", UtilAppCommon.out.RebateOnMMC));
+
+				cpclData += PrintUtilZebra.PrintNextData1("  TOTAL(A+B+C)   ",
+						String.format("%10s", UtilAppCommon.out.GrossTotal));
+
+				cpclData += PrintUtilZebra
+						.PrintNext("**************************");
+
+				cpclData += PrintUtilZebra.PrintNextData1("  REBATES           ",
+						String.format("%10s", UtilAppCommon.out.Rebate));
+
+				cpclData += "CENTER\r\n";
+				cpclData += PrintUtilZebra.PrintNext("AMOUNT PAYABLE");
+				cpclData += PrintUtilZebra
+						.PrintNext("----------------");
+				cpclData += "LEFT\r\n";
+
+				cpclData += PrintUtilZebra.PrintNextData2("  UPTO       ",
+						String.format("%s", UtilAppCommon.out.AmtPayableUptoDt), String.format("%s", UtilAppCommon.out.AmtPayableUptoAmt));
+
+				cpclData += PrintUtilZebra.PrintNextData2(" BY       ",
+						String.format("%s", UtilAppCommon.out.AmtPayablePYDt), String.format("%s", UtilAppCommon.out.AmtPayablePYAmt));
+
+				cpclData += PrintUtilZebra.PrintNextData2(" AFTER    ",
+						String.format("%s", UtilAppCommon.out.AmtPayableAfterDt), String.format("%s", UtilAppCommon.out.AmtPayableAfterAmt));
+
+
+				cpclData += PrintUtilZebra
+						.PrintNext("**************************");
+
+				cpclData += PrintUtilZebra.PrintNext("DETAILS OF LAST PAYMENT");
+				cpclData += PrintUtilZebra
+						.PrintNext("**************************");
+
+				cpclData += PrintUtilZebra.PrintNextData1("   LAST PAID AMT     ",
+						String.format("%10s", UtilAppCommon.out.LastPaymentAmt));
+
+
+				cpclData += PrintUtilZebra.PrintNextData1("   LAST PAID DT      ",
+						String.format("%10s", UtilAppCommon.out.LastPaidDate));
+
+
+				cpclData += PrintUtilZebra.PrintNextData1("   RECEIPT NO        ",
+						String.format("%12s", UtilAppCommon.out.ReceiptNumber));
+
+
+				cpclData += PrintUtilZebra.PrintNextData1("   MTR RDR        ",
+						String.format("%12s", UtilAppCommon.out.MTR_READER_ID));
+
+				//dNow = new Date();
+				//strDateTime = ft.format(dNow);
+				cpclData += PrintUtilZebra.PrintNextData1("", String.format("Ver: %s", UtilAppCommon.strAppVersion.replace(".apk", "")));
+
+
+				//cpclData +=
+
+				cpclData += "ENDQR\r\nPRINT\r\n";
+
+				cpclData += "PRINT\r\n";
+
+				thePrinterConn.write(cpclData.getBytes());
+
+				Thread.sleep(500);
+
+				thePrinterConn.close();
+				PrintUtilZebra.LineNo = 0;
+				//startActivity(new Intent(getBaseContext(), PoleMobileActivity.class));
+
+			} catch (Exception e) {
+				// Handle communications error here.
+				Toast.makeText(getApplicationContext(), e.toString(),
+						Toast.LENGTH_LONG).show();
+
+			} finally {
+				if (UtilAppCommon.bprintdupl)
+					startActivity(new Intent(getBaseContext(), ActvConsumerNbrInputForDuplicateBill.class));
+				if (UtilAppCommon.blActyncBtn)
+					startActivity(new Intent(getBaseContext(), SyncMobPoleActivity.class));
+					//else if(UtilAppCommon.inSAPSendMsg.equalsIgnoreCase("1") && !UtilAppCommon.blActyncBtn)
+					//	startActivity(new Intent(getBaseContext(), PoleMobileActivity.class));
+				else if (UtilAppCommon.billType.equalsIgnoreCase("A"))
+					startActivity(new Intent(getBaseContext(), ActvConsumerNbrInput.class));
+				else if (UtilAppCommon.billType.equalsIgnoreCase("L"))
+					startActivity(new Intent(getBaseContext(), ActvLegacyNbrInput.class));
+				else if (UtilAppCommon.billType.equalsIgnoreCase("S"))
+					startActivity(new Intent(getBaseContext(), ActvSequenceData.class));
+				else if (UtilAppCommon.billType.equalsIgnoreCase("M"))
+					startActivity(new Intent(getBaseContext(), MeterNbrInput.class));
+				else
+					startActivity(new Intent(getBaseContext(), ActvBillingOption.class));
+			}
+
+		}
+	}
 	public void tvsPrintImageAzadi(int imageId) {
 
 		BitmapFactory.Options bitmapOptions = new BitmapFactory.Options();
 		Bitmap bmp_print = BitmapFactory.decodeResource(getResources(), imageId);
-		bmp_print = getResizedBitmap(bmp_print, 400);
+		bmp_print = getResizedBitmap(bmp_print, 350);
 
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
 		bmp_print.compress(Bitmap.CompressFormat.JPEG, 100, out);
@@ -4418,10 +4331,7 @@ public class ActvBillPrinting extends AppCompatActivity {
         }
     }
 
-
-
-
-    public Bitmap getImageBitmap(File f){
+	public Bitmap getImageBitmap(File f){
         try {
             Log.e("mBitmap", String.valueOf(f));
             BitmapFactory.Options bitmapOptions = new BitmapFactory.Options();
@@ -4532,4 +4442,86 @@ public class ActvBillPrinting extends AppCompatActivity {
                 true);
         return newbm;
     }
+    /*
+	@Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+      MenuInflater inflater = getMenuInflater();
+      inflater.inflate(R.menu.mainmenu, menu);
+      return true;
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+	   	 switch (item.getItemId()) {
+	   	 case R.id.home:
+	   		finish();
+	 		 startActivity(new Intent(this, ActvivityMain.class));
+	   		finish();
+	    	 Intent intent = new Intent(this, ActvivityMain.class);
+
+	    	 startActivity(intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+	         startActivity(intent);
+	   		 break;
+	     }
+	     return true;
+   }
+
+	@Override
+	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+		// TODO Auto-generated method stub
+
+		ClsListData data = (ClsListData) parent.getItemAtPosition(position);
+		String value =  data.getValue();
+		String item = data.getDisplay();
+		Intent intent = getIntent();
+	    strPrinterValue = value;
+	    strPrinterItem = item;
+
+		// Added on 3.7.2014
+
+	}
+*/
+
+	public void getImageByCANo(String CANo) {
+		String AppDir = "";
+
+		Log.e("getImageByCANo", "Started");
+		UtilDB utildb = new UtilDB(getApplicationContext());
+		AppDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES + "/SBDocs/Photos_Crop" + "/" + utildb.getSdoCode() + "/"
+				+ utildb.getActiveMRU()).getPath();
+
+		Cursor cursorImage = utildb.getUnCompressedImage(CANo);
+		File file = null;
+		//getUnCompressedImage
+		if (cursorImage != null) {
+			cursorImage.moveToFirst();
+			file = new File(AppDir, cursorImage.getString(1));
+		}
+		//ImageProcessing imageProcessing = new ImageProcessing();
+
+		AsyncImage asyncImage = new AsyncImage(this, () -> {
+			// TODO Auto-generated method stub
+		});
+
+		//String strArray[] = imageProcessing.processImage(AppDir, file, this, cursorImage.getString(1), CANo);
+		String credentials[] = new String[6];
+		credentials[0] = CANo;
+		credentials[1] = cursorImage.getString(1).substring(4, 6);
+		credentials[2] = cursorImage.getString(1).substring(0, 4);
+		credentials[3] = utildb.getSdoCode();
+		File f = new File(AppDir);
+		credentials[4] = f.getAbsolutePath() + "/" + cursorImage.getString(1);
+		credentials[5] = utildb.getActiveMRU();
+
+		if (credentials != null)
+			asyncImage.execute(credentials);
+
+		Log.e("getImageByCANo", "Completed");
+	}
+	public void onBackPressed() {
+		// do something on back.
+		super.onBackPressed();
+		//finish();
+		// startActivity(new Intent(this, ActvivityMain.class));
+		return;
+	}
 }
