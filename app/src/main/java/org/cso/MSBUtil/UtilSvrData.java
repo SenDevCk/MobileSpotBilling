@@ -16,10 +16,11 @@ public class UtilSvrData {
 	private String SOAPNamespace;
 	private String SOAPAddress;
 
-	//Staging
+	//Staging1 current
 	/*private String HostName = "http://125.16.220.10/";
 	private String AlternateHost = "http://125.16.220.10/";
 	private String strHostNameConstant = "http://125.16.220.10/";*/
+	//Staging2 old
 //	private String HostName = "http://172.16.3.122/";
 //	private String AlternateHost = "http://172.16.3.122/";
 //	private String strHostNameConstant = "http://172.16.3.122/";
@@ -34,7 +35,7 @@ public class UtilSvrData {
 	private HttpTransportSE httpTransport=null;
 	
 	public UtilSvrData(){
-		//if(UtilAppCommon.strHostName.equals(""))
+			//if(UtilAppCommon.strHostName.equals(""))
 			UtilAppCommon.strHostName = HostName;
 			//UtilAppCommon.strHostName = ProHostName;
 	}
@@ -42,7 +43,7 @@ public class UtilSvrData {
 	public String getJsonInputData(String strParam)
 	{
 		ObjectResponse=null;
-/*		SOAPAction = "http://odishadiscoms.com/GetJson";	
+		/*SOAPAction = "http://odishadiscoms.com/GetJson";
 		SOAPMethod =  "GetJson";
 		SOAPNamespace = "http://odishadiscoms.com/";
 		SOAPAddress =  "http://odishadiscoms.com/webservices/sbaService.asmx?WSDL";*/
@@ -402,9 +403,9 @@ public class UtilSvrData {
 			
 			request.addProperty("IMEINo", UtilAppCommon.IMEI_Number);
 			//strParamValue = strParamValue + "|" + UtilAppCommon.IMEI_Number;
-			Log.e("strSDOCode", strSDOCode+" MRU= "+strMRUCode);
-			Log.e("strCANo", strCANo);
-			Log.e("imageArray", byteImage);
+			//Log.e("strSDOCode", strSDOCode+" MRU= "+strMRUCode);
+			//Log.e("strCANo", strCANo);
+			//Log.e("imageArray", byteImage);
 			envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
 			envelope.dotNet = true;
 			envelope.setOutputSoapObject(request);

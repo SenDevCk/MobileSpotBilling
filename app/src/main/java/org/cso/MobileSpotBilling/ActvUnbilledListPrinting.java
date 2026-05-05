@@ -113,16 +113,16 @@ public class ActvUnbilledListPrinting extends AppCompatActivity {
             Thread t = new Thread(sendDataAnaloginThermal);
             t.run();
         }
-       /* else if (printer[1].compareToIgnoreCase("TVS-ENGLISH") == 0) {
-            ActvMsgPrinting.TVSPrinter tvsPrinter = new ActvMsgPrinting().new TVSPrinter(printer[0]);
+        else if (printer[1].compareToIgnoreCase("TVS-ENGLISH") == 0) {
+            TVSPrinter tvsPrinter = new TVSPrinter(printer[0]);
             Thread t = new Thread(tvsPrinter);
             t.run();
         }
         else if (printer[1].compareToIgnoreCase("TVS-HINDI") == 0) {
-            ActvMsgPrinting.TVSPrinter tvsPrinter = new ActvMsgPrinting().new TVSPrinter(printer[0]);
+            TVSPrinter tvsPrinter = new TVSPrinter(printer[0]);
             Thread t = new Thread(tvsPrinter);
             t.run();
-        }*/
+        }
         else {
             Toast.makeText(this, "No Printer Configured", Toast.LENGTH_LONG)
                     .show();
@@ -414,4 +414,86 @@ public class ActvUnbilledListPrinting extends AppCompatActivity {
         }
     }
 
+    class TVSPrinter extends Thread {
+        private String address = null;
+
+        UtilDB dbObj = new UtilDB(getApplicationContext());
+
+        public TVSPrinter(String address) {
+            this.address = address;
+        }
+
+        SimpleDateFormat ft = new SimpleDateFormat("dd-MM-yy' TIME:'hh:mm");
+
+        public void run() {
+
+            try {
+
+                AnalogicsThermalPrinter conn = new AnalogicsThermalPrinter();
+                conn.openBT(address);
+
+                Bluetooth_Printer_2inch_prof_ThermalAPI printer = new Bluetooth_Printer_2inch_prof_ThermalAPI();
+
+                Toast.makeText(getBaseContext(), BILL, Toast.LENGTH_SHORT)
+                        .show();
+
+                char lf = 0x0A;
+                char cr = 0x0D;
+                Cursor c = dbObj.unbilledlist();
+                // char dp = 0x1D;
+                // char nm = 0x13;
+
+                // ////////Print On Paper Start////////////
+                StringBuilder printerdata1 = new StringBuilder();
+
+                //Print part 1
+
+
+                printerdata1.append(printer.font_Courier_24_VIP(String.format(
+                        "     %s\n", "Unbilled Consumer List")));
+                printerdata1.append(printer.font_Courier_24_VIP(String.format(
+                        "     %s\n", "---------------------")));
+
+                printerdata1.append(printer.font_Courier_24_VIP(String.format(
+                        "%s\n", "Srl CANumber LegacyNbr")));
+
+                printerdata1.append(printer.font_Courier_24_VIP(String.format(
+                        "%s\n", "----------------------")));
+
+                int cnt = 0;
+                if (c.moveToFirst()) {
+                    do {
+                        cnt++;
+                        printerdata1.append(printer.font_Courier_24_VIP(String.format(
+                                "%s  %s  %s \n", cnt, c.getString(0), c.getString(1))));
+
+                    } while (c.moveToNext());
+                }
+                printerdata1.append(printer.font_Courier_24_VIP(String.format(
+                        ".    \n ")));
+                printerdata1.append(printer.font_Courier_24_VIP(String.format(
+                        ".    \n ")));
+
+                conn.printData(printerdata1.toString().getBytes());
+
+                Thread.sleep(3000);
+                conn.closeBT();
+
+
+            } catch (Exception e) {
+                // Handle communications error here.
+                Toast.makeText(getApplicationContext(), e.toString(),
+                        Toast.LENGTH_LONG).show();
+
+            } finally {
+
+                //startActivity(new Intent(getBaseContext(), ActvReport.class));
+                finish();
+            }
+            return;
+
+        }
+    }
 }
+
+

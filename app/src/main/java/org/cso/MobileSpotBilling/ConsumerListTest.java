@@ -161,9 +161,9 @@ public class ConsumerListTest extends AppCompatActivity {
 
     public void setListAdapter(final ArrayList<HashMap<String, String>> listToShow) {
         SimpleAdapter adapter = new InteractiveArrayAdapter(this, R.layout.newcons_listitems, listToShow,
-                new String[]{"ACC_NO", "NAME", "ADDR", "METER_MANUFACTURER_SR_NO"},
-                //new int[] {R.id.newConsBinder,R.id.newConsAccNo, R.id.newConsName, R.id.newConsAddr});
-                new int[]{R.id.newConsAccNo, R.id.newConsName, R.id.newConsAddr, R.id.newConsMeterNo});
+                new String[]{"ACC_NO", "NAME", "ADDR", "METER_MANUFACTURER_SR_NO","RATE_CATEGORY"},
+                new int[] {R.id.newConsBinder,R.id.newConsAccNo, R.id.newConsName, R.id.newConsAddr,R.id.newConsMeterNo});
+                //new int[]{R.id.newConsBinder,R.id.newConsAccNo, R.id.newConsName, R.id.newConsAddr, R.id.newConsMeterNo});
         //tvConsumerListTestNOR.setText("Number of record(s) found :    " + listToShow.size());
           toolbar.setSubtitle("Records : "+listToShow.size());
         //LayoutInflater inflater = getLayoutInflater();

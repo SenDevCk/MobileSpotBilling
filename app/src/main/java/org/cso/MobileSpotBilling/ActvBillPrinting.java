@@ -266,14 +266,14 @@ public class ActvBillPrinting extends AppCompatActivity {
 //							.println("Error In Azadi Photo Print: " + ex.toString());
 //				}
 				StringBuilder ntsMsg = new StringBuilder();
-				ntsMsg.append("\nसभी घरेलू उपभोक्ताओं से अब 125 यूनिट तक\nबिजली खपत पर कोई शुल्क नहीं लिया\nजाएगा। यह लाभ जुलाई माह की खपत\nसे लागू है।\n");
+				ntsMsg.append("\nसभी घरेलू उपभोक्ताओं से अब 125 यूनिट तक\nबिजली खपत पर कोई शुल्क नहीं लिया\nजाएगा। यह लाभ जुलाई 2025\nकी खपत से लागू है।\n");
 				builder.addTextSize(1, 2);
 				builder.addTextFont(Builder.FONT_C);
 				builder.addTextAlign(Builder.ALIGN_LEFT);
 				builder.addCommand(ntsMsg.toString().getBytes(StandardCharsets.UTF_8));
 				builder.addTextFont(Builder.FONT_C);
 				builder.addTextAlign(Builder.ALIGN_RIGHT);
-				builder.addCommand("-नीतीश कुमार,मुख्यमंत्री बिहार\n".getBytes(StandardCharsets.UTF_8));
+				builder.addCommand("-सम्राट चौधरी,मुख्यमंत्री बिहार\n".getBytes(StandardCharsets.UTF_8));
 				builder.addText(" -------------------------------\n");
 				builder.addTextAlign(Builder.ALIGN_CENTER);
 				builder.addTextSize(2, 2);
@@ -322,29 +322,29 @@ public class ActvBillPrinting extends AppCompatActivity {
 						+ UtilAppCommon.out.AmtPayableUptoDt.trim() + "\nके पश्चात विदयुत सम्बन्ध विच्छेदित\nकर दिया जाएगा|" + "\n" +
 						"                 स0 वि0 अभि0" + "\n";
 				Log.v("ActvBillPrinting", "************************Printing Stage Checkpoint 3");
-//				try {
-//
-//					if (Double.parseDouble(UtilAppCommon.out.ArrearSubTotal_A) > 1000) {
-//						Log.v("ActvBillPrinting", "************************Printing Stage Checkpoint 4");
-//						builder.addCommand(String.format(
-//								hindiMessage).getBytes("UTF-8"));
-//
-//						Log.v("ActvBillPrinting", "************************Printing Stage Checkpoint 5");
-//						//	("प्रिय " + bill.get_CNAME().trim() + ",\n" + "कृपया विदयुत बकाया राशि रू" + bill.get_PROMPT_AMT().trim() + " का\nभुगतान सुचना प्राप्ति के 15 दिनों के\nभीतर सुनिश्चित करें अन्यथा विदयुत \nअधिनियम 2003 के धारा 56 के आलोक में दि." + bill.get_UPTO_DATE().trim() + " के पश्चात विदयुत\nसम्बन्ध विच्छेदित कर दिया जाएगा।" + "\n" + "                 स0 वि0 अभि0" + "\n")
-//					}
-//				} catch (NumberFormatException e) {
-//					try {
-//						Log.v("ActvBillPrinting", "************************Printing Stage Checkpoint 6");
-//						if (Float.parseFloat(UtilAppCommon.out.ArrearSubTotal_A) > 1000) {
-//							Log.v("ActvBillPrinting", "************************Printing Stage Checkpoint 7");
-//							builder.addCommand(String.format(
-//									hindiMessage).getBytes("UTF-8"));
-//							Log.v("ActvBillPrinting", "************************Printing Stage Checkpoint 8");
-//						}
-//					} catch (NumberFormatException e1) {
-//						e.printStackTrace();
-//					}
-//				}
+				try {
+
+					if (Double.parseDouble(UtilAppCommon.out.ArrearSubTotal_A) > 1000) {
+						Log.v("ActvBillPrinting", "************************Printing Stage Checkpoint 4");
+						builder.addCommand(String.format(
+								hindiMessage).getBytes("UTF-8"));
+
+						Log.v("ActvBillPrinting", "************************Printing Stage Checkpoint 5");
+						//	("प्रिय " + bill.get_CNAME().trim() + ",\n" + "कृपया विदयुत बकाया राशि रू" + bill.get_PROMPT_AMT().trim() + " का\nभुगतान सुचना प्राप्ति के 15 दिनों के\nभीतर सुनिश्चित करें अन्यथा विदयुत \nअधिनियम 2003 के धारा 56 के आलोक में दि." + bill.get_UPTO_DATE().trim() + " के पश्चात विदयुत\nसम्बन्ध विच्छेदित कर दिया जाएगा।" + "\n" + "                 स0 वि0 अभि0" + "\n")
+					}
+				} catch (NumberFormatException e) {
+					try {
+						Log.v("ActvBillPrinting", "************************Printing Stage Checkpoint 6");
+						if (Float.parseFloat(UtilAppCommon.out.ArrearSubTotal_A) > 1000) {
+							Log.v("ActvBillPrinting", "************************Printing Stage Checkpoint 7");
+							builder.addCommand(String.format(
+									hindiMessage).getBytes("UTF-8"));
+							Log.v("ActvBillPrinting", "************************Printing Stage Checkpoint 8");
+						}
+					} catch (NumberFormatException e1) {
+						e.printStackTrace();
+					}
+				}
 
 
 				/**
@@ -841,16 +841,60 @@ public class ActvBillPrinting extends AppCompatActivity {
 //				//builder.addBarcode(strBarcodeData, Builder.BARCODE_CODE93 , Builder.HRI_NONE, Builder.FONT_A, 50, 100);
 				//builder.addBarcode(strBarcodeData, Builder.BARCODE_EAN8 , Builder.HRI_NONE, Builder.FONT_A, 50, 100);
 				//builder.addBarcode(strBarcodeData, Builder.BARCODE_GS1_128 , Builder.HRI_NONE, Builder.FONT_A, 50, 100);
-
 				builder.addText("\n");
-				builder.addText(String.format("Consumer Helpline- 1912"));
+				builder.addTextAlign(Printer.ALIGN_LEFT);
+				builder.addText("Contact us for consumer complaints \n");
+				//qr images
+				try {
+					Bitmap qr1 = Utilities.getBitmapFromDrawable(ActvBillPrinting.this, R.drawable.qr1);
+					qr1 = Bitmap.createScaledBitmap(qr1, 300, 300, true);
+					builder.addImage(qr1, 0, 0, 300, 300, Builder.PARAM_DEFAULT);
+				} catch (Exception ex) {
+					ex.printStackTrace();
+					Log.v("QR1", ex.getMessage());
+					System.out.println("QR1 Print: " + ex.toString());
+				}
+				//by website
+				builder.addTextAlign(Printer.ALIGN_CENTER);
+				builder.addText("By Website" + "\n");
+				//qr2 image
+				try {
+					Bitmap qr2 = Utilities.getBitmapFromDrawable(ActvBillPrinting.this, R.drawable.qr2);
+					qr2 = Bitmap.createScaledBitmap(qr2, 300, 300, true);
+					builder.addImage(qr2, 0, 0, 300, 300, Builder.PARAM_DEFAULT);
+				} catch (Exception ex) {
+					ex.printStackTrace();
+					Log.v("QR1", ex.getMessage());
+					System.out.println("QR1 Print: " + ex.toString());
+				}
+				builder.addTextAlign(Printer.ALIGN_CENTER);
+				builder.addTextSize(1, 1);
+				builder.addTextFont(Printer.FONT_B);
+				builder.addText("By WhatsApp" + "\n");
+				//builder.addText("Local Fuse Call Center No. :"+"\n");
+				//fusecall center number
+//				builder.addTextAlign(Printer.ALIGN_RIGHT);
+//				builder.addTextSize(2, 2);
+//				builder.addTextFont(Printer.FONT_C);
+//				builder.addText(""+mrudetails.getFuseContact()+"\n");
+				//Toll-free helpline no.
+				builder.addTextSize(1, 1);
+				builder.addTextFont(Printer.FONT_B);
+				builder.addTextAlign(Printer.ALIGN_LEFT);
+				builder.addText("Toll-free helpline no.");
+				//1912
+				builder.addTextSize(2, 2);
+				builder.addTextFont(Printer.FONT_C);
+				builder.addTextAlign(Printer.ALIGN_RIGHT);
+				builder.addText( "1912" + "\n");
 
 				builder.addText("\n");
 				try {
 					Bitmap solar = Utilities.getBitmapFromDrawable(ActvBillPrinting.this, R.drawable.nasha);
 					//Bitmap azadi = BitmapFactory.decodeResource(getResources(), R.drawable.chunav);
-					solar = Bitmap.createScaledBitmap(solar, solar.getWidth(), solar.getHeight(), true);
-					builder.addImage(solar, 0, 0, solar.getWidth(), solar.getHeight(), Builder.PARAM_DEFAULT);
+					solar = Bitmap.createScaledBitmap(solar, 300, 250, true);
+					builder.addTextAlign(Printer.ALIGN_CENTER);
+					builder.addImage(solar, 0, 0, 300, 250, Builder.PARAM_DEFAULT);
 					Log.v("solar Photo Print Added", "solar Photo Print Added");
 				} catch (Exception ex) {
 					ex.printStackTrace();
@@ -990,14 +1034,14 @@ public class ActvBillPrinting extends AppCompatActivity {
 //							.println("Error In Azadi Photo Print: " + ex.toString());
 //				}
 				StringBuilder ntsMsg = new StringBuilder();
-				ntsMsg.append("\nसभी घरेलू उपभोक्ताओं से अब 125 यूनिट तक\nबिजली खपत पर कोई शुल्क नहीं लिया\nजाएगा। यह लाभ जुलाई माह की खपत\nसे लागू है।\n");
+				ntsMsg.append("\nसभी घरेलू उपभोक्ताओं से अब 125 यूनिट तक\nबिजली खपत पर कोई शुल्क नहीं लिया\nजाएगा। यह लाभ जुलाई\n2025 की खपत से लागू है।\n");
 				builder.addTextSize(1, 2);
 				builder.addTextFont(Builder.FONT_C);
 				builder.addTextAlign(Builder.ALIGN_LEFT);
 				builder.addCommand(ntsMsg.toString().getBytes(StandardCharsets.UTF_8));
 				builder.addTextFont(Builder.FONT_C);
 				builder.addTextAlign(Builder.ALIGN_RIGHT);
-				builder.addCommand("-नीतीश कुमार,मुख्यमंत्री बिहार\n".getBytes(StandardCharsets.UTF_8));
+				builder.addCommand("-सम्राट चौधरी,मुख्यमंत्री बिहार\n".getBytes(StandardCharsets.UTF_8));
 				builder.addText(" -------------------------------\n");
 				builder.addTextSize(2, 2);
 				builder.addTextFont(Builder.FONT_C);
@@ -1038,23 +1082,23 @@ public class ActvBillPrinting extends AppCompatActivity {
 						+ " का भुगतान सुचना\nप्राप्ति के 15 दिनों के भीतर\nसुनिश्चित करें अन्यथा विदयुत \nअधिनियम 2003 के धारा 56 के\nआलोक में दि."
 						+ UtilAppCommon.out.AmtPayableUptoDt.trim() + "\nके पश्चात विदयुत सम्बन्ध विच्छेदित\nकर दिया जाएगा|" + "\n" +
 						"                 स0 वि0 अभि0" + "\n";
-//				try {
-//
-//					if (Double.parseDouble(UtilAppCommon.out.ArrearSubTotal_A) > 1000) {
-//						builder.addCommand(String.format(
-//								hindiMessage).getBytes("UTF-8"));
-//						//	("प्रिय " + bill.get_CNAME().trim() + ",\n" + "कृपया विदयुत बकाया राशि रू" + bill.get_PROMPT_AMT().trim() + " का\nभुगतान सुचना प्राप्ति के 15 दिनों के\nभीतर सुनिश्चित करें अन्यथा विदयुत \nअधिनियम 2003 के धारा 56 के आलोक में दि." + bill.get_UPTO_DATE().trim() + " के पश्चात विदयुत\nसम्बन्ध विच्छेदित कर दिया जाएगा।" + "\n" + "                 स0 वि0 अभि0" + "\n")
-//					}
-//				} catch (NumberFormatException e) {
-//					try {
-//						if (Float.parseFloat(UtilAppCommon.out.ArrearSubTotal_A) > 1000) {
-//							builder.addCommand(String.format(
-//									hindiMessage).getBytes("UTF-8"));
-//						}
-//					} catch (NumberFormatException e1) {
-//
-//					}
-//				}
+				try {
+
+					if (Double.parseDouble(UtilAppCommon.out.ArrearSubTotal_A) > 1000) {
+						builder.addCommand(String.format(
+								hindiMessage).getBytes("UTF-8"));
+						//	("प्रिय " + bill.get_CNAME().trim() + ",\n" + "कृपया विदयुत बकाया राशि रू" + bill.get_PROMPT_AMT().trim() + " का\nभुगतान सुचना प्राप्ति के 15 दिनों के\nभीतर सुनिश्चित करें अन्यथा विदयुत \nअधिनियम 2003 के धारा 56 के आलोक में दि." + bill.get_UPTO_DATE().trim() + " के पश्चात विदयुत\nसम्बन्ध विच्छेदित कर दिया जाएगा।" + "\n" + "                 स0 वि0 अभि0" + "\n")
+					}
+				} catch (NumberFormatException e) {
+					try {
+						if (Float.parseFloat(UtilAppCommon.out.ArrearSubTotal_A) > 1000) {
+							builder.addCommand(String.format(
+									hindiMessage).getBytes("UTF-8"));
+						}
+					} catch (NumberFormatException e1) {
+
+					}
+				}
 
 
 /**
@@ -1455,25 +1499,76 @@ public class ActvBillPrinting extends AppCompatActivity {
 						"मीटर रीडर आईडी :%s\n", UtilAppCommon.out.MTR_READER_ID).getBytes("UTF-8"));
 				builder.addText(String.format("Ver: %s", UtilAppCommon.strAppVersion.replace(".apk", "")));
 				builder.addText("\n");
+
+				//builder.addText(String.format("Consumer Helpline- 1912\n\n"));
+				builder.addTextAlign(Printer.ALIGN_CENTER);
+				builder.addCommand(String.format("उपभोक्ता शिकायत हेतु सम्पर्क करे").getBytes("UTF-8"));
+				builder.addText("\n");
+//				//qr images
+				try {
+					Bitmap qr1 = Utilities.getBitmapFromDrawable(ActvBillPrinting.this, R.drawable.qr1);
+					qr1 = Bitmap.createScaledBitmap(qr1, 300, 300, true);
+					builder.addImage(qr1, 0, 0, 300, 300, Builder.PARAM_DEFAULT);
+				} catch (Exception ex) {
+					ex.printStackTrace();
+					Log.v("QR1", ex.getMessage());
+					System.out.println("QR1 Print: " + ex.toString());
+				}
+				//by website
+				builder.addTextAlign(Printer.ALIGN_CENTER);
+				builder.addCommand(String.format("वेबसाइट द्वारा").getBytes("UTF-8"));
+				builder.addText("\n");
+				//qr2 image
+				try {
+					Bitmap qr2 = Utilities.getBitmapFromDrawable(ActvBillPrinting.this, R.drawable.qr2);
+					qr2 = Bitmap.createScaledBitmap(qr2, 300, 300, true);
+					builder.addImage(qr2, 0, 0, 300, 300, Builder.PARAM_DEFAULT);
+				} catch (Exception ex) {
+					ex.printStackTrace();
+					Log.v("QR1", ex.getMessage());
+					System.out.println("QR1 Print: " + ex.toString());
+				}
+				builder.addTextAlign(Printer.ALIGN_CENTER);
+				builder.addTextSize(1, 1);
+				builder.addTextFont(Printer.FONT_B);
+				builder.addCommand(String.format("व्हाट्सएप द्वारा").getBytes("UTF-8"));
+				builder.addText("\n");
+//				//builder.addCommand("स्थानीय फ्यूज कॉल सेंटर नं :");
+//				//builder.addText("\n");
+//				//fusecall center number
+////				builder.addTextAlign(Printer.ALIGN_RIGHT);
+////				builder.addTextSize(2, 2);
+////				builder.addTextFont(Printer.FONT_C);
+////				builder.addText(""+mrudetails.getFuseContact()+"\n");
+//				//Toll-free helpline no.
+				builder.addTextSize(1, 1);
+				builder.addTextFont(Printer.FONT_B);
+				builder.addTextAlign(Printer.ALIGN_LEFT);
+				builder.addCommand(String.format("  टोलफ्री हेल्पलाइन नं:").getBytes("UTF-8"));
+//				//1912
+				builder.addTextSize(2, 2);
+				builder.addTextFont(Printer.FONT_C);
+				builder.addTextAlign(Printer.ALIGN_RIGHT);
+				builder.addText( "1912" + "\n");
 				strBarcodeData = UtilAppCommon.acctNbr;
-					builder.addTextAlign(Builder.ALIGN_CENTER);
+				builder.addTextAlign(Builder.ALIGN_CENTER);
 				builder.addBarcode(strBarcodeData, Builder.BARCODE_CODE39, Builder.HRI_BELOW, Builder.FONT_A, barcodeWidth, barcodeHeight);
 				builder.addTextAlign(Builder.ALIGN_LEFT);
 				builder.addText("\n");
-				builder.addText(String.format("Consumer Helpline- 1912\n\n"));
 				try {
 					Bitmap solar = Utilities.getBitmapFromDrawable(ActvBillPrinting.this, R.drawable.nasha);
-					solar = Bitmap.createScaledBitmap(solar, solar.getWidth(), solar.getHeight(), true);
-					builder.addImage(solar, 0, 0, solar.getWidth(), solar.getHeight(), Builder.PARAM_DEFAULT);
+					solar = Bitmap.createScaledBitmap(solar, 300, 250, true);
+					builder.addTextAlign(Printer.ALIGN_CENTER);
+					builder.addImage(solar, 0, 0, 300, 250, Builder.PARAM_DEFAULT);
 				} catch (Exception ex) {
 					ex.printStackTrace();
 					Log.v("Azadi Photo Print", ex.getMessage());
 					System.out.println("Error In Azadi Photo Print: " + ex.toString());
 				}
 				builder.addTextAlign(Builder.ALIGN_CENTER);
-				builder.addText("**********************\n");
-				builder.addCommand("सोलर लगाए बिजली बिल बचाए ! \n".getBytes("UTF-8"));
-				builder.addText("**********************\n");
+				builder.addText("*********************\n");
+				builder.addCommand("सोलर लगाए बिजली \n बिल बचाए ! \n".getBytes("UTF-8"));
+				builder.addText("*********************\n");
 				float flIntDisc = 0;
 				if (!(UtilAppCommon.out.INT_DISC.equalsIgnoreCase("") || UtilAppCommon.out.INT_DISC.equalsIgnoreCase("null"))) {
 					flIntDisc = Float.parseFloat(UtilAppCommon.out.INT_DISC);
@@ -1490,7 +1585,7 @@ public class ActvBillPrinting extends AppCompatActivity {
 				printer.closePrinter();
 				//
 			} catch (Exception e) {
-				//e.printStackTrace();
+				e.printStackTrace();
 				// Handle communications error here.
 				Toast.makeText(getApplicationContext(), e.toString(),
 						Toast.LENGTH_LONG).show();
@@ -1592,6 +1687,7 @@ public class ActvBillPrinting extends AppCompatActivity {
 				// char nm = 0x13;
                 double paybaleAmt=Double.parseDouble(UtilAppCommon.out.SubTotal_B)-Double.parseDouble(UtilAppCommon.out.CurrentMonthDps);
 				// ////////Print On Paper Start////////////
+				StringBuilder textData = new StringBuilder();
 				StringBuilder printerdata1 = new StringBuilder();
 				StringBuilder printerdata2 = new StringBuilder();
 				StringBuilder printerdata3 = new StringBuilder();
@@ -1625,22 +1721,22 @@ public class ActvBillPrinting extends AppCompatActivity {
 						+ " का भुगतान सुचना\nप्राप्ति के 15 दिनों के भीतर\nसुनिश्चित करें अन्यथा विदयुत \nअधिनियम 2003 के धारा 56 के\nआलोक में दि."
 						+ UtilAppCommon.out.AmtPayableUptoDt.trim() + "\nके पश्चात विदयुत सम्बन्ध\nविच्छेदित कर दिया जाएगा|" + "\n" +
 						"                 स0 वि0 अभि0" + "\n";
-				//try {
+				try {
 
-					//if (Double.parseDouble(UtilAppCommon.out.ArrearSubTotal_A) > 1000) {
-//						printerdata1.append((String.format(
-//								hindiMessage)));
+					if (Double.parseDouble(UtilAppCommon.out.ArrearSubTotal_A) > 1000) {
+						printerdata1.append((String.format(
+								hindiMessage)));
 						//	("प्रिय " + bill.get_CNAME().trim() + ",\n" + "कृपया विदयुत बकाया राशि रू" + bill.get_PROMPT_AMT().trim() + " का\nभुगतान सुचना प्राप्ति के 15 दिनों के\nभीतर सुनिश्चित करें अन्यथा विदयुत \nअधिनियम 2003 के धारा 56 के आलोक में दि." + bill.get_UPTO_DATE().trim() + " के पश्चात विदयुत\nसम्बन्ध विच्छेदित कर दिया जाएगा।" + "\n" + "                 स0 वि0 अभि0" + "\n")
-					//}
-				//} catch (NumberFormatException e) {
-					//try {
-						//if (Float.parseFloat(UtilAppCommon.out.ArrearSubTotal_A) > 1000) {
+					}
+				} catch (NumberFormatException e) {
+					try {
+						if (Float.parseFloat(UtilAppCommon.out.ArrearSubTotal_A) > 1000) {
 							printerdata1.append((String.format(hindiMessage)));
-						//}
-					//} catch (NumberFormatException e1) {
-                        //e1.printStackTrace();
-					//}
-				//}
+						}
+					} catch (NumberFormatException e1) {
+                        e1.printStackTrace();
+					}
+				}
 
 
 				//* End adding lines for tariff change 2018-19
@@ -1922,7 +2018,7 @@ public class ActvBillPrinting extends AppCompatActivity {
 
 
 				strBarcodeData = UtilAppCommon.acctNbr;
-				printerdata6.append(String.format("Consumer Helpline- 1912 \n\n"));
+				//printerdata6.append(String.format("Consumer Helpline- 1912 \n\n"));
 				printerdata6.append(String.format("******************************\n"));
 				printerdata6.append(String.format("Solar lagaen bijali bill bachaen " + "\n"));
 				printerdata6.append(String.format("****************************** \n"));
@@ -1975,9 +2071,9 @@ public class ActvBillPrinting extends AppCompatActivity {
 					hprtPrinterHelper.WriteData(new byte[]{0x1d, 0x0c});
 //					tvsPrintImageAzadi(R.drawable.cm);
 					StringBuilder ntsMsg = new StringBuilder();
-					ntsMsg.append("\nसभी घरेलू उपभोक्ताओं से अब\n125 यूनिट तक बिजली खपत पर\nकोई शुल्क नहीं लिया जाएगा। \nयह लाभ जुलाई माह की \nखपत से लागू है।\n");
+					ntsMsg.append("\nसभी घरेलू उपभोक्ताओं से अब\n125 यूनिट तक बिजली खपत पर\nकोई शुल्क नहीं लिया जाएगा। \nयह लाभ जुलाई 2025 की \nखपत से लागू है।\n");
 					hprtPrinterHelper.WriteData((ntsMsg.toString()).getBytes("UTF-8"));
-					hprtPrinterHelper.WriteData((" -नीतीश कुमार,मुख्यमंत्री बिहार\n").getBytes("UTF-8"));
+					hprtPrinterHelper.WriteData((" -सम्राट चौधरी,मुख्यमंत्री बिहार\n").getBytes("UTF-8"));
 					hprtPrinterHelper.WriteData(("-----------------------\n").getBytes("UTF-8"));
 					String subsidy="  STATE GOVT." ;
 					hprtPrinterHelper.WriteData(new byte[]{0x1B, 0x45, 0x01}); // Bold ON
@@ -2028,11 +2124,49 @@ public class ActvBillPrinting extends AppCompatActivity {
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
-
 					hprtPrinterHelper.WriteData(printerbarcode.toString().getBytes("UTF-8"));
-
+					//helpline
+					textData.append("Contact us for consumer complaints \n");
+					HPRTPrinterHelper.WriteData((textData + "\n").getBytes("gb2312"));
+					HPRTPrinterHelper.WriteData(new byte[]{0x1d, 0x0c});
+					HPRTPrinterHelper.WriteData(new byte[]{0x1D, 0x21, 0x00});
+					textData.delete(0, textData.length());
+					Bitmap qr1 = BitmapFactory.decodeResource(getResources(), R.drawable.qr1);
+					qr1 = Bitmap.createScaledBitmap(qr1, 300, 300, true);
+					printimage(qr1);
+					textData.append("      By the website \n");
+					HPRTPrinterHelper.WriteData((textData + "\n").getBytes("gb2312"));
+					HPRTPrinterHelper.WriteData(new byte[]{0x1d, 0x0c});
+					HPRTPrinterHelper.WriteData(new byte[]{0x1D, 0x21, 0x00});
+					textData.delete(0, textData.length());
+					Bitmap qr2 = BitmapFactory.decodeResource(getResources(), R.drawable.qr2);
+					qr2 = Bitmap.createScaledBitmap(qr2, 300, 300, true);
+					printimage(qr2);
+					textData.append("      By WhatsApp \n");
+					textData.append("\n");
+//					textData.append("Local Fuse Call Center No. :");
+//					HPRTPrinterHelper.WriteData((textData + "\n").getBytes("gb2312"));
+//					HPRTPrinterHelper.WriteData(new byte[]{0x1d, 0x0c});
+//					HPRTPrinterHelper.WriteData(new byte[]{0x1D, 0x21, 0x00});
+//					textData.delete(0, textData.length());
+//					textData.append("    " +mrudetails.getFuseContact()  + "\n");
+//					HPRTPrinterHelper.WriteData(new byte[]{0x1B, 0x45, 0x01}); // Bold ON
+//					HPRTPrinterHelper.WriteData(new byte[]{0x1D, 0x21, 0x11}); // Double height and width
+//					HPRTPrinterHelper.WriteData((textData + "\n").getBytes("gb2312"));
+//					textData.delete(0, textData.length());
+					textData.append("Toll-free helpline no.");
+					HPRTPrinterHelper.WriteData(new byte[]{0x1d, 0x0c});// Bold OFF
+					HPRTPrinterHelper.WriteData(new byte[]{0x1D, 0x21, 0x00});
+					HPRTPrinterHelper.WriteData((textData + "").getBytes("gb2312"));
+					textData.delete(0, textData.length());
+					textData.append("1912");
+					HPRTPrinterHelper.WriteData(new byte[]{0x1B, 0x45, 0x01}); // Bold ON
+					HPRTPrinterHelper.WriteData(new byte[]{0x1D, 0x21, 0x11}); // Double height and width
+					//  method = "addText";
+					HPRTPrinterHelper.WriteData((textData + "\n").getBytes("gb2312"));
+					textData.delete(0, textData.length());
+					//fusecall center end
 					hprtPrinterHelper.WriteData(printerdata6.toString().getBytes("UTF-8"));
-
 					//conn.multiLinguallinePrint_ver_2_0_printer(address, String.format("      %s","."), 23,Typeface.DEFAULT_BOLD);
 					hprtPrinterHelper.WriteData(printerdata7.toString().getBytes("UTF-8"));
 					tvsPrintImageAzadi(R.drawable.nasha);
@@ -2135,6 +2269,7 @@ public class ActvBillPrinting extends AppCompatActivity {
 				// char nm = 0x13;
 				double paybaleAmt=Double.parseDouble(UtilAppCommon.out.SubTotal_B)-Double.parseDouble(UtilAppCommon.out.CurrentMonthDps);
 				// ////////Print On Paper Start////////////
+				StringBuilder textData = new StringBuilder();
 				StringBuilder printerdata1 = new StringBuilder();
 				StringBuilder printerdata2 = new StringBuilder();
 				StringBuilder printerdata3 = new StringBuilder();
@@ -2168,22 +2303,23 @@ public class ActvBillPrinting extends AppCompatActivity {
 						+ " का भुगतान सुचना\nप्राप्ति के 15 दिनों के भीतर\nसुनिश्चित करें अन्यथा विदयुत \nअधिनियम 2003 के धारा 56 के\nआलोक में दि."
 						+ UtilAppCommon.out.AmtPayableUptoDt.trim() + "\nके पश्चात विदयुत सम्बन्ध\nविच्छेदित कर दिया जाएगा|" + "\n" +
 						"                 स0 वि0 अभि0" + "\n";
-//				try {
-//
-//					if (Double.parseDouble(UtilAppCommon.out.ArrearSubTotal_A) > 1000) {
-//						printerdata1.append((String.format(
-//								hindiMessage)));
-//						//	("प्रिय " + bill.get_CNAME().trim() + ",\n" + "कृपया विदयुत बकाया राशि रू" + bill.get_PROMPT_AMT().trim() + " का\nभुगतान सुचना प्राप्ति के 15 दिनों के\nभीतर सुनिश्चित करें अन्यथा विदयुत \nअधिनियम 2003 के धारा 56 के आलोक में दि." + bill.get_UPTO_DATE().trim() + " के पश्चात विदयुत\nसम्बन्ध विच्छेदित कर दिया जाएगा।" + "\n" + "                 स0 वि0 अभि0" + "\n")
-//					}
-//				} catch (NumberFormatException e) {
-//					try {
-//						if (Float.parseFloat(UtilAppCommon.out.ArrearSubTotal_A) > 1000) {
-//							printerdata1.append((String.format(hindiMessage)));
-//						}
-//					} catch (NumberFormatException e1) {
-//
-//					}
-//				}
+				try {
+
+					if (Double.parseDouble(UtilAppCommon.out.ArrearSubTotal_A) > 1000) {
+						printerdata1.append((String.format(
+								hindiMessage)));
+						//	("प्रिय " + bill.get_CNAME().trim() + ",\n" + "कृपया विदयुत बकाया राशि रू" + bill.get_PROMPT_AMT().trim() + " का\nभुगतान सुचना प्राप्ति के 15 दिनों के\nभीतर सुनिश्चित करें अन्यथा विदयुत \nअधिनियम 2003 के धारा 56 के आलोक में दि." + bill.get_UPTO_DATE().trim() + " के पश्चात विदयुत\nसम्बन्ध विच्छेदित कर दिया जाएगा।" + "\n" + "                 स0 वि0 अभि0" + "\n")
+					}
+				} catch (NumberFormatException e) {
+					//e.printStackTrace();
+					try {
+						if (Float.parseFloat(UtilAppCommon.out.ArrearSubTotal_A) > 1000) {
+							printerdata1.append((String.format(hindiMessage)));
+						}
+					} catch (NumberFormatException e1) {
+                      // e1.printStackTrace();
+					}
+				}
 
 
 				//* End adding lines for tariff change 2018-19
@@ -2489,7 +2625,7 @@ public class ActvBillPrinting extends AppCompatActivity {
 				//printerdata4.append(printer.font_Courier_24_VIP(String.format("Consumer Helpline- 1912")));
 				//printerdata4.append(String.format("Consumer Helpline- 1912"));
 				// image
-				printerdata6.append(String.format("Consumer Helpline- 1912 \n"));
+				//printerdata6.append(String.format("Consumer Helpline- 1912 \n"));
 				float flIntDisc = 0;
 				if (!(UtilAppCommon.out.INT_DISC.equalsIgnoreCase("") || UtilAppCommon.out.INT_DISC.equalsIgnoreCase("null"))) {
 					flIntDisc = Float.parseFloat(UtilAppCommon.out.INT_DISC);
@@ -2561,9 +2697,9 @@ public class ActvBillPrinting extends AppCompatActivity {
 					Thread.sleep(50);
 //					tvsPrintImageAzadi(R.drawable.cm);
 					StringBuilder ntsMsg = new StringBuilder();
-					ntsMsg.append("\nसभी घरेलू उपभोक्ताओं से अब\n125 यूनिट तक बिजली खपत पर\nकोई शुल्क नहीं लिया जाएगा।\nयह लाभ जुलाई माह की\nखपत से लागू है।\n");
+					ntsMsg.append("\nसभी घरेलू उपभोक्ताओं से अब\n125 यूनिट तक बिजली खपत पर\nकोई शुल्क नहीं लिया जाएगा।\nयह लाभ जुलाई 2025 की \nखपत से लागू है।\n");
 					hprtPrinterHelper.WriteData((ntsMsg.toString()).getBytes("UTF-8"));
-					hprtPrinterHelper.WriteData((" -नीतीश कुमार,मुख्यमंत्री बिहार\n").getBytes("UTF-8"));
+					hprtPrinterHelper.WriteData((" -सम्राट चौधरी,मुख्यमंत्री बिहार\n").getBytes("UTF-8"));
 					hprtPrinterHelper.WriteData(("-----------------------\n").getBytes("UTF-8"));
 					hprtPrinterHelper.WriteData(new byte[]{0x1d, 0x0c});
 					String subsidy=" राज्य सरकार";;
@@ -2634,7 +2770,46 @@ public class ActvBillPrinting extends AppCompatActivity {
 						e.printStackTrace();
 					}
 					hprtPrinterHelper.WriteData(printerbarcode.toString().getBytes("UTF-8"));
-
+//helpline
+					textData.append("उपभोक्ता शिकायत हेतु सम्पर्क करे \n");
+					hprtPrinterHelper.WriteData((textData + "\n").getBytes("UTF-8"));
+					hprtPrinterHelper.WriteData(new byte[]{0x1d, 0x0c});
+					hprtPrinterHelper.WriteData(new byte[]{0x1D, 0x21, 0x00});
+					textData.delete(0, textData.length());
+					Bitmap qr1 = BitmapFactory.decodeResource(getResources(), R.drawable.qr1);
+					qr1 = Bitmap.createScaledBitmap(qr1, 300, 300, true);
+					printimage(qr1);
+					textData.append("      वेबसाइट द्वारा \n");
+					hprtPrinterHelper.WriteData((textData + "\n").getBytes("UTF-8"));
+					hprtPrinterHelper.WriteData(new byte[]{0x1d, 0x0c});
+					hprtPrinterHelper.WriteData(new byte[]{0x1D, 0x21, 0x00});
+					textData.delete(0, textData.length());
+					Bitmap qr2 = BitmapFactory.decodeResource(getResources(), R.drawable.qr2);
+					qr2 = Bitmap.createScaledBitmap(qr2, 300, 300, true);
+					printimage(qr2);
+					textData.append("      व्हाट्सएप द्वारा \n");
+					textData.append("\n");
+//					textData.append("स्थानीय फ्यूज कॉल सेंटर नं :");
+//					hprtPrinterHelper.WriteData((textData + "\n").getBytes("UTF-8"));
+//					hprtPrinterHelper.WriteData(new byte[]{0x1d, 0x0c});
+//					hprtPrinterHelper.WriteData(new byte[]{0x1D, 0x21, 0x00});
+//					textData.delete(0, textData.length());
+//					textData.append("    " +mrudetails.getFuseContact()  + "\n");
+//					HPRTPrinterHelper.WriteData(new byte[]{0x1B, 0x45, 0x01}); // Bold ON
+//					HPRTPrinterHelper.WriteData(new byte[]{0x1D, 0x21, 0x11}); // Double height and width
+//					hprtPrinterHelper.WriteData((textData + "\n").getBytes("UTF-8"));
+//					textData.delete(0, textData.length());
+					textData.append("टोलफ्री हेल्पलाइन नं:");
+					hprtPrinterHelper.WriteData(new byte[]{0x1d, 0x0c});// Bold OFF
+					hprtPrinterHelper.WriteData(new byte[]{0x1D, 0x21, 0x00});
+					hprtPrinterHelper.WriteData((textData + "").getBytes("UTF-8"));
+					textData.delete(0, textData.length());
+					textData.append("1912");
+					HPRTPrinterHelper.WriteData(new byte[]{0x1B, 0x45, 0x01}); // Bold ON
+					HPRTPrinterHelper.WriteData(new byte[]{0x1D, 0x21, 0x11}); // Double height and width
+					//  method = "addText";
+					hprtPrinterHelper.WriteData((textData + "\n").getBytes("UTF-8"));
+					textData.delete(0, textData.length());
 					hprtPrinterHelper.WriteData(printerdata6.toString().getBytes("UTF-8"));
 					tvsPrintImageAzadi(R.drawable.nasha);
 					//conn.multiLinguallinePrint_ver_2_0_printer(address, String.format("      %s","."), 23,Typeface.DEFAULT_BOLD);
@@ -4234,7 +4409,8 @@ public class ActvBillPrinting extends AppCompatActivity {
 
 		DecimalFormat df = new DecimalFormat("0.00");
 		int printWidth = 350;
-		bmp_print = zoomImg(bmp_print, printWidth, printWidth);
+		int printHeight = 270;
+		bmp_print = zoomImg(bmp_print, printWidth, printHeight);
 		/*if (bmp_print.getWidth() >= printWidth) {
 
 			float c = Float.valueOf(df.format((float) bmp_print.getWidth() / printWidth));

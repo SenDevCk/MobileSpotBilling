@@ -526,7 +526,9 @@ public class ActvBilling extends AppCompatActivity implements OnClickListener, T
                         Intent intent = new Intent(this, ActvCurrReading.class);
                         intent.putExtra("MeterStatus", data.getExtras().getString("meterStatusId"));
                         intent.putExtra("PRV_BILL_DATE", UtilAppCommon.in.PRV_BILL_DATE);
-                        Log.d("PRV_BILL_DATE",""+UtilAppCommon.in.PRV_BILL_DATE);
+                        intent.putExtra("PRV_KWH", UtilAppCommon.in.PRV_READING_KWH);
+                        //intent.putExtra("PWR_FACTOR", UtilAppCommon.in.PWR_FACTOR);
+                        Log.d("PRV_BILL_DATE",""+UtilAppCommon.in.PRV_BILL_DATE+"\nPRV_READING_KWH: "+UtilAppCommon.in.PRV_READING_KWH);
                         Toast.makeText(context, ""+UtilAppCommon.in.PRV_BILL_DATE, Toast.LENGTH_SHORT).show();
                         startActivityForResult(intent, 5);
                     }
@@ -971,6 +973,9 @@ public class ActvBilling extends AppCompatActivity implements OnClickListener, T
                     Toast.makeText(ActvBilling.this, "Step16 Completed", Toast.LENGTH_SHORT).show();
                     billing();
                 }
+            }else{
+                Log.d("error","NXT_SCH_MTR_RDR_DATE may be null or blank");
+                Toast.makeText(ActvBilling.this, "NXT_SCH_MTR_RDR_DATE not Found !", Toast.LENGTH_SHORT).show();
             }
         }
         //Log.e("StartBilling", "Completed");

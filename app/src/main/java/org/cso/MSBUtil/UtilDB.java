@@ -2981,7 +2981,7 @@ public class UtilDB extends Activity {
 		db = helper.getReadableDatabase();
 		ArrayList<HashMap<String, String>> list = new ArrayList<HashMap<String, String>>();
 		String qry = String
-				.format(" select MRU,contract_ac_no,consumer_name,address, METER_MANUFACTURER_SR_NO from BillInput where  contract_ac_no not in ( select CANumber from SAPInput where MSGID in ('3','4','5','6')) ");
+				.format(" select MRU,contract_ac_no,consumer_name,address, METER_MANUFACTURER_SR_NO,RATE_CATEGORY from BillInput where  contract_ac_no not in ( select CANumber from SAPInput where MSGID in ('3','4','5','6')) ");
 						//BINDER);
 		System.out.println("query---" + qry);
 		Cursor c = db.rawQuery(qry, null);
@@ -2996,6 +2996,7 @@ public class UtilDB extends Activity {
 				map.put("NAME", c.getString(2));
 				map.put("ADDR", c.getString(3));
 				map.put("METER_MANUFACTURER_SR_NO", c.getString(4));
+				map.put("RATE_CATEGORY", c.getString(5));
 				list.add(map);
 
 			} while (c.moveToNext());

@@ -35,7 +35,9 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.text.Editable;
 import android.text.Html;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -43,12 +45,15 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SwitchCompat;
 import androidx.appcompat.widget.Toolbar;
 
 public class ActvCurrReading extends AppCompatActivity implements OnClickListener, TaskCallback {
@@ -56,10 +61,13 @@ public class ActvCurrReading extends AppCompatActivity implements OnClickListene
     String strMtrStatus;
     Button calculateBillBtn;
     boolean blFlag = true, blDialFlag = false;
-    LinearLayout linelayPowFact = null, linelayKVAH = null, linelayMaxDemandKVA = null, linelayKWH = null, linelayMaxDemand = null;
+    LinearLayout linelayPowFact = null, linelayKVAH = null, linelayMaxDemandKVA = null, linelayKWH = null, linelayMaxDemand = null,lin_prev_read;
     Toolbar toolbar;
     String PRV_BILL_DATE="";
+    Double PRV_KWH;Float PWR_FACTOR;
+    SwitchCompat swich_kvah;
 
+    boolean swichIsEnabled=false,isPowerFactorEditAvailable=false;
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
@@ -67,11 +75,12 @@ public class ActvCurrReading extends AppCompatActivity implements OnClickListene
         System.out.println("**********Inside ActvCurrReading*********** ");
         setContentView(R.layout.currreadinginput);
         PRV_BILL_DATE=getIntent().getStringExtra("PRV_BILL_DATE");
+        PRV_KWH=Double.parseDouble(getIntent().getStringExtra("PRV_KWH"));
         toolbar = findViewById(R.id.toolbar_currentred_inpt);
         //toolbar.setLogo(getResources().getDrawable(R.drawable.sbpscl_logo));
         toolbar.setTitle("Current Reading Input");
 
-        toolbar.setSubtitle(Html.fromHtml("<b style=\"color:White;\">" +"PRV_BILL_DATE"+ (PRV_BILL_DATE) + "</b> "));
+        //toolbar.setSubtitle(Html.fromHtml("<b style=\"color:White;\">" +"PBD "+ (PRV_BILL_DATE) +" PKW "+PRV_KWH+ "</b> "));
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -80,7 +89,51 @@ public class ActvCurrReading extends AppCompatActivity implements OnClickListene
         linelayMaxDemandKVA = (LinearLayout) findViewById(R.id.maxDemandKVALayout);
         linelayKWH = (LinearLayout) findViewById(R.id.CurrentReadingKWH);
         linelayMaxDemand = (LinearLayout) findViewById(R.id.LinearLayoutMaxDemand);
-
+        lin_prev_read = (LinearLayout) findViewById(R.id.lin_prev_read);
+        lin_prev_read.setVisibility(View.GONE);
+        swich_kvah=findViewById(R.id.swich_kvah);
+        swich_kvah.setVisibility(View.GONE);
+        ((TextView)findViewById(R.id.text_msg)).setVisibility(View.GONE);
+        swich_kvah.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (isChecked) {
+                // Switch ON
+                swichIsEnabled=true;
+                linelayPowFact.setBackgroundColor(getResources().getColor(R.color.material_dynamic_neutral90));
+                ((TextView)findViewById(R.id.text_msg)).setVisibility(View.VISIBLE);
+                if (isPowerFactorEditAvailable) {
+                    ((EditText) findViewById(R.id.CurrentReadingEdit)).setEnabled(false);
+                }
+                ((EditText) findViewById(R.id.CurrentReadingEditKVAH)).setEnabled(false);
+                ((EditText) findViewById(R.id.CurrentReadingEditKVAH)).setText("0");
+                ((EditText) findViewById(R.id.MaxDemandKVAEdit)).setEnabled(false);
+                ((EditText) findViewById(R.id.MaxDemandKVAEdit)).setText("0");
+                linelayMaxDemand.setVisibility(View.VISIBLE);
+                if (isPowerFactorEditAvailable) {
+                    ((EditText) findViewById(R.id.MaxDemandEdit)).setEnabled(false);
+                    ((EditText) findViewById(R.id.MaxDemandEdit)).setText("0.00");
+                }
+                ((EditText) findViewById(R.id.CurrentReadingEdit)).addTextChangedListener(kwhTextWatcher);
+                ((EditText) findViewById(R.id.MaxDemandEdit)).addTextChangedListener(maxDemTextWacher);
+                ((EditText) findViewById(R.id.PowFactorEdit)).addTextChangedListener(pfTextWatcher);
+            } else {
+                // Switch OFF
+                swichIsEnabled=false;
+                ((TextView)findViewById(R.id.text_msg)).setVisibility(View.GONE);
+                linelayPowFact.setBackgroundColor(getResources().getColor(R.color.cardview_light_background));
+                ((EditText) findViewById(R.id.CurrentReadingEdit)).setEnabled(true);
+                ((EditText) findViewById(R.id.CurrentReadingEditKVAH)).setEnabled(true);
+                ((EditText) findViewById(R.id.CurrentReadingEditKVAH)).setText("0");
+                ((EditText) findViewById(R.id.MaxDemandKVAEdit)).setEnabled(true);
+                ((EditText) findViewById(R.id.MaxDemandKVAEdit)).setText("0");
+                linelayMaxDemand.setVisibility(View.GONE);
+                ((EditText) findViewById(R.id.MaxDemandEdit)).setEnabled(true);
+                ((EditText) findViewById(R.id.MaxDemandEdit)).setText("0.00");
+                ((EditText) findViewById(R.id.CurrentReadingEdit)).removeTextChangedListener(kwhTextWatcher);
+                ((EditText) findViewById(R.id.MaxDemandEdit)).removeTextChangedListener(maxDemTextWacher);
+                ((EditText) findViewById(R.id.PowFactorEdit)).removeTextChangedListener(pfTextWatcher);
+            }
+        });
+        swich_kvah.setVisibility(View.GONE);
         Intent intent = getIntent();
         strMtrStatus = intent.getExtras().getString("MeterStatus");
         if (!intent.getExtras().getString("MeterStatus").equalsIgnoreCase("Ok")) {
@@ -179,19 +232,29 @@ public class ActvCurrReading extends AppCompatActivity implements OnClickListene
                     Toast.makeText(this, ""+ex.getMessage(), Toast.LENGTH_SHORT).show();
                 }
                 if (pre_read_date==null){
+                    isPowerFactorEditAvailable=true;
                     linelayPowFact.setVisibility(View.VISIBLE);
                     ((EditText) findViewById(R.id.PowFactorEdit)).setEnabled(true);
                 }
                 else if (pre_read_date != null && comparisonDate != null &&
                         pre_read_date.before(comparisonDate) &&
                         UtilAppCommon.in.RATE_CATEGORY.equalsIgnoreCase("NDS-IID(B)")) {
+                    isPowerFactorEditAvailable=true;
                     ((EditText) findViewById(R.id.PowFactorEdit)).setEnabled(true);
                     linelayPowFact.setVisibility(View.VISIBLE);
                 } else {
+                    isPowerFactorEditAvailable=false;
                     linelayPowFact.setVisibility(View.GONE);
                     ((EditText) findViewById(R.id.PowFactorEdit)).setEnabled(false);
                 }
                 linelayKVAH.setVisibility(View.VISIBLE);
+                if(isPowerFactorEditAvailable && UtilAppCommon.in.RATE_CATEGORY.equalsIgnoreCase("NDS-IID(B)")){
+                    swich_kvah.setVisibility(View.VISIBLE);
+                    lin_prev_read.setVisibility(View.VISIBLE);
+                }else{
+                    swich_kvah.setVisibility(View.GONE);
+                    lin_prev_read.setVisibility(View.GONE);
+                }
                 //linelayPowFact.setVisibility(View.GONE);
                 //((EditText) findViewById(R.id.CurrentReadingEditKVAH)).setText("0");
             }
@@ -234,7 +297,8 @@ public class ActvCurrReading extends AppCompatActivity implements OnClickListene
         String prvrdg = "";
         prvrdg = String.valueOf(getIntent().getExtras().getDouble("prvrdg"));
 
-        ((TextView) findViewById(R.id.PrevReadingTxt)).setText("" + prvrdg.substring(0, prvrdg.length() - 2));
+        //((TextView) findViewById(R.id.PrevReadingTxt)).setText("" + prvrdg.substring(0, prvrdg.length() - 2));
+        ((TextView) findViewById(R.id.PrevReadingTxt)).setText(""+PRV_KWH);
         calculateBillBtn = (Button) findViewById(R.id.CalculateBtn);
         calculateBillBtn.setOnClickListener(this);
     }
@@ -1103,5 +1167,106 @@ public class ActvCurrReading extends AppCompatActivity implements OnClickListene
         Log.e("getImageByCANo", "Completed");
     }
 
+final TextWatcher maxDemTextWacher= new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+            String powerfact=((EditText) findViewById(R.id.PowFactorEdit)).getText().toString();
+            PWR_FACTOR=(powerfact.equals(""))?Float.parseFloat("0.0"):Float.parseFloat(powerfact);
+            if (!(s.toString().isEmpty()||s.toString().equals("0")||s.toString().equals("0.0"))){
+                if((PWR_FACTOR == 0)){
+                    ((EditText) findViewById(R.id.PowFactorEdit)).setText("0.9");
+                }
+                Double maxDemKW=Double.parseDouble(s.toString());
+                DecimalFormat df = new DecimalFormat("#0.0");
+                String finalValue = (PWR_FACTOR == 0) ? df.format(maxDemKW / 0.9) : df.format(maxDemKW / PWR_FACTOR);
+                ((EditText) findViewById(R.id.MaxDemandKVAEdit)).setText( finalValue);
+            }else{
+                ((EditText) findViewById(R.id.MaxDemandKVAEdit)).setText(s.toString());
+            }
+        }
+    };
+
+    final TextWatcher kwhTextWatcher=new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+            String powerfact=((EditText) findViewById(R.id.PowFactorEdit)).getText().toString();
+            PWR_FACTOR=(powerfact.equals(""))?Float.parseFloat("0.0"):Float.parseFloat(powerfact);
+            if (!(s.toString().isEmpty()||s.toString().equals("0")||s.toString().equals("0.0"))){
+                if((PWR_FACTOR == 0)){
+                    ((EditText) findViewById(R.id.PowFactorEdit)).setText("0.9");
+                }
+                Double currentKWH = (s.toString().equals(""))?0:Double.parseDouble(s.toString());
+                Double value = (PWR_FACTOR==0)?(currentKWH - PRV_KWH) / 0.9:(currentKWH - PRV_KWH) / PWR_FACTOR;
+//                if(value>0) {
+                    String finalValue = String.valueOf(Math.round(PRV_KWH + value));
+                    ((EditText) findViewById(R.id.CurrentReadingEditKVAH)).setText(finalValue);
+//                }else{
+//                    ((EditText) findViewById(R.id.CurrentReadingEditKVAH)).setText("0");
+//                }
+            }else{
+                ((EditText) findViewById(R.id.CurrentReadingEditKVAH)).setText(s.toString());
+            }
+        }
+    };
+
+    final TextWatcher pfTextWatcher=new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+            if (!s.toString().isEmpty()) {
+                if (Double.parseDouble(s.toString()) > 0 && Double.parseDouble(s.toString()) <= 0.9) {
+                    PWR_FACTOR=Float.parseFloat(s.toString());
+                    ((EditText) findViewById(R.id.CurrentReadingEdit)).setEnabled(true);
+                    ((EditText) findViewById(R.id.MaxDemandEdit)).setEnabled(true);
+                    String kwhValue=((EditText) findViewById(R.id.CurrentReadingEdit)).getText().toString();
+                    String maxDemKW1=((EditText) findViewById(R.id.MaxDemandEdit)).getText().toString();
+                    if (!kwhValue.isEmpty()){
+                        if (Double.parseDouble(kwhValue)>0){
+                            Double currentKWH = Double.parseDouble(kwhValue);
+                            Double value = (PWR_FACTOR==0)?(currentKWH - PRV_KWH) / 0.9:(currentKWH - PRV_KWH) / PWR_FACTOR;
+                            String finalValue = String.valueOf(Math.round(PRV_KWH + value));
+                            ((EditText) findViewById(R.id.CurrentReadingEditKVAH)).setText(finalValue);
+                        }
+                    }
+                    if (!maxDemKW1.isEmpty()){
+                        if (Double.parseDouble(maxDemKW1)>0){
+                            Double maxDemKW=Double.parseDouble(maxDemKW1);
+                            DecimalFormat df = new DecimalFormat("#0.0");
+                            String finalValue = (PWR_FACTOR == 0) ? df.format(maxDemKW / 0.9) : df.format(maxDemKW / PWR_FACTOR);
+                            ((EditText) findViewById(R.id.MaxDemandKVAEdit)).setText( finalValue);
+                        }
+                    }
+                }
+            }
+        }
+    };
 }

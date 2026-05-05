@@ -35,7 +35,7 @@
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:padding="10dp"
-            android:background="@android:color/darker_gray"
+            android:background="@color/common_google_signin_btn_text_dark_disabled"
             >
 
             <LinearLayout
@@ -47,7 +47,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight=".3"
-                    android:text="Name :"
+                    android:text="Name "
                     android:textColor="@color/colorPrimaryDark" />
 
                 <TextView
@@ -56,7 +56,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight=".6"
                     android:text="N/A"
-                    android:textColor="@android:color/black"
+                    android:textColor="@color/colorAccent"
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
@@ -84,32 +84,82 @@
                     android:textSize="18sp"
                     android:textStyle="bold" />
             </LinearLayout>
+            <LinearLayout
+                android:id="@+id/lin_prev_read"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".3"
+                    android:text="Prev. KWH Read"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:visibility="visible" />
+
+                <TextView
+                    android:id="@+id/PrevReadingTxt"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".6"
+                    android:textColor="@android:color/holo_green_dark"
+                    android:textSize="18dp"
+                    android:textStyle="bold"
+                    android:text="N/A"/>
+            </LinearLayout>
         </LinearLayout>
 
-        <LinearLayout
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/swich_kvah"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp">
-
+            android:layout_marginTop="10dp"
+            android:textColor="@color/design_default_color_secondary_variant"
+            android:text="KVAH not available"
+            android:textStyle="bold"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="10dp"
+            android:background="@android:color/darker_gray"/>
+        <LinearLayout
+            android:id="@+id/PowFactorLineLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical">
             <TextView
-                android:layout_width="0dp"
+                android:id="@+id/text_msg"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight=".3"
-                android:text="Prev. Reading :"
-                android:textColor="@android:color/black"
-                android:textSize="18dp"
-                android:visibility="invisible" />
+                android:textColor="@android:color/holo_red_dark"
+                android:text="Enter Power factor first ->"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                >
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".3"
+                    android:text="Pow. Factor"
+                    android:textColor="@color/colorPrimaryDark" />
 
-            <TextView
-                android:id="@+id/PrevReadingTxt"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight=".6"
-                android:textColor="@android:color/black"
-                android:textSize="18dp"
-                android:visibility="invisible" />
+                <EditText
+                    android:id="@+id/PowFactorEdit"
+                    style="@style/StyleEditText"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_weight=".6"
+                    android:hint="Power Factor"
+                    android:inputType="numberDecimal"
+                    android:paddingLeft="10dp"
+                    android:textColor="@android:color/darker_gray" />
+            </LinearLayout>
         </LinearLayout>
-
         <LinearLayout
             android:id="@+id/CurrentReadingKWH"
             android:layout_width="match_parent"
@@ -210,31 +260,6 @@
                 android:layout_weight=".6"
                 android:hint="Max Demand"
                 android:inputType="numberDecimal" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/PowFactorLineLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp">
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight=".3"
-                android:text="Pow. Factor"
-                android:textColor="@color/colorPrimaryDark" />
-
-            <EditText
-                android:id="@+id/PowFactorEdit"
-                style="@style/StyleEditText"
-                android:layout_width="0dp"
-                android:layout_height="40dp"
-                android:layout_weight=".6"
-                android:hint="Power Factor"
-                android:inputType="numberDecimal"
-                android:paddingLeft="10dp"
-                android:textColor="@android:color/darker_gray" />
         </LinearLayout>
 
 

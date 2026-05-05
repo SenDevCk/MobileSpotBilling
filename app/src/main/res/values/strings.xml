@@ -3,12 +3,12 @@
     <string name="home">Main</string>
 
     <!--Production-->
-       <string name="app_name">BMB (B4.2.4)</string>
-       <string name="app_version"></string>
-       ``````<string name="appcode_version">C4.1B4.2.0.4</string>
-    <string name="app_fileversion">VP4.2.4.apk</string>
+       <string name="app_name">BMB (B4.2.6)</string>
+       <string name="app_version">VP4.2.6</string>
+       <string name="appcode_version">C4.1B4.2.0.6</string>
+        <string name="app_fileversion">VP4.2.6.apk</string>
     <!--Testing-->
-   <!--<string name="app_name">BMB (B4.1.9)</string>
+  <!-- <string name="app_name">BMB (B4.1.9)</string>
     <string name="app_version">B4.1.9</string>
     <string name="appcode_version">C4.1.9</string>
     <string name="app_fileversion">VP4.1.9.apk</string>-->
@@ -47,11 +47,11 @@
     <string name="hint_name_dc">Enter DC Meter Reading:</string>
     <string name="err_msg_name">Enter valid meter reading</string>
     <string-array name="PrinterType">
-        <item>Analogic Thermal</item>
-        <!--<item>Analogic Thermal-Hin</item>-->
-        <item>Epson Thermal</item>
+       <!-- <item>Analogic Thermal</item>
+        <item>Analogic Thermal-Hin</item>-->
+        <!--<item>Epson Thermal</item>-->
         <item>Epson Thermal-Hin</item>
-        <item>TVS-ENGLISH</item>
+       <!-- <item>TVS-ENGLISH</item>-->
         <item>TVS-HINDI</item>
         <!--<item>Mini Portable Thermal</item>-->
        <!-- <item>Zebra Thermal</item>-->
