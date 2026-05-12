@@ -1580,8 +1580,10 @@ public class ActvBillPrinting extends AppCompatActivity {
 				builder.addText("\n");
 				builder.addCut(Builder.CUT_FEED);
 				printer.openPrinter(Print.DEVTYPE_BLUETOOTH, address, Print.TRUE, Print.PARAM_DEFAULT);
-				printer.sendData(builder, 22000, status, battery);
+				printer.sendData(builder, 30000, status, battery);
 				//startActivity(new Intent(getBaseContext(), PoleMobileActivity.class));
+				builder.clearCommandBuffer();
+				Thread.sleep(1500);
 				printer.closePrinter();
 				//
 			} catch (Exception e) {
